@@ -1,0 +1,16 @@
+http://www.baidu.com/#wd=openfiledialog%20filter&ie=utf-8&tn=baiduhome_pg&f=3&rsv_bp=1&rsv_spt=1&rsv_sug3=24&rsv_sug4=799&rsv_sug1=15&rsv_sug2=0&inputT=2580&oq=openfiledialog%20&rsp=1&rsv_sug=1&bs=openfiledialog
+http://msdn.microsoft.com/zh-cn/library/system.windows.forms.openfiledialog(VS.80).aspx
+http://blog.sina.com.cn/s/blog_62cd5a980100vjpt.html
+http://www.baidu.com/#wd=dataview%20%E6%8E%92%E5%BA%8F%20%E6%95%B0%E5%AD%97&ie=utf-8&tn=baiduhome_pg&f=8&rsv_bp=1&rsv_spt=1&rsv_sug3=2&rsv_sug4=90&rsv_sug2=0&inputT=257&bs=dataview%20%E6%8E%92%E5%BA%8F%20%E6%95%B0%E5%AD%97%E5%88%97
+http://q.cnblogs.com/q/15700/
+http://zhidao.baidu.com/link?url=HbybnfI5XWRnrt-e4T0-8RAjMuwgAc5kVkmqbrjNj69sx2W9LBTAosv1qvtWNlG23Emzpg5FA9G4BKk_MsWxQa
+http://zhidao.baidu.com/link?url=yePmSgxZ8XPM_zQrsGc0GDedziOokDeLz4rRK1VpbqTPE616hcM4YJZqHJBKXywWgfJyE8SYbVs5AUaXqK7tRq
+http://zhidao.baidu.com/question/19643659.html?qbl=relate_question_1&word=ado.net%20access
+http://www.oschina.net/code/snippet_4946_749
+http://www.jb51.net/article/31776.htm
+http://greatverve.cnblogs.com/archive/2011/07/18/app-config.html
+http://www.baidu.com/#wd=access%E8%BF%9E%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%20%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84&ie=utf-8&tn=baiduhome_pg&f=8&rsv_bp=1&rsv_spt=1&rsv_sug3=12&rsv_sug4=342&rsv_sug1=2&rsv_sug2=0&inputT=2980&bs=access%E8%BF%9E%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2
+http://wenku.baidu.com/link?url=EP7fFFFtR5K35QIxDI9cFtX7MBk27gH5kMHy5-hHDmlPYJjhg3PzpQtmZjmB-bvOVQgB5H2eH-OT9Ph423O3VLLy27i1j0UAUXSTxW4jcI3
+http://www.baidu.com/#wd=OleDbParameter&rsv_spt=1&issp=1&rsv_bp=0&ie=utf-8&tn=baiduhome_pg&rsv_n=2&rsv_sug3=1&rsv_sug4=31&rsv_sug1=1&f=3&rsp=0&inputT=1346
+http://technet.microsoft.com/zh-cn/magazine/system.data.oledb.oledbparameter(VS.80).aspx
+http://zhidao.baidu.com/link?url=vLb9B9sLlyZdStlamMyRqbAHkZgufS88SuAbTwpRvvS9cqm6JVf6thGLBNouRCUQX79IFOyjQEPkTRMerrIz9a

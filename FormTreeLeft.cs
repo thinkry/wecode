@@ -18,6 +18,13 @@ namespace WeCode1._0
             InitializeComponent();
         }
 
+        public void frmTree_Reload()
+        {
+            treeViewDir.Nodes.Clear();
+            //重新绑定
+            treeViewDir.ImageList = imageList1;
+            iniTreeDigui(GetTable("select * from ttree"), "NodeId", "ParentId", "Title", treeViewDir.Nodes, null);
+        }
         private void FormTreeLeft_Load(object sender, EventArgs e)
         {
             //初始化绑定目录树(非递归)
@@ -573,6 +580,18 @@ namespace WeCode1._0
         private void treeViewDir_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
 
+        }
+
+        //加入书签
+        private void toolStripMenuItemTxtMark_Click(object sender, EventArgs e)
+        {
+            //获取选中节点
+            TreeNode SeleNode = treeViewDir.SelectedNode;
+            if (SeleNode == null)
+                return;
+            string NodeId = SeleNode.Tag.ToString();
+            string SQL = "update Ttree set marktime=" + PubFunc.time2TotalSeconds().ToString() + " where Nodeid=" + NodeId;
+            AccessAdo.ExecuteNonQuery(SQL);
         }
 
 

@@ -59,7 +59,20 @@ namespace WeCode1._0
         {
             if (Scintilla.Modified)
             {
-                MessageBox.Show("是否保存？");
+                string Title = this.Text;
+                DialogResult dr = MessageBox.Show(this, "文档已修改，是否保存?", Title, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (dr == DialogResult.Cancel)
+                {
+                    // Stop closing
+                    e.Cancel = true;
+                    return;
+                }
+                else if (dr == DialogResult.Yes)
+                {
+                    this.Save();
+                    e.Cancel = false;
+                    return;
+                }
             }
         }
 

@@ -35,7 +35,9 @@
             // scintilla1
             // 
             this.scintilla1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scintilla1.LineWrapping.VisualFlags = ScintillaNET.LineWrappingVisualFlags.End;
             this.scintilla1.Location = new System.Drawing.Point(0, 0);
+            this.scintilla1.Margins.Margin2.Width = 16;
             this.scintilla1.Name = "scintilla1";
             this.scintilla1.Size = new System.Drawing.Size(284, 262);
             this.scintilla1.Styles.BraceBad.FontName = "Verd";

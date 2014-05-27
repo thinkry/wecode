@@ -11,7 +11,7 @@ namespace WeCode1._0
     public static class AccessAdo
     {
         //数据库连接字符串
-        public static readonly string strConnection = ConfigurationManager.ConnectionStrings["DBConn"].ConnectionString;
+        public static string strConnection = ConfigurationManager.ConnectionStrings["DBConn"].ConnectionString;
 
         // 用于缓存参数的HASH表
         private static Hashtable parmCache = Hashtable.Synchronized(new Hashtable());

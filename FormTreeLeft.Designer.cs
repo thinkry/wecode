@@ -113,26 +113,27 @@
             this.toolStripMenuItemTxtProp,
             this.toolStripMenuItemTxtMark});
             this.contextMenuStripTxt.Name = "contextMenuStripTxt";
-            this.contextMenuStripTxt.Size = new System.Drawing.Size(125, 70);
+            this.contextMenuStripTxt.Size = new System.Drawing.Size(153, 92);
             // 
             // toolStripMenuItemTxtDel
             // 
             this.toolStripMenuItemTxtDel.Name = "toolStripMenuItemTxtDel";
-            this.toolStripMenuItemTxtDel.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItemTxtDel.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItemTxtDel.Text = "删除";
             this.toolStripMenuItemTxtDel.Click += new System.EventHandler(this.toolStripMenuItemTxtDel_Click);
             // 
             // toolStripMenuItemTxtProp
             // 
             this.toolStripMenuItemTxtProp.Name = "toolStripMenuItemTxtProp";
-            this.toolStripMenuItemTxtProp.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItemTxtProp.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItemTxtProp.Text = "属性";
             // 
             // toolStripMenuItemTxtMark
             // 
             this.toolStripMenuItemTxtMark.Name = "toolStripMenuItemTxtMark";
-            this.toolStripMenuItemTxtMark.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItemTxtMark.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItemTxtMark.Text = "加为书签";
+            this.toolStripMenuItemTxtMark.Click += new System.EventHandler(this.toolStripMenuItemTxtMark_Click);
             // 
             // contextMenuStripTreeBlank
             // 

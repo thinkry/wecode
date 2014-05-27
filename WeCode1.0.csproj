@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ScintillaNET">
-      <HintPath>..\..\..\..\..\Desktop\SourceDLL\ScintillaNET.dll</HintPath>
+      <HintPath>C:\Users\Administrator\Desktop\SourceDLL\ScintillaNET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -44,12 +44,18 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WeifenLuo.WinFormsUI.Docking">
-      <HintPath>..\..\DockPanelDemo2.0\DockPanelDemo2.0\bin\Debug\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+      <HintPath>..\WeCode1.0\WeCode1.0\bin\Debug\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessAdo.cs" />
     <Compile Include="DirNode.cs" />
+    <Compile Include="DocFind.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DocFind.Designer.cs">
+      <DependentUpon>DocFind.cs</DependentUpon>
+    </Compile>
     <Compile Include="DocumentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PubFunc.cs" />
     <Compile Include="Attachment.cs" />
+    <Compile Include="DocMark.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DocMark.Designer.cs">
+      <DependentUpon>DocMark.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="DocFind.resx">
+      <DependentUpon>DocFind.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DocumentForm.resx">
       <DependentUpon>DocumentForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -110,6 +125,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="DocMark.resx">
+      <DependentUpon>DocMark.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using System.Data.OleDb;
 using System.IO;
 using System.Configuration;
+using ScintillaNET;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace WeCode1._0
 {
@@ -42,6 +44,16 @@ namespace WeCode1._0
         {
             InitializeComponent();
 
+            //书签
+            DocMark frmMark = new DocMark();
+            frmMark.formParent = this;
+            frmMark.Show(dockPanel1);
+
+            //显示查找
+            DocFind FormFind = new DocFind();
+            FormFind.formParent = this;
+            FormFind.Show(dockPanel1);
+
             //显示树窗口
             frTree = new FormTreeLeft();
             frTree.formParent = this;
@@ -52,6 +64,7 @@ namespace WeCode1._0
             FormAttachment frmAttchment = new FormAttachment();
             Attachment.AttForm = frmAttchment;
             frmAttchment.Show(dockPanel1);
+
         }
 
         private void toolStripButtonUp_Click(object sender, EventArgs e)
@@ -258,9 +271,68 @@ namespace WeCode1._0
 
         }
 
+        private bool closeAll()
+        {
+            //关闭所有打开的文档
+                string IsDocModi = "false";
+                foreach (DocumentForm doc in dockPanel1.Documents)
+                {
+                    if (doc.Scintilla.Modified)
+                        IsDocModi = "true";
+                }
+                if (IsDocModi == "true")
+                {
+                    DialogResult dr = MessageBox.Show(this, "是否保存所有文档?", "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    if (dr == DialogResult.Cancel)
+                    {
+                        return false;
+                    }
+                    else if (dr == DialogResult.No)
+                    {
+                        CloseAllDoment();
+                        return true;
+                    }
+                    else
+                    {
+                        foreach (DocumentForm doc in dockPanel1.Documents)
+                        {
+                            doc.Save();
+                        }
+                        CloseAllDoment();
+                        return true;
+                    }
+                }
+
+                else
+                {
+                    CloseAllDoment();
+                    return true;
+                }
+        }
+
+        //关闭所有文档
+        private void CloseAllDoment()
+        {
+            IDockContent[] documents = dockPanel1.DocumentsToArray();
+
+            foreach (IDockContent content in documents)
+            {
+                content.DockHandler.Close();
+            }
+        }
+
         //打开数据库
         private void toolStripMenuItemOpenDB_Click(object sender, EventArgs e)
         {
+           //关闭所有打开的文档
+            if (closeAll() == false)
+                return;
+            //刷新附件列表数据
+            Attachment.ActiveNodeId = "-1";
+            Attachment.AttForm.ReFreshAttachGrid();
+            //TODO
+            //清空搜索以及书签列表
+
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
             //openFileDialog1.InitialDirectory = "c:\\";
@@ -273,6 +345,12 @@ namespace WeCode1._0
                //修改连接字符串，并重新加载
                 string conStr = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + fileName;
                 UpdateConnectionStringsConfig("DBConn",conStr);
+                
+                //重新加载所有资源
+                AccessAdo.strConnection = conStr;
+                
+
+                frTree.frmTree_Reload();
             }
         }
 
@@ -438,6 +516,20 @@ namespace WeCode1._0
         private void toolStripButtonDel_Click(object sender, EventArgs e)
         {
             frTree.DelNode();
+        }
+
+        //自动换行
+        private void toolStripMenuItemAutoWrap_Click(object sender, EventArgs e)
+        {
+            // 所有打开的文档自动换行
+            toolStripMenuItemAutoWrap.Checked = !toolStripMenuItemAutoWrap.Checked;
+            foreach (DocumentForm doc in dockPanel1.Documents)
+            {
+                if (toolStripMenuItemAutoWrap.Checked)
+                    doc.Scintilla.LineWrapping.Mode = LineWrappingMode.Word;
+                else
+                    doc.Scintilla.LineWrapping.Mode = LineWrappingMode.None;
+            }
         }
     }
 }
