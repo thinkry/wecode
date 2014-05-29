@@ -115,6 +115,7 @@
             this.toolStripMenuItemReName.Name = "toolStripMenuItemReName";
             this.toolStripMenuItemReName.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItemReName.Text = "重命名";
+            this.toolStripMenuItemReName.Click += new System.EventHandler(this.toolStripMenuItemReName_Click);
             // 
             // contextMenuStripAtt2
             // 

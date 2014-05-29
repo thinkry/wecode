@@ -33,8 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ScintillaNET">
-      <HintPath>C:\Users\Administrator\Desktop\SourceDLL\ScintillaNET.dll</HintPath>
+    <Reference Include="ScintillaNET, Version=2.6.0.0, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Administrator\Desktop\图标\ScintillaNET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -49,6 +50,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessAdo.cs" />
+    <Compile Include="AttRenameDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AttRenameDialog.Designer.cs">
+      <DependentUpon>AttRenameDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContentExcs.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="DirNode.cs" />
     <Compile Include="DocFind.cs">
       <SubType>Form</SubType>
@@ -97,6 +107,15 @@
     <Compile Include="DocMark.Designer.cs">
       <DependentUpon>DocMark.cs</DependentUpon>
     </Compile>
+    <Compile Include="WelcomeDoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WelcomeDoc.Designer.cs">
+      <DependentUpon>WelcomeDoc.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AttRenameDialog.resx">
+      <DependentUpon>AttRenameDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DocFind.resx">
       <DependentUpon>DocFind.cs</DependentUpon>
     </EmbeddedResource>
@@ -127,6 +146,9 @@
     </Compile>
     <EmbeddedResource Include="DocMark.resx">
       <DependentUpon>DocMark.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WelcomeDoc.resx">
+      <DependentUpon>WelcomeDoc.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="Properties\Settings.settings">
@@ -170,6 +192,11 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="db\helpdb.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

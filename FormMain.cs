@@ -16,6 +16,11 @@ namespace WeCode1._0
     public partial class FormMain : Form
     {
         private FormTreeLeft frTree;
+        private FormAttachment frmAttchment;
+        private DocMark frmMark;
+        private DocFind FormFind;
+
+        private DeserializeDockContent m_deserializeDockContent;
 
 
         #region Fields
@@ -43,27 +48,30 @@ namespace WeCode1._0
         public FormMain()
         {
             InitializeComponent();
+            
 
             //书签
-            DocMark frmMark = new DocMark();
+            frmMark = new DocMark();
             frmMark.formParent = this;
-            frmMark.Show(dockPanel1);
+            //frmMark.Show(dockPanel1);
 
             //显示查找
-            DocFind FormFind = new DocFind();
+            FormFind = new DocFind();
             FormFind.formParent = this;
-            FormFind.Show(dockPanel1);
+            //FormFind.Show(dockPanel1);
 
             //显示树窗口
             frTree = new FormTreeLeft();
             frTree.formParent = this;
-            frTree.Show(dockPanel1);
+            //frTree.Show(dockPanel1);
 
             //显示附件窗口
             Attachment.ActiveNodeId = "-1";
-            FormAttachment frmAttchment = new FormAttachment();
+            frmAttchment = new FormAttachment();
             Attachment.AttForm = frmAttchment;
-            frmAttchment.Show(dockPanel1);
+            //frmAttchment.Show(dockPanel1);
+
+            m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
 
         }
 
@@ -93,23 +101,54 @@ namespace WeCode1._0
         //打开文章
         public void openNew(string nodeId)
         {
+            //欢迎窗口是否打开，如果打开则关闭
+            if (Attachment.isWelcomePageopen == "1")
+            {
+                IDockContent[] documents = dockPanel1.DocumentsToArray();
 
-                // 如果已经打开，则定位，否则新窗口打开
-                bool isOpen = false;
-                foreach (DocumentForm documentForm in dockPanel1.Documents)
+                foreach (IDockContent content in documents)
                 {
-                    if (nodeId.Equals(documentForm.NodeId, StringComparison.OrdinalIgnoreCase))
-                    {
-                        documentForm.Select();
-                        isOpen = true;
-                        break;
-                    }
+                        content.DockHandler.Close();
                 }
+                Attachment.isWelcomePageopen = "0";
+            }
+            // 如果已经打开，则定位，否则新窗口打开
+            bool isOpen = false;
+            foreach (DocumentForm documentForm in dockPanel1.Documents)
+            {
+                if (nodeId.Equals(documentForm.NodeId, StringComparison.OrdinalIgnoreCase))
+                {
+                    documentForm.Select();
+                    isOpen = true;
+                    break;
+                }
+            }
 
-                // Open the files
-                if (!isOpen)
-                    OpenFile(nodeId);
+            // Open the files
+            if (!isOpen)
+                OpenFile(nodeId);
         }
+
+        ////打开文章
+        //public void openNew(string nodeId)
+        //{
+
+        //        // 如果已经打开，则定位，否则新窗口打开
+        //        bool isOpen = false;
+        //        foreach (DocumentForm documentForm in dockPanel1.Documents)
+        //        {
+        //            if (nodeId.Equals(documentForm.NodeId, StringComparison.OrdinalIgnoreCase))
+        //            {
+        //                documentForm.Select();
+        //                isOpen = true;
+        //                break;
+        //            }
+        //        }
+
+        //        // Open the files
+        //        if (!isOpen)
+        //            OpenFile(nodeId);
+        //}
 
 
         private DocumentForm OpenFile(string nodeId)
@@ -209,6 +248,10 @@ namespace WeCode1._0
         //保存所有
         private void toolStripButtonSvAll_Click(object sender, EventArgs e)
         {
+            if (Attachment.isWelcomePageopen == "1")
+            {
+                return;
+            }
             foreach (DocumentForm doc in dockPanel1.Documents)
             {
                 doc.Activate();
@@ -530,6 +573,125 @@ namespace WeCode1._0
                 else
                     doc.Scintilla.LineWrapping.Mode = LineWrappingMode.None;
             }
+        }
+
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void toolStripMenuItemFont_Click(object sender, EventArgs e)
+        {
+            FontDialog fontDialog = new FontDialog();
+            fontDialog.AllowScriptChange = true;
+            fontDialog.ShowEffects = false;
+            if (fontDialog.ShowDialog() != DialogResult.Cancel)
+            {
+                ActiveDocument.Scintilla.Font = fontDialog.Font;//将当前选定的文字改变字体
+            }
+        }
+
+        private void toolStripMenuItemIsShowTB_Click(object sender, EventArgs e)
+        {
+            toolStripMenuItemIsShowTB.Checked = !toolStripMenuItemIsShowTB.Checked;
+
+            toolStripMain.Visible = toolStripMenuItemIsShowTB.Checked;
+        }
+
+        private void toolStripMenuItemIsShowSb_Click(object sender, EventArgs e)
+        {
+            toolStripMenuItemIsShowSb.Checked = !toolStripMenuItemIsShowSb.Checked;
+            statusStripMain.Visible = toolStripMenuItemIsShowSb.Checked;
+        }
+
+        private void toolStripMenuItemIsShowLeft_Click(object sender, EventArgs e)
+        {
+            frTree.Show(dockPanel1);
+            frmMark.Show(dockPanel1);
+            FormFind.Show(dockPanel1);
+        }
+
+        private void toolStripMenuItemIsShowAtt_Click(object sender, EventArgs e)
+        {
+            frmAttchment.Show(dockPanel1);
+        }
+
+        private void toolStripButtonProp_Click(object sender, EventArgs e)
+        {
+            frTree.ShowProp();
+        }
+
+        //打开欢迎界面
+        public void openWelcomePage()
+        {
+            WelcomeDoc welDoc = new WelcomeDoc();
+            welDoc.NodeId = "-1";
+            welDoc.Show(dockPanel1);
+            Attachment.isWelcomePageopen = "1";
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            Attachment.frmMain = this;
+
+            //加载布局
+            string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.config");
+
+            if (File.Exists(configFile))
+                dockPanel1.LoadFromXml(configFile, m_deserializeDockContent);
+
+            //打开欢迎界面
+            openWelcomePage();
+        }
+
+        //状态栏标题
+        public void showFullPathTime(string path,string crtTime)
+        {
+            this.toolStripStatusLabelTitle.Text = path;
+            this.toolStripStatusLabelDocTime.Text = crtTime;
+        }
+
+        //删除所有书签
+        private void toolStripMenuItemDelAllMark_Click(object sender, EventArgs e)
+        {
+            AccessAdo.ExecuteNonQuery("update ttree set marktime=0");
+        }
+
+        private void toolStripMenuItemExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.config");
+                dockPanel1.SaveAsXml(configFile);
+        }
+
+        private IDockContent GetContentFromPersistString(string persistString)
+        {
+            if (persistString == typeof(FormTreeLeft).ToString())
+                return frTree;
+            else if (persistString == typeof(FormAttachment).ToString())
+                return frmAttchment;
+            else if (persistString == typeof(DocFind).ToString())
+                return FormFind;
+            else if (persistString == typeof(DocMark).ToString())
+                return frmMark;
+            else
+            {
+                return null;
+            }
+        }
+
+        private void toolStripButtonCloseTab_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButtonCloseTabAll_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -36,12 +36,14 @@ namespace WeCode1._0
                     this.labelTitle.Text="输入目录标题";
                     this.labelTip.Text = "目录属性";
                     this.textBoxTitle.Text = Title;
+                    this.checkBoxIsOnRootCreate.Visible = false;
                     break;
                 case "3":
                     this.Text = "文章属性";
                     this.labelTitle.Text="输入文章标题";
                     this.labelTip.Text = "文章属性";
                     this.textBoxTitle.Text = Title;
+                    this.checkBoxIsOnRootCreate.Visible = false;
                     break;
                 default:
                     break;
@@ -54,6 +56,11 @@ namespace WeCode1._0
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(textBoxTitle.Text))
+            {
+                MessageBox.Show("标题不能为空！");
+                return;
+            }
             ReturnVal = new string[3];
             ReturnVal[0] = this.textBoxTitle.Text;
             ReturnVal[1] = this.comboBoxLanguageType.Text;

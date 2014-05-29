@@ -3,7 +3,6 @@ E:\git\wecode\obj\x86\Debug\Interop.ADODB.dll
 E:\git\wecode\obj\x86\Debug\Interop.ADOX.dll
 E:\git\wecode\obj\x86\Debug\Interop.JRO.dll
 E:\git\wecode\obj\x86\Debug\WeCode1.0.csproj.ResolveComReference.cache
-E:\git\wecode\obj\x86\Debug\WeCode1.0.csprojResolveAssemblyReference.cache
 E:\git\wecode\obj\x86\Debug\WeCode1._0.DocumentForm.resources
 E:\git\wecode\obj\x86\Debug\WeCode1._0.FormAttachment.resources
 E:\git\wecode\obj\x86\Debug\WeCode1._0.FormMain.resources
@@ -23,3 +22,6 @@ E:\git\wecode\obj\x86\Debug\WeCode1.0.exe
 E:\git\wecode\obj\x86\Debug\WeCode1.0.pdb
 E:\git\wecode\obj\x86\Debug\WeCode1._0.DocFind.resources
 E:\git\wecode\obj\x86\Debug\WeCode1._0.DocMark.resources
+E:\git\wecode\bin\Debug\db\helpdb.mdb
+E:\git\wecode\obj\x86\Debug\WeCode1._0.AttRenameDialog.resources
+E:\git\wecode\obj\x86\Debug\WeCode1._0.WelcomeDoc.resources

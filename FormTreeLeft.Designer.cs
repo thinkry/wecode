@@ -58,6 +58,7 @@
             this.treeViewDir.Size = new System.Drawing.Size(335, 509);
             this.treeViewDir.TabIndex = 0;
             this.treeViewDir.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewDir_BeforeExpand);
+            this.treeViewDir.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDir_AfterSelect);
             this.treeViewDir.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDir_NodeMouseClick);
             this.treeViewDir.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDir_NodeMouseDoubleClick);
             this.treeViewDir.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeViewDir_MouseDown);
@@ -105,6 +106,7 @@
             this.toolStripMenuItemProp.Name = "toolStripMenuItemProp";
             this.toolStripMenuItemProp.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItemProp.Text = "属性";
+            this.toolStripMenuItemProp.Click += new System.EventHandler(this.toolStripMenuItemProp_Click);
             // 
             // contextMenuStripTxt
             // 
@@ -113,25 +115,26 @@
             this.toolStripMenuItemTxtProp,
             this.toolStripMenuItemTxtMark});
             this.contextMenuStripTxt.Name = "contextMenuStripTxt";
-            this.contextMenuStripTxt.Size = new System.Drawing.Size(153, 92);
+            this.contextMenuStripTxt.Size = new System.Drawing.Size(125, 70);
             // 
             // toolStripMenuItemTxtDel
             // 
             this.toolStripMenuItemTxtDel.Name = "toolStripMenuItemTxtDel";
-            this.toolStripMenuItemTxtDel.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemTxtDel.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItemTxtDel.Text = "删除";
             this.toolStripMenuItemTxtDel.Click += new System.EventHandler(this.toolStripMenuItemTxtDel_Click);
             // 
             // toolStripMenuItemTxtProp
             // 
             this.toolStripMenuItemTxtProp.Name = "toolStripMenuItemTxtProp";
-            this.toolStripMenuItemTxtProp.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemTxtProp.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItemTxtProp.Text = "属性";
+            this.toolStripMenuItemTxtProp.Click += new System.EventHandler(this.toolStripMenuItemTxtProp_Click);
             // 
             // toolStripMenuItemTxtMark
             // 
             this.toolStripMenuItemTxtMark.Name = "toolStripMenuItemTxtMark";
-            this.toolStripMenuItemTxtMark.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemTxtMark.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItemTxtMark.Text = "加为书签";
             this.toolStripMenuItemTxtMark.Click += new System.EventHandler(this.toolStripMenuItemTxtMark_Click);
             // 

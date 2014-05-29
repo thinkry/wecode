@@ -33,15 +33,19 @@ namespace WeCode1._0
         //刷新附件
         public void ReFreshAttachGrid()
         {
-            DataView dv = new DataView(AccessAdo.ExecuteDataSet("select affixid,nodeid,'' as 序号,[title] as 标题,[size] as 大小,[time] as 加入日期 from tattachment where nodeid=" + Attachment.ActiveNodeId).Tables[0]);
+            DataView dv = new DataView(AccessAdo.ExecuteDataSet("select affixid,nodeid,'' as 序号,[title] as 标题,[size] as 大小,[time],' ' as 加入日期 from tattachment where nodeid=" + Attachment.ActiveNodeId).Tables[0]);
             dataGridView1.DataSource = dv;
             dataGridView1.Columns[0].Visible = false;
             dataGridView1.Columns[1].Visible = false;
+            dataGridView1.Columns[5].Visible = false;
 
             int count = dv.Count;
             for (int i = 0; i < count; i++)
             {
                 dataGridView1.Rows[i].Cells[2].Value = i+1;
+                string TotalSeConds = dataGridView1.Rows[i].Cells[5].Value.ToString();
+                DateTime AttTime = PubFunc.seconds2Time(Convert.ToInt32(TotalSeConds));
+                dataGridView1.Rows[i].Cells[6].Value = AttTime.ToString();
             }
         }
 
@@ -190,6 +194,22 @@ namespace WeCode1._0
             string Affixid = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
             AccessAdo.ExecuteNonQuery("delete from tattachment where affixid=" + Affixid);
             ReFreshAttachGrid();
+        }
+
+        //重命名
+        private void toolStripMenuItemReName_Click(object sender, EventArgs e)
+        {
+            string Affixid = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            string Title = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
+
+            AttRenameDialog ReNameDia = new AttRenameDialog(Title);
+            DialogResult dr = ReNameDia.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                Title = ReNameDia.ReturnVal[0];
+                AccessAdo.ExecuteNonQuery("update tattachment set title='" + Title + "' where affixid=" + Affixid);
+                ReFreshAttachGrid();
+            }
         }
     }
 }

@@ -38,6 +38,15 @@ namespace WeCode1._0
                 case "C#":
                     SynId = "108";
                     break;
+                case "mssql":
+                    SynId = "109";
+                    break;
+                case "pgsql":
+                    SynId = "110";
+                    break;
+                case "python":
+                    SynId = "111";
+                    break;
                 default:
                     break;
 
@@ -79,6 +88,15 @@ namespace WeCode1._0
                 case "108":
                     Language = "C#";
                     break;
+                case "109":
+                    Language = "mssql";
+                    break;
+                case "110":
+                    Language = "pgsql";
+                    break;
+                case "111":
+                    Language = "python";
+                    break;
                 default:
                     break;
 
@@ -103,7 +121,7 @@ namespace WeCode1._0
                     Language = "html";
                     break;
                 case "103":
-                    Language = "Pascal/Delphi";
+                    Language = "pascal";
                     break;
                 case "104":
                     Language = "java";
@@ -119,6 +137,15 @@ namespace WeCode1._0
                     break;
                 case "108":
                     Language = "cs";
+                    break;
+                case "109":
+                    Language = "mssql";
+                    break;
+                case "110":
+                    Language = "pgsql";
+                    break;
+                case "111":
+                    Language = "python";
                     break;
                 default:
                     break;

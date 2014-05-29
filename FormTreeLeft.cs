@@ -421,7 +421,7 @@ namespace WeCode1._0
                     DateTime d2=DateTime.Now;
                     TimeSpan dt=d2-d1;
                     //相差秒数
-                    string Seconds=dt.Seconds.ToString();
+                    string Seconds=dt.TotalSeconds.ToString();
                     //插入TTREE
                     string sql = string.Format("insert into ttree(NodeID,Title,ParentId,Type,CreateTime,SynId,Turn) values({0},'{1}',{2},{3},{4},{5},{6})", NewNodeId, Title, NewPid, 0, Seconds, SynId, NewTurn);
                     AccessAdo.ExecuteNonQuery(sql);
@@ -500,7 +500,7 @@ namespace WeCode1._0
                     DateTime d2 = DateTime.Now;
                     TimeSpan dt = d2 - d1;
                     //相差秒数
-                    string Seconds = dt.Seconds.ToString();
+                    string Seconds = dt.TotalSeconds.ToString();
                     //插入TTREE
                     string sql = string.Format("insert into ttree(NodeID,Title,ParentId,Type,CreateTime,SynId,Turn) values({0},'{1}',{2},{3},{4},{5},{6})", NewNodeId, Title, NewPid, 1, Seconds, SynId, NewTurn);
                     AccessAdo.ExecuteNonQuery(sql);
@@ -577,9 +577,10 @@ namespace WeCode1._0
             toolStripMenuItemDel_Click(sender, e);
         }
 
+        
         private void treeViewDir_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-
+            
         }
 
         //加入书签
@@ -592,6 +593,64 @@ namespace WeCode1._0
             string NodeId = SeleNode.Tag.ToString();
             string SQL = "update Ttree set marktime=" + PubFunc.time2TotalSeconds().ToString() + " where Nodeid=" + NodeId;
             AccessAdo.ExecuteNonQuery(SQL);
+        }
+
+        //供主窗口调用
+        public void ShowProp()
+        {
+            toolStripMenuItemProp_Click(null, null);
+        }
+
+        //调整、查看属性
+        private void toolStripMenuItemProp_Click(object sender, EventArgs e)
+        {
+            //获取选中节点
+            TreeNode SeleNode = treeViewDir.SelectedNode;
+            if (SeleNode == null)
+                return;
+            string ParLang = AccessAdo.ExecuteScalar("select SynId from ttree where NodeId=" + SeleNode.Tag.ToString()).ToString();
+            ParLang = PubFunc.Synid2Language(ParLang);
+            string Type = AccessAdo.ExecuteScalar("select type from ttree where NodeId=" + SeleNode.Tag.ToString()).ToString();
+            string DiaType = (Type == "1") ? "3" : "2";
+            ProperDialog propDia = new ProperDialog(DiaType, SeleNode.Text, ParLang);
+            DialogResult dr = propDia.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                string Title = propDia.ReturnVal[0];
+                string Language = propDia.ReturnVal[1];
+                string SynId = PubFunc.Language2Synid(Language);
+
+                if (SeleNode != null)
+                {
+                    //更新标题和语言
+                    AccessAdo.ExecuteNonQuery("update ttree set title='"+Title+"',synid="+SynId+" where nodeid="+SeleNode.Tag.ToString());
+                    //更新节点信息
+                    SeleNode.Text = Title;
+                    //打开后设置语言
+                    Language = PubFunc.Synid2LanguageSetLang(SynId);
+                    
+                }
+            }
+        }
+
+        private void toolStripMenuItemTxtProp_Click(object sender, EventArgs e)
+        {
+            toolStripMenuItemProp_Click(sender, e);
+        }
+
+        //切换节点，状态栏显示路径
+        private void treeViewDir_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            TreeNode seleNode = treeViewDir.SelectedNode;
+            if (seleNode == null)
+                return;
+            if (seleNode.ImageIndex == 0)
+                return;
+            string path = seleNode.FullPath;
+            int TotalSeconds = Convert.ToInt32(AccessAdo.ExecuteScalar("select createtime from ttree where nodeid=" + seleNode.Tag.ToString()).ToString());
+            DateTime cTime = PubFunc.seconds2Time(TotalSeconds);
+            string createTime = "创建： "+cTime.ToString();
+            formParent.showFullPathTime(path,createTime);
         }
 
 
