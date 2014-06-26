@@ -32,5 +32,13 @@ namespace WeCode1._0
         {
             InitializeComponent();
         }
+
+        private void WelcomeDoc_Activated(object sender, EventArgs e)
+        {
+            Attachment.ActiveNodeId = "-1";
+            Attachment.ActiveDOCType = "local";
+            Attachment.AttForm.ReFreshAttachGrid();
+            Attachment.AttForm.GridDiable();
+        }
     }
 }

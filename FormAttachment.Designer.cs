@@ -38,9 +38,18 @@
             this.toolStripMenuItemReName = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripAtt2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.添加附件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStripOL1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStripOL2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStripAtt1.SuspendLayout();
             this.contextMenuStripAtt2.SuspendLayout();
+            this.contextMenuStripOL1.SuspendLayout();
+            this.contextMenuStripOL2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -80,40 +89,40 @@
             this.toolStripMenuItemSaveAs,
             this.toolStripMenuItemReName});
             this.contextMenuStripAtt1.Name = "contextMenuStrip1";
-            this.contextMenuStripAtt1.Size = new System.Drawing.Size(153, 136);
+            this.contextMenuStripAtt1.Size = new System.Drawing.Size(125, 114);
             // 
             // toolStripMenuItemOpenZIP
             // 
             this.toolStripMenuItemOpenZIP.Name = "toolStripMenuItemOpenZIP";
-            this.toolStripMenuItemOpenZIP.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemOpenZIP.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItemOpenZIP.Text = "打开附件";
             this.toolStripMenuItemOpenZIP.Click += new System.EventHandler(this.toolStripMenuItemOpenZIP_Click);
             // 
             // toolStripMenuItemAddZIP
             // 
             this.toolStripMenuItemAddZIP.Name = "toolStripMenuItemAddZIP";
-            this.toolStripMenuItemAddZIP.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemAddZIP.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItemAddZIP.Text = "添加附件";
             this.toolStripMenuItemAddZIP.Click += new System.EventHandler(this.toolStripMenuItemAddZIP_Click);
             // 
             // toolStripMenuItemDelZIP
             // 
             this.toolStripMenuItemDelZIP.Name = "toolStripMenuItemDelZIP";
-            this.toolStripMenuItemDelZIP.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemDelZIP.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItemDelZIP.Text = "删除附件";
             this.toolStripMenuItemDelZIP.Click += new System.EventHandler(this.toolStripMenuItemDelZIP_Click);
             // 
             // toolStripMenuItemSaveAs
             // 
             this.toolStripMenuItemSaveAs.Name = "toolStripMenuItemSaveAs";
-            this.toolStripMenuItemSaveAs.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemSaveAs.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItemSaveAs.Text = "另存为";
             this.toolStripMenuItemSaveAs.Click += new System.EventHandler(this.toolStripMenuItemSaveAs_Click);
             // 
             // toolStripMenuItemReName
             // 
             this.toolStripMenuItemReName.Name = "toolStripMenuItemReName";
-            this.toolStripMenuItemReName.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemReName.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItemReName.Text = "重命名";
             this.toolStripMenuItemReName.Click += new System.EventHandler(this.toolStripMenuItemReName_Click);
             // 
@@ -130,6 +139,58 @@
             this.添加附件ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.添加附件ToolStripMenuItem.Text = "添加附件";
             this.添加附件ToolStripMenuItem.Click += new System.EventHandler(this.添加附件ToolStripMenuItem_Click);
+            // 
+            // contextMenuStripOL1
+            // 
+            this.contextMenuStripOL1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem2,
+            this.toolStripMenuItem3,
+            this.toolStripMenuItem4});
+            this.contextMenuStripOL1.Name = "contextMenuStripOL1";
+            this.contextMenuStripOL1.Size = new System.Drawing.Size(153, 114);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1.Text = "上传附件";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem2.Text = "删除附件";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem3.Text = "下载附件";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem4.Text = "重命名";
+            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+            // 
+            // contextMenuStripOL2
+            // 
+            this.contextMenuStripOL2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem5});
+            this.contextMenuStripOL2.Name = "contextMenuStrip1";
+            this.contextMenuStripOL2.Size = new System.Drawing.Size(125, 26);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem5.Text = "上传附件";
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
             // FormAttachment
             // 
@@ -150,6 +211,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStripAtt1.ResumeLayout(false);
             this.contextMenuStripAtt2.ResumeLayout(false);
+            this.contextMenuStripOL1.ResumeLayout(false);
+            this.contextMenuStripOL2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -165,5 +228,12 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemReName;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripAtt2;
         private System.Windows.Forms.ToolStripMenuItem 添加附件ToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripOL1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripOL2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
     }
 }

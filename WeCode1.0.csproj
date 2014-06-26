@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WeCode1._0</RootNamespace>
     <AssemblyName>WeCode1.0</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -33,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Administrator\Desktop\oauth\doubanOauth2.0\YouDaoOauth2Demo\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="ScintillaNET, Version=2.6.0.0, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\Administrator\Desktop\图标\ScintillaNET.dll</HintPath>
@@ -42,6 +47,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WeifenLuo.WinFormsUI.Docking">
@@ -56,6 +62,7 @@
     <Compile Include="AttRenameDialog.Designer.cs">
       <DependentUpon>AttRenameDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="AuthorAPI.cs" />
     <Compile Include="ContentExcs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,11 +79,23 @@
     <Compile Include="DocumentForm.Designer.cs">
       <DependentUpon>DocumentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Download.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Download.Designer.cs">
+      <DependentUpon>Download.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormAttachment.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormAttachment.Designer.cs">
       <DependentUpon>FormAttachment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAuthor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAuthor.Designer.cs">
+      <DependentUpon>FormAuthor.cs</DependentUpon>
     </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
@@ -91,6 +110,7 @@
       <DependentUpon>FormTreeLeft.cs</DependentUpon>
     </Compile>
     <Compile Include="IniLexer.cs" />
+    <Compile Include="NoteAPI.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProperDialog.cs">
       <SubType>Form</SubType>
@@ -107,11 +127,26 @@
     <Compile Include="DocMark.Designer.cs">
       <DependentUpon>DocMark.cs</DependentUpon>
     </Compile>
+    <Compile Include="treeTagBook.cs" />
+    <Compile Include="treeTagNote.cs" />
+    <Compile Include="UpLoad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpLoad.Designer.cs">
+      <DependentUpon>UpLoad.cs</DependentUpon>
+    </Compile>
     <Compile Include="WelcomeDoc.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="WelcomeDoc.Designer.cs">
       <DependentUpon>WelcomeDoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XMLAPI.cs" />
+    <Compile Include="YouDaoTree.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YouDaoTree.Designer.cs">
+      <DependentUpon>YouDaoTree.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AttRenameDialog.resx">
       <DependentUpon>AttRenameDialog.cs</DependentUpon>
@@ -122,8 +157,14 @@
     <EmbeddedResource Include="DocumentForm.resx">
       <DependentUpon>DocumentForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Download.resx">
+      <DependentUpon>Download.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAttachment.resx">
       <DependentUpon>FormAttachment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAuthor.resx">
+      <DependentUpon>FormAuthor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
@@ -147,10 +188,19 @@
     <EmbeddedResource Include="DocMark.resx">
       <DependentUpon>DocMark.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UpLoad.resx">
+      <DependentUpon>UpLoad.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WelcomeDoc.resx">
       <DependentUpon>WelcomeDoc.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="App.config" />
+    <EmbeddedResource Include="YouDaoTree.resx">
+      <DependentUpon>YouDaoTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -181,7 +231,7 @@
       <Lcid>0</Lcid>
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </COMReference>
     <COMReference Include="JRO">
       <Guid>{AC3B8B4C-B6CA-11D1-9F31-00C04FC29D52}</Guid>
@@ -190,12 +240,15 @@
       <Lcid>0</Lcid>
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="db\helpdb.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TreeNodeLocal.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

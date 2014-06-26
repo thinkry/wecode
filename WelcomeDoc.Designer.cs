@@ -55,6 +55,7 @@
             this.Name = "WelcomeDoc";
             this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document;
             this.Text = "WelcomeDoc";
+            this.Activated += new System.EventHandler(this.WelcomeDoc_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

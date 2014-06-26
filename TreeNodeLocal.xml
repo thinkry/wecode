@@ -1,0 +1,39 @@
+<wecode>
+  <book id="6F0F2F6B-563F-48D0-A4DE-CA14F2CB2C3F" title="笔记本1_C++" Language="c#">
+    <note id="771F5DE2-35C6-4EFB-A0E4-526F664C3A04" path="/SVR49E8F1FD0D654ECDB38771E1FA3BF654/71F581B8EC4544C498FFAAB0571D2D1C" title="第一篇C++笔记" createtime="1000000" updatetime="200000" Language="c#" isMark="0">
+    </note>
+    <note id="C99B78BD-8753-4051-AE5B-6952D0C419B7" path="/SVR49E8F1FD0D654ECDB38771E1FA3BF654/71F581B8EC4544C498FFAAB0571D2D1C" title="第二篇C++笔记" createtime="1000000" updatetime="200000" Language="c#" isMark="0">
+    </note>
+    <note id="F9B1B8F1-1040-4E73-AFFE-0F1B1D001E01" path="/SVR49E8F1FD0D654ECDB38771E1FA3BF654/71F581B8EC4544C498FFAAB0571D2D1C" title="第二篇C++笔记" createtime="1000000" updatetime="200000" Language="c#" isMark="0">
+    </note>
+    <book id="0B2B9FD3-CA93-4091-937B-60A0B6FB6E7C" title="笔记本1子笔记本" Language="c#">
+      <note id="53C11CBD-E1F0-4D3B-9DB3-8A9474BEB151" path="/SVR49E8F1FD0D654ECDB38771E1FA3BF654/71F581B8EC4544C498FFAAB0571D2D1C" title="第1篇C++笔记" createtime="1000000" updatetime="200000" Language="c#" isMark="0">
+      </note>
+      <note id="49990B2B-35AC-4E5B-8EFE-10EB62627B89" path="/SVR49E8F1FD0D654ECDB38771E1FA3BF654/71F581B8EC4544C498FFAAB0571D2D1C" title="第2篇C++笔记" createtime="1000000" updatetime="200000" Language="c#" isMark="0">
+      </note>
+      <note id="7FAD534D-798E-407D-8D8B-569E976E5A2B" path="/SVR49E8F1FD0D654ECDB38771E1FA3BF654/71F581B8EC4544C498FFAAB0571D2D1C" title="第3篇C++笔记" createtime="1000000" updatetime="200000" Language="c#" isMark="0">
+      </note>
+      <book id="1eaad043-300c-4909-81ef-db769a35f509" title="笔记本1子笔记本_新目录" Language="c#">
+        <book id="fcce25a5-e90a-45e4-b498-e758369c5cd9" title="笔记本1子笔记本_新目录_新目录" Language="c#" />
+      </book>
+    </book>
+  </book>
+  <book id="8B81134E-48AD-4708-8703-2B69AB566DDB" title="笔记本2_C#" Language="c#">
+    <note id="F766DF89-FA0B-4C99-9B77-5DFE960FD4FE" path="/SVR49E8F1FD0D654ECDB38771E1FA3BF654/71F581B8EC4544C498FFAAB0571D2D1C" title="第一篇C#笔记" createtime="1000000" updatetime="200000" Language="c#" isMark="0">
+    </note>
+    <note id="E87F789E-BBFA-4C0E-9E30-ED5E3DDCFD9C" path="/SVR49E8F1FD0D654ECDB38771E1FA3BF654/71F581B8EC4544C498FFAAB0571D2D1C" title="第二篇C#笔记" createtime="1000000" updatetime="200000" Language="c#" isMark="0">
+    </note>
+    <note id="C940654E-BBB5-45CE-99C6-F2F702ADF48B" path="/SVR49E8F1FD0D654ECDB38771E1FA3BF654/71F581B8EC4544C498FFAAB0571D2D1C" title="第二篇C#笔记" createtime="1000000" updatetime="200000" Language="c#" isMark="0">
+    </note>
+    <book id="AAC6E794-F215-43A0-90AA-AC1082967331" title="笔记本2子笔记本" Language="c#">
+      <note id="97D19EAF-20AE-467C-8815-A15E7C09792C" path="/SVR49E8F1FD0D654ECDB38771E1FA3BF654/71F581B8EC4544C498FFAAB0571D2D1C" title="第1篇C#笔记" createtime="1000000" updatetime="200000" Language="c#" isMark="0">
+      </note>
+      <note id="202D3B1B-128D-47E4-9FD0-9EB8D0868AE5" path="/SVR49E8F1FD0D654ECDB38771E1FA3BF654/71F581B8EC4544C498FFAAB0571D2D1C" title="第2篇C#笔记" createtime="1000000" updatetime="200000" Language="c#" isMark="0">
+      </note>
+      <note id="B7135057-D570-402D-9334-3B1282E3AD6B" path="/SVR49E8F1FD0D654ECDB38771E1FA3BF654/71F581B8EC4544C498FFAAB0571D2D1C" title="第3篇C#笔记" createtime="1000000" updatetime="200000" Language="c#" isMark="0">
+      </note>
+    </book>
+  </book>
+  <note id="7815C9C6-E576-4BD7-98C1-485C8A73F20D" path="/SVR49E8F1FD0D654ECDB38771E1FA3BF654/71F581B8EC4544C498FFAAB0571D2D1C" title="根目录笔记" createtime="1000000" updatetime="200000" Language="c#" isMark="0">
+  </note>
+</wecode>

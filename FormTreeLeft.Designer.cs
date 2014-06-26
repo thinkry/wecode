@@ -58,17 +58,21 @@
             this.treeViewDir.Size = new System.Drawing.Size(335, 509);
             this.treeViewDir.TabIndex = 0;
             this.treeViewDir.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewDir_BeforeExpand);
+            this.treeViewDir.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeViewDir_ItemDrag);
             this.treeViewDir.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDir_AfterSelect);
             this.treeViewDir.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDir_NodeMouseClick);
             this.treeViewDir.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDir_NodeMouseDoubleClick);
+            this.treeViewDir.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeViewDir_DragDrop);
+            this.treeViewDir.DragOver += new System.Windows.Forms.DragEventHandler(this.treeViewDir_DragOver);
+            this.treeViewDir.DragLeave += new System.EventHandler(this.treeViewDir_DragLeave);
             this.treeViewDir.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeViewDir_MouseDown);
             // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "ClosedFolder.ICO");
-            this.imageList1.Images.SetKeyName(1, "File.ico");
+            this.imageList1.Images.SetKeyName(0, "打开.png");
+            this.imageList1.Images.SetKeyName(1, "文本.png");
             // 
             // contextMenuStripDir
             // 

@@ -19,6 +19,8 @@ namespace WeCode1._0
 
         private string _nodeId;
 
+        private string _type;
+
         private bool _iniLexer;
 
         #endregion Fields
@@ -29,6 +31,12 @@ namespace WeCode1._0
         {
             get { return _nodeId; }
             set { _nodeId = value; }
+        }
+
+        public string Type
+        {
+            get { return _type; }
+            set { _type = value; }
         }
 
 
@@ -57,7 +65,7 @@ namespace WeCode1._0
 
         private void DocumentForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Scintilla.Modified)
+            if (Scintilla.Modified&&Attachment.isDeleteClose=="0")
             {
                 string Title = this.Text;
                 DialogResult dr = MessageBox.Show(this, "文档已修改，是否保存?", Title, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
@@ -79,22 +87,34 @@ namespace WeCode1._0
         //保存当前文章
         public void Save()
         {
-            string DocText = this.scintilla1.Text;
-            if (DocText.Length == 0)
-                return;
+            if (this.Type == "local")
+            {
+                string DocText = this.scintilla1.Text;
+                if (DocText.Length == 0)
+                    return;
 
-            OleDbParameter p1 = new OleDbParameter("@Content", OleDbType.VarChar);
-            p1.Value = DocText;
-            OleDbParameter p2 = new OleDbParameter("@NodeId", OleDbType.Integer);
-            p2.Value = Convert.ToInt32(this.NodeId);
+                OleDbParameter p1 = new OleDbParameter("@Content", OleDbType.VarChar);
+                p1.Value = DocText;
+                OleDbParameter p2 = new OleDbParameter("@NodeId", OleDbType.Integer);
+                p2.Value = Convert.ToInt32(this.NodeId);
 
-            OleDbParameter[] ArrPara = new OleDbParameter[2];
-            ArrPara[0] = p1;
-            ArrPara[1] = p2;
-            string SQL = "update tcontent set content=@Content where NodeId=@NodeId";
-            AccessAdo.ExecuteNonQuery(SQL, ArrPara);
+                OleDbParameter[] ArrPara = new OleDbParameter[2];
+                ArrPara[0] = p1;
+                ArrPara[1] = p2;
+                string SQL = "update tcontent set content=@Content where NodeId=@NodeId";
+                AccessAdo.ExecuteNonQuery(SQL, ArrPara);
 
-            scintilla1.Modified = false;
+                scintilla1.Modified = false;
+            }
+            else if (this.Type == "online")
+            {
+                string DocText = this.scintilla1.Text;
+                if (DocText.Length == 0)
+                    return;
+                NoteAPI.UpdateNote(this.NodeId,DocText);
+
+                scintilla1.Modified = false;
+            }
         }
 
         private void scintilla1_ModifiedChanged(object sender, EventArgs e)
@@ -121,6 +141,8 @@ namespace WeCode1._0
         {
             //设置附件
             Attachment.ActiveNodeId = this.NodeId;
+            Attachment.ActiveDOCType = this.Type;
+            Attachment.AttForm.GridEnable();
             Attachment.AttForm.ReFreshAttachGrid();
         }
 
@@ -229,6 +251,27 @@ namespace WeCode1._0
         {
             Attachment.DocCount = DockPanel.DocumentsCount;
             chek2ShowWelcome();
+        }
+
+        //导出为HTML
+        public bool ExportAsHtml()
+        {
+            using (SaveFileDialog dialog = new SaveFileDialog())
+            {
+                string fileName = (Text.EndsWith(" *") ? Text.Substring(0, Text.Length - 2) : Text);
+                dialog.Filter = "HTML Files (*.html;*.htm)|*.html;*.htm|All Files (*.*)|*.*";
+                dialog.FileName = fileName + ".html";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    scintilla1.Lexing.Colorize(); // Make sure the document is current
+                    using (StreamWriter sw = new StreamWriter(dialog.FileName))
+                        scintilla1.ExportHtml(sw, fileName, false);
+
+                    return true;
+                }
+            }
+
+            return false;
         }
 
 

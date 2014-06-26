@@ -15,7 +15,6 @@ E:\git\wecode\bin\Debug\WeCode1.0.pdb
 E:\git\wecode\bin\Debug\ScintillaNET.dll
 E:\git\wecode\bin\Debug\WeifenLuo.WinFormsUI.Docking.dll
 E:\git\wecode\bin\Debug\WeifenLuo.WinFormsUI.Docking.pdb
-E:\git\wecode\bin\Debug\Interop.ADODB.dll
 E:\git\wecode\bin\Debug\Interop.ADOX.dll
 E:\git\wecode\bin\Debug\Interop.JRO.dll
 E:\git\wecode\obj\x86\Debug\WeCode1.0.exe
@@ -25,3 +24,10 @@ E:\git\wecode\obj\x86\Debug\WeCode1._0.DocMark.resources
 E:\git\wecode\bin\Debug\db\helpdb.mdb
 E:\git\wecode\obj\x86\Debug\WeCode1._0.AttRenameDialog.resources
 E:\git\wecode\obj\x86\Debug\WeCode1._0.WelcomeDoc.resources
+E:\git\wecode\obj\x86\Debug\WeCode1.0.csprojResolveAssemblyReference.cache
+E:\git\wecode\obj\x86\Debug\WeCode1._0.YouDaoTree.resources
+E:\git\wecode\bin\Debug\TreeNodeLocal.xml
+E:\git\wecode\bin\Debug\Newtonsoft.Json.dll
+E:\git\wecode\obj\x86\Debug\WeCode1._0.FormAuthor.resources
+E:\git\wecode\obj\x86\Debug\WeCode1._0.UpLoad.resources
+E:\git\wecode\obj\x86\Debug\WeCode1._0.Download.resources

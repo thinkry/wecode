@@ -10,12 +10,17 @@ using System.IO;
 using System.Configuration;
 using ScintillaNET;
 using WeifenLuo.WinFormsUI.Docking;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using System.Web;
 
 namespace WeCode1._0
 {
     public partial class FormMain : Form
     {
         private FormTreeLeft frTree;
+        private YouDaoTree frYoudaoTree;
+
         private FormAttachment frmAttchment;
         private DocMark frmMark;
         private DocFind FormFind;
@@ -48,7 +53,6 @@ namespace WeCode1._0
         public FormMain()
         {
             InitializeComponent();
-            
 
             //书签
             frmMark = new DocMark();
@@ -65,6 +69,11 @@ namespace WeCode1._0
             frTree.formParent = this;
             //frTree.Show(dockPanel1);
 
+            //显示有道树窗口
+            frYoudaoTree = new YouDaoTree();
+            frYoudaoTree.formParent = this;
+            //frYoudaoTree.Show(dockPanel1);
+
             //显示附件窗口
             Attachment.ActiveNodeId = "-1";
             frmAttchment = new FormAttachment();
@@ -73,16 +82,74 @@ namespace WeCode1._0
 
             m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
 
+            //第一次打开界面，先判断token是否有效（为空或者过期）
+            //有效，同步XML到本地，加载有道云树目录;无效，打开授权页面进行授权
+            //授权成功后，云端创建两个目录以及配置文件，然后加载树目录
+            IniYouDaoAuthor();
+            
+
         }
 
+        //初始化授权相关
+        public void IniYouDaoAuthor()
+        {
+            //判断token是否有效
+            string IsAuthor = AuthorAPI.GetIsAuthor();
+            if (IsAuthor != "OK")
+            {
+                //禁用云目录
+                Attachment.IsTokeneffective = 0;
+                this.Load += new System.EventHandler(this.showNoAuthor);
+            }
+            else
+            {
+                //从云端拉取XML同步到本地
+                XMLAPI.Yun2XML();
+                Attachment.IsTokeneffective = 1;
+                //获取用户信息并禁用登陆按钮
+                toolStripMenuItemAuthor.Text = "已登录";
+                toolStripMenuItemAuthor.Enabled = false;
+            }
+            
+        }
+
+        private void showNoAuthor(object sender, System.EventArgs e)
+        {
+            MessageBox.Show("未授权有道云笔记或者授权已过期，请点击菜单以重新授权！");
+        }
+        
+        //上移
         private void toolStripButtonUp_Click(object sender, EventArgs e)
         {
-            frTree.setNodeUp();
+            if(dockPanel1.ActiveContent.GetType()==typeof(FormTreeLeft))
+            {
+                frTree.setNodeUp();
+            }
+            else if (dockPanel1.ActiveContent.GetType() == typeof(YouDaoTree))
+            {
+                frYoudaoTree.setNodeUp();
+            }
+            else
+            {
+                return;
+            }
         }
 
+        //下移
         private void toolStripButtonDown_Click(object sender, EventArgs e)
         {
-            frTree.setNodeDown();
+            if (dockPanel1.ActiveContent.GetType() == typeof(FormTreeLeft))
+            {
+                frTree.setNodeDown();
+            }
+            else if (dockPanel1.ActiveContent.GetType() == typeof(YouDaoTree))
+            {
+                frYoudaoTree.setNodeDown();
+            }
+            else
+            {
+                return;
+            }
         }
 
         //关闭文章
@@ -129,6 +196,59 @@ namespace WeCode1._0
                 OpenFile(nodeId);
         }
 
+        //打开云笔记
+        public void openNewYouDao(string nodeId,string title)
+        {
+            //欢迎窗口是否打开，如果打开则关闭
+            if (Attachment.isWelcomePageopen == "1")
+            {
+                IDockContent[] documents = dockPanel1.DocumentsToArray();
+
+                foreach (IDockContent content in documents)
+                {
+                    content.DockHandler.Close();
+                }
+                Attachment.isWelcomePageopen = "0";
+            }
+            // 如果已经打开，则定位，否则新窗口打开
+            bool isOpen = false;
+            foreach (DocumentForm documentForm in dockPanel1.Documents)
+            {
+                if (nodeId.Equals(documentForm.NodeId, StringComparison.OrdinalIgnoreCase))
+                {
+                    documentForm.Select();
+                    isOpen = true;
+                    break;
+                }
+            }
+
+            // Open the files
+            if (!isOpen)
+                OpenFileYouDao(nodeId,title);
+        }
+
+        private DocumentForm OpenFileYouDao(string nodeId,string title)
+        {
+
+            //获取文章信息
+
+            string Content = NoteAPI.GetNote(nodeId);
+
+            DocumentForm doc = new DocumentForm();
+            SetScintillaToCurrentOptions(doc);
+            doc.Scintilla.Text = Content;
+            doc.Scintilla.UndoRedo.EmptyUndoBuffer();
+            doc.Scintilla.Modified = false;
+            doc.Text = title;
+            doc.NodeId = nodeId;
+            doc.Type = "online";
+            doc.Show(dockPanel1);
+
+
+            return doc;
+        }
+
+
         ////打开文章
         //public void openNew(string nodeId)
         //{
@@ -169,6 +289,7 @@ namespace WeCode1._0
             doc.Scintilla.Modified = false;
             doc.Text = Title;
             doc.NodeId = nodeId;
+            doc.Type = "local";
             doc.Show(dockPanel1);
             
 
@@ -206,12 +327,26 @@ namespace WeCode1._0
 
         private void toolStripButtonNewText_Click(object sender, EventArgs e)
         {
-            frTree.NewDoc();
+            if (dockPanel1.ActiveContent.GetType() == typeof(FormTreeLeft))
+            {
+                frTree.NewDoc();
+            }
+            else if (dockPanel1.ActiveContent.GetType() == typeof(YouDaoTree))
+            {
+                frYoudaoTree.NewDoc();
+            }
         }
 
         private void toolStripButtonNewDir_Click(object sender, EventArgs e)
         {
-            frTree.NewDir();
+            if (dockPanel1.ActiveContent.GetType() == typeof(FormTreeLeft))
+            {
+                frTree.NewDir();
+            }
+            else if (dockPanel1.ActiveContent.GetType() == typeof(YouDaoTree))
+            {
+                frYoudaoTree.NewDir();
+            }
         }
 
         //保存
@@ -318,11 +453,15 @@ namespace WeCode1._0
         {
             //关闭所有打开的文档
                 string IsDocModi = "false";
-                foreach (DocumentForm doc in dockPanel1.Documents)
+                if (Attachment.isWelcomePageopen == "0")
                 {
-                    if (doc.Scintilla.Modified)
-                        IsDocModi = "true";
+                    foreach (DocumentForm doc in dockPanel1.Documents)
+                    {
+                        if (doc.Scintilla.Modified)
+                            IsDocModi = "true";
+                    }
                 }
+
                 if (IsDocModi == "true")
                 {
                     DialogResult dr = MessageBox.Show(this, "是否保存所有文档?", "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
@@ -367,15 +506,7 @@ namespace WeCode1._0
         //打开数据库
         private void toolStripMenuItemOpenDB_Click(object sender, EventArgs e)
         {
-           //关闭所有打开的文档
-            if (closeAll() == false)
-                return;
-            //刷新附件列表数据
-            Attachment.ActiveNodeId = "-1";
-            Attachment.AttForm.ReFreshAttachGrid();
-            //TODO
-            //清空搜索以及书签列表
-
+           
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
             //openFileDialog1.InitialDirectory = "c:\\";
@@ -384,6 +515,18 @@ namespace WeCode1._0
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                //关闭所有打开的文档
+                if (closeAll() == false)
+                    return;
+                //刷新附件列表数据
+                if (Attachment.isWelcomePageopen == "0")
+                {
+                    openWelcomePage();
+                }
+                Attachment.ActiveNodeId = "-1";
+                Attachment.AttForm.ReFreshAttachGrid();
+
+
                 string fileName = openFileDialog1.FileName;
                //修改连接字符串，并重新加载
                 string conStr = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + fileName;
@@ -394,6 +537,9 @@ namespace WeCode1._0
                 
 
                 frTree.frmTree_Reload();
+                //清空搜索重新加载书签
+                FormFind.IniData();
+                frmMark.RefreshGrid("local");
             }
         }
 
@@ -558,7 +704,15 @@ namespace WeCode1._0
 
         private void toolStripButtonDel_Click(object sender, EventArgs e)
         {
-            frTree.DelNode();
+            if (dockPanel1.ActiveContent.GetType() == typeof(FormTreeLeft))
+            {
+                frTree.DelNode();
+            }
+            else if (dockPanel1.ActiveContent.GetType() == typeof(YouDaoTree))
+            {
+
+                frYoudaoTree.DelNode();
+            }
         }
 
         //自动换行
@@ -566,13 +720,17 @@ namespace WeCode1._0
         {
             // 所有打开的文档自动换行
             toolStripMenuItemAutoWrap.Checked = !toolStripMenuItemAutoWrap.Checked;
-            foreach (DocumentForm doc in dockPanel1.Documents)
+            if (Attachment.isWelcomePageopen == "0")
             {
-                if (toolStripMenuItemAutoWrap.Checked)
-                    doc.Scintilla.LineWrapping.Mode = LineWrappingMode.Word;
-                else
-                    doc.Scintilla.LineWrapping.Mode = LineWrappingMode.None;
+                foreach (DocumentForm doc in dockPanel1.Documents)
+                {
+                    if (toolStripMenuItemAutoWrap.Checked)
+                        doc.Scintilla.LineWrapping.Mode = LineWrappingMode.Word;
+                    else
+                        doc.Scintilla.LineWrapping.Mode = LineWrappingMode.None;
+                }
             }
+            
         }
 
         private void toolStripButton6_Click(object sender, EventArgs e)
@@ -609,6 +767,7 @@ namespace WeCode1._0
             frTree.Show(dockPanel1);
             frmMark.Show(dockPanel1);
             FormFind.Show(dockPanel1);
+            frYoudaoTree.Show(dockPanel1);
         }
 
         private void toolStripMenuItemIsShowAtt_Click(object sender, EventArgs e)
@@ -618,7 +777,15 @@ namespace WeCode1._0
 
         private void toolStripButtonProp_Click(object sender, EventArgs e)
         {
-            frTree.ShowProp();
+            if (dockPanel1.ActiveContent.GetType() == typeof(FormTreeLeft))
+            {
+                frTree.ShowProp();
+            }
+            else if (dockPanel1.ActiveContent.GetType() == typeof(YouDaoTree))
+            {
+
+                frYoudaoTree.ShowProp();
+            }
         }
 
         //打开欢迎界面
@@ -672,6 +839,8 @@ namespace WeCode1._0
         {
             if (persistString == typeof(FormTreeLeft).ToString())
                 return frTree;
+            else if (persistString == typeof(YouDaoTree).ToString())
+                return frYoudaoTree;
             else if (persistString == typeof(FormAttachment).ToString())
                 return frmAttchment;
             else if (persistString == typeof(DocFind).ToString())
@@ -684,12 +853,111 @@ namespace WeCode1._0
             }
         }
 
+        //关闭
         private void toolStripButtonCloseTab_Click(object sender, EventArgs e)
         {
-
+            if (ActiveDocument != null)
+                ActiveDocument.Close();
         }
 
+        //关闭所有
         private void toolStripButtonCloseTabAll_Click(object sender, EventArgs e)
+        {
+            IDockContent[] documents = dockPanel1.DocumentsToArray();
+
+            foreach (IDockContent content in documents)
+            {
+                content.DockHandler.Close();
+            }
+        }
+
+        private void toolStripMenuItemExportHTML_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null)
+                ActiveDocument.ExportAsHtml();
+        }
+
+        private void toolStripMenuItemPrint_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null)
+                ActiveDocument.Scintilla.Printing.Print();
+        }
+
+        private void toolStripMenuItemPv_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null)
+                ActiveDocument.Scintilla.Printing.PrintPreview();
+        }
+
+
+        //授权，并且初始化用户信息
+        private void toolStripMenuItemAuthor_Click(object sender, EventArgs e)
+        {
+            FormAuthor frAuthor = new FormAuthor();
+            DialogResult dr = frAuthor.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                //授权成功，禁用登陆按钮，初始化目录以及配置信息，显示有道云树
+                this.toolStripMenuItemAuthor.Text = "已登录";
+                this.toolStripMenuItemAuthor.Enabled = false;
+                //初始化目录以及配置信息
+                AuthorAPI.CreatewecodeConfig();
+                //从云端拉取目录配置到本地
+                XMLAPI.Yun2XML();
+
+                //加载树
+                frYoudaoTree.IniYoudaoTree();
+            }
+        }
+
+
+        //在目录窗口激活或者失去焦点时禁用菜单按钮
+        public void HideShowMenu(Boolean sMode)
+        {
+              
+              this.toolStripButtonNewText.Enabled = sMode;
+              this.toolStripButtonNewDir.Enabled = sMode;
+              this.toolStripButtonDel.Enabled = sMode;
+              this.toolStripButtonProp.Enabled = sMode;
+              this.toolStripButtonUp.Enabled = sMode;
+              this.toolStripButtonDown.Enabled = sMode;
+        }
+
+        //窗体发生变化时触发
+        private void dockPanel1_ActiveContentChanged(object sender, EventArgs e)
+        {
+            if (dockPanel1.ActiveContent != null)
+            {
+                try
+                {
+                    if (dockPanel1.ActiveContent.GetType() == typeof(FormTreeLeft))
+                    {
+                        HideShowMenu(true);
+                    }
+                    else if (dockPanel1.ActiveContent.GetType() == typeof(YouDaoTree)&&Attachment.IsTokeneffective==1)
+                    {
+                        HideShowMenu(true);
+                    }
+                    else
+                    {
+                        HideShowMenu(false);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+            }
+        }
+
+        private void FormMain_Shown(object sender, EventArgs e)
+        {
+            //IniYouDaoAuthor();
+        }
+
+        //关于
+        private void toolStripMenuItemAbout_Click(object sender, EventArgs e)
         {
 
         }
