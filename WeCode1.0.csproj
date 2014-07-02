@@ -40,7 +40,7 @@
     </Reference>
     <Reference Include="ScintillaNET, Version=2.6.0.0, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Administrator\Desktop\图标\ScintillaNET.dll</HintPath>
+      <HintPath>C:\Users\Administrator\Desktop\sciSource\bin\Debug\ScintillaNET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -61,6 +61,12 @@
     </Compile>
     <Compile Include="AttRenameDialog.Designer.cs">
       <DependentUpon>AttRenameDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="AuthorAPI.cs" />
     <Compile Include="ContentExcs.cs">
@@ -150,6 +156,9 @@
     </Compile>
     <EmbeddedResource Include="AttRenameDialog.resx">
       <DependentUpon>AttRenameDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="About.resx">
+      <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DocFind.resx">
       <DependentUpon>DocFind.cs</DependentUpon>
@@ -251,6 +260,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

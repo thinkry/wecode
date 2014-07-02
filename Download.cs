@@ -6,11 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace WeCode1._0
 {
     public partial class Download : Form
     {
+        Thread t;
         private string _URL;
         private string _Filename;
 
@@ -27,6 +29,15 @@ namespace WeCode1._0
             lblURL.Text = _URL;
             lblDownLoad.Text = "0/0";
             lblSpeed.Text = "O KB/S";
+            //DownloadFile(_URL, _Filename, this.progressBar1);
+            //新线程下载
+            Control.CheckForIllegalCrossThreadCalls = false;
+            t = new Thread(new ThreadStart(ThFun));
+            t.Start(); 
+        }
+
+        public void ThFun()
+        {
             DownloadFile(_URL, _Filename, this.progressBar1);
         }
 
@@ -38,6 +49,8 @@ namespace WeCode1._0
         /// <param name="Prog">用于显示的进度条</param>
         public void DownloadFile(string URL, string filename, System.Windows.Forms.ProgressBar prog)
         {
+            System.IO.Stream so = new System.IO.FileStream(filename, System.IO.FileMode.Create);
+
             try
             {
                 System.Net.HttpWebRequest Myrq = (System.Net.HttpWebRequest)System.Net.HttpWebRequest.Create(URL);
@@ -52,7 +65,7 @@ namespace WeCode1._0
                 }
 
                 System.IO.Stream st = myrp.GetResponseStream();
-                System.IO.Stream so = new System.IO.FileStream(filename, System.IO.FileMode.Create);
+                //System.IO.Stream so = new System.IO.FileStream(filename, System.IO.FileMode.Create);
                 long totalDownloadedByte = 0;
                 byte[] by = new byte[1024];
                 int osize = st.Read(by, 0, (int)by.Length);
@@ -66,7 +79,7 @@ namespace WeCode1._0
                 while (osize > 0)
                 {
                     totalDownloadedByte = osize + totalDownloadedByte;
-                    System.Windows.Forms.Application.DoEvents();
+                    //System.Windows.Forms.Application.DoEvents();
                     so.Write(by, 0, osize);
 
                     TimeSpan span = DateTime.Now - startTime;
@@ -77,7 +90,7 @@ namespace WeCode1._0
                         lblSpeed.Text = " 平均速度：" + (offset / 1024 / second).ToString("0.00") + "KB/秒";
                     }
 
-                    lblDownLoad.Text = totalDownloadedByte.ToString() + "字节/" + totalBytes.ToString() + "字节";
+                    lblDownLoad.Text = (totalDownloadedByte/1024).ToString("F2") + "KB/" + (totalBytes/1024).ToString("F2") + "KB";
                     if (prog != null)
                     {
                         prog.Value = (int)totalDownloadedByte;
@@ -91,8 +104,22 @@ namespace WeCode1._0
             }
             catch (System.Exception)
             {
-                throw;
+
             }
+            finally {
+                so.Close();
+            }
+        }
+
+        private void Download_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //Thread.CurrentThread.Abort();
+            t.DisableComObjectEagerCleanup();
+            t.Abort();
+
+            this.Dispose();
+
+            this.Close();
         }
 
     }

@@ -13,6 +13,7 @@ using WeifenLuo.WinFormsUI.Docking;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Web;
+using System.Xml;
 
 namespace WeCode1._0
 {
@@ -98,6 +99,10 @@ namespace WeCode1._0
             if (IsAuthor != "OK")
             {
                 //禁用云目录
+                this.toolStripMenuItemLogin.Visible = true;
+                this.toolStripMenuItemUinfo.Visible = false;
+                Text = "WeCode--未登录";
+
                 Attachment.IsTokeneffective = 0;
                 this.Load += new System.EventHandler(this.showNoAuthor);
             }
@@ -107,15 +112,24 @@ namespace WeCode1._0
                 XMLAPI.Yun2XML();
                 Attachment.IsTokeneffective = 1;
                 //获取用户信息并禁用登陆按钮
-                toolStripMenuItemAuthor.Text = "已登录";
-                toolStripMenuItemAuthor.Enabled = false;
+                this.toolStripMenuItemLogin.Visible = false;
+                this.toolStripMenuItemUinfo.Visible = true;
+                Text = "WeCode--已登录";
             }
             
         }
 
         private void showNoAuthor(object sender, System.EventArgs e)
         {
-            MessageBox.Show("未授权有道云笔记或者授权已过期，请点击菜单以重新授权！");
+            //MessageBox.Show("未授权有道云笔记或者授权已过期，请点击用户--登录以重新授权！");
+            if (ConfigurationManager.AppSettings["authorAlert"] != "0")
+            {
+                if (MessageBox.Show("未授权有道云笔记或者授权已过期，请点击菜单用户--登录以重新授权！\n点击“确定”不再提醒", "登录提醒", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+                {
+                    PubFunc.SetConfiguration("authorAlert", "0");
+                }
+            }
+
         }
         
         //上移
@@ -155,12 +169,15 @@ namespace WeCode1._0
         //关闭文章
         public void CloseDoc(string nodeId)
         {
-            foreach (DocumentForm documentForm in dockPanel1.Documents)
+            if (Attachment.isWelcomePageopen == "0")
             {
-                if (nodeId.Equals(documentForm.NodeId, StringComparison.OrdinalIgnoreCase))
+                foreach (DocumentForm documentForm in dockPanel1.Documents)
                 {
-                    documentForm.Close();
-                    break;
+                    if (nodeId.Equals(documentForm.NodeId, StringComparison.OrdinalIgnoreCase))
+                    {
+                        documentForm.Close();
+                        break;
+                    }
                 }
             }
         }
@@ -357,7 +374,7 @@ namespace WeCode1._0
         }
 
 
-        //设置语言
+        //设置语言(激活文档)
         public void SetLanguage(string language)
         {
             if ("ini".Equals(language, StringComparison.OrdinalIgnoreCase))
@@ -377,6 +394,23 @@ namespace WeCode1._0
                     ActiveDocument.Scintilla.Indentation.SmartIndentType = ScintillaNET.SmartIndent.CPP;
                 else
                     ActiveDocument.Scintilla.Indentation.SmartIndentType = ScintillaNET.SmartIndent.None;
+            }
+        }
+
+        //设置语言
+        public void SetLanguageByDoc(string language,string id)
+        {
+            //根据id设置语言
+            if (Attachment.isWelcomePageopen == "0")
+            {
+                foreach (DocumentForm documentForm in dockPanel1.Documents)
+                {
+                    if (id.Equals(documentForm.NodeId, StringComparison.OrdinalIgnoreCase))
+                    {
+                        documentForm.SetLanguageByDoc(language);
+                        break;
+                    }
+                }
             }
         }
         
@@ -495,11 +529,15 @@ namespace WeCode1._0
         //关闭所有文档
         private void CloseAllDoment()
         {
-            IDockContent[] documents = dockPanel1.DocumentsToArray();
-
-            foreach (IDockContent content in documents)
+            if (Attachment.isWelcomePageopen == "0")
             {
-                content.DockHandler.Close();
+                IDockContent[] documents = dockPanel1.DocumentsToArray();
+
+                foreach (IDockContent content in documents)
+                {
+                    content.DockHandler.Close();
+                }
+                
             }
         }
 
@@ -537,10 +575,15 @@ namespace WeCode1._0
                 
 
                 frTree.frmTree_Reload();
-                //清空搜索重新加载书签
-                FormFind.IniData();
-                frmMark.RefreshGrid("local");
+                ReSetMarkFind();
             }
+        }
+
+        public void ReSetMarkFind()
+        {
+            //清空搜索重新加载书签
+            FormFind.IniData();
+            frmMark.RefreshGrid("local");
         }
 
 
@@ -688,12 +731,14 @@ namespace WeCode1._0
 
         private void toolStripMenuItemFind_Click(object sender, EventArgs e)
         {
-            ActiveDocument.Scintilla.FindReplace.ShowFind();
+            if (ActiveDocument != null)
+                 ActiveDocument.Scintilla.FindReplace.ShowFind();
         }
 
         private void toolStripMenuItemReplace_Click(object sender, EventArgs e)
         {
-            ActiveDocument.Scintilla.FindReplace.ShowReplace();
+            if (ActiveDocument != null)
+                ActiveDocument.Scintilla.FindReplace.ShowReplace();
         }
 
         private void toolStripMenuItemSelAll_Click(object sender, EventArgs e)
@@ -745,9 +790,58 @@ namespace WeCode1._0
             fontDialog.ShowEffects = false;
             if (fontDialog.ShowDialog() != DialogResult.Cancel)
             {
-                ActiveDocument.Scintilla.Font = fontDialog.Font;//将当前选定的文字改变字体
+                FontConverter fc = new FontConverter();
+                string sfont = fc.ConvertToString(fontDialog.Font);
+
+                if (Attachment.isWelcomePageopen == "1")
+                {
+                    return;
+                }
+                foreach (DocumentForm doc in dockPanel1.Documents)
+                {
+                    SetFont(doc,(Font)fc.ConvertFromString(sfont));
+                }
+
+                PubFunc.SetConfiguration("defaultFont", sfont);
             }
         }
+
+        public void SetFont(DocumentForm doc,Font xFont)
+        {
+            //ActiveDocument.Scintilla.Font = xFont;
+
+        doc.Scintilla.Styles.Default.Font = xFont;
+
+        doc.Scintilla.Styles[0].Font = xFont;               //'white space
+        doc.Scintilla.Styles[1].Font = xFont;              //'comments-block
+        doc.Scintilla.Styles[2].Font = xFont;              // 'comments-singlechar
+        doc.Scintilla.Styles[3].Font = xFont;              // 'half-formed comment
+        doc.Scintilla.Styles[4].Font = xFont;            //   'numbers
+        doc.Scintilla.Styles[5].Font = xFont;              // 'keyword after complete
+        doc.Scintilla.Styles[6].Font = xFont;              // 'quoted text-double
+        doc.Scintilla.Styles[7].Font = xFont;              // 'quoted text-single
+        doc.Scintilla.Styles[8].Font = xFont;               //'"table" keyword l
+        doc.Scintilla.Styles[9].Font = xFont;               //'? knows
+        doc.Scintilla.Styles[10].Font = xFont;              //'symbol (<>);=-
+        doc.Scintilla.Styles[11].Font = xFont;              //'half-formed words
+        doc.Scintilla.Styles[12].Font = xFont;              //'mixed quoted text 'text"  ?strange
+        doc.Scintilla.Styles[14].Font = xFont;              //'sql-type keyword (still looks weird)
+        doc.Scintilla.Styles[15].Font = xFont;              //'sql @symbol in a comment 
+        doc.Scintilla.Styles[16].Font = xFont;              //'sql function returning INT
+        doc.Scintilla.Styles[19].Font = xFont;              //'in/out
+        doc.Scintilla.Styles[32].Font = xFont;              //'plain ordinary whitespace, that exists everywhere
+
+        doc.Scintilla.Styles[StylesCommon.LineNumber].Font = xFont;
+        doc.Scintilla.Styles[StylesCommon.BraceBad].Font = xFont;
+        doc.Scintilla.Styles[StylesCommon.BraceLight].Font = xFont;
+        doc.Scintilla.Styles[StylesCommon.CallTip].Font = xFont;
+        doc.Scintilla.Styles[StylesCommon.ControlChar].Font = xFont;
+        doc.Scintilla.Styles[StylesCommon.Default].Font = xFont;
+        doc.Scintilla.Styles[StylesCommon.IndentGuide].Font = xFont;
+        doc.Scintilla.Styles[StylesCommon.LastPredefined].Font = xFont;
+        doc.Scintilla.Styles[StylesCommon.Max].Font = xFont;
+        }
+
 
         private void toolStripMenuItemIsShowTB_Click(object sender, EventArgs e)
         {
@@ -818,10 +912,32 @@ namespace WeCode1._0
             this.toolStripStatusLabelDocTime.Text = crtTime;
         }
 
+        public void showLinePosition(int x, int y)
+        {
+            this.toolStripStatusLabelRowCol.Text = "行 " + x.ToString() + "        列 " + y.ToString();
+        }
+
         //删除所有书签
         private void toolStripMenuItemDelAllMark_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("删除所有书签？", "提示", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            } 
             AccessAdo.ExecuteNonQuery("update ttree set marktime=0");
+            //删除有道云书签
+            if (Attachment.IsTokeneffective == 1)
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load("TreeNodeLocal.xml");
+                XmlNodeList xlist = doc.SelectNodes("//note[@isMark='1']");
+                foreach (XmlNode xnode in xlist)
+                {
+                    xnode.Attributes["isMark"].Value = "0";
+                }
+                doc.Save("TreeNodeLocal.xml");
+                XMLAPI.XML2Yun();
+            }
         }
 
         private void toolStripMenuItemExit_Click(object sender, EventArgs e)
@@ -863,11 +979,14 @@ namespace WeCode1._0
         //关闭所有
         private void toolStripButtonCloseTabAll_Click(object sender, EventArgs e)
         {
-            IDockContent[] documents = dockPanel1.DocumentsToArray();
-
-            foreach (IDockContent content in documents)
+            if (Attachment.isWelcomePageopen == "0")
             {
-                content.DockHandler.Close();
+                IDockContent[] documents = dockPanel1.DocumentsToArray();
+
+                foreach (IDockContent content in documents)
+                {
+                    content.DockHandler.Close();
+                }
             }
         }
 
@@ -893,21 +1012,7 @@ namespace WeCode1._0
         //授权，并且初始化用户信息
         private void toolStripMenuItemAuthor_Click(object sender, EventArgs e)
         {
-            FormAuthor frAuthor = new FormAuthor();
-            DialogResult dr = frAuthor.ShowDialog();
-            if (dr == DialogResult.OK)
-            {
-                //授权成功，禁用登陆按钮，初始化目录以及配置信息，显示有道云树
-                this.toolStripMenuItemAuthor.Text = "已登录";
-                this.toolStripMenuItemAuthor.Enabled = false;
-                //初始化目录以及配置信息
-                AuthorAPI.CreatewecodeConfig();
-                //从云端拉取目录配置到本地
-                XMLAPI.Yun2XML();
-
-                //加载树
-                frYoudaoTree.IniYoudaoTree();
-            }
+            
         }
 
 
@@ -959,7 +1064,91 @@ namespace WeCode1._0
         //关于
         private void toolStripMenuItemAbout_Click(object sender, EventArgs e)
         {
+            About ab = new About();
+            ab.ShowDialog();
+        }
+
+        //保存
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null)
+                ActiveDocument.Save();
+        }
+
+        //撤销
+        private void toolStripButtonUndo_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null)
+                ActiveDocument.Scintilla.UndoRedo.Undo();
+        }
+
+        //反撤销
+        private void toolStripButtonRedo_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null)
+                ActiveDocument.Scintilla.UndoRedo.Redo();
+        }
+
+        //剪切
+        private void toolStripButtonCut_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null)
+                ActiveDocument.Scintilla.Clipboard.Cut();
+        }
+
+        //复制
+        private void toolStripButtonCopy_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null)
+                ActiveDocument.Scintilla.Clipboard.Copy();
+        }
+
+        //粘贴
+        private void toolStripButtonPaste_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null)
+                ActiveDocument.Scintilla.Clipboard.Paste();
+        }
+
+        //授权
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            FormAuthor frAuthor = new FormAuthor();
+            DialogResult dr = frAuthor.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                //授权成功，禁用登陆按钮，初始化目录以及配置信息，显示有道云树
+                this.toolStripMenuItemLogin.Visible = false;
+                this.toolStripMenuItemUinfo.Visible = true;
+                Text = "WeCode--已登录";
+                //初始化目录以及配置信息
+                AuthorAPI.CreatewecodeConfig();
+                //从云端拉取目录配置到本地
+                XMLAPI.Yun2XML();
+
+                Attachment.IsTokeneffective = 1;
+                //加载树
+                frYoudaoTree.IniYoudaoTree();
+                HideShowMenu(true);
+            }
+        }
+
+        //查看用户信息
+        private void toolStripMenuItemUinfo_Click(object sender, EventArgs e)
+        {
+            string sUserInfo = NoteAPI.GetUserInfo();
+            if (sUserInfo=="")
+                return;
+            JObject jo = JObject.Parse(sUserInfo);
+            float userdsize=(float)jo["used_size"];
+            float totalsize = (float)jo["total_size"];
+            string user = jo["user"].ToString();
+            string info = "当前用户：" + user + "\n";
+            info += "总共空间：" + totalsize / 1048576 + "MB\n";
+            info += "已用空间：" + userdsize / 1048576 + "MB\n";
+            MessageBox.Show(info,"用户信息");
 
         }
+
     }
 }

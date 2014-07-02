@@ -29,7 +29,20 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DocumentForm));
             this.scintilla1 = new ScintillaNET.Scintilla();
+            this.contextMenuStripMouseClick = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemUndo = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemRedo = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemCut = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemPaste = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemSerch = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemReplace = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemSeleAll = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripTab = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemTabClose = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemTabCloseE = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,16 +54,21 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemTabAddMark = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.scintilla1)).BeginInit();
+            this.contextMenuStripMouseClick.SuspendLayout();
             this.contextMenuStripTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // scintilla1
             // 
+            this.scintilla1.ConfigurationManager.LoadOrder = ScintillaNET.Configuration.ConfigurationLoadOrder.UserCustomBuiltIn;
+            this.scintilla1.ContextMenuStrip = this.contextMenuStripMouseClick;
             this.scintilla1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scintilla1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.scintilla1.LineWrapping.VisualFlags = ScintillaNET.LineWrappingVisualFlags.End;
             this.scintilla1.Location = new System.Drawing.Point(0, 0);
             this.scintilla1.Margins.Margin2.Width = 16;
             this.scintilla1.Name = "scintilla1";
+            this.scintilla1.Selection.BackColorUnfocused = System.Drawing.SystemColors.Highlight;
             this.scintilla1.Size = new System.Drawing.Size(284, 262);
             this.scintilla1.Styles.BraceBad.FontName = "Verd";
             this.scintilla1.Styles.BraceBad.Size = 9F;
@@ -73,6 +91,110 @@
             this.scintilla1.TabIndex = 0;
             this.scintilla1.CharAdded += new System.EventHandler<ScintillaNET.CharAddedEventArgs>(this.scintilla1_CharAdded);
             this.scintilla1.ModifiedChanged += new System.EventHandler(this.scintilla1_ModifiedChanged);
+            this.scintilla1.SelectionChanged += new System.EventHandler(this.scintilla1_SelectionChanged);
+            this.scintilla1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.scintilla1_MouseDown);
+            // 
+            // contextMenuStripMouseClick
+            // 
+            this.contextMenuStripMouseClick.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemUndo,
+            this.toolStripMenuItemRedo,
+            this.toolStripSeparator3,
+            this.toolStripMenuItemCut,
+            this.toolStripMenuItemCopy,
+            this.toolStripMenuItemPaste,
+            this.toolStripSeparator4,
+            this.toolStripMenuItemSerch,
+            this.toolStripMenuItemReplace,
+            this.toolStripSeparator5,
+            this.toolStripMenuItemSeleAll});
+            this.contextMenuStripMouseClick.Name = "contextMenuStripMouseClick";
+            this.contextMenuStripMouseClick.Size = new System.Drawing.Size(162, 198);
+            this.contextMenuStripMouseClick.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripMouseClick_Opening);
+            // 
+            // toolStripMenuItemUndo
+            // 
+            this.toolStripMenuItemUndo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemUndo.Image")));
+            this.toolStripMenuItemUndo.Name = "toolStripMenuItemUndo";
+            this.toolStripMenuItemUndo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.toolStripMenuItemUndo.Size = new System.Drawing.Size(161, 22);
+            this.toolStripMenuItemUndo.Text = "撤消(&U)";
+            this.toolStripMenuItemUndo.Click += new System.EventHandler(this.toolStripMenuItemUndo_Click);
+            // 
+            // toolStripMenuItemRedo
+            // 
+            this.toolStripMenuItemRedo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemRedo.Image")));
+            this.toolStripMenuItemRedo.Name = "toolStripMenuItemRedo";
+            this.toolStripMenuItemRedo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
+            this.toolStripMenuItemRedo.Size = new System.Drawing.Size(161, 22);
+            this.toolStripMenuItemRedo.Text = "重做(&R)";
+            this.toolStripMenuItemRedo.Click += new System.EventHandler(this.toolStripMenuItemRedo_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(158, 6);
+            // 
+            // toolStripMenuItemCut
+            // 
+            this.toolStripMenuItemCut.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemCut.Image")));
+            this.toolStripMenuItemCut.Name = "toolStripMenuItemCut";
+            this.toolStripMenuItemCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.toolStripMenuItemCut.Size = new System.Drawing.Size(161, 22);
+            this.toolStripMenuItemCut.Text = "剪切(&X)";
+            this.toolStripMenuItemCut.Click += new System.EventHandler(this.toolStripMenuItemCut_Click);
+            // 
+            // toolStripMenuItemCopy
+            // 
+            this.toolStripMenuItemCopy.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemCopy.Image")));
+            this.toolStripMenuItemCopy.Name = "toolStripMenuItemCopy";
+            this.toolStripMenuItemCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.toolStripMenuItemCopy.Size = new System.Drawing.Size(161, 22);
+            this.toolStripMenuItemCopy.Text = "复制(&C)";
+            this.toolStripMenuItemCopy.Click += new System.EventHandler(this.toolStripMenuItemCopy_Click);
+            // 
+            // toolStripMenuItemPaste
+            // 
+            this.toolStripMenuItemPaste.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemPaste.Image")));
+            this.toolStripMenuItemPaste.Name = "toolStripMenuItemPaste";
+            this.toolStripMenuItemPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.toolStripMenuItemPaste.Size = new System.Drawing.Size(161, 22);
+            this.toolStripMenuItemPaste.Text = "粘贴(&P)";
+            this.toolStripMenuItemPaste.Click += new System.EventHandler(this.toolStripMenuItemPaste_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(158, 6);
+            // 
+            // toolStripMenuItemSerch
+            // 
+            this.toolStripMenuItemSerch.Name = "toolStripMenuItemSerch";
+            this.toolStripMenuItemSerch.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.toolStripMenuItemSerch.Size = new System.Drawing.Size(161, 22);
+            this.toolStripMenuItemSerch.Text = "查找";
+            this.toolStripMenuItemSerch.Click += new System.EventHandler(this.toolStripMenuItemSerch_Click);
+            // 
+            // toolStripMenuItemReplace
+            // 
+            this.toolStripMenuItemReplace.Name = "toolStripMenuItemReplace";
+            this.toolStripMenuItemReplace.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
+            this.toolStripMenuItemReplace.Size = new System.Drawing.Size(161, 22);
+            this.toolStripMenuItemReplace.Text = "替换";
+            this.toolStripMenuItemReplace.Click += new System.EventHandler(this.toolStripMenuItemReplace_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(158, 6);
+            // 
+            // toolStripMenuItemSeleAll
+            // 
+            this.toolStripMenuItemSeleAll.Name = "toolStripMenuItemSeleAll";
+            this.toolStripMenuItemSeleAll.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.toolStripMenuItemSeleAll.Size = new System.Drawing.Size(161, 22);
+            this.toolStripMenuItemSeleAll.Text = "全选(&A)";
+            this.toolStripMenuItemSeleAll.Click += new System.EventHandler(this.toolStripMenuItemSeleAll_Click);
             // 
             // contextMenuStripTab
             // 
@@ -87,7 +209,7 @@
             this.toolStripSeparator2,
             this.toolStripMenuItemTabAddMark});
             this.contextMenuStripTab.Name = "contextMenuStripTab";
-            this.contextMenuStripTab.Size = new System.Drawing.Size(188, 170);
+            this.contextMenuStripTab.Size = new System.Drawing.Size(188, 192);
             // 
             // toolStripMenuItemTabClose
             // 
@@ -156,13 +278,16 @@
             this.Controls.Add(this.scintilla1);
             this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DocumentForm";
             this.TabPageContextMenuStrip = this.contextMenuStripTab;
             this.Activated += new System.EventHandler(this.DocumentForm_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DocumentForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DocumentForm_FormClosed);
             this.Load += new System.EventHandler(this.DocumentForm_Load);
+            this.Shown += new System.EventHandler(this.DocumentForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.scintilla1)).EndInit();
+            this.contextMenuStripMouseClick.ResumeLayout(false);
             this.contextMenuStripTab.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -181,6 +306,18 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemTabRdOnly;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemTabAddMark;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripMouseClick;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemUndo;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRedo;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCut;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCopy;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemPaste;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSerch;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemReplace;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSeleAll;
 
     }
 }

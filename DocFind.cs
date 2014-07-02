@@ -50,7 +50,7 @@ namespace WeCode1._0
                 dataGridViewSerch.DataSource = AccessAdo.ExecuteDataSet(SQL).Tables[0];
                 dataGridViewSerch.Columns[0].Visible = false;
             }
-            else if (comboBox1.Text == "有道云")
+            else if (comboBox1.Text == "有道云" && Attachment.IsTokeneffective == 1)
             {
                 serchType = "online";
                 DataTable tempDt = new DataTable();
@@ -75,33 +75,53 @@ namespace WeCode1._0
 
 
             }
+            else
+            {
+                serchType = "online";
+                DataTable tempDt = new DataTable();
+                tempDt.Columns.Add("path");
+                tempDt.Columns.Add("标题");
+                tempDt.Columns.Add("Language");
+
+                dataGridViewSerch.DataSource = tempDt;
+                dataGridViewSerch.Columns[0].Visible = false;
+                dataGridViewSerch.Columns[2].Visible = false;
+            }
         }
 
         //双击打开文章
         private void dataGridViewSerch_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (serchType == "local")
+            try
             {
-                string nodeid = dataGridViewSerch.SelectedRows[0].Cells[0].Value.ToString();
-                formParent.openNew(nodeid);
+                if (serchType == "local")
+                {
+                    string nodeid = dataGridViewSerch.SelectedRows[0].Cells[0].Value.ToString();
+                    formParent.openNew(nodeid);
 
-                //打开后设置语言
-                string Language = AccessAdo.ExecuteScalar("select synid from ttree where nodeid=" + nodeid).ToString();
-                Language = PubFunc.Synid2LanguageSetLang(Language);
-                formParent.SetLanguage(Language);
+                    //打开后设置语言
+                    string Language = AccessAdo.ExecuteScalar("select synid from ttree where nodeid=" + nodeid).ToString();
+                    Language = PubFunc.Synid2LanguageSetLang(Language);
+                    formParent.SetLanguage(Language);
+                }
+                else if (serchType == "online")
+                {
+                    //双击文章，如果已经打开，则定位，否则新窗口打开
+                    string sNodeId = dataGridViewSerch.SelectedRows[0].Cells[0].Value.ToString();
+                    string sLang = dataGridViewSerch.SelectedRows[0].Cells[2].Value.ToString();
+                    string title = dataGridViewSerch.SelectedRows[0].Cells[1].Value.ToString();
+                    formParent.openNewYouDao(sNodeId, title);
+
+                    ///打开后设置语言
+                    string Language = PubFunc.Synid2LanguageSetLang(PubFunc.Language2Synid(sLang));
+                    formParent.SetLanguage(Language);
+                }
             }
-            else if (serchType == "online")
+            catch (Exception ex)
             {
-                //双击文章，如果已经打开，则定位，否则新窗口打开
-                string sNodeId = dataGridViewSerch.SelectedRows[0].Cells[0].Value.ToString();
-                string sLang = dataGridViewSerch.SelectedRows[0].Cells[2].Value.ToString();
-                string title = dataGridViewSerch.SelectedRows[0].Cells[1].Value.ToString();
-                formParent.openNewYouDao(sNodeId, title);
-
-                ///打开后设置语言
-                string Language = PubFunc.Synid2LanguageSetLang(PubFunc.Language2Synid(sLang));
-                formParent.SetLanguage(Language);
+                
             }
+           
 
         }
 

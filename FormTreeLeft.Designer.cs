@@ -168,9 +168,10 @@
                         | WeifenLuo.WinFormsUI.Docking.DockAreas.DockBottom)));
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.HideOnClose = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormTreeLeft";
             this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft;
-            this.Text = "目录";
+            this.Text = "本地";
             this.Load += new System.EventHandler(this.FormTreeLeft_Load);
             this.contextMenuStripDir.ResumeLayout(false);
             this.contextMenuStripTxt.ResumeLayout(false);

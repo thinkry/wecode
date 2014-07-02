@@ -105,7 +105,7 @@
             this.dataGridViewSerch.AllowUserToResizeRows = false;
             this.dataGridViewSerch.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewSerch.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridViewSerch.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridViewSerch.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridViewSerch.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridViewSerch.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dataGridViewSerch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -144,6 +144,7 @@
                         | WeifenLuo.WinFormsUI.Docking.DockAreas.DockBottom)));
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.HideOnClose = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DocFind";
             this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft;
             this.Text = "查找";

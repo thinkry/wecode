@@ -24,10 +24,12 @@ E:\git\wecode\obj\x86\Debug\WeCode1._0.DocMark.resources
 E:\git\wecode\bin\Debug\db\helpdb.mdb
 E:\git\wecode\obj\x86\Debug\WeCode1._0.AttRenameDialog.resources
 E:\git\wecode\obj\x86\Debug\WeCode1._0.WelcomeDoc.resources
-E:\git\wecode\obj\x86\Debug\WeCode1.0.csprojResolveAssemblyReference.cache
 E:\git\wecode\obj\x86\Debug\WeCode1._0.YouDaoTree.resources
 E:\git\wecode\bin\Debug\TreeNodeLocal.xml
 E:\git\wecode\bin\Debug\Newtonsoft.Json.dll
 E:\git\wecode\obj\x86\Debug\WeCode1._0.FormAuthor.resources
 E:\git\wecode\obj\x86\Debug\WeCode1._0.UpLoad.resources
 E:\git\wecode\obj\x86\Debug\WeCode1._0.Download.resources
+E:\git\wecode\bin\Debug\ScintillaNET.pdb
+E:\git\wecode\obj\x86\Debug\WeCode1.0.csprojResolveAssemblyReference.cache
+E:\git\wecode\obj\x86\Debug\WeCode1._0.authorAlertForm.resources

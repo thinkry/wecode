@@ -61,6 +61,11 @@ namespace WeCode1._0
                 MessageBox.Show("标题不能为空！");
                 return;
             }
+            else if (textBoxTitle.Text.Length > 50)
+            {
+                MessageBox.Show("标题长度不能超过50字节！");
+                return;
+            }
             ReturnVal = new string[3];
             ReturnVal[0] = this.textBoxTitle.Text;
             ReturnVal[1] = this.comboBoxLanguageType.Text;

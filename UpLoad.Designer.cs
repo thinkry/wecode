@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpLoad));
             this.lblTime = new System.Windows.Forms.Label();
             this.lblSpeed = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
@@ -74,23 +75,27 @@
             // progressBar1
             // 
             this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progressBar1.Location = new System.Drawing.Point(0, 107);
+            this.progressBar1.Location = new System.Drawing.Point(0, 110);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(822, 23);
+            this.progressBar1.Size = new System.Drawing.Size(496, 20);
             this.progressBar1.TabIndex = 4;
             // 
             // UpLoad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(822, 130);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(496, 130);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.lblSize);
             this.Controls.Add(this.lblState);
             this.Controls.Add(this.lblSpeed);
             this.Controls.Add(this.lblTime);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "UpLoad";
             this.Text = "上传附件";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UpLoad_FormClosing);
             this.Load += new System.EventHandler(this.UpLoad_Load);
             this.Shown += new System.EventHandler(this.UpLoad_Shown);
             this.ResumeLayout(false);

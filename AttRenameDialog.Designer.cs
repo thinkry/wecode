@@ -28,17 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AttRenameDialog));
             this.labelReName = new System.Windows.Forms.Label();
             this.textBoxReName = new System.Windows.Forms.TextBox();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelReName
             // 
             this.labelReName.AutoSize = true;
-            this.labelReName.Location = new System.Drawing.Point(13, 104);
+            this.labelReName.Location = new System.Drawing.Point(13, 73);
             this.labelReName.Name = "labelReName";
             this.labelReName.Size = new System.Drawing.Size(53, 12);
             this.labelReName.TabIndex = 0;
@@ -46,14 +49,14 @@
             // 
             // textBoxReName
             // 
-            this.textBoxReName.Location = new System.Drawing.Point(82, 101);
+            this.textBoxReName.Location = new System.Drawing.Point(82, 70);
             this.textBoxReName.Name = "textBoxReName";
             this.textBoxReName.Size = new System.Drawing.Size(289, 21);
             this.textBoxReName.TabIndex = 1;
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(199, 136);
+            this.buttonOk.Location = new System.Drawing.Point(199, 105);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
             this.buttonOk.TabIndex = 2;
@@ -63,7 +66,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(296, 136);
+            this.buttonCancel.Location = new System.Drawing.Point(296, 105);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 3;
@@ -81,11 +84,22 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "重命名";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(312, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            // 
             // AttRenameDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(383, 171);
+            this.ClientSize = new System.Drawing.Size(383, 138);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
@@ -96,7 +110,9 @@
             this.MinimizeBox = false;
             this.Name = "AttRenameDialog";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "重命名";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -109,5 +125,6 @@
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

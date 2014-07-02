@@ -552,5 +552,52 @@ namespace WeCode1._0
             }
         }
 
+        public static string GetUserInfo()
+        {
+            string result = "";
+
+            if (ConfigurationManager.AppSettings["AccessToken"] == "")
+            {
+                result = "";
+            }
+            else
+            {
+                //测试获取用户信息
+                try
+                {
+                    //获取AccessTokon构造URL
+                    StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/user/get.json"); //可变字符串
+                    //追加组合格式字符串
+                    url.AppendFormat("?oauth_token={0}&", ConfigurationManager.AppSettings["AccessToken"]);
+
+                    string Input = url.ToString();
+                    //HttpWebRequest对象实例:该类用于获取和操作HTTP请求
+                    var request = (HttpWebRequest)WebRequest.Create(Input); //Create:创建WebRequest对象
+                    //设置请求方法为GET
+                    //request.Headers.Add("Authorization", "Bearer " + accessToken);
+                    request.Method = "GET";
+                    //HttpWebResponse对象实例:该类用于获取和操作HTTP应答 
+                    var response = (HttpWebResponse)request.GetResponse(); //GetResponse:获取答复
+                    //构造数据流对象实例
+                    Stream stream = response.GetResponseStream(); //GetResponseStream:获取应答流
+                    StreamReader sr = new StreamReader(stream); //从字节流中读取字符
+                    //从流当前位置读取到末尾并显示在WebBrower控件中 
+                    string content = sr.ReadToEnd();
+
+                    result = content;
+                    //关闭响应流
+                    stream.Close();
+                    sr.Close();
+                    response.Close();
+                }
+                catch (Exception msg) //异常处理
+                {
+                    result = "";
+                }
+            }
+
+            return result;
+        }
+
     }
 }

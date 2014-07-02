@@ -36,8 +36,8 @@ namespace WeCode1._0
 
         private void FormAttachment_Load(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = AccessAdo.ExecuteDataSet("select '' as 序号,[title] as 标题,[size] as 大小,[time] as 加入日期 from tattachment where nodeid=" + Attachment.ActiveNodeId).Tables[0];
-
+            //dataGridView1.DataSource = AccessAdo.ExecuteDataSet("select '' as 序号,[title] as 标题,[size] as 大小,[time] as 加入日期 from tattachment where nodeid=-1").Tables[0];
+            ReFreshAttachGrid();
         }
 
         //刷新附件
@@ -324,8 +324,11 @@ namespace WeCode1._0
                         _upFilePath = op.FileName;
                         _upFileName = op.SafeFileName;
 
-                        Thread t = new Thread(new ThreadStart(ThFun));
-                        t.Start(); 
+                        UpLoad upForm = new UpLoad(_upUrl, _upFilePath, _upFileName, Attachment.ActiveNodeId);
+                        upForm.Show();
+
+                        //Thread t = new Thread(new ThreadStart(ThFun));
+                        //t.Start(); 
 
                         
                     }
@@ -338,11 +341,6 @@ namespace WeCode1._0
             }
         }
 
-        public void ThFun()
-        {
-            UpLoad upForm = new UpLoad(_upUrl, _upFilePath, _upFileName, Attachment.ActiveNodeId);
-            upForm.ShowDialog();
-        }
         
         //上传云附件
         private void toolStripMenuItem1_Click(object sender, EventArgs e)

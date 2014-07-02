@@ -36,7 +36,7 @@ namespace WeCode1._0
                 dataGridViewSerch.DataSource = AccessAdo.ExecuteDataSet(SQL).Tables[0];
                 dataGridViewSerch.Columns[0].Visible = false;
             }
-            else if (sType == "online")
+            else if (sType == "online"&&Attachment.IsTokeneffective==1)
             {
                 DataTable tempDt = new DataTable();
                 tempDt.Columns.Add("path");
@@ -61,33 +61,53 @@ namespace WeCode1._0
                 dataGridViewSerch.Columns[2].Visible = false;
                 dataGridViewSerch.Columns[3].Visible = false;
             }
+            else
+            {
+                DataTable tempDt = new DataTable();
+                tempDt.Columns.Add("path");
+                tempDt.Columns.Add("标题");
+                tempDt.Columns.Add("Language");
+                tempDt.Columns.Add("id");
+                dataGridViewSerch.DataSource = tempDt;
+                dataGridViewSerch.Columns[0].Visible = false;
+                dataGridViewSerch.Columns[2].Visible = false;
+                dataGridViewSerch.Columns[3].Visible = false;
+            }
         }
 
         //双击打开文章
         private void dataGridViewSerch_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (markType == "local")
+            try
             {
-                string nodeid = dataGridViewSerch.SelectedRows[0].Cells[0].Value.ToString();
-                formParent.openNew(nodeid);
+                if (markType == "local")
+                {
+                    string nodeid = dataGridViewSerch.SelectedRows[0].Cells[0].Value.ToString();
+                    formParent.openNew(nodeid);
 
-                //打开后设置语言
-                string Language = AccessAdo.ExecuteScalar("select synid from ttree where nodeid=" + nodeid).ToString();
-                Language = PubFunc.Synid2LanguageSetLang(Language);
-                formParent.SetLanguage(Language);
+                    //打开后设置语言
+                    string Language = AccessAdo.ExecuteScalar("select synid from ttree where nodeid=" + nodeid).ToString();
+                    Language = PubFunc.Synid2LanguageSetLang(Language);
+                    formParent.SetLanguage(Language);
+                }
+                else if (markType == "online")
+                {
+                    //双击文章，如果已经打开，则定位，否则新窗口打开
+                    string sNodeId = dataGridViewSerch.SelectedRows[0].Cells[0].Value.ToString();
+                    string sLang = dataGridViewSerch.SelectedRows[0].Cells[2].Value.ToString();
+                    string title = dataGridViewSerch.SelectedRows[0].Cells[1].Value.ToString();
+                    formParent.openNewYouDao(sNodeId, title);
+
+                    ///打开后设置语言
+                    string Language = PubFunc.Synid2LanguageSetLang(PubFunc.Language2Synid(sLang));
+                    formParent.SetLanguage(Language);
+                }
             }
-            else if (markType == "online")
+            catch (Exception ex)
             {
-                //双击文章，如果已经打开，则定位，否则新窗口打开
-                string sNodeId = dataGridViewSerch.SelectedRows[0].Cells[0].Value.ToString();
-                string sLang = dataGridViewSerch.SelectedRows[0].Cells[2].Value.ToString();
-                string title = dataGridViewSerch.SelectedRows[0].Cells[1].Value.ToString();
-                formParent.openNewYouDao(sNodeId, title);
-
-                ///打开后设置语言
-                string Language = PubFunc.Synid2LanguageSetLang(PubFunc.Language2Synid(sLang));
-                formParent.SetLanguage(Language);
+                
             }
+            
         }
 
         private void buttonRefresh_Click(object sender, EventArgs e)
@@ -129,10 +149,12 @@ namespace WeCode1._0
         {
             if (this.comboBox1.SelectedIndex == 0)
             {
+                markType = "local";
                 RefreshGrid("local");
             }
             else if (this.comboBox1.SelectedIndex == 1)
             {
+                markType = "online";
                 RefreshGrid("online"); 
             }
         }

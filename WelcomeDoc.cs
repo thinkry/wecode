@@ -40,5 +40,41 @@ namespace WeCode1._0
             Attachment.AttForm.ReFreshAttachGrid();
             Attachment.AttForm.GridDiable();
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string target = "https://github.com/thinkry/wecode";
+            try
+            {
+                System.Diagnostics.Process.Start(target);
+            }
+            catch (System.ComponentModel.Win32Exception noBrowser)
+            {
+                if (noBrowser.ErrorCode == -2147467259)
+                    MessageBox.Show(noBrowser.Message);
+            }
+            catch (System.Exception other)
+            {
+                MessageBox.Show(other.Message);
+            }
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string target = "mailto:herbertmarson1990@gmail.com";
+            try
+            {
+                System.Diagnostics.Process.Start(target);
+            }
+            catch (System.ComponentModel.Win32Exception noBrowser)
+            {
+                if (noBrowser.ErrorCode == -2147467259)
+                    MessageBox.Show(noBrowser.Message);
+            }
+            catch (System.Exception other)
+            {
+                MessageBox.Show(other.Message);
+            }
+        }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Download));
             this.label1 = new System.Windows.Forms.Label();
             this.lblURL = new System.Windows.Forms.Label();
             this.lblSaveAs = new System.Windows.Forms.Label();
@@ -114,16 +115,17 @@
             // progressBar1
             // 
             this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progressBar1.Location = new System.Drawing.Point(0, 135);
+            this.progressBar1.Location = new System.Drawing.Point(0, 138);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(665, 23);
+            this.progressBar1.Size = new System.Drawing.Size(515, 20);
             this.progressBar1.TabIndex = 8;
             // 
             // Download
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(665, 158);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(515, 158);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.lblSpeed);
             this.Controls.Add(this.label8);
@@ -133,8 +135,11 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblURL);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Download";
             this.Text = "下载";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Download_FormClosing);
             this.Shown += new System.EventHandler(this.Download_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();

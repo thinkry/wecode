@@ -404,6 +404,8 @@ namespace WeCode1._0
                     InsertNodeDir.SelectedImageIndex = 0;
                     treeViewDir.Nodes.Insert(treeViewDir.Nodes.Count, InsertNodeDir);
 
+                    treeViewDir.SelectedNode = InsertNodeDir;
+
                 }
 
                 else if (SeleNode != null)
@@ -444,9 +446,11 @@ namespace WeCode1._0
                     if (IsOnRoot == "True")
                     {
                         treeViewDir.Nodes.Insert(treeViewDir.Nodes.Count, InsertNodeDir);
+                        treeViewDir.SelectedNode = InsertNodeDir;
                     }
                     else {
                         SeleNode.Nodes.Insert(SeleNode.Nodes.Count, InsertNodeDir);
+                        treeViewDir.SelectedNode = InsertNodeDir;
                     }
 
                 }
@@ -483,7 +487,7 @@ namespace WeCode1._0
             {
                 isHaveNodes = "False";
             }
-            else {
+            else{
                 ParLang = AccessAdo.ExecuteScalar("select SynId from ttree where NodeId=" + SeleNode.Tag.ToString()).ToString();
             }
            
@@ -525,6 +529,7 @@ namespace WeCode1._0
                     InsertNodeDoc.SelectedImageIndex = 1;
                     treeViewDir.Nodes.Insert(treeViewDir.Nodes.Count, InsertNodeDoc);
 
+                    treeViewDir.SelectedNode = InsertNodeDoc;
 
                     //新窗口打开编辑界面
                     formParent.openNew(NewNodeId);
@@ -576,10 +581,12 @@ namespace WeCode1._0
                     if (IsOnRoot == "True")
                     {
                         treeViewDir.Nodes.Insert(treeViewDir.Nodes.Count, InsertNodeDoc);
+                        treeViewDir.SelectedNode = InsertNodeDoc;
                     }
                     else
                     {
                         SeleNode.Nodes.Insert(SeleNode.Nodes.Count, InsertNodeDoc);
+                        treeViewDir.SelectedNode = InsertNodeDoc;
                     }
 
                     //新窗口打开编辑界面
@@ -616,6 +623,8 @@ namespace WeCode1._0
             DelNodeData(SeleNode.Tag.ToString());
 
             Attachment.isDeleteClose = "0";
+
+            formParent.ReSetMarkFind();
         }
 
         //删除数据库记录，同时关闭已打开的文章
@@ -698,6 +707,10 @@ namespace WeCode1._0
                     SeleNode.Text = Title;
                     //打开后设置语言
                     Language = PubFunc.Synid2LanguageSetLang(SynId);
+                    if (SeleNode.ImageIndex == 1)
+                    {
+                        formParent.SetLanguageByDoc(Language, SeleNode.Tag.ToString());
+                    }
                     
                 }
             }

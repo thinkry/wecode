@@ -10,11 +10,13 @@ using System.IO;
 using System.Net;
 using System.Configuration;
 using Newtonsoft.Json.Linq;
+using System.Threading;
 
 namespace WeCode1._0
 {
     public partial class UpLoad : Form
     {
+        Thread t;
          private string _URL;
         private string _Filename;
         private string _Path;
@@ -37,18 +39,26 @@ namespace WeCode1._0
 
         private void UpLoad_Shown(object sender, EventArgs e)
         {
+            //新线程下载
+            Control.CheckForIllegalCrossThreadCalls = false;
+            t = new Thread(new ThreadStart(ThFun));
+            t.Start(); 
+        }
+
+        public void ThFun()
+        {
             try
             {
-                string JRtn=Upload_Request(_URL, _Path, _Filename, this.progressBar1);
+                string JRtn = Upload_Request(_URL, _Path, _Filename, this.progressBar1);
                 if (JRtn == "")
                 {
                     MessageBox.Show("上传失败！");
                     return;
                 }
                 else
-                { 
-                    JObject jo=JObject.Parse(JRtn);
-                    string fileUrl=jo["url"].ToString();
+                {
+                    JObject jo = JObject.Parse(JRtn);
+                    string fileUrl = jo["url"].ToString();
                     //更新笔记
                     NoteAPI.UpdateRource(fileUrl, _length, _Filename, _notepath);
                     MessageBox.Show("上传成功！");
@@ -58,7 +68,7 @@ namespace WeCode1._0
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
             }
         }
 
@@ -147,7 +157,7 @@ namespace WeCode1._0
                     lblTime.Text = "已用时：" + second.ToString("F2") + "秒";
                     if (second > 0.001)
                     {
-                        lblSpeed.Text = " 平均速度：" + (offset / 1024 / second).ToString("0.00") + "KB/秒";
+                        lblSpeed.Text = "平均速度：" + (offset / 1024 / second).ToString("0.00") + "KB/秒";
                     }
                     else
                     {
@@ -194,6 +204,15 @@ namespace WeCode1._0
             }
 
             return returnValue;
+        }
+
+        private void UpLoad_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            t.Abort();
+
+            this.Dispose();
+
+            this.Close();
         }
     }
 }

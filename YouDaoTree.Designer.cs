@@ -51,15 +51,21 @@
             // treeViewYouDao
             // 
             this.treeViewYouDao.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewYouDao.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.treeViewYouDao.ImageIndex = 0;
             this.treeViewYouDao.ImageList = this.imageList1;
             this.treeViewYouDao.Location = new System.Drawing.Point(0, 0);
+            this.treeViewYouDao.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.treeViewYouDao.Name = "treeViewYouDao";
             this.treeViewYouDao.SelectedImageIndex = 0;
-            this.treeViewYouDao.Size = new System.Drawing.Size(319, 547);
+            this.treeViewYouDao.Size = new System.Drawing.Size(372, 775);
             this.treeViewYouDao.TabIndex = 0;
+            this.treeViewYouDao.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeViewYouDao_ItemDrag);
             this.treeViewYouDao.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewYouDao_AfterSelect);
             this.treeViewYouDao.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewYouDao_NodeMouseDoubleClick);
+            this.treeViewYouDao.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeViewYouDao_DragDrop);
+            this.treeViewYouDao.DragOver += new System.Windows.Forms.DragEventHandler(this.treeViewYouDao_DragOver);
+            this.treeViewYouDao.DragLeave += new System.EventHandler(this.treeViewYouDao_DragLeave);
             this.treeViewYouDao.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeViewYouDao_MouseDown);
             // 
             // imageList1
@@ -153,16 +159,18 @@
             // 
             // YouDaoTree
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(319, 547);
+            this.ClientSize = new System.Drawing.Size(372, 775);
             this.Controls.Add(this.treeViewYouDao);
             this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)(((((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft)
                         | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight)
                         | WeifenLuo.WinFormsUI.Docking.DockAreas.DockTop)
                         | WeifenLuo.WinFormsUI.Docking.DockAreas.DockBottom)));
-            this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.HideOnClose = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "YouDaoTree";
             this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft;
             this.Text = "有道云";

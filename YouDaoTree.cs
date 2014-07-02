@@ -14,9 +14,14 @@ namespace WeCode1._0
     {
         public FormMain formParent;
 
+        TreeNode dragDropTreeNode;
+        DateTime startTime;
+
+
         public YouDaoTree()
         {
             InitializeComponent();
+            treeViewYouDao.AllowDrop = true;
         }
 
         //窗体加载
@@ -105,20 +110,20 @@ namespace WeCode1._0
             }
         }
 
-         //This function is called recursively until all nodes are loaded
-		private void addTreeNode(XmlNode xmlNode, TreeNode treeNode)
-		{
-			XmlNode xNode;
-			TreeNode tNode;
-			XmlNodeList xNodeList;
+        //This function is called recursively until all nodes are loaded
+        private void addTreeNode(XmlNode xmlNode, TreeNode treeNode)
+        {
+            XmlNode xNode;
+            TreeNode tNode;
+            XmlNodeList xNodeList;
 
-			if (xmlNode.HasChildNodes) //The current node has children
-			{
-				xNodeList = xmlNode.ChildNodes;
+            if (xmlNode.HasChildNodes) //The current node has children
+            {
+                xNodeList = xmlNode.ChildNodes;
 
-				for(int x=0; x<=xNodeList.Count-1; x++) //Loop through the child nodes
-				{
-					xNode = xmlNode.ChildNodes[x];
+                for (int x = 0; x <= xNodeList.Count - 1; x++) //Loop through the child nodes
+                {
+                    xNode = xmlNode.ChildNodes[x];
 
                     TreeNode tempNode = new TreeNode();
                     tempNode.ImageIndex = 0;
@@ -143,14 +148,14 @@ namespace WeCode1._0
                         tempNode.Tag = tBookTag;
                     }
 
-					treeNode.Nodes.Add(tempNode);
-					tNode = treeNode.Nodes[x];
-					addTreeNode(xNode, tNode);
-				}
-			}
-		}
+                    treeNode.Nodes.Add(tempNode);
+                    tNode = treeNode.Nodes[x];
+                    addTreeNode(xNode, tNode);
+                }
+            }
+        }
 
-		#endregion
+        #endregion
 
 
         //双击打开文章
@@ -174,7 +179,7 @@ namespace WeCode1._0
                 ///打开后设置语言
                 string Language = PubFunc.Synid2LanguageSetLang(PubFunc.Language2Synid(sLang));
                 formParent.SetLanguage(Language);
-                
+
             }
         }
 
@@ -185,7 +190,7 @@ namespace WeCode1._0
             TreeNode SeleNode = treeViewYouDao.SelectedNode;
             string isCreateRoot = "False";
             string ParLang = "TEXT";
-            
+
             //如果没有选中节点,则新建顶层目录
             if (SeleNode == null || treeViewYouDao.Nodes.Count == 0)
             {
@@ -213,7 +218,7 @@ namespace WeCode1._0
                 string sGUID = System.Guid.NewGuid().ToString();
 
                 //新建根级目录
-                if (IsOnRoot == "True"||isCreateRoot=="True")
+                if (IsOnRoot == "True" || isCreateRoot == "True")
                 {
                     //插入树节点
                     TreeNode InsertNodeDir = new TreeNode(Title);
@@ -226,6 +231,7 @@ namespace WeCode1._0
                     InsertNodeDir.Tag = tb;
 
                     treeViewYouDao.Nodes.Insert(treeViewYouDao.Nodes.Count, InsertNodeDir);
+                    treeViewYouDao.SelectedNode = InsertNodeDir;
 
                     //更新本地XML文档
                     XmlDocument xDoc = new XmlDocument();
@@ -241,7 +247,7 @@ namespace WeCode1._0
                     xDoc.Save("TreeNodeLocal.xml");
 
                     //同步到云端
-                    XMLAPI.XML2Yun();  
+                    XMLAPI.XML2Yun();
 
                 }
 
@@ -252,7 +258,7 @@ namespace WeCode1._0
                         MessageBox.Show("不能在文章下新增节点！");
                         return;
                     }
-                        
+
 
                     //插入树节点
                     TreeNode InsertNodeDir = new TreeNode(Title);
@@ -264,6 +270,7 @@ namespace WeCode1._0
                     InsertNodeDir.Tag = tb;
 
                     SeleNode.Nodes.Insert(SeleNode.Nodes.Count, InsertNodeDir);
+                    treeViewYouDao.SelectedNode = InsertNodeDir;
 
 
                     //更新本地XML文档
@@ -275,7 +282,7 @@ namespace WeCode1._0
                     appEle.SetAttribute("id", sGUID);
                     appEle.SetAttribute("title", Title);
                     appEle.SetAttribute("Language", Language);
-                    
+
                     xseleNode.AppendChild(appEle);
                     xDoc.Save("TreeNodeLocal.xml");
 
@@ -327,7 +334,8 @@ namespace WeCode1._0
             {
                 isHaveNodes = "False";
             }
-            else {
+            else
+            {
                 if (SeleNode.ImageIndex == 0)
                 {
                     ParLang = ((treeTagBook)SeleNode.Tag).Language;
@@ -337,7 +345,7 @@ namespace WeCode1._0
                     ParLang = ((treeTagNote)SeleNode.Tag).Language;
                 }
             }
-            
+
             ProperDialog propDia = new ProperDialog("1", "", ParLang);
             DialogResult dr = propDia.ShowDialog();
             if (dr == DialogResult.OK)
@@ -370,6 +378,7 @@ namespace WeCode1._0
 
                     InsertNodeNote.Tag = tag;
                     treeViewYouDao.Nodes.Insert(treeViewYouDao.Nodes.Count, InsertNodeNote);
+                    treeViewYouDao.SelectedNode = InsertNodeNote;
 
                     //更新本地XML文档
                     XmlDocument xDoc = new XmlDocument();
@@ -396,7 +405,7 @@ namespace WeCode1._0
 
                     //打开后设置语言
                     Language = PubFunc.Synid2LanguageSetLang(SynId);
-                    formParent.SetLanguage(Language);  
+                    formParent.SetLanguage(Language);
                 }
 
                 else if (SeleNode != null)
@@ -421,6 +430,7 @@ namespace WeCode1._0
 
                             InsertNodeNote.Tag = tag;
                             treeViewYouDao.Nodes.Insert(treeViewYouDao.Nodes.Count, InsertNodeNote);
+                            treeViewYouDao.SelectedNode = InsertNodeNote;
 
                             //更新本地XML文档
                             XmlDocument xDoc = new XmlDocument();
@@ -443,11 +453,11 @@ namespace WeCode1._0
                             XMLAPI.XML2Yun();
 
                             //新窗口打开编辑界面
-                            formParent.openNewYouDao(Path,Title);
+                            formParent.openNewYouDao(Path, Title);
 
                             //打开后设置语言
                             Language = PubFunc.Synid2LanguageSetLang(SynId);
-                            formParent.SetLanguage(Language);   
+                            formParent.SetLanguage(Language);
                         }
 
                         else
@@ -472,6 +482,7 @@ namespace WeCode1._0
                             InsertNodeNote.Tag = tag;
 
                             SeleNode.Nodes.Insert(SeleNode.Nodes.Count, InsertNodeNote);
+                            treeViewYouDao.SelectedNode = InsertNodeNote;
 
 
                             //更新本地XML文档
@@ -495,7 +506,7 @@ namespace WeCode1._0
                             XMLAPI.XML2Yun();
 
                             //新窗口打开编辑界面
-                            formParent.openNewYouDao(Path,Title);
+                            formParent.openNewYouDao(Path, Title);
 
                             //打开后设置语言
                             Language = PubFunc.Synid2LanguageSetLang(SynId);
@@ -507,7 +518,7 @@ namespace WeCode1._0
                 }
             }
         }
-        
+
         //删除目录或者文章
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
@@ -520,10 +531,10 @@ namespace WeCode1._0
                 return;
 
             //删除前确认
-            if (MessageBox.Show("当前节点及其所有子节点都会被删除，继续？", "提示", MessageBoxButtons.YesNo) == DialogResult.No)  
+            if (MessageBox.Show("当前节点及其所有子节点都会被删除，继续？", "提示", MessageBoxButtons.YesNo) == DialogResult.No)
             {
                 return;
-            } 
+            }
             //先查找到所选节点下面所有的文章进行删除
             //删除云数据
             DelNodeData(SeleNode.Name);
@@ -532,7 +543,9 @@ namespace WeCode1._0
             treeViewYouDao.Nodes.Remove(SeleNode);
 
             Attachment.isDeleteClose = "0";
- 
+
+            formParent.ReSetMarkFind();
+
         }
 
         //删除有道云数据，同时关闭已打开的文章,再更新本地XML并同步到云
@@ -664,7 +677,7 @@ namespace WeCode1._0
 
         #endregion
 
-        
+
         private void toolStripMenuItem8_Click(object sender, EventArgs e)
         {
             toolStripMenuItem1_Click(sender, e);
@@ -716,7 +729,8 @@ namespace WeCode1._0
                         tb.Language = Language;
                         SeleNode.Tag = tb;
                     }
-                    else {
+                    else
+                    {
                         treeTagNote tag = new treeTagNote();
                         tag.path = ((treeTagNote)SeleNode.Tag).path;
                         tag.createtime = ((treeTagNote)SeleNode.Tag).createtime;
@@ -727,6 +741,10 @@ namespace WeCode1._0
                     }
                     //打开后设置语言
                     Language = PubFunc.Synid2LanguageSetLang(SynId);
+                    if (SeleNode.ImageIndex == 1)
+                    {
+                        formParent.SetLanguageByDoc(Language, ((treeTagNote)SeleNode.Tag).path);
+                    }
 
                 }
             }
@@ -754,12 +772,12 @@ namespace WeCode1._0
 
         private void YouDaoTree_Activated(object sender, EventArgs e)
         {
-            
+
         }
 
         private void YouDaoTree_Deactivate(object sender, EventArgs e)
         {
-            
+
         }
 
         //供主窗口调用
@@ -807,5 +825,197 @@ namespace WeCode1._0
             }
         }
 
+        #region drag
+        private void treeViewYouDao_DragDrop(object sender, DragEventArgs e)
+        {
+            if (this.dragDropTreeNode != null)
+            {
+                if (e.Data.GetDataPresent(typeof(TreeNode)))
+                {
+
+                    TreeNode tn = (TreeNode)e.Data.GetData(typeof(TreeNode));
+
+                    if (tn.Text == this.dragDropTreeNode.Text || this.dragDropTreeNode.FullPath.IndexOf(tn.FullPath) == 0)
+                    {
+                        this.dragDropTreeNode.BackColor = SystemColors.Window;
+                        this.dragDropTreeNode.ForeColor = SystemColors.WindowText;
+                        this.dragDropTreeNode = null;
+                        return;
+                    }
+                    tn.Remove();//从原父节点移除被拖得节点 
+                    this.dragDropTreeNode.Nodes.Add(tn);//添加被拖得节点到新节点下面 
+
+                    //更新XML
+                    string id1 = tn.Name.ToString();  //拖动的节点
+                    string id2 = this.dragDropTreeNode.Name.ToString();
+
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load("TreeNodeLocal.xml");
+                    XmlNode Node1 = doc.SelectSingleNode("//node()[@id='" + id1 + "']");
+                    XmlNode Node2 = doc.SelectSingleNode("//node()[@id='" + id2 + "']");
+
+                    Node2.AppendChild(Node1);
+                    doc.Save("TreeNodeLocal.xml");
+                    XMLAPI.XML2Yun();
+
+                    if (this.dragDropTreeNode.IsExpanded == false)
+                    {
+                        this.dragDropTreeNode.Expand();//展开节点 
+                    }
+
+                }
+                else if (e.Data.GetDataPresent(typeof(ListViewItem)))
+                {
+                    if (this.dragDropTreeNode.Parent != null)
+                    {
+                        //int categoryID = ((Category)this.dragDropTreeNode.Tag).CategoryID;
+                        ListViewItem listViewItem = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
+                        //Item item = (Item)listViewItem.Tag;
+                        //DocumentController.GetInstance().UpdateItemCategory(item.ItemID, categoryID);
+                        listViewItem.Remove();
+                    }
+                }
+                //取消被放置的节点高亮显示 
+                this.dragDropTreeNode.BackColor = SystemColors.Window;
+                this.dragDropTreeNode.ForeColor = SystemColors.WindowText;
+                this.dragDropTreeNode = null;
+            }
+        }
+
+        private void treeViewYouDao_DragLeave(object sender, EventArgs e)
+        {
+            if (this.dragDropTreeNode != null) //在按下{ESC}，取消被放置的节点高亮显示 
+            {
+                this.dragDropTreeNode.BackColor = SystemColors.Window;
+                this.dragDropTreeNode.ForeColor = SystemColors.WindowText;
+                this.dragDropTreeNode = null;
+            }
+        }
+
+        private void treeViewYouDao_DragOver(object sender, DragEventArgs e)
+        {
+            //当光标悬停在 TreeView 控件上时，展开该控件中的 TreeNode 
+            Point p = this.treeViewYouDao.PointToClient(Control.MousePosition);
+            TreeNode tn = this.treeViewYouDao.GetNodeAt(p);
+            if (tn != null)
+            {
+                if (this.dragDropTreeNode != tn) //移动到新的节点 
+                {
+                    if (tn.Nodes.Count > 0 && tn.IsExpanded == false)
+                    {
+                        this.startTime = DateTime.Now;//设置新的起始时间 
+                    }
+                }
+                else
+                {
+                    if (tn.Nodes.Count > 0 && tn.IsExpanded == false && this.startTime != DateTime.MinValue)
+                    {
+                        TimeSpan ts = DateTime.Now - this.startTime;
+                        if (ts.TotalMilliseconds >= 1000) //一秒 
+                        {
+                            tn.Expand();
+                            this.startTime = DateTime.MinValue;
+                        }
+                    }
+                }
+
+            }
+            //设置拖放标签Effect状态 
+            if (tn != null)//&& (tn != this.treeView.SelectedNode)) //当控件移动到空白处时，设置不可用。 
+            {
+                if ((e.AllowedEffect & DragDropEffects.Move) != 0)
+                {
+                    e.Effect = DragDropEffects.Move;
+                }
+                if (((e.AllowedEffect & DragDropEffects.Copy) != 0) && ((e.KeyState & 0x08) != 0))//Ctrl key 
+                {
+                    e.Effect = DragDropEffects.Copy;
+                }
+                if (((e.AllowedEffect & DragDropEffects.Link) != 0) && ((e.KeyState & 0x08) != 0) && ((e.KeyState & 0x04) != 0))//Ctrl key + Shift key 
+                {
+                    e.Effect = DragDropEffects.Link;
+                }
+                if (e.Data.GetDataPresent(typeof(TreeNode)))//拖动的是TreeNode 
+                {
+
+                    TreeNode parND = tn;//判断是否拖到了子项 
+                    bool isChildNode = false;
+                    while (parND.Parent != null)
+                    {
+                        parND = parND.Parent;
+                        if (parND == (TreeNode)e.Data.GetData(typeof(TreeNode)))
+                        {
+                            isChildNode = true;
+                            break;
+                        }
+                    }
+                    if (isChildNode || tn.ImageIndex == 1)
+                    {
+                        e.Effect = DragDropEffects.None;
+                    }
+                }
+                else if (e.Data.GetDataPresent(typeof(ListViewItem)))//拖动的是ListViewItem 
+                {
+                    if (tn.Parent == null)
+                    {
+                        e.Effect = DragDropEffects.None;
+                    }
+                }
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+
+            //设置拖放目标TreeNode的背景色 
+            if (e.Effect == DragDropEffects.None)
+            {
+                if (this.dragDropTreeNode != null) //取消被放置的节点高亮显示 
+                {
+                    this.dragDropTreeNode.BackColor = SystemColors.Window;
+                    this.dragDropTreeNode.ForeColor = SystemColors.WindowText;
+                    this.dragDropTreeNode = null;
+                }
+            }
+            else
+            {
+                if (tn != null)
+                {
+                    if (this.dragDropTreeNode != null)
+                    {
+                        if (this.dragDropTreeNode != tn)
+                        {
+                            this.dragDropTreeNode.BackColor = SystemColors.Window;//取消上一个被放置的节点高亮显示 
+                            this.dragDropTreeNode.ForeColor = SystemColors.WindowText;
+                            this.dragDropTreeNode = tn;//设置为新的节点 
+                            this.dragDropTreeNode.BackColor = SystemColors.Highlight;
+                            this.dragDropTreeNode.ForeColor = SystemColors.HighlightText;
+                        }
+                        //else
+                        //{
+                        //    return;
+                        //}
+                    }
+                    else
+                    {
+                        this.dragDropTreeNode = tn;//设置为新的节点 
+                        this.dragDropTreeNode.BackColor = SystemColors.Highlight;
+                        this.dragDropTreeNode.ForeColor = SystemColors.HighlightText;
+                    }
+                }
+            }
+
+        }
+
+        private void treeViewYouDao_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            TreeNode tn = e.Item as TreeNode;
+            dragDropTreeNode = tn;
+            if ((e.Button == MouseButtons.Left) && (tn != null)) //根节点不允许拖放操作。 
+            {
+                this.treeViewYouDao.DoDragDrop(tn, DragDropEffects.Copy | DragDropEffects.Move | DragDropEffects.Link);
+            }
+        }
+        #endregion
     }
 }
