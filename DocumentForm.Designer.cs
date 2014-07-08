@@ -60,6 +60,7 @@
             // 
             // scintilla1
             // 
+            this.scintilla1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.scintilla1.ConfigurationManager.LoadOrder = ScintillaNET.Configuration.ConfigurationLoadOrder.UserCustomBuiltIn;
             this.scintilla1.ContextMenuStrip = this.contextMenuStripMouseClick;
             this.scintilla1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -69,7 +70,7 @@
             this.scintilla1.Margins.Margin2.Width = 16;
             this.scintilla1.Name = "scintilla1";
             this.scintilla1.Selection.BackColorUnfocused = System.Drawing.SystemColors.Highlight;
-            this.scintilla1.Size = new System.Drawing.Size(284, 262);
+            this.scintilla1.Size = new System.Drawing.Size(1444, 882);
             this.scintilla1.Styles.BraceBad.FontName = "Verd";
             this.scintilla1.Styles.BraceBad.Size = 9F;
             this.scintilla1.Styles.BraceLight.FontName = "Verd";
@@ -169,6 +170,7 @@
             // 
             // toolStripMenuItemSerch
             // 
+            this.toolStripMenuItemSerch.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemSerch.Image")));
             this.toolStripMenuItemSerch.Name = "toolStripMenuItemSerch";
             this.toolStripMenuItemSerch.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
             this.toolStripMenuItemSerch.Size = new System.Drawing.Size(161, 22);
@@ -209,64 +211,69 @@
             this.toolStripSeparator2,
             this.toolStripMenuItemTabAddMark});
             this.contextMenuStripTab.Name = "contextMenuStripTab";
-            this.contextMenuStripTab.Size = new System.Drawing.Size(188, 192);
+            this.contextMenuStripTab.Size = new System.Drawing.Size(145, 170);
             // 
             // toolStripMenuItemTabClose
             // 
+            this.toolStripMenuItemTabClose.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemTabClose.Image")));
             this.toolStripMenuItemTabClose.Name = "toolStripMenuItemTabClose";
-            this.toolStripMenuItemTabClose.Size = new System.Drawing.Size(187, 22);
+            this.toolStripMenuItemTabClose.Size = new System.Drawing.Size(144, 22);
             this.toolStripMenuItemTabClose.Text = "关闭(&C)";
             this.toolStripMenuItemTabClose.Click += new System.EventHandler(this.toolStripMenuItemTabClose_Click);
             // 
             // toolStripMenuItemTabCloseE
             // 
             this.toolStripMenuItemTabCloseE.Name = "toolStripMenuItemTabCloseE";
-            this.toolStripMenuItemTabCloseE.Size = new System.Drawing.Size(187, 22);
-            this.toolStripMenuItemTabCloseE.Text = "除此之外全部关闭(&E)";
+            this.toolStripMenuItemTabCloseE.Size = new System.Drawing.Size(144, 22);
+            this.toolStripMenuItemTabCloseE.Text = "关闭其他(&E)";
             this.toolStripMenuItemTabCloseE.Click += new System.EventHandler(this.toolStripMenuItemTabCloseE_Click);
             // 
             // toolStripMenuItemTabCloseAll
             // 
+            this.toolStripMenuItemTabCloseAll.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemTabCloseAll.Image")));
             this.toolStripMenuItemTabCloseAll.Name = "toolStripMenuItemTabCloseAll";
-            this.toolStripMenuItemTabCloseAll.Size = new System.Drawing.Size(187, 22);
+            this.toolStripMenuItemTabCloseAll.Size = new System.Drawing.Size(144, 22);
             this.toolStripMenuItemTabCloseAll.Text = "全部关闭(&A)";
             this.toolStripMenuItemTabCloseAll.Click += new System.EventHandler(this.toolStripMenuItemTabCloseAll_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(184, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(141, 6);
             // 
             // toolStripMenuItemTabSv
             // 
+            this.toolStripMenuItemTabSv.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemTabSv.Image")));
             this.toolStripMenuItemTabSv.Name = "toolStripMenuItemTabSv";
-            this.toolStripMenuItemTabSv.Size = new System.Drawing.Size(187, 22);
+            this.toolStripMenuItemTabSv.Size = new System.Drawing.Size(144, 22);
             this.toolStripMenuItemTabSv.Text = "保存(&S)";
             this.toolStripMenuItemTabSv.Click += new System.EventHandler(this.toolStripMenuItemTabSv_Click);
             // 
             // toolStripMenuItemTabSvAll
             // 
+            this.toolStripMenuItemTabSvAll.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemTabSvAll.Image")));
             this.toolStripMenuItemTabSvAll.Name = "toolStripMenuItemTabSvAll";
-            this.toolStripMenuItemTabSvAll.Size = new System.Drawing.Size(187, 22);
+            this.toolStripMenuItemTabSvAll.Size = new System.Drawing.Size(144, 22);
             this.toolStripMenuItemTabSvAll.Text = "保存所有(&V)";
             this.toolStripMenuItemTabSvAll.Click += new System.EventHandler(this.toolStripMenuItemTabSvAll_Click);
             // 
             // toolStripMenuItemTabRdOnly
             // 
             this.toolStripMenuItemTabRdOnly.Name = "toolStripMenuItemTabRdOnly";
-            this.toolStripMenuItemTabRdOnly.Size = new System.Drawing.Size(187, 22);
+            this.toolStripMenuItemTabRdOnly.Size = new System.Drawing.Size(144, 22);
             this.toolStripMenuItemTabRdOnly.Text = "只读(&R)";
             this.toolStripMenuItemTabRdOnly.Click += new System.EventHandler(this.toolStripMenuItemTabRdOnly_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(184, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(141, 6);
             // 
             // toolStripMenuItemTabAddMark
             // 
+            this.toolStripMenuItemTabAddMark.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemTabAddMark.Image")));
             this.toolStripMenuItemTabAddMark.Name = "toolStripMenuItemTabAddMark";
-            this.toolStripMenuItemTabAddMark.Size = new System.Drawing.Size(187, 22);
+            this.toolStripMenuItemTabAddMark.Size = new System.Drawing.Size(144, 22);
             this.toolStripMenuItemTabAddMark.Text = "加为书签(&M)";
             this.toolStripMenuItemTabAddMark.Click += new System.EventHandler(this.toolStripMenuItemTabAddMark_Click);
             // 
@@ -274,7 +281,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(1444, 882);
             this.Controls.Add(this.scintilla1);
             this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

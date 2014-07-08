@@ -17,5 +17,9 @@ namespace WeCode1._0
         public static string isDeleteClose = "0";
 
         public static string ActiveDOCType = "local";
+
+        public static string isnewOpenDoc = "1";
+
+        public static System.Windows.Forms.FormWindowState WinState = System.Windows.Forms.FormWindowState.Maximized;
     }
 }

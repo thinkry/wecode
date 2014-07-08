@@ -11,6 +11,7 @@ using System.IO;
 using System.Data.OleDb;
 using System.Configuration;
 using System.Xml;
+using System.Drawing.Text;
 
 namespace WeCode1._0
 {
@@ -113,9 +114,14 @@ namespace WeCode1._0
                 string DocText = this.scintilla1.Text;
                 if (DocText.Length == 0)
                     return;
-                NoteAPI.UpdateNote(this.NodeId,DocText);
-
-                scintilla1.Modified = false;
+                if (NoteAPI.UpdateNote(this.NodeId, DocText) == "OK")
+                {
+                    scintilla1.Modified = false;
+                }
+                else
+                {
+                    MessageBox.Show("保存失败！");
+                }
             }
         }
 
@@ -387,13 +393,61 @@ namespace WeCode1._0
 
         private void DocumentForm_Shown(object sender, EventArgs e)
         {
+
+            //设置自动换行
+            if (PubFunc.GetConfiguration("AutoLineWrap") == "1")
+            {
+                Scintilla.LineWrapping.Mode = LineWrappingMode.Word;
+            }
+            else
+            {
+                Scintilla.LineWrapping.Mode = LineWrappingMode.None;
+            }
+
+            bool isVerExi = false;
+            bool isCouExi = false;
+            bool isWeiExi = false;
             try
             {
+                FontConverter fc = new FontConverter();
+                string sfont;
                 if (ConfigurationManager.AppSettings["defaultFont"] != "")
-                { 
-                    FontConverter fc = new FontConverter();
-                    string sfont = ConfigurationManager.AppSettings["defaultFont"];
+                {
+                    sfont = ConfigurationManager.AppSettings["defaultFont"];
                     SetFont(this, (Font)fc.ConvertFromString(sfont));
+                }
+                else
+                {
+                    InstalledFontCollection Flists = new InstalledFontCollection();
+                    foreach (FontFamily font in Flists.Families)
+                    {
+                        if (font.Name == "Verdana") {
+                            isVerExi = true;
+                        }
+                        else if (font.Name == "Courier New")
+                        {
+                            isCouExi = true;
+                        }
+                        else if (font.Name == "微软雅黑")
+                        {
+                            isWeiExi = true;
+                        }
+                    }
+                    if (isVerExi == true)
+                    {
+                        sfont = "Verdana, 12pt";
+                        SetFont(this, (Font)fc.ConvertFromString(sfont));
+                    }
+                    else if (isCouExi == true)
+                    {
+                        sfont = "Courier New, 12pt";
+                        SetFont(this, (Font)fc.ConvertFromString(sfont));
+                    }
+                    else if (isWeiExi == true)
+                    {
+                        sfont = "微软雅黑, 12pt";
+                        SetFont(this, (Font)fc.ConvertFromString(sfont));
+                    }
                 }
             }
             catch (Exception ex)

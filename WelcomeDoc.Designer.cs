@@ -36,18 +36,19 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(178, 132);
+            this.linkLabel2.Location = new System.Drawing.Point(155, 132);
             this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(167, 12);
+            this.linkLabel2.Size = new System.Drawing.Size(245, 12);
             this.linkLabel2.TabIndex = 17;
             this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "herbertmarson1990@gmail.com";
+            this.linkLabel2.Text = "https://github.com/thinkry/wecode/issues";
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // label4
@@ -56,19 +57,19 @@
             this.label4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.Location = new System.Drawing.Point(115, 129);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(68, 17);
+            this.label4.Size = new System.Drawing.Size(44, 17);
             this.label4.TabIndex = 16;
-            this.label4.Text = "联系方式：";
+            this.label4.Text = "反馈：";
             // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(178, 99);
+            this.linkLabel1.Location = new System.Drawing.Point(155, 99);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(203, 12);
+            this.linkLabel1.Size = new System.Drawing.Size(191, 12);
             this.linkLabel1.TabIndex = 15;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "https://github.com/thinkry/wecode";
+            this.linkLabel1.Text = "http://thinkry.github.io/wecode";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // label3
@@ -77,9 +78,9 @@
             this.label3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.Location = new System.Drawing.Point(115, 96);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 17);
+            this.label3.Size = new System.Drawing.Size(44, 17);
             this.label3.TabIndex = 14;
-            this.label3.Text = "源      码：";
+            this.label3.Text = "主页：";
             // 
             // label2
             // 
@@ -87,9 +88,9 @@
             this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(115, 65);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(129, 17);
+            this.label2.Size = new System.Drawing.Size(128, 17);
             this.label2.TabIndex = 13;
-            this.label2.Text = "源代码管理软件  1.0版";
+            this.label2.Text = "程序员的知识管理软件";
             // 
             // pictureBox2
             // 
@@ -111,6 +112,16 @@
             this.label1.TabIndex = 11;
             this.label1.Text = "wecode";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Location = new System.Drawing.Point(202, 36);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 17);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "1.0.0";
+            // 
             // WelcomeDoc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -118,6 +129,7 @@
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(762, 397);
             this.CloseButton = false;
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.linkLabel1);
@@ -132,6 +144,7 @@
             this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document;
             this.Text = "欢迎";
             this.Activated += new System.EventHandler(this.WelcomeDoc_Activated);
+            this.Load += new System.EventHandler(this.WelcomeDoc_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -147,6 +160,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label5;
 
     }
 }

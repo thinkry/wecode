@@ -138,6 +138,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Download";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "下载";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Download_FormClosing);
             this.Shown += new System.EventHandler(this.Download_Shown);

@@ -14,6 +14,8 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Web;
 using System.Xml;
+using System.Net;
+using System.Threading;
 
 namespace WeCode1._0
 {
@@ -50,10 +52,17 @@ namespace WeCode1._0
 
         #endregion Properties
 
-
         public FormMain()
         {
+
             InitializeComponent();
+
+            //版本检查
+            //DateTime d1 = DateTime.Now;
+            //CheckVer();
+            //DateTime d2 = DateTime.Now;
+            //TimeSpan sp = d2 - d1;
+            //MessageBox.Show(sp.TotalMilliseconds.ToString());
 
             //书签
             frmMark = new DocMark();
@@ -83,12 +92,48 @@ namespace WeCode1._0
 
             m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
 
+            IniPanel();
+
             //第一次打开界面，先判断token是否有效（为空或者过期）
             //有效，同步XML到本地，加载有道云树目录;无效，打开授权页面进行授权
             //授权成功后，云端创建两个目录以及配置文件，然后加载树目录
             IniYouDaoAuthor();
-            
 
+        }
+
+        //初始化相关
+        private void IniPanel()
+        {
+            try
+            {
+                Attachment.frmMain = this;
+
+                //加载布局
+                string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.config");
+
+                if (File.Exists(configFile))
+                    dockPanel1.LoadFromXml(configFile, m_deserializeDockContent);
+
+                //打开欢迎界面
+                openWelcomePage();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
+
+        private void setSkin()
+        {
+            this.dockPanel1.Skin.DockPaneStripSkin.DocumentGradient.DockStripGradient.StartColor = Color.FromArgb(228, 226, 213);
+            this.dockPanel1.Skin.DockPaneStripSkin.DocumentGradient.DockStripGradient.EndColor = Color.FromArgb(228, 226, 213);
+
+            this.dockPanel1.Skin.DockPaneStripSkin.ToolWindowGradient.InactiveCaptionGradient.StartColor = Color.FromArgb(204, 199, 186);
+            this.dockPanel1.Skin.DockPaneStripSkin.ToolWindowGradient.InactiveCaptionGradient.EndColor = Color.FromArgb(204, 199, 186);
+
+            //this.dockPanel1.Skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.StartColor = Color.FromArgb(204, 199, 186);
+            //this.dockPanel1.Skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.EndColor = Color.FromArgb(204, 199, 186);
         }
 
         //初始化授权相关
@@ -124,7 +169,7 @@ namespace WeCode1._0
             //MessageBox.Show("未授权有道云笔记或者授权已过期，请点击用户--登录以重新授权！");
             if (ConfigurationManager.AppSettings["authorAlert"] != "0")
             {
-                if (MessageBox.Show("未授权有道云笔记或者授权已过期，请点击菜单用户--登录以重新授权！\n点击“确定”不再提醒", "登录提醒", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+                if (MessageBox.Show("未授权有道云笔记或者授权已过期，点击菜单用户--登录以重新授权！\n\n点击“确定”不再提醒", "登录提醒", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
                 {
                     PubFunc.SetConfiguration("authorAlert", "0");
                 }
@@ -203,6 +248,7 @@ namespace WeCode1._0
                 if (nodeId.Equals(documentForm.NodeId, StringComparison.OrdinalIgnoreCase))
                 {
                     documentForm.Select();
+                    Attachment.isnewOpenDoc = "0";
                     isOpen = true;
                     break;
                 }
@@ -234,6 +280,7 @@ namespace WeCode1._0
                 if (nodeId.Equals(documentForm.NodeId, StringComparison.OrdinalIgnoreCase))
                 {
                     documentForm.Select();
+                    Attachment.isnewOpenDoc = "0";
                     isOpen = true;
                     break;
                 }
@@ -246,7 +293,7 @@ namespace WeCode1._0
 
         private DocumentForm OpenFileYouDao(string nodeId,string title)
         {
-
+            Attachment.isnewOpenDoc = "1";
             //获取文章信息
 
             string Content = NoteAPI.GetNote(nodeId);
@@ -260,7 +307,6 @@ namespace WeCode1._0
             doc.NodeId = nodeId;
             doc.Type = "online";
             doc.Show(dockPanel1);
-
 
             return doc;
         }
@@ -290,7 +336,7 @@ namespace WeCode1._0
 
         private DocumentForm OpenFile(string nodeId)
         {
-
+            Attachment.isnewOpenDoc = "1";
             //获取文章信息
             string SQL = "select Title,Content from TContent inner join TTree on TContent.NodeId=Ttree.NodeId where TContent.NodeId=" + nodeId;
             DataTable temp = AccessAdo.ExecuteDataSet(SQL, null).Tables[0];
@@ -770,9 +816,15 @@ namespace WeCode1._0
                 foreach (DocumentForm doc in dockPanel1.Documents)
                 {
                     if (toolStripMenuItemAutoWrap.Checked)
+                    {
                         doc.Scintilla.LineWrapping.Mode = LineWrappingMode.Word;
+                        PubFunc.SetConfiguration("AutoLineWrap", "1");
+                    }
                     else
+                    {
                         doc.Scintilla.LineWrapping.Mode = LineWrappingMode.None;
+                        PubFunc.SetConfiguration("AutoLineWrap", "0");
+                    }
                 }
             }
             
@@ -785,12 +837,18 @@ namespace WeCode1._0
 
         private void toolStripMenuItemFont_Click(object sender, EventArgs e)
         {
+            FontConverter fc = new FontConverter();
+
             FontDialog fontDialog = new FontDialog();
             fontDialog.AllowScriptChange = true;
             fontDialog.ShowEffects = false;
+            fontDialog.AllowVerticalFonts = false;
+            if (PubFunc.GetConfiguration("defaultFont") != "")
+            {
+                fontDialog.Font = (Font)fc.ConvertFromString(PubFunc.GetConfiguration("defaultFont"));
+            }
             if (fontDialog.ShowDialog() != DialogResult.Cancel)
             {
-                FontConverter fc = new FontConverter();
                 string sfont = fc.ConvertToString(fontDialog.Font);
 
                 if (Attachment.isWelcomePageopen == "1")
@@ -856,17 +914,39 @@ namespace WeCode1._0
             statusStripMain.Visible = toolStripMenuItemIsShowSb.Checked;
         }
 
+        //显示隐藏工作区
         private void toolStripMenuItemIsShowLeft_Click(object sender, EventArgs e)
         {
-            frTree.Show(dockPanel1);
+            //toolStripMenuItemIsShowLeft.Checked = !toolStripMenuItemIsShowLeft.Checked;
+            //if (toolStripMenuItemIsShowLeft.Checked == true)
+            //{
             frmMark.Show(dockPanel1);
-            FormFind.Show(dockPanel1);
+            //FormFind.Show(dockPanel1);
             frYoudaoTree.Show(dockPanel1);
+            frTree.Show(dockPanel1);
+            //}
+            //else { 
+            //    //隐藏工作区
+            //    this.frTree.Hide();
+            //    this.frYoudaoTree.Hide();
+            //    //this.FormFind.Close();
+            //    this.frmMark.Hide();
+            //}
         }
 
+        //显示隐藏附件
         private void toolStripMenuItemIsShowAtt_Click(object sender, EventArgs e)
         {
-            frmAttchment.Show(dockPanel1);
+            //toolStripMenuItemIsShowAtt.Checked = !toolStripMenuItemIsShowAtt.Checked;
+            //if (toolStripMenuItemIsShowAtt.Checked == true)
+            //{
+                frmAttchment.Show(dockPanel1);
+
+            //}
+            //else
+            //{
+            //    frmAttchment.Hide();
+            //}
         }
 
         private void toolStripButtonProp_Click(object sender, EventArgs e)
@@ -893,16 +973,26 @@ namespace WeCode1._0
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            Attachment.frmMain = this;
+            CheckVer();
 
-            //加载布局
-            string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.config");
+            setSkin();
 
-            if (File.Exists(configFile))
-                dockPanel1.LoadFromXml(configFile, m_deserializeDockContent);
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 
-            //打开欢迎界面
-            openWelcomePage();
+            //设置菜单栏勾选状态
+            SetMenuCheck();
+        }
+
+        public void SetMenuCheck()
+        {
+            if (PubFunc.GetConfiguration("AutoLineWrap") == "1")
+            {
+                toolStripMenuItemAutoWrap.Checked = true;
+            }
+            else
+            {
+                toolStripMenuItemAutoWrap.Checked = false;
+            }
         }
 
         //状态栏标题
@@ -940,15 +1030,34 @@ namespace WeCode1._0
             }
         }
 
+        //退出
         private void toolStripMenuItemExit_Click(object sender, EventArgs e)
         {
+
+            //先判断查找是否显示，显示先隐藏
+            if (this.FormFind.IsHidden == false)
+                FormFind.Hide();
+
+            string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.config");
+                dockPanel1.SaveAsXml(configFile);
+
+            this.notifyIcon1.Visible=false;
+            System.Environment.Exit(System.Environment.ExitCode);
+            this.Dispose();
             this.Close();
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.config");
-                dockPanel1.SaveAsXml(configFile);
+            e.Cancel = true;
+            //先判断查找是否显示，显示先隐藏
+            if (this.FormFind.IsHidden == false)
+                FormFind.Hide();
+            this.Visible = false;
+            //气泡提示
+            notifyIcon1.ShowBalloonTip(100, "提示", "wecode已最小化至托盘", ToolTipIcon.Info);
+            //string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.config");
+            //    dockPanel1.SaveAsXml(configFile);
         }
 
         private IDockContent GetContentFromPersistString(string persistString)
@@ -959,8 +1068,6 @@ namespace WeCode1._0
                 return frYoudaoTree;
             else if (persistString == typeof(FormAttachment).ToString())
                 return frmAttchment;
-            else if (persistString == typeof(DocFind).ToString())
-                return FormFind;
             else if (persistString == typeof(DocMark).ToString())
                 return frmMark;
             else
@@ -1026,6 +1133,7 @@ namespace WeCode1._0
               this.toolStripButtonProp.Enabled = sMode;
               this.toolStripButtonUp.Enabled = sMode;
               this.toolStripButtonDown.Enabled = sMode;
+
         }
 
         //窗体发生变化时触发
@@ -1039,7 +1147,7 @@ namespace WeCode1._0
                     {
                         HideShowMenu(true);
                     }
-                    else if (dockPanel1.ActiveContent.GetType() == typeof(YouDaoTree)&&Attachment.IsTokeneffective==1)
+                    else if (dockPanel1.ActiveContent.GetType() == typeof(YouDaoTree) && Attachment.IsTokeneffective == 1)
                     {
                         HideShowMenu(true);
                     }
@@ -1117,6 +1225,7 @@ namespace WeCode1._0
             DialogResult dr = frAuthor.ShowDialog();
             if (dr == DialogResult.OK)
             {
+                MessageBox.Show("授权成功!");
                 //授权成功，禁用登陆按钮，初始化目录以及配置信息，显示有道云树
                 this.toolStripMenuItemLogin.Visible = false;
                 this.toolStripMenuItemUinfo.Visible = true;
@@ -1146,8 +1255,318 @@ namespace WeCode1._0
             string info = "当前用户：" + user + "\n";
             info += "总共空间：" + totalsize / 1048576 + "MB\n";
             info += "已用空间：" + userdsize / 1048576 + "MB\n";
-            MessageBox.Show(info,"用户信息");
+            //MessageBox.Show(info,"用户信息");
+            UserInfo uInfo = new UserInfo(info);
+            uInfo.ShowDialog();
+            if (uInfo.DialogResult == DialogResult.Abort)
+            {
+                LoginOut();
+            }
 
+        }
+
+        //注销操作
+        public void LoginOut()
+        {
+            //修改配置
+            PubFunc.SetConfiguration("AccessToken", "");
+            //禁用云目录
+            this.toolStripMenuItemLogin.Visible = true;
+            this.toolStripMenuItemUinfo.Visible = false;
+            Text = "WeCode--未登录";
+
+            Attachment.IsTokeneffective = 0;
+            frYoudaoTree.YdLogOut();
+            //关闭所有已打开的有道文章
+            //避免保存的提示
+            Attachment.isDeleteClose = "1";
+
+            if (Attachment.isWelcomePageopen == "0")
+            {
+                IDockContent[] documents = dockPanel1.DocumentsToArray();
+
+                foreach (IDockContent content in documents)
+                {
+                    if (((DocumentForm)content).Type == "online")
+                    {
+                        content.DockHandler.Close();
+                    }
+                }
+            }
+
+            Attachment.isDeleteClose = "0";
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            //DocumentForm doc = new DocumentForm();
+            //SetScintillaToCurrentOptions(doc);
+            //doc.Text = "aaa";
+            //doc.Show(dockPanel1);
+            ////toolIncremental.Searcher.Scintilla = doc.Scintilla;
+            ////return doc;
+        }
+
+        //搜索
+        public void OpenSerch(string sType)
+        {
+            if (sType == "local")
+            {
+                FormFind.Show(dockPanel1);
+                FormFind.SetSerchType("local");
+            }
+            else if (sType == "online")
+            {
+                FormFind.Show(dockPanel1);
+                FormFind.SetSerchType("online");
+            }
+        }
+
+        //显示主窗口
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (this.Visible == false)
+            {
+                this.Visible = true;
+            }
+            else
+            {
+                this.WindowState = Attachment.WinState;
+            }
+        }
+
+        //退出
+        private void toolStripMenuItem3_Click_1(object sender, EventArgs e)
+        {
+            //先判断查找是否显示，显示先隐藏
+            if (this.FormFind.IsHidden == false)
+                FormFind.Hide();
+
+            string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.config");
+            dockPanel1.SaveAsXml(configFile);
+
+            this.notifyIcon1.Visible = false;
+            System.Environment.Exit(System.Environment.ExitCode);
+            this.Dispose();
+            this.Close();
+        }
+
+        //双击托盘区显示窗口
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (this.Visible == false)
+            {
+                this.Visible = true;
+            }
+            else
+            {
+                this.WindowState = Attachment.WinState;
+            }
+        }
+
+        //查找文章
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            OpenSerch("local");
+        }
+
+
+        #region 版本检查
+        //定义一个委托 
+        public delegate void MyInvoke();
+
+        //线程方法 
+        private void DoWork() 
+        { 
+        //其他操作  
+        MyInvoke mi = new MyInvoke(Check); 
+        this.BeginInvoke(mi); 
+        } 
+
+        private void CheckVer()
+        {
+            bool bResult = true;
+            bool IsCheck = false;
+            if (PubFunc.GetConfiguration("checkVerAlert") == "1")
+            {
+                IsCheck = true;
+            }
+            else if (PubFunc.GetConfiguration("checkVerAlert") == "0")
+            {
+                string lastTime = PubFunc.GetConfiguration("lastVerAlertTime");
+                if (lastTime != "")
+                {
+                    DateTime d1 = DateTime.Now;
+                    DateTime d2 = DateTime.Parse(lastTime);
+                    TimeSpan tp = d1 - d2;
+                    if (tp.TotalDays > 15)
+                    {
+                        IsCheck = true;
+                    }
+                }
+            }
+
+            if (IsCheck == true)
+            {
+                //检查新版本，新线程中检查
+                Thread thread = new Thread(new ThreadStart(Check));
+                thread.Start(); 
+                //Check();
+            }
+        }
+
+        private void Check()
+        {
+            string pageHtml;
+            try
+            {
+                WebClient MyWebClient = new WebClient();
+
+                MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于对向Internet资源的请求进行身份验证的网络凭据。
+
+                Byte[] pageData = MyWebClient.DownloadData("http://thinkry.github.io/wecode/version.xml"); //从指定网站下载数据
+
+                pageHtml = Encoding.UTF8.GetString(pageData);
+                pageHtml = pageHtml.Trim();
+                XmlDocument xDoc = new XmlDocument();
+                xDoc.LoadXml(pageHtml);
+                //xDoc.Load("version.xml");
+                string newVer = xDoc.DocumentElement.FirstChild.Attributes["latestver"].Value;
+                string oldVer = PubFunc.GetConfiguration("Version");
+
+                if (newVer != oldVer)//有新版本
+                {
+                    string tips = "";
+                    XmlNode ntips = xDoc.SelectSingleNode("//tips");
+                    foreach (XmlNode node in ntips)
+                    {
+                        tips += node.InnerText + "\r\n";
+                    }
+                    string sdlUrl = xDoc.SelectSingleNode("//download").Attributes["url"].Value;
+
+                    DialogUpdate upDia = new DialogUpdate(newVer, tips, sdlUrl);
+                    DialogResult dr = upDia.ShowDialog();
+
+                    if (dr == DialogResult.No||dr==DialogResult.Cancel)
+                    {
+                        //继续运行
+                    }
+                }
+
+            }
+            catch (WebException webEx)
+            {
+
+                Console.WriteLine(webEx.Message.ToString());
+
+            }
+        }
+        #endregion
+
+        //主页
+        private void toolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            string target = "http://thinkry.github.io/wecode";
+            try
+            {
+                System.Diagnostics.Process.Start(target);
+            }
+            catch (System.ComponentModel.Win32Exception noBrowser)
+            {
+                if (noBrowser.ErrorCode == -2147467259)
+                    MessageBox.Show(noBrowser.Message);
+            }
+            catch (System.Exception other)
+            {
+                MessageBox.Show(other.Message);
+            }
+        }
+
+        //意见反馈
+        private void toolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            string target = "https://github.com/thinkry/wecode/issues";
+            try
+            {
+                System.Diagnostics.Process.Start(target);
+            }
+            catch (System.ComponentModel.Win32Exception noBrowser)
+            {
+                if (noBrowser.ErrorCode == -2147467259)
+                    MessageBox.Show(noBrowser.Message);
+            }
+            catch (System.Exception other)
+            {
+                MessageBox.Show(other.Message);
+            }
+        }
+
+        //放大
+        private void toolStripButtonZoomOut_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null&&_zoomLevel<=19)
+            {
+                _zoomLevel++;
+                ActiveDocument.Scintilla.ZoomFactor = _zoomLevel;
+            }
+        }
+
+        private void toolStripButtonZoomIn_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null && _zoomLevel >=-9)
+            {
+                _zoomLevel--;
+                ActiveDocument.Scintilla.ZoomFactor = _zoomLevel;
+            }
+        }
+
+        private void toolStripButtonResetZoom_Click(object sender, EventArgs e)
+        {
+            _zoomLevel=0;
+            if (ActiveDocument != null)
+            {
+                ActiveDocument.Scintilla.ZoomFactor = _zoomLevel;
+            }
+        }
+
+        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        {
+            //this.WindowState = System.Windows.Forms.FormWindowState.Normal;
+        }
+
+        private void FormMain_SizeChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState != FormWindowState.Minimized)
+            {
+                Attachment.WinState = this.WindowState;
+            }
+        }
+
+        private void toolStripMenuItemZoomOut_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null && _zoomLevel <= 19)
+            {
+                _zoomLevel++;
+                ActiveDocument.Scintilla.ZoomFactor = _zoomLevel;
+            }
+        }
+
+        private void toolStripMenuItemZoomIn_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null && _zoomLevel >= -9)
+            {
+                _zoomLevel--;
+                ActiveDocument.Scintilla.ZoomFactor = _zoomLevel;
+            }
+        }
+
+        private void toolStripMenuItemResetZoom_Click(object sender, EventArgs e)
+        {
+            _zoomLevel = 0;
+            if (ActiveDocument != null)
+            {
+                ActiveDocument.Scintilla.ZoomFactor = _zoomLevel;
+            }
         }
 
     }

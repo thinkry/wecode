@@ -185,8 +185,9 @@ namespace WeCode1._0
         /// </summary>
         /// <param name="path"></param>
         /// <param name="content">sci文本框内的文本，未编码</param>
-        public static void UpdateNote(string path, string content)
+        public static string UpdateNote(string path, string content)
         {
+            string result = "OK";
             if (ConfigurationManager.AppSettings["AccessToken"] != "")
             {
                 try
@@ -195,7 +196,7 @@ namespace WeCode1._0
                     XmlDocument doc = GetNoteWithXML(path);
                     if (doc == null)
                     {
-                        return;
+                        return "FAIL";
                     }
                     string eContent = HttpUtility.HtmlEncode(content);
                     doc.DocumentElement.FirstChild.InnerXml = eContent;
@@ -210,14 +211,16 @@ namespace WeCode1._0
 
                     string aaa = HttpPostData(url.ToString(), myCol);
 
+                    result = "OK";
 
 
                 }
                 catch (Exception msg) //异常处理
                 {
-
+                    result = "FAIL";
                 }
             }
+            return result;
         }
 
 

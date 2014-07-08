@@ -36,6 +36,7 @@ namespace WeCode1._0
             else
             {
                 treeViewYouDao.Enabled = false;
+                toolStrip1.Enabled = false;
             }
         }
 
@@ -93,7 +94,13 @@ namespace WeCode1._0
                     addTreeNode(cNode, tNode);
                 }
 
-                //treeViewYouDao.ExpandAll();
+                //默认选中第一个节点
+                if (treeViewYouDao.Nodes.Count > 0)
+                {
+                    treeViewYouDao.SelectedNode = treeViewYouDao.Nodes[0];
+                }
+
+                toolStrip1.Enabled = true;
 
             }
             catch (XmlException xExc) //Exception is thrown is there is an error in the Xml
@@ -178,7 +185,10 @@ namespace WeCode1._0
 
                 ///打开后设置语言
                 string Language = PubFunc.Synid2LanguageSetLang(PubFunc.Language2Synid(sLang));
-                formParent.SetLanguage(Language);
+                if (Attachment.isnewOpenDoc == "1")
+                {
+                    formParent.SetLanguage(Language);
+                }
 
             }
         }
@@ -262,6 +272,7 @@ namespace WeCode1._0
 
                     //插入树节点
                     TreeNode InsertNodeDir = new TreeNode(Title);
+                    InsertNodeDir.Name = sGUID;
                     InsertNodeDir.ImageIndex = 0;
                     InsertNodeDir.SelectedImageIndex = 0;
 
@@ -551,6 +562,7 @@ namespace WeCode1._0
         //删除有道云数据，同时关闭已打开的文章,再更新本地XML并同步到云
         public void DelNodeData(string id)
         {
+
             XmlDocument doc = new XmlDocument();
             doc.Load("TreeNodeLocal.xml");
             XmlNode seleNode = doc.SelectSingleNode("//node()[@id='" + id + "']");
@@ -559,6 +571,10 @@ namespace WeCode1._0
             {
                 //选中的是文章
                 string path = seleNode.Attributes["path"].Value;
+
+                //关闭打开的文章
+                formParent.CloseDoc(path);
+
                 NoteAPI.DeleteNote(path);
             }
             else
@@ -569,6 +585,10 @@ namespace WeCode1._0
                 {
                     string path = xnode.Attributes["path"].Value;
                     //删除笔记
+
+                    //关闭打开的文章
+                    formParent.CloseDoc(path);
+
                     NoteAPI.DeleteNote(path);
                 }
             }
@@ -1017,5 +1037,50 @@ namespace WeCode1._0
             }
         }
         #endregion
+
+        //新建文章
+        private void toolStripButtonNewYDDoc_Click(object sender, EventArgs e)
+        {
+            NewDoc();
+        }
+
+        private void toolStripButtonNewYDDir_Click(object sender, EventArgs e)
+        {
+            NewDir();
+        }
+
+        private void toolStripButtonYDDel_Click(object sender, EventArgs e)
+        {
+            DelNode();
+        }
+
+        private void toolStripButtonYDProp_Click(object sender, EventArgs e)
+        {
+            ShowProp();
+        }
+
+        private void toolStripButtonYDUp_Click(object sender, EventArgs e)
+        {
+            setNodeUp();
+        }
+
+        private void toolStripButtonYDDown_Click(object sender, EventArgs e)
+        {
+            setNodeDown();
+        }
+
+        private void toolStripButtonYDSerch_Click(object sender, EventArgs e)
+        {
+            formParent.OpenSerch("online");
+        }
+
+        //注销后，禁用控件，清空节点
+        public void YdLogOut()
+        { 
+            //清空节点
+            this.treeViewYouDao.Nodes.Clear();
+            this.treeViewYouDao.Enabled = false;
+            this.toolStrip1.Enabled = false;
+        }
     }
 }

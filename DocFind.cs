@@ -102,7 +102,10 @@ namespace WeCode1._0
                     //打开后设置语言
                     string Language = AccessAdo.ExecuteScalar("select synid from ttree where nodeid=" + nodeid).ToString();
                     Language = PubFunc.Synid2LanguageSetLang(Language);
-                    formParent.SetLanguage(Language);
+                    if (Attachment.isnewOpenDoc == "1")
+                    {
+                        formParent.SetLanguage(Language);
+                    }
                 }
                 else if (serchType == "online")
                 {
@@ -114,7 +117,10 @@ namespace WeCode1._0
 
                     ///打开后设置语言
                     string Language = PubFunc.Synid2LanguageSetLang(PubFunc.Language2Synid(sLang));
-                    formParent.SetLanguage(Language);
+                    if (Attachment.isnewOpenDoc == "1")
+                    {
+                        formParent.SetLanguage(Language);
+                    }
                 }
             }
             catch (Exception ex)
@@ -130,6 +136,20 @@ namespace WeCode1._0
         {
             dataGridViewSerch.DataSource = AccessAdo.ExecuteDataSet("select [title] as 标题 from ttree where 1=2").Tables[0];
             this.textBoxSerch.Text = "";
+        }
+
+
+        //设置查找的初始选项
+        public void SetSerchType(string sType)
+        {
+            if (sType == "local")
+            {
+                this.comboBox1.SelectedIndex = 0;
+            }
+            else if (sType == "online")
+            {
+                this.comboBox1.SelectedIndex = 1;
+            }
         }
     }
 }

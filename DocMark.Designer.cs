@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DocMark));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DocMark));
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.dataGridViewSerch = new System.Windows.Forms.DataGridView();
             this.buttonRefresh = new System.Windows.Forms.Button();
             this.buttonDelMark = new System.Windows.Forms.Button();
-            this.dataGridViewSerch = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSerch)).BeginInit();
             this.SuspendLayout();
@@ -66,6 +66,39 @@
             this.comboBox1.TabIndex = 3;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
+            // dataGridViewSerch
+            // 
+            this.dataGridViewSerch.AllowUserToAddRows = false;
+            this.dataGridViewSerch.AllowUserToDeleteRows = false;
+            this.dataGridViewSerch.AllowUserToResizeRows = false;
+            this.dataGridViewSerch.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewSerch.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridViewSerch.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dataGridViewSerch.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewSerch.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridViewSerch.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dataGridViewSerch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewSerch.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewSerch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewSerch.Location = new System.Drawing.Point(0, 28);
+            this.dataGridViewSerch.MultiSelect = false;
+            this.dataGridViewSerch.Name = "dataGridViewSerch";
+            this.dataGridViewSerch.ReadOnly = true;
+            this.dataGridViewSerch.RowHeadersVisible = false;
+            this.dataGridViewSerch.RowTemplate.Height = 23;
+            this.dataGridViewSerch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewSerch.Size = new System.Drawing.Size(284, 362);
+            this.dataGridViewSerch.TabIndex = 1;
+            this.dataGridViewSerch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSerch_CellDoubleClick);
+            // 
             // buttonRefresh
             // 
             this.buttonRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -95,38 +128,6 @@
             this.buttonDelMark.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonDelMark.UseVisualStyleBackColor = true;
             this.buttonDelMark.Click += new System.EventHandler(this.buttonDelMark_Click);
-            // 
-            // dataGridViewSerch
-            // 
-            this.dataGridViewSerch.AllowUserToAddRows = false;
-            this.dataGridViewSerch.AllowUserToDeleteRows = false;
-            this.dataGridViewSerch.AllowUserToResizeRows = false;
-            this.dataGridViewSerch.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewSerch.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridViewSerch.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridViewSerch.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dataGridViewSerch.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.dataGridViewSerch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewSerch.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewSerch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewSerch.Location = new System.Drawing.Point(0, 28);
-            this.dataGridViewSerch.MultiSelect = false;
-            this.dataGridViewSerch.Name = "dataGridViewSerch";
-            this.dataGridViewSerch.ReadOnly = true;
-            this.dataGridViewSerch.RowHeadersVisible = false;
-            this.dataGridViewSerch.RowTemplate.Height = 23;
-            this.dataGridViewSerch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewSerch.Size = new System.Drawing.Size(284, 362);
-            this.dataGridViewSerch.TabIndex = 1;
-            this.dataGridViewSerch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSerch_CellDoubleClick);
             // 
             // DocMark
             // 

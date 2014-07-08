@@ -105,7 +105,7 @@ namespace WeCode1._0
                 JObject obj = JObject.Parse(content);
                 accessToken = (string)obj["accessToken"];   //accesstoken
 
-                MessageBox.Show("授权成功!");
+                //MessageBox.Show("授权成功!");
 
                 //写入accessToken
                 SetConfiguration("AccessToken", accessToken);

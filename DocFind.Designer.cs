@@ -49,7 +49,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(446, 28);
+            this.panel1.Size = new System.Drawing.Size(417, 28);
             this.panel1.TabIndex = 0;
             // 
             // comboBox1
@@ -60,7 +60,7 @@
             this.comboBox1.Items.AddRange(new object[] {
             "本地",
             "有道云"});
-            this.comboBox1.Location = new System.Drawing.Point(320, 4);
+            this.comboBox1.Location = new System.Drawing.Point(291, 4);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(57, 20);
             this.comboBox1.TabIndex = 3;
@@ -71,7 +71,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSerch.Location = new System.Drawing.Point(64, 3);
             this.textBoxSerch.Name = "textBoxSerch";
-            this.textBoxSerch.Size = new System.Drawing.Size(250, 21);
+            this.textBoxSerch.Size = new System.Drawing.Size(221, 21);
             this.textBoxSerch.TabIndex = 2;
             // 
             // button1
@@ -80,7 +80,7 @@
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(383, 3);
+            this.button1.Location = new System.Drawing.Point(354, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(63, 23);
             this.button1.TabIndex = 1;
@@ -106,8 +106,9 @@
             this.dataGridViewSerch.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewSerch.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridViewSerch.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridViewSerch.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridViewSerch.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewSerch.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridViewSerch.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dataGridViewSerch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -126,7 +127,7 @@
             this.dataGridViewSerch.RowHeadersVisible = false;
             this.dataGridViewSerch.RowTemplate.Height = 23;
             this.dataGridViewSerch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewSerch.Size = new System.Drawing.Size(446, 362);
+            this.dataGridViewSerch.Size = new System.Drawing.Size(417, 559);
             this.dataGridViewSerch.TabIndex = 1;
             this.dataGridViewSerch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSerch_CellDoubleClick);
             // 
@@ -135,18 +136,15 @@
             this.AcceptButton = this.button1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(446, 390);
+            this.ClientSize = new System.Drawing.Size(417, 587);
             this.Controls.Add(this.dataGridViewSerch);
             this.Controls.Add(this.panel1);
-            this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)(((((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft)
-                        | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight)
-                        | WeifenLuo.WinFormsUI.Docking.DockAreas.DockTop)
-                        | WeifenLuo.WinFormsUI.Docking.DockAreas.DockBottom)));
+            this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.Float;
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.HideOnClose = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DocFind";
-            this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft;
+            this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float;
             this.Text = "查找";
             this.Load += new System.EventHandler(this.DocFind_Load);
             this.panel1.ResumeLayout(false);

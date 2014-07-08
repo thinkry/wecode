@@ -88,7 +88,10 @@ namespace WeCode1._0
                     //打开后设置语言
                     string Language = AccessAdo.ExecuteScalar("select synid from ttree where nodeid=" + nodeid).ToString();
                     Language = PubFunc.Synid2LanguageSetLang(Language);
-                    formParent.SetLanguage(Language);
+                    if (Attachment.isnewOpenDoc == "1")
+                    {
+                        formParent.SetLanguage(Language);
+                    }
                 }
                 else if (markType == "online")
                 {
@@ -100,7 +103,10 @@ namespace WeCode1._0
 
                     ///打开后设置语言
                     string Language = PubFunc.Synid2LanguageSetLang(PubFunc.Language2Synid(sLang));
-                    formParent.SetLanguage(Language);
+                    if (Attachment.isnewOpenDoc == "1")
+                    {
+                        formParent.SetLanguage(Language);
+                    }
                 }
             }
             catch (Exception ex)
@@ -127,6 +133,8 @@ namespace WeCode1._0
         //删除书签
         private void buttonDelMark_Click(object sender, EventArgs e)
         {
+            if (dataGridViewSerch.SelectedRows.Count <= 0)
+                return;
             if (markType == "local")
             {
                 string nodeid = dataGridViewSerch.SelectedRows[0].Cells[0].Value.ToString();

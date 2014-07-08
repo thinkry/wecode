@@ -38,6 +38,12 @@ namespace WeCode1._0
             //递归方式一次性全部加载
             treeViewDir.ImageList = imageList1;
             iniTreeDigui(GetTable("select * from ttree"), "NodeId", "ParentId", "Title", treeViewDir.Nodes, null);
+
+            //默认选中第一个节点
+            if (treeViewDir.Nodes.Count > 0)
+            {
+                treeViewDir.SelectedNode = treeViewDir.Nodes[0];
+            }
         }
 
         ///   <summary>   
@@ -310,7 +316,10 @@ namespace WeCode1._0
                 //打开后设置语言
                 string Language = AccessAdo.ExecuteScalar("select synid from ttree where nodeid=" + sNodeId).ToString();
                 Language = PubFunc.Synid2LanguageSetLang(Language);
-                formParent.SetLanguage(Language);
+                if (Attachment.isnewOpenDoc == "1")
+                {
+                    formParent.SetLanguage(Language);
+                }
             }
         }
 
@@ -925,6 +934,59 @@ namespace WeCode1._0
         }
 
         #endregion
+
+        //新建文章
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            NewDoc();
+        }
+
+        //新建目录
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            NewDir();
+        }
+        
+        //删除
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            DelNode();
+        }
+        
+        //属性
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            ShowProp();
+        }
+
+        //上移
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            setNodeUp();
+        }
+
+        //下移
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+            setNodeDown();
+        }
+
+        //窗体激活时
+        private void FormTreeLeft_Activated(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void FormTreeLeft_Deactivate(object sender, EventArgs e)
+        {
+
+        }
+
+        //搜索
+        private void toolStripButtonSerch_Click(object sender, EventArgs e)
+        {
+            formParent.OpenSerch("local");
+        }
 
 
     }
