@@ -61,7 +61,6 @@
             // scintilla1
             // 
             this.scintilla1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.scintilla1.ConfigurationManager.LoadOrder = ScintillaNET.Configuration.ConfigurationLoadOrder.UserCustomBuiltIn;
             this.scintilla1.ContextMenuStrip = this.contextMenuStripMouseClick;
             this.scintilla1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scintilla1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

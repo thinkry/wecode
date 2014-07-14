@@ -31,6 +31,7 @@ namespace WeCode1._0
         public WelcomeDoc()
         {
             InitializeComponent();
+            label5.Text = PubFunc.GetConfiguration("Version");
         }
 
         private void WelcomeDoc_Activated(object sender, EventArgs e)

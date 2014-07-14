@@ -36,7 +36,7 @@ namespace WeCode1._0
         private int _newDocumentCount = 0;
         private string[] _args;
         private int _zoomLevel=0;
-        private const int LINE_NUMBERS_MARGIN_WIDTH = 35;
+        private const int LINE_NUMBERS_MARGIN_WIDTH = 50;
 
         #endregion Fields
 
@@ -52,8 +52,15 @@ namespace WeCode1._0
 
         #endregion Properties
 
+        // 当收到第二个进程的通知时，显示窗体  
+        private void OnProgramStarted(object state, bool timeout)
+        {
+            toolStripMenuItem2_Click(null,null);  
+        }  
+
         public FormMain()
         {
+            ThreadPool.RegisterWaitForSingleObject(Program.ProgramStarted, OnProgramStarted, null, -1, false); 
 
             InitializeComponent();
 
@@ -99,6 +106,35 @@ namespace WeCode1._0
             //授权成功后，云端创建两个目录以及配置文件，然后加载树目录
             IniYouDaoAuthor();
 
+
+            //上报统计信息
+            Thread t = new Thread(new ThreadStart(UpUerInfo));
+            t.Start(); 
+        }
+
+        public void UpUerInfo()
+        {
+            try
+            {
+                string uuid = PubFunc.GetConfiguration("UUID");
+                string ver = PubFunc.GetConfiguration("Version");
+                string Token = PubFunc.GetConfiguration("AccessToken");
+                string url = "http://wecode.thinkry.com/c/ping?u=" + uuid + "&v=" + ver + "&yd=" + Token;
+
+                WebClient MyWebClient = new WebClient();
+
+                MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于对向Internet资源的请求进行身份验证的网络凭据。
+
+                Byte[] pageData = MyWebClient.DownloadData(url); //从指定网站下载数据
+
+            }
+            catch (WebException webEx)
+            {
+
+                Console.WriteLine(webEx.Message.ToString());
+
+            }
+            
         }
 
         //初始化相关
@@ -228,7 +264,7 @@ namespace WeCode1._0
         }
 
         //打开文章
-        public void openNew(string nodeId)
+        public void openNew(string nodeId,string treeLocation,string updateTime)
         {
             //欢迎窗口是否打开，如果打开则关闭
             if (Attachment.isWelcomePageopen == "1")
@@ -256,11 +292,11 @@ namespace WeCode1._0
 
             // Open the files
             if (!isOpen)
-                OpenFile(nodeId);
+                OpenFile(nodeId,treeLocation,updateTime);
         }
 
         //打开云笔记
-        public void openNewYouDao(string nodeId,string title)
+        public void openNewYouDao(string nodeId,string title,string treeLocation,string updatetime)
         {
             //欢迎窗口是否打开，如果打开则关闭
             if (Attachment.isWelcomePageopen == "1")
@@ -288,10 +324,10 @@ namespace WeCode1._0
 
             // Open the files
             if (!isOpen)
-                OpenFileYouDao(nodeId,title);
+                OpenFileYouDao(nodeId,title,treeLocation,updatetime);
         }
 
-        private DocumentForm OpenFileYouDao(string nodeId,string title)
+        private DocumentForm OpenFileYouDao(string nodeId, string title, string treeLocation, string updatetime)
         {
             Attachment.isnewOpenDoc = "1";
             //获取文章信息
@@ -299,6 +335,9 @@ namespace WeCode1._0
             string Content = NoteAPI.GetNote(nodeId);
 
             DocumentForm doc = new DocumentForm();
+            doc.TreeLocation = treeLocation;
+            doc.LastUpdateTime = updatetime;
+
             SetScintillaToCurrentOptions(doc);
             doc.Scintilla.Text = Content;
             doc.Scintilla.UndoRedo.EmptyUndoBuffer();
@@ -334,7 +373,7 @@ namespace WeCode1._0
         //}
 
 
-        private DocumentForm OpenFile(string nodeId)
+        private DocumentForm OpenFile(string nodeId,string treeLocation,string updateTime)
         {
             Attachment.isnewOpenDoc = "1";
             //获取文章信息
@@ -346,6 +385,9 @@ namespace WeCode1._0
             string Content = temp.Rows[0]["Content"].ToString();
 
             DocumentForm doc = new DocumentForm();
+            doc.TreeLocation = treeLocation;
+            doc.LastUpdateTime = updateTime;
+
             SetScintillaToCurrentOptions(doc);
             doc.Scintilla.Text = Content;
             doc.Scintilla.UndoRedo.EmptyUndoBuffer();
@@ -363,10 +405,10 @@ namespace WeCode1._0
         private void SetScintillaToCurrentOptions(DocumentForm doc)
         {
             //// Turn on line numbers?
-            //if (lineNumbersToolStripMenuItem.Checked)
+            if (toolStripMenuItemLn.Checked)
                 doc.Scintilla.Margins.Margin0.Width = LINE_NUMBERS_MARGIN_WIDTH;
-            //else
-            //    doc.Scintilla.Margins.Margin0.Width = 0;
+            else
+                doc.Scintilla.Margins.Margin0.Width = 0;
 
             //// Turn on white space?
             //if (whitespaceToolStripMenuItem.Checked)
@@ -384,7 +426,7 @@ namespace WeCode1._0
             //doc.Scintilla.EndOfLine.IsVisible = endOfLineToolStripMenuItem.Checked;
 
             // Set the zoom
-            doc.Scintilla.ZoomFactor = _zoomLevel;
+            doc.Scintilla.ZoomFactor = 0;
         }
 
 
@@ -420,6 +462,13 @@ namespace WeCode1._0
         }
 
 
+        //设置路径，修改时间
+        public void SetTreeLocat(string treeLocation,string UpdateTime)
+        {
+            ActiveDocument.TreeLocation = treeLocation;
+            ActiveDocument.LastUpdateTime = UpdateTime;
+        }
+
         //设置语言(激活文档)
         public void SetLanguage(string language)
         {
@@ -444,7 +493,7 @@ namespace WeCode1._0
         }
 
         //设置语言
-        public void SetLanguageByDoc(string language,string id)
+        public void SetLanguageByDoc(string language,string id,string newTitle,string newTreeLocation)
         {
             //根据id设置语言
             if (Attachment.isWelcomePageopen == "0")
@@ -453,7 +502,7 @@ namespace WeCode1._0
                 {
                     if (id.Equals(documentForm.NodeId, StringComparison.OrdinalIgnoreCase))
                     {
-                        documentForm.SetLanguageByDoc(language);
+                        documentForm.SetLanguageByDoc(language,newTitle,newTreeLocation);
                         break;
                     }
                 }
@@ -498,15 +547,16 @@ namespace WeCode1._0
 
                 //创建表
                 OleDbConnection conn = new OleDbConnection(path);
-                string crtSQL=" CREATE TABLE TTree ( "+
-				" [NodeId] INTEGER CONSTRAINT PK_TTree26 PRIMARY KEY, "+
-				" [Title] VARCHAR, "+
-				" [ParentId] INTEGER, "+
-				" [Type] INTEGER, "+
-				" [CreateTime] INTEGER, "+
-				" [SynId] INTEGER, "+
-				" [Turn] INTEGER,  "+
-				" [MarkTime] INTEGER) ";
+                string crtSQL = " CREATE TABLE TTree ( " +
+                " [NodeId] INTEGER CONSTRAINT PK_TTree26 PRIMARY KEY, " +
+                " [Title] VARCHAR, " +
+                " [ParentId] INTEGER, " +
+                " [Type] INTEGER, " +
+                " [CreateTime] INTEGER, " +
+                " [SynId] INTEGER, " +
+                " [Turn] INTEGER,  " +
+                " [MarkTime] INTEGER, " +
+                " [UpdateTime] INTEGER) ";
                 AccessAdo.ExecuteNonQuery(conn, crtSQL);
 
                 crtSQL=" CREATE TABLE TContent ( "+
@@ -619,9 +669,37 @@ namespace WeCode1._0
                 //重新加载所有资源
                 AccessAdo.strConnection = conStr;
                 
+                //升级数据库
+                UpdateDB();
 
                 frTree.frmTree_Reload();
                 ReSetMarkFind();
+            }
+        }
+
+        //判断数据库表是否存在最后更新时间字段，没有则新增字段，并且赋值创建时间
+        private void UpdateDB()
+        {
+            DataTable tempdt = AccessAdo.ExecuteDataSet("select * from ttree").Tables[0];
+            Boolean isUpdateTimeExsist = false;
+            for (int i = 0; i < tempdt.Columns.Count; i++)
+            {
+                if (tempdt.Columns[i].ColumnName == "UpdateTime")
+                {
+                    isUpdateTimeExsist = true;
+                }
+                else {
+                    isUpdateTimeExsist = false;
+                }
+            }
+
+            if (isUpdateTimeExsist == false)
+            { 
+                //不存在，添加字段，赋值
+                string sql = "alter table ttree add COLUMN UpdateTime INTEGER";
+                AccessAdo.ExecuteNonQuery(sql);
+                sql = "update ttree set updatetime=createtime";
+                AccessAdo.ExecuteNonQuery(sql);
             }
         }
 
@@ -720,7 +798,7 @@ namespace WeCode1._0
 
             SaveFileDialog sf = new SaveFileDialog();
             //设置文件类型
-            sf.Filter = "数据文件(*.mdb)|*..mdb";
+            sf.Filter = "数据文件(*.mdb)|*.mdb";
             if (sf.ShowDialog() == DialogResult.OK)
             {
                 string Path2 = sf.FileName;
@@ -809,24 +887,31 @@ namespace WeCode1._0
         //自动换行
         private void toolStripMenuItemAutoWrap_Click(object sender, EventArgs e)
         {
-            // 所有打开的文档自动换行
-            toolStripMenuItemAutoWrap.Checked = !toolStripMenuItemAutoWrap.Checked;
-            if (Attachment.isWelcomePageopen == "0")
-            {
-                foreach (DocumentForm doc in dockPanel1.Documents)
-                {
-                    if (toolStripMenuItemAutoWrap.Checked)
-                    {
-                        doc.Scintilla.LineWrapping.Mode = LineWrappingMode.Word;
-                        PubFunc.SetConfiguration("AutoLineWrap", "1");
-                    }
-                    else
-                    {
-                        doc.Scintilla.LineWrapping.Mode = LineWrappingMode.None;
-                        PubFunc.SetConfiguration("AutoLineWrap", "0");
-                    }
-                }
-            }
+            //// 所有打开的文档自动换行
+            //toolStripMenuItemAutoWrap.Checked = !toolStripMenuItemAutoWrap.Checked;
+            //if (Attachment.isWelcomePageopen == "0")
+            //{
+            //    foreach (DocumentForm doc in dockPanel1.Documents)
+            //    {
+            //        if (toolStripMenuItemAutoWrap.Checked)
+            //        {
+            //            doc.Scintilla.LineWrapping.Mode = LineWrappingMode.Word;
+            //        }
+            //        else
+            //        {
+            //            doc.Scintilla.LineWrapping.Mode = LineWrappingMode.None;
+            //        }
+            //    }
+            //}
+
+            //if (toolStripMenuItemAutoWrap.Checked)
+            //{
+            //    PubFunc.SetConfiguration("AutoLineWrap", "1");
+            //}
+            //else
+            //{
+            //    PubFunc.SetConfiguration("AutoLineWrap", "0");
+            //}
             
         }
 
@@ -987,12 +1072,20 @@ namespace WeCode1._0
         {
             if (PubFunc.GetConfiguration("AutoLineWrap") == "1")
             {
-                toolStripMenuItemAutoWrap.Checked = true;
+                toolStripMenuItemAutoWrap1.Checked = true;
             }
             else
             {
-                toolStripMenuItemAutoWrap.Checked = false;
+                toolStripMenuItemAutoWrap1.Checked = false;
             }
+        }
+
+        //清空状态栏信息
+        public void clearStatus()
+        {
+            this.toolStripStatusLabelTitle.Text = "";
+            this.toolStripStatusLabelDocTime.Text = "";
+            this.toolStripStatusLabelRowCol.Text = "";
         }
 
         //状态栏标题
@@ -1010,7 +1103,7 @@ namespace WeCode1._0
         //删除所有书签
         private void toolStripMenuItemDelAllMark_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("删除所有书签？", "提示", MessageBoxButtons.YesNo) == DialogResult.No)
+            if (MessageBox.Show("删除所有书签（包括本地笔记本和有道云）？", "提示", MessageBoxButtons.YesNo) == DialogResult.No)
             {
                 return;
             } 
@@ -1028,6 +1121,8 @@ namespace WeCode1._0
                 doc.Save("TreeNodeLocal.xml");
                 XMLAPI.XML2Yun();
             }
+
+            ReSetMarkFind();
         }
 
         //退出
@@ -1055,7 +1150,12 @@ namespace WeCode1._0
                 FormFind.Hide();
             this.Visible = false;
             //气泡提示
-            notifyIcon1.ShowBalloonTip(100, "提示", "wecode已最小化至托盘", ToolTipIcon.Info);
+            if (PubFunc.GetConfiguration("FirstRun") == "1")
+            {
+                //仅第一次弹出提示
+                notifyIcon1.ShowBalloonTip(100, "提示", "wecode已最小化至托盘", ToolTipIcon.Info);
+                PubFunc.SetConfiguration("FirstRun", "0");
+            }
             //string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.config");
             //    dockPanel1.SaveAsXml(configFile);
         }
@@ -1312,18 +1412,18 @@ namespace WeCode1._0
         {
             if (sType == "local")
             {
-                FormFind.Show(dockPanel1);
+                FormFind.Show();
                 FormFind.SetSerchType("local");
             }
             else if (sType == "online")
             {
-                FormFind.Show(dockPanel1);
+                FormFind.Show();
                 FormFind.SetSerchType("online");
             }
         }
 
         //显示主窗口
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        public void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
             if (this.Visible == false)
             {
@@ -1569,5 +1669,113 @@ namespace WeCode1._0
             }
         }
 
+        //显示行号
+        private void toolStripMenuItemShowLn_Click(object sender, EventArgs e)
+        {
+            //if (Attachment.isWelcomePageopen == "0")
+            //{
+            //    toolStripMenuItemShowLn.Checked = !toolStripMenuItemShowLn.Checked;
+            //    foreach (DocumentForm docForm in dockPanel1.Documents)
+            //    {
+            //        if (toolStripMenuItemShowLn.Checked)
+            //            docForm.Scintilla.Margins.Margin0.Width = LINE_NUMBERS_MARGIN_WIDTH;
+            //        else
+            //            docForm.Scintilla.Margins.Margin0.Width = 0;
+            //    }
+            //}
+        }
+
+        //查找
+        private void toolStripMenuItemSerch_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null)
+                ActiveDocument.Scintilla.FindReplace.ShowFind();
+        }
+        //替换
+        private void toolStripMenuItemRp_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null)
+                ActiveDocument.Scintilla.FindReplace.ShowReplace();
+        }
+
+        private void toolStripButtonPrint_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null)
+                ActiveDocument.Scintilla.Printing.Print();
+        }
+
+        private void toolStripMenuItem12_Click(object sender, EventArgs e)
+        {
+            // 所有打开的文档自动换行
+            toolStripMenuItemAutoWrap1.Checked = !toolStripMenuItemAutoWrap1.Checked;
+            if (Attachment.isWelcomePageopen == "0")
+            {
+                foreach (DocumentForm doc in dockPanel1.Documents)
+                {
+                    if (toolStripMenuItemAutoWrap1.Checked)
+                    {
+                        doc.Scintilla.LineWrapping.Mode = LineWrappingMode.Word;
+                    }
+                    else
+                    {
+                        doc.Scintilla.LineWrapping.Mode = LineWrappingMode.None;
+                    }
+                }
+            }
+
+            if (toolStripMenuItemAutoWrap1.Checked)
+            {
+                PubFunc.SetConfiguration("AutoLineWrap", "1");
+            }
+            else
+            {
+                PubFunc.SetConfiguration("AutoLineWrap", "0");
+            }
+        }
+
+
+        private void toolStripMenuItemLn_Click(object sender, EventArgs e)
+        {
+            if (Attachment.isWelcomePageopen == "0")
+            {
+                toolStripMenuItemLn.Checked = !toolStripMenuItemLn.Checked;
+                foreach (DocumentForm docForm in dockPanel1.Documents)
+                {
+                    if (toolStripMenuItemLn.Checked)
+                        docForm.Scintilla.Margins.Margin0.Width = LINE_NUMBERS_MARGIN_WIDTH;
+                    else
+                        docForm.Scintilla.Margins.Margin0.Width = 0;
+                }
+            }
+        }
+
+        private void toolStripMenuItemZo_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null && _zoomLevel <= 19)
+            {
+                _zoomLevel++;
+                ActiveDocument.Scintilla.ZoomFactor = _zoomLevel;
+            }
+        }
+
+        private void toolStripMenuItemZi_Click(object sender, EventArgs e)
+        {
+            if (ActiveDocument != null && _zoomLevel >= -9)
+            {
+                _zoomLevel--;
+                ActiveDocument.Scintilla.ZoomFactor = _zoomLevel;
+            }
+        }
+
+        private void toolStripMenuItemResZoom_Click(object sender, EventArgs e)
+        {
+            _zoomLevel = 0;
+            if (ActiveDocument != null)
+            {
+                ActiveDocument.Scintilla.ZoomFactor = _zoomLevel;
+            }
+        }
+
+        
     }
 }

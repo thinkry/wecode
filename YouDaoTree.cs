@@ -181,7 +181,11 @@ namespace WeCode1._0
                 //双击文章，如果已经打开，则定位，否则新窗口打开
                 string sNodeId = ((treeTagNote)treeViewYouDao.SelectedNode.Tag).path;
                 string sLang = ((treeTagNote)treeViewYouDao.SelectedNode.Tag).Language;
-                formParent.openNewYouDao(sNodeId, treeViewYouDao.SelectedNode.Text);
+                string updateTime = ((treeTagNote)treeViewYouDao.SelectedNode.Tag).updatetime;
+                updateTime = "最后更新时间：" + PubFunc.seconds2Time(Convert.ToInt32(updateTime)).ToString();
+                string treeLocation = treeViewYouDao.SelectedNode.FullPath;
+
+                formParent.openNewYouDao(sNodeId, treeViewYouDao.SelectedNode.Text,treeLocation,updateTime);
 
                 ///打开后设置语言
                 string Language = PubFunc.Synid2LanguageSetLang(PubFunc.Language2Synid(sLang));
@@ -412,7 +416,8 @@ namespace WeCode1._0
                     XMLAPI.XML2Yun();
 
                     //新窗口打开编辑界面
-                    formParent.openNewYouDao(Path, Title);
+                    string lastTime="最后更新时间："+DateTime.Now.ToString();
+                    formParent.openNewYouDao(Path, Title, treeViewYouDao.SelectedNode.FullPath,lastTime);
 
                     //打开后设置语言
                     Language = PubFunc.Synid2LanguageSetLang(SynId);
@@ -464,7 +469,8 @@ namespace WeCode1._0
                             XMLAPI.XML2Yun();
 
                             //新窗口打开编辑界面
-                            formParent.openNewYouDao(Path, Title);
+                            string lastTime = "最后更新时间：" + DateTime.Now.ToString();
+                            formParent.openNewYouDao(Path, Title, treeViewYouDao.SelectedNode.FullPath,lastTime);
 
                             //打开后设置语言
                             Language = PubFunc.Synid2LanguageSetLang(SynId);
@@ -488,6 +494,7 @@ namespace WeCode1._0
                             tag.Language = Language;
                             tag.isMark = "0";
 
+                            InsertNodeNote.Name = sGUID;
                             InsertNodeNote.ImageIndex = 1;
                             InsertNodeNote.SelectedImageIndex = 1;
                             InsertNodeNote.Tag = tag;
@@ -517,7 +524,8 @@ namespace WeCode1._0
                             XMLAPI.XML2Yun();
 
                             //新窗口打开编辑界面
-                            formParent.openNewYouDao(Path, Title);
+                            string lastTime = "最后更新时间：" + DateTime.Now.ToString();
+                            formParent.openNewYouDao(Path, Title, treeViewYouDao.SelectedNode.FullPath,lastTime);
 
                             //打开后设置语言
                             Language = PubFunc.Synid2LanguageSetLang(SynId);
@@ -763,7 +771,7 @@ namespace WeCode1._0
                     Language = PubFunc.Synid2LanguageSetLang(SynId);
                     if (SeleNode.ImageIndex == 1)
                     {
-                        formParent.SetLanguageByDoc(Language, ((treeTagNote)SeleNode.Tag).path);
+                        formParent.SetLanguageByDoc(Language, ((treeTagNote)SeleNode.Tag).path,Title,SeleNode.FullPath);
                     }
 
                 }
@@ -826,23 +834,24 @@ namespace WeCode1._0
 
         private void treeViewYouDao_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            try
-            {
-                TreeNode seleNode = treeViewYouDao.SelectedNode;
-                if (seleNode == null)
-                    return;
-                if (seleNode.ImageIndex == 0)
-                    return;
-                string path = seleNode.FullPath;
-                int TotalSeconds = Convert.ToInt32(((treeTagNote)seleNode.Tag).createtime);
-                DateTime cTime = PubFunc.seconds2Time(TotalSeconds);
-                string createTime = "创建： " + cTime.ToString();
-                formParent.showFullPathTime(path, createTime);
-            }
-            catch (Exception wx)
-            {
-                throw wx;
-            }
+            //try
+            //{
+            //    TreeNode seleNode = treeViewYouDao.SelectedNode;
+            //    if (seleNode == null)
+            //        return;
+            //    if (seleNode.ImageIndex == 0)
+            //        return;
+            //    string path = seleNode.FullPath;
+            //    string sNodeId = ((treeTagNote)treeViewYouDao.SelectedNode.Tag).path;
+            //    int TotalSeconds = Convert.ToInt32(NoteAPI.GetUpdateTime(sNodeId));
+            //    DateTime cTime = PubFunc.seconds2Time(TotalSeconds);
+            //    string createTime = "最后更新时间： " + cTime.ToString();
+            //    formParent.showFullPathTime(path, createTime);
+            //}
+            //catch (Exception wx)
+            //{
+                
+            //}
         }
 
         #region drag

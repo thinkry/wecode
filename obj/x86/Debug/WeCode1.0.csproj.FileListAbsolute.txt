@@ -32,7 +32,9 @@ E:\git\wecode\obj\x86\Debug\WeCode1._0.UpLoad.resources
 E:\git\wecode\obj\x86\Debug\WeCode1._0.Download.resources
 E:\git\wecode\bin\Debug\ScintillaNET.pdb
 E:\git\wecode\obj\x86\Debug\WeCode1._0.About.resources
-E:\git\wecode\obj\x86\Debug\WeCode1.0.csprojResolveAssemblyReference.cache
 E:\git\wecode\obj\x86\Debug\WeCode1._0.test.resources
 E:\git\wecode\obj\x86\Debug\WeCode1._0.DialogUpdate.resources
 E:\git\wecode\obj\x86\Debug\WeCode1._0.UserInfo.resources
+E:\git\wecode\bin\Debug\Newtonsoft.Json.pdb
+E:\git\wecode\bin\Debug\Newtonsoft.Json.xml
+E:\git\wecode\bin\Debug\Interop.ADODB.dll

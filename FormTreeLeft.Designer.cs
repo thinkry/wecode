@@ -43,15 +43,15 @@
             this.contextMenuStripTreeBlank = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemBlankNewDir = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.treeViewDir = new System.Windows.Forms.TreeView();
             this.toolStripButtonNewDoc = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNewDir = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDel = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonProp = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonUp = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDown = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSerch = new System.Windows.Forms.ToolStripButton();
+            this.treeViewDir = new System.Windows.Forms.TreeView();
             this.contextMenuStripDir.SuspendLayout();
             this.contextMenuStripTxt.SuspendLayout();
             this.contextMenuStripTreeBlank.SuspendLayout();
@@ -145,18 +145,19 @@
             this.contextMenuStripTreeBlank.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemBlankNewDir});
             this.contextMenuStripTreeBlank.Name = "contextMenuStripTreeBlank";
-            this.contextMenuStripTreeBlank.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStripTreeBlank.Size = new System.Drawing.Size(125, 26);
             // 
             // toolStripMenuItemBlankNewDir
             // 
             this.toolStripMenuItemBlankNewDir.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemBlankNewDir.Image")));
             this.toolStripMenuItemBlankNewDir.Name = "toolStripMenuItemBlankNewDir";
-            this.toolStripMenuItemBlankNewDir.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemBlankNewDir.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItemBlankNewDir.Text = "新建目录";
             this.toolStripMenuItemBlankNewDir.Click += new System.EventHandler(this.toolStripMenuItemBlankNewDir_Click);
             // 
             // toolStrip1
             // 
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonNewDoc,
@@ -172,31 +173,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(335, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // treeViewDir
-            // 
-            this.treeViewDir.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.treeViewDir.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewDir.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.treeViewDir.HideSelection = false;
-            this.treeViewDir.Location = new System.Drawing.Point(0, 25);
-            this.treeViewDir.Name = "treeViewDir";
-            this.treeViewDir.Size = new System.Drawing.Size(335, 484);
-            this.treeViewDir.TabIndex = 4;
-            this.treeViewDir.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewDir_BeforeExpand);
-            this.treeViewDir.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeViewDir_ItemDrag);
-            this.treeViewDir.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDir_AfterSelect);
-            this.treeViewDir.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDir_NodeMouseClick);
-            this.treeViewDir.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDir_NodeMouseDoubleClick);
-            this.treeViewDir.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeViewDir_DragDrop);
-            this.treeViewDir.DragOver += new System.Windows.Forms.DragEventHandler(this.treeViewDir_DragOver);
-            this.treeViewDir.DragLeave += new System.EventHandler(this.treeViewDir_DragLeave);
-            this.treeViewDir.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeViewDir_MouseDown);
             // 
             // toolStripButtonNewDoc
             // 
@@ -238,6 +214,11 @@
             this.toolStripButtonProp.Text = "属性";
             this.toolStripButtonProp.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripButtonUp
             // 
             this.toolStripButtonUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -269,6 +250,26 @@
             this.toolStripButtonSerch.Text = "查找文章";
             this.toolStripButtonSerch.Click += new System.EventHandler(this.toolStripButtonSerch_Click);
             // 
+            // treeViewDir
+            // 
+            this.treeViewDir.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.treeViewDir.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewDir.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.treeViewDir.HideSelection = false;
+            this.treeViewDir.Location = new System.Drawing.Point(0, 25);
+            this.treeViewDir.Name = "treeViewDir";
+            this.treeViewDir.Size = new System.Drawing.Size(335, 484);
+            this.treeViewDir.TabIndex = 4;
+            this.treeViewDir.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewDir_BeforeExpand);
+            this.treeViewDir.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeViewDir_ItemDrag);
+            this.treeViewDir.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDir_AfterSelect);
+            this.treeViewDir.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDir_NodeMouseClick);
+            this.treeViewDir.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDir_NodeMouseDoubleClick);
+            this.treeViewDir.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeViewDir_DragDrop);
+            this.treeViewDir.DragOver += new System.Windows.Forms.DragEventHandler(this.treeViewDir_DragOver);
+            this.treeViewDir.DragLeave += new System.EventHandler(this.treeViewDir_DragLeave);
+            this.treeViewDir.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeViewDir_MouseDown);
+            // 
             // FormTreeLeft
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -285,7 +286,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormTreeLeft";
             this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft;
-            this.Text = "本地";
+            this.Text = "本地笔记本";
             this.Activated += new System.EventHandler(this.FormTreeLeft_Activated);
             this.Deactivate += new System.EventHandler(this.FormTreeLeft_Deactivate);
             this.Load += new System.EventHandler(this.FormTreeLeft_Load);

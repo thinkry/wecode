@@ -23,13 +23,14 @@ namespace WeCode1._0
                 case "0":
                     this.Text = "新建目录";
                     this.labelTitle.Text="输入目录标题";
-                    this.labelTip.Text = "新建节点的默认语法高亮和父节点相同";
-
+                    this.labelTip.Text = "新建目录的默认语法高亮和父目录相同";
+                    this.checkBoxIsOnRootCreate.Text = "在顶层新建目录";
                     break;
                 case "1":
                     this.Text="新建文章";
                     this.labelTitle.Text="输入文章标题";
-                    this.labelTip.Text = "新建节点的默认语法高亮和父节点相同";
+                    this.labelTip.Text = "新建文章的默认语法高亮和父目录相同";
+                    this.checkBoxIsOnRootCreate.Text = "在顶层新建文章";
                     break;
                 case "2":
                     this.Text = "目录属性";

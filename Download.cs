@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
@@ -114,7 +113,7 @@ namespace WeCode1._0
         private void Download_FormClosing(object sender, FormClosingEventArgs e)
         {
             //Thread.CurrentThread.Abort();
-            t.DisableComObjectEagerCleanup();
+            //t.DisableComObjectEagerCleanup();
             t.Abort();
 
             this.Dispose();

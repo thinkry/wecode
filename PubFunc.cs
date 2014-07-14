@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Configuration;
+using System.Data;
+using System.Xml;
 
 namespace WeCode1._0
 {
@@ -12,7 +14,7 @@ namespace WeCode1._0
             string SynId = "0";
             switch (language)
             {
-                case "TEXT":
+                case "Text":
                     SynId = "0";
                     break;
                 case "C/C++":
@@ -24,7 +26,7 @@ namespace WeCode1._0
                 case "Pascal/Delphi":
                     SynId = "103";
                     break;
-                case "JAVA":
+                case "Java":
                     SynId = "104";
                     break;
                 case "VB/VB.NET":
@@ -33,19 +35,16 @@ namespace WeCode1._0
                 case "XML":
                     SynId = "106";
                     break;
-                case "日记":
-                    SynId = "107";
-                    break;
                 case "C#":
                     SynId = "108";
                     break;
-                case "mssql":
+                case "TSQL":
                     SynId = "109";
                     break;
-                case "pgsql":
+                case "PostgreSQL":
                     SynId = "110";
                     break;
-                case "python":
+                case "Python":
                     SynId = "111";
                     break;
                 default:
@@ -59,11 +58,11 @@ namespace WeCode1._0
 
         public static string Synid2Language(string SynId)
         {
-            string Language = "TEXT";
+            string Language = "Text";
             switch (SynId)
             {
                 case "0":
-                    Language = "TEXT";
+                    Language = "Text";
                     break;
                 case "101":
                     Language = "C/C++";
@@ -75,7 +74,7 @@ namespace WeCode1._0
                     Language = "Pascal/Delphi";
                     break;
                 case "104":
-                    Language = "JAVA";
+                    Language = "Java";
                     break;
                 case "105":
                     Language = "VB/VB.NET";
@@ -84,19 +83,19 @@ namespace WeCode1._0
                     Language = "XML";
                     break;
                 case "107":
-                    Language = "日记";
+                    Language = "TEXT";
                     break;
                 case "108":
                     Language = "C#";
                     break;
                 case "109":
-                    Language = "mssql";
+                    Language = "TSQL";
                     break;
                 case "110":
-                    Language = "pgsql";
+                    Language = "PostgreSQL";
                     break;
                 case "111":
-                    Language = "python";
+                    Language = "Python";
                     break;
                 default:
                     break;
@@ -174,6 +173,87 @@ namespace WeCode1._0
             DateTime d2 = new DateTime();
             d2 = d1.AddSeconds(totalSeconds);
             return d2;
+        }
+
+        //通过id找到树路径
+        public static string id2FullPath(string id)
+        {
+            string result = "";
+            try
+            {
+                DataTable tempDt = AccessAdo.ExecuteDataSet("select title,parentid from ttree where nodeid=" + id).Tables[0];
+                while (tempDt.Rows.Count>0)
+                {
+                    string tempID = tempDt.Rows[0]["parentid"].ToString();
+                    result += tempDt.Rows[0]["title"].ToString()+"\\";
+                    tempDt = AccessAdo.ExecuteDataSet("select title,parentid from ttree where nodeid=" + tempID).Tables[0];
+
+                }
+
+                //倒置
+                string[] arrTitle = result.Split('\\');
+                result="";
+                for (int i = arrTitle.Length - 2; i >=0; i--)
+                {
+                    result += arrTitle[i] + "\\";
+                }
+                result = result.Substring(0, result.Length - 1);
+            }
+            catch (Exception ex)
+            {
+                result = "";
+            }
+            return result;
+        }
+
+        //通过nodeid找到XML路径以及最后修改时间（云笔记）
+        public static string id2FullPathYoudao(string nodeid)
+        {
+            string result = "";
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load("TreeNodeLocal.xml");
+                XmlNode xnode = doc.SelectSingleNode("//note[@path='" + nodeid + "'" + "]");
+
+                while (xnode!=null&&xnode.Name!="wecode")
+                {
+                    result += xnode.Attributes["title"].Value + "\\";
+                    xnode = xnode.ParentNode;
+                }
+
+                //倒置
+                string[] arrTitle = result.Split('\\');
+                result = "";
+                for (int i = arrTitle.Length - 2; i >= 0; i--)
+                {
+                    result += arrTitle[i] + "\\";
+                }
+                result = result.Substring(0, result.Length - 1);
+            }
+            catch (Exception ex)
+            {
+                result = "";
+            }
+            return result;
+        }
+
+        public static string GetLatUpdateTime(string nodeid)
+        {
+            string result = "";
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load("TreeNodeLocal.xml");
+                XmlNode xnode = doc.SelectSingleNode("//note[@path='" + nodeid + "'" + "]");
+                result = xnode.Attributes["updatetime"].Value;
+
+            }
+            catch (Exception ex)
+            {
+                result = "";
+            }
+            return result;
         }
 
         /// <summary>  

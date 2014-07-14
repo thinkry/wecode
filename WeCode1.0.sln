@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeCode1.0", "WeCode1.0.csproj", "{B9AD3FFB-9135-4937-8E4B-6279C4F9B633}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeCode", "WeCode.csproj", "{B9AD3FFB-9135-4937-8E4B-6279C4F9B633}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "wecodeSetup", "..\wecodeSetup\wecodeSetup.vdproj", "{91EC1FFC-2BF4-4B68-A4AB-53FA634BCA68}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "wecode1", "..\wecodeSetup\wecodeSetup.vdproj", "{91EC1FFC-2BF4-4B68-A4AB-53FA634BCA68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -310,8 +310,14 @@ namespace WeCode1._0
             else
             {
                 //双击文章，如果已经打开，则定位，否则新窗口打开
+
+                string treeLocation = treeViewDir.SelectedNode.FullPath;
+                int TotalSeconds = Convert.ToInt32(AccessAdo.ExecuteScalar("select updatetime from ttree where nodeid=" + treeViewDir.SelectedNode.Tag.ToString()).ToString());
+                DateTime cTime = PubFunc.seconds2Time(TotalSeconds);
+                string UpdateTime = "最后更新时间： "+cTime.ToString();
+
                 string sNodeId = treeViewDir.SelectedNode.Tag.ToString();
-                formParent.openNew(sNodeId);
+                formParent.openNew(sNodeId,treeLocation,UpdateTime);
 
                 //打开后设置语言
                 string Language = AccessAdo.ExecuteScalar("select synid from ttree where nodeid=" + sNodeId).ToString();
@@ -403,7 +409,7 @@ namespace WeCode1._0
                     //相差秒数
                     string Seconds = dt.Seconds.ToString();
                     //插入TTREE
-                    string sql = string.Format("insert into ttree(NodeID,Title,ParentId,Type,CreateTime,SynId,Turn) values({0},'{1}',{2},{3},{4},{5},{6})", NewNodeId, Title, NewPid, 0, Seconds, SynId, NewTurn);
+                    string sql = string.Format("insert into ttree(NodeID,Title,ParentId,Type,CreateTime,SynId,Turn,Updatetime) values({0},'{1}',{2},{3},{4},{5},{6},{7})", NewNodeId, Title, NewPid, 0, Seconds, SynId, NewTurn,Seconds);
                     AccessAdo.ExecuteNonQuery(sql);
 
                     //插入树节点
@@ -444,7 +450,7 @@ namespace WeCode1._0
                     //相差秒数
                     string Seconds=dt.TotalSeconds.ToString();
                     //插入TTREE
-                    string sql = string.Format("insert into ttree(NodeID,Title,ParentId,Type,CreateTime,SynId,Turn) values({0},'{1}',{2},{3},{4},{5},{6})", NewNodeId, Title, NewPid, 0, Seconds, SynId, NewTurn);
+                    string sql = string.Format("insert into ttree(NodeID,Title,ParentId,Type,CreateTime,SynId,Turn,UpdateTime) values({0},'{1}',{2},{3},{4},{5},{6},{7})", NewNodeId, Title, NewPid, 0, Seconds, SynId, NewTurn,Seconds);
                     AccessAdo.ExecuteNonQuery(sql);
 
                     //插入树节点
@@ -523,9 +529,9 @@ namespace WeCode1._0
                     DateTime d2 = DateTime.Now;
                     TimeSpan dt = d2 - d1;
                     //相差秒数
-                    string Seconds = dt.Seconds.ToString();
+                    string Seconds = dt.TotalSeconds.ToString();
                     //插入TTREE
-                    string sql = string.Format("insert into ttree(NodeID,Title,ParentId,Type,CreateTime,SynId,Turn) values({0},'{1}',{2},{3},{4},{5},{6})", NewNodeId, Title, NewPid, 1, Seconds, SynId, NewTurn);
+                    string sql = string.Format("insert into ttree(NodeID,Title,ParentId,Type,CreateTime,SynId,Turn,UpdateTime) values({0},'{1}',{2},{3},{4},{5},{6},{7})", NewNodeId, Title, NewPid, 1, Seconds, SynId, NewTurn,Seconds);
                     AccessAdo.ExecuteNonQuery(sql);
                     //插入TTcontent
                     sql = string.Format("insert into tcontent(NodeId) values({0})", NewNodeId);
@@ -541,7 +547,8 @@ namespace WeCode1._0
                     treeViewDir.SelectedNode = InsertNodeDoc;
 
                     //新窗口打开编辑界面
-                    formParent.openNew(NewNodeId);
+                    string lastTime="最后更新时间："+DateTime.Now.ToString();
+                    formParent.openNew(NewNodeId, treeViewDir.SelectedNode.FullPath, lastTime);
 
                     //打开后设置语言
                     Language = PubFunc.Synid2LanguageSetLang(SynId);
@@ -576,7 +583,7 @@ namespace WeCode1._0
                     //相差秒数
                     string Seconds = dt.TotalSeconds.ToString();
                     //插入TTREE
-                    string sql = string.Format("insert into ttree(NodeID,Title,ParentId,Type,CreateTime,SynId,Turn) values({0},'{1}',{2},{3},{4},{5},{6})", NewNodeId, Title, NewPid, 1, Seconds, SynId, NewTurn);
+                    string sql = string.Format("insert into ttree(NodeID,Title,ParentId,Type,CreateTime,SynId,Turn,UpdateTime) values({0},'{1}',{2},{3},{4},{5},{6},{7})", NewNodeId, Title, NewPid, 1, Seconds, SynId, NewTurn,Seconds);
                     AccessAdo.ExecuteNonQuery(sql);
                     //插入TTcontent
                     sql = string.Format("insert into tcontent(NodeId) values({0})", NewNodeId);
@@ -599,7 +606,8 @@ namespace WeCode1._0
                     }
 
                     //新窗口打开编辑界面
-                    formParent.openNew(NewNodeId);
+                    string lastTime = "最后更新时间：" + DateTime.Now.ToString();
+                    formParent.openNew(NewNodeId, treeViewDir.SelectedNode.FullPath, lastTime);
 
                     //打开后设置语言
                     Language = PubFunc.Synid2LanguageSetLang(SynId);
@@ -711,14 +719,14 @@ namespace WeCode1._0
                 if (SeleNode != null)
                 {
                     //更新标题和语言
-                    AccessAdo.ExecuteNonQuery("update ttree set title='"+Title+"',synid="+SynId+" where nodeid="+SeleNode.Tag.ToString());
+                    AccessAdo.ExecuteNonQuery("update ttree set title='"+Title+"',synid="+SynId+",updatetime="+PubFunc.time2TotalSeconds()+" where nodeid="+SeleNode.Tag.ToString());
                     //更新节点信息
                     SeleNode.Text = Title;
                     //打开后设置语言
                     Language = PubFunc.Synid2LanguageSetLang(SynId);
                     if (SeleNode.ImageIndex == 1)
                     {
-                        formParent.SetLanguageByDoc(Language, SeleNode.Tag.ToString());
+                        formParent.SetLanguageByDoc(Language, SeleNode.Tag.ToString(),Title,SeleNode.FullPath);
                     }
                     
                 }
@@ -733,16 +741,18 @@ namespace WeCode1._0
         //切换节点，状态栏显示路径
         private void treeViewDir_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            TreeNode seleNode = treeViewDir.SelectedNode;
-            if (seleNode == null)
-                return;
-            if (seleNode.ImageIndex == 0)
-                return;
-            string path = seleNode.FullPath;
-            int TotalSeconds = Convert.ToInt32(AccessAdo.ExecuteScalar("select createtime from ttree where nodeid=" + seleNode.Tag.ToString()).ToString());
-            DateTime cTime = PubFunc.seconds2Time(TotalSeconds);
-            string createTime = "创建： "+cTime.ToString();
-            formParent.showFullPathTime(path,createTime);
+            //TreeNode seleNode = treeViewDir.SelectedNode;
+            //if (seleNode == null)
+            //    return;
+            //if (seleNode.ImageIndex == 0)
+            //    return;
+            //string path = seleNode.FullPath;
+            //int TotalSeconds = Convert.ToInt32(AccessAdo.ExecuteScalar("select updatetime from ttree where nodeid=" + seleNode.Tag.ToString()).ToString());
+            //DateTime cTime = PubFunc.seconds2Time(TotalSeconds);
+            //string createTime = "最后更新时间： "+cTime.ToString();
+            //formParent.showFullPathTime(path,createTime);
+
+            //修改为激活文档窗口时显示
         }
 
 

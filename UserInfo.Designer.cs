@@ -47,10 +47,10 @@
             // labelUInfo
             // 
             this.labelUInfo.AutoSize = true;
-            this.labelUInfo.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelUInfo.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelUInfo.Location = new System.Drawing.Point(24, 22);
             this.labelUInfo.Name = "labelUInfo";
-            this.labelUInfo.Size = new System.Drawing.Size(55, 21);
+            this.labelUInfo.Size = new System.Drawing.Size(43, 17);
             this.labelUInfo.TabIndex = 0;
             this.labelUInfo.Text = "label1";
             // 

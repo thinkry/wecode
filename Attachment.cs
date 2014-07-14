@@ -21,5 +21,6 @@ namespace WeCode1._0
         public static string isnewOpenDoc = "1";
 
         public static System.Windows.Forms.FormWindowState WinState = System.Windows.Forms.FormWindowState.Maximized;
+
     }
 }

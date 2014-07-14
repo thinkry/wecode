@@ -83,7 +83,12 @@ namespace WeCode1._0
                 if (markType == "local")
                 {
                     string nodeid = dataGridViewSerch.SelectedRows[0].Cells[0].Value.ToString();
-                    formParent.openNew(nodeid);
+                    int TotalSeconds = Convert.ToInt32(AccessAdo.ExecuteScalar("select updatetime from ttree where nodeid=" + nodeid).ToString());
+                    DateTime cTime = PubFunc.seconds2Time(TotalSeconds);
+                    string UpdateTime = "最后更新时间： " + cTime.ToString();
+                    string treeLocation = PubFunc.id2FullPath(nodeid);
+
+                    formParent.openNew(nodeid, treeLocation, UpdateTime);
 
                     //打开后设置语言
                     string Language = AccessAdo.ExecuteScalar("select synid from ttree where nodeid=" + nodeid).ToString();
@@ -99,7 +104,12 @@ namespace WeCode1._0
                     string sNodeId = dataGridViewSerch.SelectedRows[0].Cells[0].Value.ToString();
                     string sLang = dataGridViewSerch.SelectedRows[0].Cells[2].Value.ToString();
                     string title = dataGridViewSerch.SelectedRows[0].Cells[1].Value.ToString();
-                    formParent.openNewYouDao(sNodeId, title);
+                    string treeLacation = PubFunc.id2FullPathYoudao(sNodeId);
+                    int TotalSeconds = Convert.ToInt32(PubFunc.GetLatUpdateTime(sNodeId));
+                    DateTime cTime = PubFunc.seconds2Time(TotalSeconds);
+                    string UpdateTime = "最后更新时间： " + cTime.ToString();
+
+                    formParent.openNewYouDao(sNodeId, title, treeLacation, UpdateTime);
 
                     ///打开后设置语言
                     string Language = PubFunc.Synid2LanguageSetLang(PubFunc.Language2Synid(sLang));

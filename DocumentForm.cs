@@ -26,6 +26,10 @@ namespace WeCode1._0
 
         private bool _iniLexer;
 
+        private string _treeLocation;
+
+        private string _lastUpdateTime;
+
         #endregion Fields
 
         #region Properties
@@ -49,6 +53,20 @@ namespace WeCode1._0
             set { _iniLexer = value; }
         }
 
+        //树路径，状态栏显示
+        public string TreeLocation
+        {
+            get { return _treeLocation; }
+            set { _treeLocation = value; }
+        }
+
+        //最后更新时间
+        public string LastUpdateTime
+        {
+            get { return _lastUpdateTime; }
+            set { _lastUpdateTime = value; }
+        }
+
 
         public Scintilla Scintilla
         {
@@ -65,6 +83,21 @@ namespace WeCode1._0
         {
             InitializeComponent();
         }
+
+
+        //刷新状态栏
+        public void reFreshStatus()
+        {
+            if (Type == "local")
+            {
+                Attachment.frmMain.showFullPathTime("【本地笔记本】" + TreeLocation, LastUpdateTime);
+            }
+            else
+            {
+                Attachment.frmMain.showFullPathTime("【有道云】" + TreeLocation, LastUpdateTime);
+            }
+        }
+
 
         private void DocumentForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -107,6 +140,14 @@ namespace WeCode1._0
                 string SQL = "update tcontent set content=@Content where NodeId=@NodeId";
                 AccessAdo.ExecuteNonQuery(SQL, ArrPara);
 
+                //更新修改时间
+                int Seconds = PubFunc.time2TotalSeconds();
+                SQL="update ttree set updatetime="+Seconds+" where nodeid="+NodeId;
+                AccessAdo.ExecuteNonQuery(SQL);
+
+                LastUpdateTime = "最后更新时间："+DateTime.Now.ToString();
+                Attachment.frmMain.showFullPathTime("【本地笔记本】"+TreeLocation, LastUpdateTime);
+
                 scintilla1.Modified = false;
             }
             else if (this.Type == "online")
@@ -116,6 +157,20 @@ namespace WeCode1._0
                     return;
                 if (NoteAPI.UpdateNote(this.NodeId, DocText) == "OK")
                 {
+                    //更新XML最后修改时间
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load("TreeNodeLocal.xml");
+                    XmlNode xnode = doc.SelectSingleNode("//note[path='"+NodeId+"'"+"]");
+                    if (xnode != null)
+                    {
+                        xnode.Attributes["updatetime"].Value = PubFunc.time2TotalSeconds().ToString();
+                    }
+                    doc.Save("TreeNodeLocal.xml");
+                    XMLAPI.XML2Yun();
+
+                    LastUpdateTime = "最后更新时间：" + DateTime.Now.ToString();
+                    Attachment.frmMain.showFullPathTime("【有道云】"+TreeLocation, LastUpdateTime);
+
                     scintilla1.Modified = false;
                 }
                 else
@@ -160,6 +215,16 @@ namespace WeCode1._0
                 int lineStartPosition = Scintilla.Lines.Current.StartPosition;
                 int y = overAllPosition - lineStartPosition;
                 Attachment.frmMain.showLinePosition(x, y);
+
+                //设置路径以及最后修改时间
+                if (Type == "local")
+                {
+                    Attachment.frmMain.showFullPathTime("【本地笔记本】" + TreeLocation, LastUpdateTime);
+                }
+                else {
+                    Attachment.frmMain.showFullPathTime("【有道云】"+TreeLocation, LastUpdateTime);
+                }
+
             }
 
             catch (Exception ex)
@@ -171,7 +236,7 @@ namespace WeCode1._0
 
         private void DocumentForm_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         //关闭完了需要显示欢迎界面
@@ -180,6 +245,8 @@ namespace WeCode1._0
             if (Attachment.DocCount == 1)
             {
                 Attachment.frmMain.openWelcomePage();
+                //清空状态栏信息
+                Attachment.frmMain.clearStatus();
             }
         }
         //关闭当前页签
@@ -391,9 +458,9 @@ namespace WeCode1._0
 
         }
 
-        private void DocumentForm_Shown(object sender, EventArgs e)
+        //设置字体以及样式
+        private void setFontStyle()
         {
-
             //设置自动换行
             if (PubFunc.GetConfiguration("AutoLineWrap") == "1")
             {
@@ -421,7 +488,8 @@ namespace WeCode1._0
                     InstalledFontCollection Flists = new InstalledFontCollection();
                     foreach (FontFamily font in Flists.Families)
                     {
-                        if (font.Name == "Verdana") {
+                        if (font.Name == "Verdana")
+                        {
                             isVerExi = true;
                         }
                         else if (font.Name == "Courier New")
@@ -451,9 +519,16 @@ namespace WeCode1._0
                 }
             }
             catch (Exception ex)
-            { 
-                
+            {
+
             }
+        }
+
+
+        private void DocumentForm_Shown(object sender, EventArgs e)
+        {
+
+            setFontStyle();
         }
 
         public void SetFont(DocumentForm doc, Font xFont)
@@ -490,11 +565,29 @@ namespace WeCode1._0
             doc.Scintilla.Styles[StylesCommon.IndentGuide].Font = xFont;
             doc.Scintilla.Styles[StylesCommon.LastPredefined].Font = xFont;
             doc.Scintilla.Styles[StylesCommon.Max].Font = xFont;
+
+            //设置样式
+            doc.Scintilla.Styles[StylesCommon.LineNumber].BackColor = SystemColors.Window;
+            doc.Scintilla.Margins.FoldMarginColor = Color.FromArgb(250, 240, 230);
+            doc.Scintilla.Margins.Margin1.Width = 0;
+            doc.Scintilla.Styles[StylesCommon.LineNumber].ForeColor = Color.FromArgb(128, 128, 128);
         }
 
         //设置语言
-        public void SetLanguageByDoc(string language)
+        public void SetLanguageByDoc(string language,string newTitle,string newTreeLocation)
         {
+            this.TreeLocation = newTreeLocation;
+            reFreshStatus();
+
+            if (this.Scintilla.Modified == true)
+            {
+                this.Text = newTitle + " *";
+            }
+            else
+            {
+                this.Text = newTitle;
+            }
+
             if ("ini".Equals(language, StringComparison.OrdinalIgnoreCase))
             {
                 // Reset/set all styles and prepare _scintilla for custom lexing
@@ -513,6 +606,8 @@ namespace WeCode1._0
                 else
                     this.Scintilla.Indentation.SmartIndentType = ScintillaNET.SmartIndent.None;
             }
+
+            setFontStyle();
         }
 
     }

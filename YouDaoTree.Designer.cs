@@ -43,15 +43,15 @@
             this.contextMenuStripYDblank = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.treeViewYouDao = new System.Windows.Forms.TreeView();
             this.toolStripButtonNewYDDoc = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNewYDDir = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonYDDel = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonYDProp = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonYDUp = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonYDDown = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonYDSerch = new System.Windows.Forms.ToolStripButton();
+            this.treeViewYouDao = new System.Windows.Forms.TreeView();
             this.contextMenuStripYDdir.SuspendLayout();
             this.contextMenuStripYDtxt.SuspendLayout();
             this.contextMenuStripYDblank.SuspendLayout();
@@ -157,6 +157,7 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonNewYDDoc,
@@ -172,33 +173,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(372, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // treeViewYouDao
-            // 
-            this.treeViewYouDao.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.treeViewYouDao.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewYouDao.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.treeViewYouDao.HideSelection = false;
-            this.treeViewYouDao.ImageIndex = 0;
-            this.treeViewYouDao.ImageList = this.imageList1;
-            this.treeViewYouDao.Location = new System.Drawing.Point(0, 25);
-            this.treeViewYouDao.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.treeViewYouDao.Name = "treeViewYouDao";
-            this.treeViewYouDao.SelectedImageIndex = 0;
-            this.treeViewYouDao.Size = new System.Drawing.Size(372, 750);
-            this.treeViewYouDao.TabIndex = 4;
-            this.treeViewYouDao.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeViewYouDao_ItemDrag);
-            this.treeViewYouDao.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewYouDao_AfterSelect);
-            this.treeViewYouDao.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewYouDao_NodeMouseDoubleClick);
-            this.treeViewYouDao.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeViewYouDao_DragDrop);
-            this.treeViewYouDao.DragOver += new System.Windows.Forms.DragEventHandler(this.treeViewYouDao_DragOver);
-            this.treeViewYouDao.DragLeave += new System.EventHandler(this.treeViewYouDao_DragLeave);
-            this.treeViewYouDao.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeViewYouDao_MouseDown);
             // 
             // toolStripButtonNewYDDoc
             // 
@@ -240,6 +214,11 @@
             this.toolStripButtonYDProp.Text = "属性";
             this.toolStripButtonYDProp.Click += new System.EventHandler(this.toolStripButtonYDProp_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripButtonYDUp
             // 
             this.toolStripButtonYDUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -270,6 +249,28 @@
             this.toolStripButtonYDSerch.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonYDSerch.Text = "查找文章";
             this.toolStripButtonYDSerch.Click += new System.EventHandler(this.toolStripButtonYDSerch_Click);
+            // 
+            // treeViewYouDao
+            // 
+            this.treeViewYouDao.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.treeViewYouDao.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewYouDao.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.treeViewYouDao.HideSelection = false;
+            this.treeViewYouDao.ImageIndex = 0;
+            this.treeViewYouDao.ImageList = this.imageList1;
+            this.treeViewYouDao.Location = new System.Drawing.Point(0, 25);
+            this.treeViewYouDao.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.treeViewYouDao.Name = "treeViewYouDao";
+            this.treeViewYouDao.SelectedImageIndex = 0;
+            this.treeViewYouDao.Size = new System.Drawing.Size(372, 750);
+            this.treeViewYouDao.TabIndex = 4;
+            this.treeViewYouDao.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeViewYouDao_ItemDrag);
+            this.treeViewYouDao.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewYouDao_AfterSelect);
+            this.treeViewYouDao.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewYouDao_NodeMouseDoubleClick);
+            this.treeViewYouDao.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeViewYouDao_DragDrop);
+            this.treeViewYouDao.DragOver += new System.Windows.Forms.DragEventHandler(this.treeViewYouDao_DragOver);
+            this.treeViewYouDao.DragLeave += new System.EventHandler(this.treeViewYouDao_DragLeave);
+            this.treeViewYouDao.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeViewYouDao_MouseDown);
             // 
             // YouDaoTree
             // 

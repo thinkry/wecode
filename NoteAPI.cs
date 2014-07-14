@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Configuration;
 using System.Net;
@@ -295,6 +294,40 @@ namespace WeCode1._0
                     xDoc.LoadXml("<root>" + oa + "</root>");
                     result = xDoc.DocumentElement.FirstChild.InnerXml;
                     result = HttpUtility.HtmlDecode(result);
+
+                }
+                catch (Exception msg) //异常处理
+                {
+
+                }
+            }
+            return result;
+        }
+
+        //获取最后修改时间
+        public static string GetUpdateTime(string path)
+        {
+            string result = "";
+            if (ConfigurationManager.AppSettings["AccessToken"] != "")
+            {
+                try
+                {
+                    //获取AccessTokon构造URL
+                    StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/note/get.json"); //可变字符串
+
+                    //获取access_token构造POST参数
+                    StringBuilder urlPoststr = new StringBuilder(""); // 可变字符串
+                    //追加组合格式字符串
+                    urlPoststr.AppendFormat("oauth_token={0}&", ConfigurationManager.AppSettings["AccessToken"]);
+                    urlPoststr.AppendFormat("&path={0}&", path);
+                    //获取POST提交数据返回内容
+                    string JNotebookListAll = sendMessage(url.ToString(), urlPoststr.ToString());
+
+                    //获取的数据装换为Json格式 此时返回的json格式的数据
+
+                    JObject o = JObject.Parse(JNotebookListAll);
+                    string oa = o["modify_time"].ToString();
+                    result = oa;
 
                 }
                 catch (Exception msg) //异常处理

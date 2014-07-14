@@ -30,21 +30,21 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            WeifenLuo.WinFormsUI.Docking.DockPanelSkin dockPanelSkin5 = new WeifenLuo.WinFormsUI.Docking.DockPanelSkin();
-            WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin autoHideStripSkin5 = new WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin();
-            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient13 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient29 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin dockPaneStripSkin5 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin();
-            WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient dockPaneStripGradient5 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient30 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient14 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient31 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient dockPaneStripToolWindowGradient5 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient32 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient33 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient15 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient34 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient35 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.DockPanelSkin dockPanelSkin4 = new WeifenLuo.WinFormsUI.Docking.DockPanelSkin();
+            WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin autoHideStripSkin4 = new WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin();
+            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient10 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient22 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin dockPaneStripSkin4 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin();
+            WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient dockPaneStripGradient4 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient23 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient11 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient24 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient dockPaneStripToolWindowGradient4 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient25 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient26 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient12 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient27 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient28 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItemFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemNewDB = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,10 +66,8 @@
             this.toolStripMenuItemCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItempaste = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemFdAndReplace = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemFind = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemReplace = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemAutoWrap = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemSerch = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemRp = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemSelAll = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,6 +98,7 @@
             this.toolStripButtonCloseTabAll = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSv = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSvAll = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonUndo = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonRedo = new System.Windows.Forms.ToolStripButton();
@@ -107,9 +106,6 @@
             this.toolStripButtonCut = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonCopy = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonPaste = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonZoomOut = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonZoomIn = new System.Windows.Forms.ToolStripButton();
             this.statusStripMain = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelTitle = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelRowCol = new System.Windows.Forms.ToolStripStatusLabel();
@@ -119,11 +115,12 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripButtonPrint = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemZoomOut = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemZoomIn = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemResetZoom = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemResZoom = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemZi = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemZo = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemLn = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemAutoWrap1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMain.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.statusStripMain.SuspendLayout();
@@ -168,47 +165,43 @@
             // toolStripMenuItemNewDB
             // 
             this.toolStripMenuItemNewDB.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStripMenuItemNewDB.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemNewDB.Image")));
             this.toolStripMenuItemNewDB.Name = "toolStripMenuItemNewDB";
-            this.toolStripMenuItemNewDB.Size = new System.Drawing.Size(201, 22);
-            this.toolStripMenuItemNewDB.Text = "新建数据库(&N)";
+            this.toolStripMenuItemNewDB.Size = new System.Drawing.Size(225, 22);
+            this.toolStripMenuItemNewDB.Text = "新建本地笔记本(&N)";
             this.toolStripMenuItemNewDB.Click += new System.EventHandler(this.toolStripMenuItemNewDB_Click);
             // 
             // toolStripMenuItemOpenDB
             // 
             this.toolStripMenuItemOpenDB.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStripMenuItemOpenDB.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemOpenDB.Image")));
             this.toolStripMenuItemOpenDB.Name = "toolStripMenuItemOpenDB";
             this.toolStripMenuItemOpenDB.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.toolStripMenuItemOpenDB.Size = new System.Drawing.Size(201, 22);
-            this.toolStripMenuItemOpenDB.Text = "打开数据库(&O)";
+            this.toolStripMenuItemOpenDB.Size = new System.Drawing.Size(225, 22);
+            this.toolStripMenuItemOpenDB.Text = "打开本地笔记本(&O)";
             this.toolStripMenuItemOpenDB.Click += new System.EventHandler(this.toolStripMenuItemOpenDB_Click);
             // 
             // toolStripMenuItemZipDB
             // 
-            this.toolStripMenuItemZipDB.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemZipDB.Image")));
             this.toolStripMenuItemZipDB.Name = "toolStripMenuItemZipDB";
-            this.toolStripMenuItemZipDB.Size = new System.Drawing.Size(201, 22);
-            this.toolStripMenuItemZipDB.Text = "压缩数据库(&C)";
+            this.toolStripMenuItemZipDB.Size = new System.Drawing.Size(225, 22);
+            this.toolStripMenuItemZipDB.Text = "压缩本地笔记本(&C)";
             this.toolStripMenuItemZipDB.Click += new System.EventHandler(this.toolStripMenuItemZipDB_Click);
             // 
             // toolStripMenuItemBackUpDB
             // 
-            this.toolStripMenuItemBackUpDB.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemBackUpDB.Image")));
             this.toolStripMenuItemBackUpDB.Name = "toolStripMenuItemBackUpDB";
-            this.toolStripMenuItemBackUpDB.Size = new System.Drawing.Size(201, 22);
-            this.toolStripMenuItemBackUpDB.Text = "备份当前数据库(&B)";
+            this.toolStripMenuItemBackUpDB.Size = new System.Drawing.Size(225, 22);
+            this.toolStripMenuItemBackUpDB.Text = "备份当前本地笔记本(&B)";
             this.toolStripMenuItemBackUpDB.Click += new System.EventHandler(this.toolStripMenuItemBackUpDB_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(198, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(222, 6);
             // 
             // toolStripMenuItemExportHTML
             // 
             this.toolStripMenuItemExportHTML.Name = "toolStripMenuItemExportHTML";
-            this.toolStripMenuItemExportHTML.Size = new System.Drawing.Size(201, 22);
+            this.toolStripMenuItemExportHTML.Size = new System.Drawing.Size(225, 22);
             this.toolStripMenuItemExportHTML.Text = "导出为HTML";
             this.toolStripMenuItemExportHTML.Visible = false;
             this.toolStripMenuItemExportHTML.Click += new System.EventHandler(this.toolStripMenuItemExportHTML_Click);
@@ -217,14 +210,14 @@
             // 
             this.toolStripMenuItemPrint.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemPrint.Image")));
             this.toolStripMenuItemPrint.Name = "toolStripMenuItemPrint";
-            this.toolStripMenuItemPrint.Size = new System.Drawing.Size(201, 22);
+            this.toolStripMenuItemPrint.Size = new System.Drawing.Size(225, 22);
             this.toolStripMenuItemPrint.Text = "打印";
             this.toolStripMenuItemPrint.Click += new System.EventHandler(this.toolStripMenuItemPrint_Click);
             // 
             // toolStripMenuItemPv
             // 
             this.toolStripMenuItemPv.Name = "toolStripMenuItemPv";
-            this.toolStripMenuItemPv.Size = new System.Drawing.Size(201, 22);
+            this.toolStripMenuItemPv.Size = new System.Drawing.Size(225, 22);
             this.toolStripMenuItemPv.Text = "打印预览";
             this.toolStripMenuItemPv.Click += new System.EventHandler(this.toolStripMenuItemPv_Click);
             // 
@@ -232,19 +225,19 @@
             // 
             this.toolStripMenuItemDelAllMark.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemDelAllMark.Image")));
             this.toolStripMenuItemDelAllMark.Name = "toolStripMenuItemDelAllMark";
-            this.toolStripMenuItemDelAllMark.Size = new System.Drawing.Size(201, 22);
+            this.toolStripMenuItemDelAllMark.Size = new System.Drawing.Size(225, 22);
             this.toolStripMenuItemDelAllMark.Text = "删除所有书签(&D)";
             this.toolStripMenuItemDelAllMark.Click += new System.EventHandler(this.toolStripMenuItemDelAllMark_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(198, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(222, 6);
             // 
             // toolStripMenuItemExit
             // 
             this.toolStripMenuItemExit.Name = "toolStripMenuItemExit";
-            this.toolStripMenuItemExit.Size = new System.Drawing.Size(201, 22);
+            this.toolStripMenuItemExit.Size = new System.Drawing.Size(225, 22);
             this.toolStripMenuItemExit.Text = "退出(&X)";
             this.toolStripMenuItemExit.Click += new System.EventHandler(this.toolStripMenuItemExit_Click);
             // 
@@ -258,16 +251,12 @@
             this.toolStripMenuItemCopy,
             this.toolStripMenuItempaste,
             this.toolStripSeparator4,
-            this.toolStripMenuItemFdAndReplace,
-            this.toolStripMenuItemAutoWrap,
+            this.toolStripMenuItemSerch,
+            this.toolStripMenuItemRp,
             this.toolStripSeparator5,
             this.toolStripMenuItemSelAll,
             this.toolStripMenuItem1,
-            this.toolStripMenuItem4,
-            this.toolStripSeparator11,
-            this.toolStripMenuItemZoomOut,
-            this.toolStripMenuItemZoomIn,
-            this.toolStripMenuItemResetZoom});
+            this.toolStripMenuItem4});
             this.toolStripMenuItemEdit.Name = "toolStripMenuItemEdit";
             this.toolStripMenuItemEdit.Size = new System.Drawing.Size(59, 21);
             this.toolStripMenuItemEdit.Text = "编辑(&E)";
@@ -277,7 +266,7 @@
             this.toolStripMenuItemUndo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemUndo.Image")));
             this.toolStripMenuItemUndo.Name = "toolStripMenuItemUndo";
             this.toolStripMenuItemUndo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.toolStripMenuItemUndo.Size = new System.Drawing.Size(161, 22);
+            this.toolStripMenuItemUndo.Size = new System.Drawing.Size(173, 22);
             this.toolStripMenuItemUndo.Text = "撤消(&U)";
             this.toolStripMenuItemUndo.Click += new System.EventHandler(this.toolStripMenuItemUndo_Click);
             // 
@@ -286,21 +275,21 @@
             this.toolStripMenuItemRedo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemRedo.Image")));
             this.toolStripMenuItemRedo.Name = "toolStripMenuItemRedo";
             this.toolStripMenuItemRedo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.toolStripMenuItemRedo.Size = new System.Drawing.Size(161, 22);
+            this.toolStripMenuItemRedo.Size = new System.Drawing.Size(173, 22);
             this.toolStripMenuItemRedo.Text = "重做(&R)";
             this.toolStripMenuItemRedo.Click += new System.EventHandler(this.toolStripMenuItemRedo_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(158, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(170, 6);
             // 
             // toolStripMenuItemCut
             // 
             this.toolStripMenuItemCut.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemCut.Image")));
             this.toolStripMenuItemCut.Name = "toolStripMenuItemCut";
             this.toolStripMenuItemCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.toolStripMenuItemCut.Size = new System.Drawing.Size(161, 22);
+            this.toolStripMenuItemCut.Size = new System.Drawing.Size(173, 22);
             this.toolStripMenuItemCut.Text = "剪切(&X)";
             this.toolStripMenuItemCut.Click += new System.EventHandler(this.toolStripMenuItemCut_Click);
             // 
@@ -309,7 +298,7 @@
             this.toolStripMenuItemCopy.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemCopy.Image")));
             this.toolStripMenuItemCopy.Name = "toolStripMenuItemCopy";
             this.toolStripMenuItemCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.toolStripMenuItemCopy.Size = new System.Drawing.Size(161, 22);
+            this.toolStripMenuItemCopy.Size = new System.Drawing.Size(173, 22);
             this.toolStripMenuItemCopy.Text = "复制(&C)";
             this.toolStripMenuItemCopy.Click += new System.EventHandler(this.toolStripMenuItemCopy_Click);
             // 
@@ -317,59 +306,46 @@
             // 
             this.toolStripMenuItempaste.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItempaste.Image")));
             this.toolStripMenuItempaste.Name = "toolStripMenuItempaste";
+            this.toolStripMenuItempaste.ShortcutKeyDisplayString = "Ctrl+V";
             this.toolStripMenuItempaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.toolStripMenuItempaste.Size = new System.Drawing.Size(161, 22);
+            this.toolStripMenuItempaste.Size = new System.Drawing.Size(173, 22);
             this.toolStripMenuItempaste.Text = "粘贴(&P)";
             this.toolStripMenuItempaste.Click += new System.EventHandler(this.toolStripMenuItempaste_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(158, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(170, 6);
             // 
-            // toolStripMenuItemFdAndReplace
+            // toolStripMenuItemSerch
             // 
-            this.toolStripMenuItemFdAndReplace.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemFind,
-            this.toolStripMenuItemReplace});
-            this.toolStripMenuItemFdAndReplace.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemFdAndReplace.Image")));
-            this.toolStripMenuItemFdAndReplace.Name = "toolStripMenuItemFdAndReplace";
-            this.toolStripMenuItemFdAndReplace.Size = new System.Drawing.Size(161, 22);
-            this.toolStripMenuItemFdAndReplace.Text = "查找和替换";
+            this.toolStripMenuItemSerch.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.toolStripMenuItemSerch.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemSerch.Image")));
+            this.toolStripMenuItemSerch.Name = "toolStripMenuItemSerch";
+            this.toolStripMenuItemSerch.ShortcutKeyDisplayString = "";
+            this.toolStripMenuItemSerch.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.toolStripMenuItemSerch.Size = new System.Drawing.Size(173, 22);
+            this.toolStripMenuItemSerch.Text = "查找";
+            this.toolStripMenuItemSerch.Click += new System.EventHandler(this.toolStripMenuItemSerch_Click);
             // 
-            // toolStripMenuItemFind
+            // toolStripMenuItemRp
             // 
-            this.toolStripMenuItemFind.Name = "toolStripMenuItemFind";
-            this.toolStripMenuItemFind.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.toolStripMenuItemFind.Size = new System.Drawing.Size(163, 22);
-            this.toolStripMenuItemFind.Text = "查找(&F)";
-            this.toolStripMenuItemFind.Click += new System.EventHandler(this.toolStripMenuItemFind_Click);
-            // 
-            // toolStripMenuItemReplace
-            // 
-            this.toolStripMenuItemReplace.Name = "toolStripMenuItemReplace";
-            this.toolStripMenuItemReplace.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
-            this.toolStripMenuItemReplace.Size = new System.Drawing.Size(163, 22);
-            this.toolStripMenuItemReplace.Text = "替换(&H)";
-            this.toolStripMenuItemReplace.Click += new System.EventHandler(this.toolStripMenuItemReplace_Click);
-            // 
-            // toolStripMenuItemAutoWrap
-            // 
-            this.toolStripMenuItemAutoWrap.Name = "toolStripMenuItemAutoWrap";
-            this.toolStripMenuItemAutoWrap.Size = new System.Drawing.Size(161, 22);
-            this.toolStripMenuItemAutoWrap.Text = "自动换行";
-            this.toolStripMenuItemAutoWrap.Click += new System.EventHandler(this.toolStripMenuItemAutoWrap_Click);
+            this.toolStripMenuItemRp.Name = "toolStripMenuItemRp";
+            this.toolStripMenuItemRp.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
+            this.toolStripMenuItemRp.Size = new System.Drawing.Size(173, 22);
+            this.toolStripMenuItemRp.Text = "替换";
+            this.toolStripMenuItemRp.Click += new System.EventHandler(this.toolStripMenuItemRp_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(158, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(170, 6);
             // 
             // toolStripMenuItemSelAll
             // 
             this.toolStripMenuItemSelAll.Name = "toolStripMenuItemSelAll";
             this.toolStripMenuItemSelAll.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.toolStripMenuItemSelAll.Size = new System.Drawing.Size(161, 22);
+            this.toolStripMenuItemSelAll.Size = new System.Drawing.Size(173, 22);
             this.toolStripMenuItemSelAll.Text = "全选(&A)";
             this.toolStripMenuItemSelAll.Click += new System.EventHandler(this.toolStripMenuItemSelAll_Click);
             // 
@@ -378,7 +354,7 @@
             this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(161, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(173, 22);
             this.toolStripMenuItem1.Text = "保存";
             this.toolStripMenuItem1.Visible = false;
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
@@ -387,7 +363,7 @@
             // 
             this.toolStripMenuItem4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem4.Image")));
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(161, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(173, 22);
             this.toolStripMenuItem4.Text = "查找文章(&F)...";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
@@ -399,6 +375,12 @@
             this.toolStripMenuItemIsShowLeft,
             this.toolStripMenuItemIsShowAtt,
             this.toolStripSeparator10,
+            this.toolStripMenuItemAutoWrap1,
+            this.toolStripMenuItemLn,
+            this.toolStripMenuItemZo,
+            this.toolStripMenuItemZi,
+            this.toolStripMenuItemResZoom,
+            this.toolStripSeparator9,
             this.toolStripMenuItemFont});
             this.toolStripMenuItemView.Name = "toolStripMenuItemView";
             this.toolStripMenuItemView.Size = new System.Drawing.Size(60, 21);
@@ -409,7 +391,7 @@
             this.toolStripMenuItemIsShowTB.Checked = true;
             this.toolStripMenuItemIsShowTB.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripMenuItemIsShowTB.Name = "toolStripMenuItemIsShowTB";
-            this.toolStripMenuItemIsShowTB.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemIsShowTB.Size = new System.Drawing.Size(173, 22);
             this.toolStripMenuItemIsShowTB.Text = "工具栏(&T)";
             this.toolStripMenuItemIsShowTB.Click += new System.EventHandler(this.toolStripMenuItemIsShowTB_Click);
             // 
@@ -418,33 +400,33 @@
             this.toolStripMenuItemIsShowSb.Checked = true;
             this.toolStripMenuItemIsShowSb.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripMenuItemIsShowSb.Name = "toolStripMenuItemIsShowSb";
-            this.toolStripMenuItemIsShowSb.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemIsShowSb.Size = new System.Drawing.Size(173, 22);
             this.toolStripMenuItemIsShowSb.Text = "状态栏(&S)";
             this.toolStripMenuItemIsShowSb.Click += new System.EventHandler(this.toolStripMenuItemIsShowSb_Click);
             // 
             // toolStripMenuItemIsShowLeft
             // 
             this.toolStripMenuItemIsShowLeft.Name = "toolStripMenuItemIsShowLeft";
-            this.toolStripMenuItemIsShowLeft.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemIsShowLeft.Size = new System.Drawing.Size(173, 22);
             this.toolStripMenuItemIsShowLeft.Text = "工作区(&W)";
             this.toolStripMenuItemIsShowLeft.Click += new System.EventHandler(this.toolStripMenuItemIsShowLeft_Click);
             // 
             // toolStripMenuItemIsShowAtt
             // 
             this.toolStripMenuItemIsShowAtt.Name = "toolStripMenuItemIsShowAtt";
-            this.toolStripMenuItemIsShowAtt.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemIsShowAtt.Size = new System.Drawing.Size(173, 22);
             this.toolStripMenuItemIsShowAtt.Text = "附件(&A)";
             this.toolStripMenuItemIsShowAtt.Click += new System.EventHandler(this.toolStripMenuItemIsShowAtt_Click);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(170, 6);
             // 
             // toolStripMenuItemFont
             // 
             this.toolStripMenuItemFont.Name = "toolStripMenuItemFont";
-            this.toolStripMenuItemFont.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemFont.Size = new System.Drawing.Size(173, 22);
             this.toolStripMenuItemFont.Text = "源代码字体(&F)";
             this.toolStripMenuItemFont.Click += new System.EventHandler(this.toolStripMenuItemFont_Click);
             // 
@@ -531,10 +513,7 @@
             this.toolStripSeparator8,
             this.toolStripButtonCut,
             this.toolStripButtonCopy,
-            this.toolStripButtonPaste,
-            this.toolStripSeparator9,
-            this.toolStripButtonZoomOut,
-            this.toolStripButtonZoomIn});
+            this.toolStripButtonPaste});
             this.toolStripMain.Location = new System.Drawing.Point(0, 25);
             this.toolStripMain.Name = "toolStripMain";
             this.toolStripMain.Size = new System.Drawing.Size(866, 25);
@@ -654,6 +633,16 @@
             this.toolStripButtonSvAll.Text = "保存所有";
             this.toolStripButtonSvAll.Click += new System.EventHandler(this.toolStripButtonSvAll_Click);
             // 
+            // toolStripButtonPrint
+            // 
+            this.toolStripButtonPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonPrint.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonPrint.Image")));
+            this.toolStripButtonPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonPrint.Name = "toolStripButtonPrint";
+            this.toolStripButtonPrint.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonPrint.Text = "打印";
+            this.toolStripButtonPrint.Click += new System.EventHandler(this.toolStripButtonPrint_Click);
+            // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
@@ -714,31 +703,6 @@
             this.toolStripButtonPaste.Text = "粘贴";
             this.toolStripButtonPaste.Click += new System.EventHandler(this.toolStripButtonPaste_Click);
             // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripButtonZoomOut
-            // 
-            this.toolStripButtonZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonZoomOut.Image")));
-            this.toolStripButtonZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonZoomOut.Name = "toolStripButtonZoomOut";
-            this.toolStripButtonZoomOut.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonZoomOut.Text = "放大(Ctrl+滚轮上)";
-            this.toolStripButtonZoomOut.Click += new System.EventHandler(this.toolStripButtonZoomOut_Click);
-            // 
-            // toolStripButtonZoomIn
-            // 
-            this.toolStripButtonZoomIn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonZoomIn.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonZoomIn.Image")));
-            this.toolStripButtonZoomIn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonZoomIn.Name = "toolStripButtonZoomIn";
-            this.toolStripButtonZoomIn.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonZoomIn.Text = "缩小(Ctrl+滚轮下)";
-            this.toolStripButtonZoomIn.Click += new System.EventHandler(this.toolStripButtonZoomIn_Click);
-            // 
             // statusStripMain
             // 
             this.statusStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -778,53 +742,53 @@
             this.dockPanel1.Location = new System.Drawing.Point(0, 50);
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.Size = new System.Drawing.Size(866, 492);
-            dockPanelGradient13.EndColor = System.Drawing.SystemColors.ControlLight;
-            dockPanelGradient13.StartColor = System.Drawing.SystemColors.ControlLight;
-            autoHideStripSkin5.DockStripGradient = dockPanelGradient13;
-            tabGradient29.EndColor = System.Drawing.SystemColors.Control;
-            tabGradient29.StartColor = System.Drawing.SystemColors.Control;
-            tabGradient29.TextColor = System.Drawing.SystemColors.ControlDarkDark;
-            autoHideStripSkin5.TabGradient = tabGradient29;
-            autoHideStripSkin5.TextFont = new System.Drawing.Font("微软雅黑", 9F);
-            dockPanelSkin5.AutoHideStripSkin = autoHideStripSkin5;
-            tabGradient30.EndColor = System.Drawing.SystemColors.ControlLightLight;
-            tabGradient30.StartColor = System.Drawing.SystemColors.ControlLightLight;
-            tabGradient30.TextColor = System.Drawing.SystemColors.ControlText;
-            dockPaneStripGradient5.ActiveTabGradient = tabGradient30;
-            dockPanelGradient14.EndColor = System.Drawing.SystemColors.Control;
-            dockPanelGradient14.StartColor = System.Drawing.SystemColors.Control;
-            dockPaneStripGradient5.DockStripGradient = dockPanelGradient14;
-            tabGradient31.EndColor = System.Drawing.SystemColors.ControlLight;
-            tabGradient31.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
-            tabGradient31.StartColor = System.Drawing.SystemColors.ControlLightLight;
-            tabGradient31.TextColor = System.Drawing.SystemColors.ControlText;
-            dockPaneStripGradient5.InactiveTabGradient = tabGradient31;
-            dockPaneStripSkin5.DocumentGradient = dockPaneStripGradient5;
-            dockPaneStripSkin5.TextFont = new System.Drawing.Font("微软雅黑", 9F);
-            tabGradient32.EndColor = System.Drawing.SystemColors.ActiveCaption;
-            tabGradient32.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
-            tabGradient32.StartColor = System.Drawing.SystemColors.ActiveCaption;
-            tabGradient32.TextColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dockPaneStripToolWindowGradient5.ActiveCaptionGradient = tabGradient32;
-            tabGradient33.EndColor = System.Drawing.SystemColors.Control;
-            tabGradient33.StartColor = System.Drawing.SystemColors.Control;
-            tabGradient33.TextColor = System.Drawing.SystemColors.ControlText;
-            dockPaneStripToolWindowGradient5.ActiveTabGradient = tabGradient33;
-            dockPanelGradient15.EndColor = System.Drawing.SystemColors.ControlLight;
-            dockPanelGradient15.StartColor = System.Drawing.SystemColors.ControlLight;
-            dockPaneStripToolWindowGradient5.DockStripGradient = dockPanelGradient15;
-            tabGradient34.EndColor = System.Drawing.SystemColors.ControlLight;
-            tabGradient34.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
-            tabGradient34.StartColor = System.Drawing.SystemColors.ControlLight;
-            tabGradient34.TextColor = System.Drawing.SystemColors.InactiveCaptionText;
-            dockPaneStripToolWindowGradient5.InactiveCaptionGradient = tabGradient34;
-            tabGradient35.EndColor = System.Drawing.Color.Transparent;
-            tabGradient35.StartColor = System.Drawing.Color.Transparent;
-            tabGradient35.TextColor = System.Drawing.SystemColors.ControlDarkDark;
-            dockPaneStripToolWindowGradient5.InactiveTabGradient = tabGradient35;
-            dockPaneStripSkin5.ToolWindowGradient = dockPaneStripToolWindowGradient5;
-            dockPanelSkin5.DockPaneStripSkin = dockPaneStripSkin5;
-            this.dockPanel1.Skin = dockPanelSkin5;
+            dockPanelGradient10.EndColor = System.Drawing.SystemColors.ControlLight;
+            dockPanelGradient10.StartColor = System.Drawing.SystemColors.ControlLight;
+            autoHideStripSkin4.DockStripGradient = dockPanelGradient10;
+            tabGradient22.EndColor = System.Drawing.SystemColors.Control;
+            tabGradient22.StartColor = System.Drawing.SystemColors.Control;
+            tabGradient22.TextColor = System.Drawing.SystemColors.ControlDarkDark;
+            autoHideStripSkin4.TabGradient = tabGradient22;
+            autoHideStripSkin4.TextFont = new System.Drawing.Font("微软雅黑", 9F);
+            dockPanelSkin4.AutoHideStripSkin = autoHideStripSkin4;
+            tabGradient23.EndColor = System.Drawing.SystemColors.ControlLightLight;
+            tabGradient23.StartColor = System.Drawing.SystemColors.ControlLightLight;
+            tabGradient23.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripGradient4.ActiveTabGradient = tabGradient23;
+            dockPanelGradient11.EndColor = System.Drawing.SystemColors.Control;
+            dockPanelGradient11.StartColor = System.Drawing.SystemColors.Control;
+            dockPaneStripGradient4.DockStripGradient = dockPanelGradient11;
+            tabGradient24.EndColor = System.Drawing.SystemColors.ControlLight;
+            tabGradient24.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            tabGradient24.StartColor = System.Drawing.SystemColors.ControlLightLight;
+            tabGradient24.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripGradient4.InactiveTabGradient = tabGradient24;
+            dockPaneStripSkin4.DocumentGradient = dockPaneStripGradient4;
+            dockPaneStripSkin4.TextFont = new System.Drawing.Font("微软雅黑", 9F);
+            tabGradient25.EndColor = System.Drawing.SystemColors.ActiveCaption;
+            tabGradient25.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            tabGradient25.StartColor = System.Drawing.SystemColors.ActiveCaption;
+            tabGradient25.TextColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dockPaneStripToolWindowGradient4.ActiveCaptionGradient = tabGradient25;
+            tabGradient26.EndColor = System.Drawing.SystemColors.Control;
+            tabGradient26.StartColor = System.Drawing.SystemColors.Control;
+            tabGradient26.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripToolWindowGradient4.ActiveTabGradient = tabGradient26;
+            dockPanelGradient12.EndColor = System.Drawing.SystemColors.ControlLight;
+            dockPanelGradient12.StartColor = System.Drawing.SystemColors.ControlLight;
+            dockPaneStripToolWindowGradient4.DockStripGradient = dockPanelGradient12;
+            tabGradient27.EndColor = System.Drawing.SystemColors.ControlLight;
+            tabGradient27.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            tabGradient27.StartColor = System.Drawing.SystemColors.ControlLight;
+            tabGradient27.TextColor = System.Drawing.SystemColors.InactiveCaptionText;
+            dockPaneStripToolWindowGradient4.InactiveCaptionGradient = tabGradient27;
+            tabGradient28.EndColor = System.Drawing.Color.Transparent;
+            tabGradient28.StartColor = System.Drawing.Color.Transparent;
+            tabGradient28.TextColor = System.Drawing.SystemColors.ControlDarkDark;
+            dockPaneStripToolWindowGradient4.InactiveTabGradient = tabGradient28;
+            dockPaneStripSkin4.ToolWindowGradient = dockPaneStripToolWindowGradient4;
+            dockPanelSkin4.DockPaneStripSkin = dockPaneStripSkin4;
+            this.dockPanel1.Skin = dockPanelSkin4;
             this.dockPanel1.SupportDeeplyNestedContent = true;
             this.dockPanel1.TabIndex = 4;
             this.dockPanel1.TabStop = true;
@@ -860,42 +824,47 @@
             this.toolStripMenuItem3.Text = "退出";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click_1);
             // 
-            // toolStripButtonPrint
+            // toolStripMenuItemResZoom
             // 
-            this.toolStripButtonPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonPrint.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonPrint.Image")));
-            this.toolStripButtonPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonPrint.Name = "toolStripButtonPrint";
-            this.toolStripButtonPrint.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonPrint.Text = "打印";
+            this.toolStripMenuItemResZoom.Name = "toolStripMenuItemResZoom";
+            this.toolStripMenuItemResZoom.Size = new System.Drawing.Size(173, 22);
+            this.toolStripMenuItemResZoom.Text = "重置缩放";
+            this.toolStripMenuItemResZoom.Click += new System.EventHandler(this.toolStripMenuItemResZoom_Click);
             // 
-            // toolStripSeparator11
+            // toolStripMenuItemZi
             // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(158, 6);
+            this.toolStripMenuItemZi.Name = "toolStripMenuItemZi";
+            this.toolStripMenuItemZi.Size = new System.Drawing.Size(173, 22);
+            this.toolStripMenuItemZi.Text = "缩小(Ctrl+滚轮下)";
+            this.toolStripMenuItemZi.Click += new System.EventHandler(this.toolStripMenuItemZi_Click);
             // 
-            // toolStripMenuItemZoomOut
+            // toolStripMenuItemZo
             // 
-            this.toolStripMenuItemZoomOut.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemZoomOut.Image")));
-            this.toolStripMenuItemZoomOut.Name = "toolStripMenuItemZoomOut";
-            this.toolStripMenuItemZoomOut.Size = new System.Drawing.Size(161, 22);
-            this.toolStripMenuItemZoomOut.Text = "放大";
-            this.toolStripMenuItemZoomOut.Click += new System.EventHandler(this.toolStripMenuItemZoomOut_Click);
+            this.toolStripMenuItemZo.Name = "toolStripMenuItemZo";
+            this.toolStripMenuItemZo.Size = new System.Drawing.Size(173, 22);
+            this.toolStripMenuItemZo.Text = "放大(Ctrl+滚轮上)";
+            this.toolStripMenuItemZo.Click += new System.EventHandler(this.toolStripMenuItemZo_Click);
             // 
-            // toolStripMenuItemZoomIn
+            // toolStripMenuItemLn
             // 
-            this.toolStripMenuItemZoomIn.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemZoomIn.Image")));
-            this.toolStripMenuItemZoomIn.Name = "toolStripMenuItemZoomIn";
-            this.toolStripMenuItemZoomIn.Size = new System.Drawing.Size(161, 22);
-            this.toolStripMenuItemZoomIn.Text = "缩小";
-            this.toolStripMenuItemZoomIn.Click += new System.EventHandler(this.toolStripMenuItemZoomIn_Click);
+            this.toolStripMenuItemLn.Checked = true;
+            this.toolStripMenuItemLn.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toolStripMenuItemLn.Name = "toolStripMenuItemLn";
+            this.toolStripMenuItemLn.Size = new System.Drawing.Size(173, 22);
+            this.toolStripMenuItemLn.Text = "显示行号";
+            this.toolStripMenuItemLn.Click += new System.EventHandler(this.toolStripMenuItemLn_Click);
             // 
-            // toolStripMenuItemResetZoom
+            // toolStripSeparator9
             // 
-            this.toolStripMenuItemResetZoom.Name = "toolStripMenuItemResetZoom";
-            this.toolStripMenuItemResetZoom.Size = new System.Drawing.Size(161, 22);
-            this.toolStripMenuItemResetZoom.Text = "重置缩放";
-            this.toolStripMenuItemResetZoom.Click += new System.EventHandler(this.toolStripMenuItemResetZoom_Click);
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(170, 6);
+            // 
+            // toolStripMenuItemAutoWrap1
+            // 
+            this.toolStripMenuItemAutoWrap1.Name = "toolStripMenuItemAutoWrap1";
+            this.toolStripMenuItemAutoWrap1.Size = new System.Drawing.Size(173, 22);
+            this.toolStripMenuItemAutoWrap1.Text = "自动换行";
+            this.toolStripMenuItemAutoWrap1.Click += new System.EventHandler(this.toolStripMenuItem12_Click);
             // 
             // FormMain
             // 
@@ -948,10 +917,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCopy;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItempaste;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFdAndReplace;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFind;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemReplace;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAutoWrap;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSelAll;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemView;
@@ -976,7 +941,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonPaste;
         private System.Windows.Forms.StatusStrip statusStripMain;
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemIsShowTB;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemIsShowSb;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemIsShowLeft;
@@ -1001,13 +965,15 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
-        private System.Windows.Forms.ToolStripButton toolStripButtonZoomOut;
-        private System.Windows.Forms.ToolStripButton toolStripButtonZoomIn;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemZoomOut;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemZoomIn;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemResetZoom;
         private System.Windows.Forms.ToolStripButton toolStripButtonPrint;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSerch;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRp;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAutoWrap1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemLn;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemZo;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemZi;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemResZoom;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
     }
 }
 
