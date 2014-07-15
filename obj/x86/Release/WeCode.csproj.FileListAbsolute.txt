@@ -43,3 +43,4 @@ E:\git\wecode\bin\Release\WeCode.application
 E:\git\wecode\obj\x86\Release\WeCode.TrustInfo.xml
 E:\git\wecode\obj\x86\Release\WeCode.exe.manifest
 E:\git\wecode\obj\x86\Release\WeCode.application
+E:\git\wecode\obj\x86\Release\WeCode.csprojResolveAssemblyReference.cache
