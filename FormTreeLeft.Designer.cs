@@ -63,7 +63,10 @@
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "Images_r13_c12_s1.png");
-            this.imageList1.Images.SetKeyName(1, "Images_r20_c12_s111.png");
+            this.imageList1.Images.SetKeyName(1, "Images_r20_c12_s1121.png");
+            this.imageList1.Images.SetKeyName(2, "Images_r20_c12_s131.png");
+            this.imageList1.Images.SetKeyName(3, "Images_r20_c12_s1111.png");
+            this.imageList1.Images.SetKeyName(4, "Images_r20_c12_s111.png");
             // 
             // contextMenuStripDir
             // 

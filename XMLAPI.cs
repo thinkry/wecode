@@ -209,6 +209,9 @@ namespace WeCode1._0
                 doc.LoadXml(result);
                 doc.Save("TreeNodeLocal.xml");
 
+                //拉取完了检查升级
+                CheckDb.CheckUpdateXML();
+
             }
             catch (Exception msg) //异常处理
             {

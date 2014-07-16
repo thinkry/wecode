@@ -21,6 +21,9 @@ namespace WeCode1._0
         {
             InitializeComponent();
             treeViewDir.AllowDrop = true;
+
+            //检查数据库升级
+            CheckDb.UpdateDB();
         }
 
         public void frmTree_Reload()

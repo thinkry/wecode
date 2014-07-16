@@ -287,5 +287,42 @@ namespace WeCode1._0
         {
             return ConfigurationManager.AppSettings[key];
         }
+
+
+        //比较版本号大小
+        public static int VersionCompare(string newVer, string oldVer)
+        {
+            int result = 0;
+            try
+            {
+                string[] s1 = newVer.Split('.');
+                string[] s2 = oldVer.Split('.');
+                if (Convert.ToInt16(s1[0]) > Convert.ToInt16(s2[0]))
+                {
+                    result = 1;
+                }
+                else if (Convert.ToInt16(s1[0]) < Convert.ToInt16(s2[0]))
+                {
+                    result = -1;
+                }
+                else if (Convert.ToInt16(s1[1]) > Convert.ToInt16(s2[1]))
+                {
+                    result = 1;
+                }
+                else if (Convert.ToInt16(s1[1]) < Convert.ToInt16(s2[1]))
+                {
+                    result = -1;
+                }
+                else if (Convert.ToInt16(s1[2]) > Convert.ToInt16(s2[2]))
+                {
+                    result = 1;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
     }
 }

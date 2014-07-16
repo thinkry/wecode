@@ -556,7 +556,8 @@ namespace WeCode1._0
                 " [SynId] INTEGER, " +
                 " [Turn] INTEGER,  " +
                 " [MarkTime] INTEGER, " +
-                " [UpdateTime] INTEGER) ";
+                " [UpdateTime] INTEGER, "+
+                " [IsLock] INTEGER DEFAULT 0 ) ";
                 AccessAdo.ExecuteNonQuery(conn, crtSQL);
 
                 crtSQL=" CREATE TABLE TContent ( "+
@@ -573,6 +574,11 @@ namespace WeCode1._0
                 " [Data] IMAGE , " +
                 " [Size] INTEGER, " +
                 " [Time] INTEGER)";
+                AccessAdo.ExecuteNonQuery(conn, crtSQL);
+
+                crtSQL = " CREATE TABLE MyKeys ( " +
+                " [KeyE] MEMO, " +
+                " [KeyD5] MEMO) ";
                 AccessAdo.ExecuteNonQuery(conn, crtSQL);
 
             }
@@ -670,38 +676,13 @@ namespace WeCode1._0
                 AccessAdo.strConnection = conStr;
                 
                 //升级数据库
-                UpdateDB();
+                CheckDb.UpdateDB();
 
                 frTree.frmTree_Reload();
                 ReSetMarkFind();
             }
         }
 
-        //判断数据库表是否存在最后更新时间字段，没有则新增字段，并且赋值创建时间
-        private void UpdateDB()
-        {
-            DataTable tempdt = AccessAdo.ExecuteDataSet("select * from ttree").Tables[0];
-            Boolean isUpdateTimeExsist = false;
-            for (int i = 0; i < tempdt.Columns.Count; i++)
-            {
-                if (tempdt.Columns[i].ColumnName == "UpdateTime")
-                {
-                    isUpdateTimeExsist = true;
-                }
-                else {
-                    isUpdateTimeExsist = false;
-                }
-            }
-
-            if (isUpdateTimeExsist == false)
-            { 
-                //不存在，添加字段，赋值
-                string sql = "alter table ttree add COLUMN UpdateTime INTEGER";
-                AccessAdo.ExecuteNonQuery(sql);
-                sql = "update ttree set updatetime=createtime";
-                AccessAdo.ExecuteNonQuery(sql);
-            }
-        }
 
         public void ReSetMarkFind()
         {
@@ -1533,8 +1514,9 @@ namespace WeCode1._0
                 //xDoc.Load("version.xml");
                 string newVer = xDoc.DocumentElement.FirstChild.Attributes["latestver"].Value;
                 string oldVer = PubFunc.GetConfiguration("Version");
+                int rsCompare = PubFunc.VersionCompare(newVer, oldVer);
 
-                if (newVer != oldVer)//有新版本
+                if (rsCompare==1)//有新版本
                 {
                     string tips = "";
                     XmlNode ntips = xDoc.SelectSingleNode("//tips");

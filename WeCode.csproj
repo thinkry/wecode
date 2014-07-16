@@ -95,6 +95,7 @@
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="AuthorAPI.cs" />
+    <Compile Include="CheckDb.cs" />
     <Compile Include="ContentExcs.cs">
       <SubType>Form</SubType>
     </Compile>
