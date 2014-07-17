@@ -32,26 +32,29 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(YouDaoTree));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.contextMenuStripYDdir = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripYDtxt = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripYDblank = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.treeViewYouDao = new System.Windows.Forms.TreeView();
             this.toolStripButtonNewYDDoc = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNewYDDir = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonYDDel = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonYDProp = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonYDUp = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonYDDown = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonYDSerch = new System.Windows.Forms.ToolStripButton();
-            this.treeViewYouDao = new System.Windows.Forms.TreeView();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemEncrypt = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemDecrypt = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripYDdir.SuspendLayout();
             this.contextMenuStripYDtxt.SuspendLayout();
             this.contextMenuStripYDblank.SuspendLayout();
@@ -64,6 +67,7 @@
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "Images_r13_c12_s1.png");
             this.imageList1.Images.SetKeyName(1, "Images_r20_c12_s111.png");
+            this.imageList1.Images.SetKeyName(2, "Images_r20_c12_s1111.png");
             // 
             // contextMenuStripYDdir
             // 
@@ -75,70 +79,17 @@
             this.contextMenuStripYDdir.Name = "contextMenuStripYDdir";
             this.contextMenuStripYDdir.Size = new System.Drawing.Size(125, 92);
             // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem1.Text = "新建目录";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem2.Image")));
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem2.Text = "新建文章";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem3.Image")));
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem3.Text = "删除";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem4.Image")));
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem4.Text = "属性";
-            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
-            // 
             // contextMenuStripYDtxt
             // 
             this.contextMenuStripYDtxt.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem6,
             this.toolStripMenuItem7,
-            this.toolStripMenuItem5});
+            this.toolStripMenuItem5,
+            this.toolStripSeparator2,
+            this.toolStripMenuItemEncrypt,
+            this.toolStripMenuItemDecrypt});
             this.contextMenuStripYDtxt.Name = "contextMenuStripYDtxt";
-            this.contextMenuStripYDtxt.Size = new System.Drawing.Size(125, 70);
-            // 
-            // toolStripMenuItem6
-            // 
-            this.toolStripMenuItem6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem6.Image")));
-            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem6.Text = "删除";
-            this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
-            // 
-            // toolStripMenuItem7
-            // 
-            this.toolStripMenuItem7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem7.Image")));
-            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem7.Text = "属性";
-            this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
-            // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem5.Image")));
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem5.Text = "加为书签";
-            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
+            this.contextMenuStripYDtxt.Size = new System.Drawing.Size(125, 120);
             // 
             // contextMenuStripYDblank
             // 
@@ -146,14 +97,6 @@
             this.toolStripMenuItem8});
             this.contextMenuStripYDblank.Name = "contextMenuStripYDblank";
             this.contextMenuStripYDblank.Size = new System.Drawing.Size(125, 26);
-            // 
-            // toolStripMenuItem8
-            // 
-            this.toolStripMenuItem8.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem8.Image")));
-            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem8.Text = "新建目录";
-            this.toolStripMenuItem8.Click += new System.EventHandler(this.toolStripMenuItem8_Click);
             // 
             // toolStrip1
             // 
@@ -173,6 +116,33 @@
             this.toolStrip1.Size = new System.Drawing.Size(372, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // treeViewYouDao
+            // 
+            this.treeViewYouDao.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.treeViewYouDao.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewYouDao.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.treeViewYouDao.HideSelection = false;
+            this.treeViewYouDao.ImageIndex = 0;
+            this.treeViewYouDao.ImageList = this.imageList1;
+            this.treeViewYouDao.Location = new System.Drawing.Point(0, 25);
+            this.treeViewYouDao.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.treeViewYouDao.Name = "treeViewYouDao";
+            this.treeViewYouDao.SelectedImageIndex = 0;
+            this.treeViewYouDao.Size = new System.Drawing.Size(372, 750);
+            this.treeViewYouDao.TabIndex = 4;
+            this.treeViewYouDao.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeViewYouDao_ItemDrag);
+            this.treeViewYouDao.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewYouDao_AfterSelect);
+            this.treeViewYouDao.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewYouDao_NodeMouseDoubleClick);
+            this.treeViewYouDao.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeViewYouDao_DragDrop);
+            this.treeViewYouDao.DragOver += new System.Windows.Forms.DragEventHandler(this.treeViewYouDao_DragOver);
+            this.treeViewYouDao.DragLeave += new System.EventHandler(this.treeViewYouDao_DragLeave);
+            this.treeViewYouDao.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeViewYouDao_MouseDown);
             // 
             // toolStripButtonNewYDDoc
             // 
@@ -214,11 +184,6 @@
             this.toolStripButtonYDProp.Text = "属性";
             this.toolStripButtonYDProp.Click += new System.EventHandler(this.toolStripButtonYDProp_Click);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
             // toolStripButtonYDUp
             // 
             this.toolStripButtonYDUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -250,27 +215,90 @@
             this.toolStripButtonYDSerch.Text = "查找文章";
             this.toolStripButtonYDSerch.Click += new System.EventHandler(this.toolStripButtonYDSerch_Click);
             // 
-            // treeViewYouDao
+            // toolStripMenuItem1
             // 
-            this.treeViewYouDao.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.treeViewYouDao.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewYouDao.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.treeViewYouDao.HideSelection = false;
-            this.treeViewYouDao.ImageIndex = 0;
-            this.treeViewYouDao.ImageList = this.imageList1;
-            this.treeViewYouDao.Location = new System.Drawing.Point(0, 25);
-            this.treeViewYouDao.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.treeViewYouDao.Name = "treeViewYouDao";
-            this.treeViewYouDao.SelectedImageIndex = 0;
-            this.treeViewYouDao.Size = new System.Drawing.Size(372, 750);
-            this.treeViewYouDao.TabIndex = 4;
-            this.treeViewYouDao.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeViewYouDao_ItemDrag);
-            this.treeViewYouDao.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewYouDao_AfterSelect);
-            this.treeViewYouDao.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewYouDao_NodeMouseDoubleClick);
-            this.treeViewYouDao.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeViewYouDao_DragDrop);
-            this.treeViewYouDao.DragOver += new System.Windows.Forms.DragEventHandler(this.treeViewYouDao_DragOver);
-            this.treeViewYouDao.DragLeave += new System.EventHandler(this.treeViewYouDao_DragLeave);
-            this.treeViewYouDao.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeViewYouDao_MouseDown);
+            this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem1.Text = "新建目录";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem2.Image")));
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem2.Text = "新建文章";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem3.Image")));
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem3.Text = "删除";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem4.Image")));
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem4.Text = "属性";
+            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem6.Image")));
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem6.Text = "删除";
+            this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
+            // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem7.Image")));
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem7.Text = "属性";
+            this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem5.Image")));
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem5.Text = "加为书签";
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
+            // 
+            // toolStripMenuItem8
+            // 
+            this.toolStripMenuItem8.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem8.Image")));
+            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem8.Text = "新建目录";
+            this.toolStripMenuItem8.Click += new System.EventHandler(this.toolStripMenuItem8_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(121, 6);
+            // 
+            // toolStripMenuItemEncrypt
+            // 
+            this.toolStripMenuItemEncrypt.Name = "toolStripMenuItemEncrypt";
+            this.toolStripMenuItemEncrypt.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItemEncrypt.Text = "加密";
+            this.toolStripMenuItemEncrypt.Visible = false;
+            this.toolStripMenuItemEncrypt.Click += new System.EventHandler(this.toolStripMenuItemEncrypt_Click);
+            // 
+            // toolStripMenuItemDecrypt
+            // 
+            this.toolStripMenuItemDecrypt.Name = "toolStripMenuItemDecrypt";
+            this.toolStripMenuItemDecrypt.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItemDecrypt.Text = "取消加密";
+            this.toolStripMenuItemDecrypt.Visible = false;
+            this.toolStripMenuItemDecrypt.Click += new System.EventHandler(this.toolStripMenuItemDecrypt_Click);
             // 
             // YouDaoTree
             // 
@@ -327,5 +355,8 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonYDDown;
         private System.Windows.Forms.ToolStripButton toolStripButtonYDSerch;
         private System.Windows.Forms.TreeView treeViewYouDao;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemEncrypt;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDecrypt;
     }
 }

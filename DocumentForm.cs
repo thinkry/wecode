@@ -30,6 +30,8 @@ namespace WeCode1._0
 
         private string _lastUpdateTime;
 
+        private int _isLock=0;
+
         #endregion Fields
 
         #region Properties
@@ -65,6 +67,13 @@ namespace WeCode1._0
         {
             get { return _lastUpdateTime; }
             set { _lastUpdateTime = value; }
+        }
+
+        //是否加密
+        public int IsLock
+        {
+            get { return _isLock; }
+            set { _isLock = value; }
         }
 
 
@@ -129,6 +138,12 @@ namespace WeCode1._0
                 if (DocText.Length == 0)
                     return;
 
+                //如果是加密文章，先把文本加密再保存
+                if (IsLock == 1)
+                {
+                    DocText = EncryptDecrptt.EncrptyByKey(DocText, Attachment.KeyD);
+                }
+
                 OleDbParameter p1 = new OleDbParameter("@Content", OleDbType.VarChar);
                 p1.Value = DocText;
                 OleDbParameter p2 = new OleDbParameter("@NodeId", OleDbType.Integer);
@@ -155,6 +170,13 @@ namespace WeCode1._0
                 string DocText = this.scintilla1.Text;
                 if (DocText.Length == 0)
                     return;
+
+                //如果是加密文章，先把文本加密再保存
+                if (IsLock == 1)
+                {
+                    DocText = EncryptDecrptt.EncrptyByKey(DocText, Attachment.KeyDYouDao);
+                }
+
                 if (NoteAPI.UpdateNote(this.NodeId, DocText) == "OK")
                 {
                     //更新XML最后修改时间

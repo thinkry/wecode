@@ -102,7 +102,7 @@ namespace WeCode1._0
                     string UpdateTime = "最后更新时间： " + cTime.ToString();
                     string treeLocation = PubFunc.id2FullPath(nodeid);
 
-                    formParent.openNew(nodeid, treeLocation, UpdateTime);
+                    formParent.openNew(nodeid, treeLocation, UpdateTime,1);
 
                     //打开后设置语言
                     string Language = AccessAdo.ExecuteScalar("select synid from ttree where nodeid=" + nodeid).ToString();
@@ -123,7 +123,7 @@ namespace WeCode1._0
                     DateTime cTime = PubFunc.seconds2Time(TotalSeconds);
                     string UpdateTime = "最后更新时间： " + cTime.ToString();
 
-                    formParent.openNewYouDao(sNodeId, title,treeLacation,UpdateTime);
+                    formParent.openNewYouDao(sNodeId, title,treeLacation,UpdateTime,1);
 
                     ///打开后设置语言
                     string Language = PubFunc.Synid2LanguageSetLang(PubFunc.Language2Synid(sLang));

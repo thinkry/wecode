@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessAdo.cs" />
+    <Compile Include="AesHelper.cs" />
     <Compile Include="AttRenameDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +99,12 @@
     <Compile Include="CheckDb.cs" />
     <Compile Include="ContentExcs.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogPSW.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogPSW.Designer.cs">
+      <DependentUpon>DialogPSW.cs</DependentUpon>
     </Compile>
     <Compile Include="DialogUpdate.cs">
       <SubType>Form</SubType>
@@ -124,6 +131,7 @@
     <Compile Include="Download.Designer.cs">
       <DependentUpon>Download.cs</DependentUpon>
     </Compile>
+    <Compile Include="EncryptDecrptt.cs" />
     <Compile Include="FormAttachment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -199,11 +207,26 @@
     <Compile Include="YouDaoTree.Designer.cs">
       <DependentUpon>YouDaoTree.cs</DependentUpon>
     </Compile>
+    <Compile Include="DialogPSWYouDao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogPSWYouDao.Designer.cs">
+      <DependentUpon>DialogPSWYouDao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DiaChgLocalPSW.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DiaChgLocalPSW.Designer.cs">
+      <DependentUpon>DiaChgLocalPSW.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AttRenameDialog.resx">
       <DependentUpon>AttRenameDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogPSW.resx">
+      <DependentUpon>DialogPSW.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DialogUpdate.resx">
       <DependentUpon>DialogUpdate.cs</DependentUpon>
@@ -259,6 +282,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="YouDaoTree.resx">
       <DependentUpon>YouDaoTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogPSWYouDao.resx">
+      <DependentUpon>DialogPSWYouDao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DiaChgLocalPSW.resx">
+      <DependentUpon>DiaChgLocalPSW.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>

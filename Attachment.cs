@@ -20,6 +20,12 @@ namespace WeCode1._0
 
         public static string isnewOpenDoc = "1";
 
+        public static string KeyD = "";
+        public static string KeyDYouDao = "";
+
+        //加密文章是否成功打开
+        public static string EncryptdeContentOpenSuccess="1";
+
         public static System.Windows.Forms.FormWindowState WinState = System.Windows.Forms.FormWindowState.Maximized;
 
     }

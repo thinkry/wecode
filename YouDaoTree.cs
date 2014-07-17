@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using WeifenLuo.WinFormsUI.Docking;
+using System.Data.OleDb;
 
 namespace WeCode1._0
 {
@@ -81,6 +82,12 @@ namespace WeCode1._0
 
                         tNode.ImageIndex = 1;
                         tNode.SelectedImageIndex = 1;
+                        if (cNode.Attributes["IsLock"].Value == "1")
+                        {
+                            tNode.ImageIndex = 2;
+                            tNode.SelectedImageIndex = 2;
+                        }
+
                         tNode.Tag = tNoteTag;
                     }
                     else if (cNode.Name == "book")
@@ -146,6 +153,12 @@ namespace WeCode1._0
                         tNoteTag.Language = xNode.Attributes["Language"].Value;
                         tempNode.ImageIndex = 1;
                         tempNode.SelectedImageIndex = 1;
+                        if (xNode.Attributes["IsLock"].Value == "1")
+                        {
+                            tempNode.ImageIndex = 2;
+                            tempNode.SelectedImageIndex = 2;
+                        }
+
                         tempNode.Tag = tNoteTag;
                     }
                     else if (xNode.Name == "book")
@@ -185,7 +198,32 @@ namespace WeCode1._0
                 updateTime = "最后更新时间：" + PubFunc.seconds2Time(Convert.ToInt32(updateTime)).ToString();
                 string treeLocation = treeViewYouDao.SelectedNode.FullPath;
 
-                formParent.openNewYouDao(sNodeId, treeViewYouDao.SelectedNode.Text,treeLocation,updateTime);
+                if (iType == 2)
+                {
+                    //加密,对content解密
+                    string MykeydYd = "";
+                    if (Attachment.KeyDYouDao != "")
+                    {
+                        //内存中已存在秘钥
+                        MykeydYd = Attachment.KeyDYouDao;
+                    }
+                    else
+                    {
+                        //内存中不存在秘钥
+                        DialogPSWYouDao dp = new DialogPSWYouDao("3");
+                        DialogResult dr = dp.ShowDialog();
+                        if (dr == DialogResult.OK)
+                        {
+                            MykeydYd = dp.ReturnVal;
+                        }
+                    }
+
+                    if (MykeydYd == "")
+                        return;
+
+                }
+
+                formParent.openNewYouDao(sNodeId, treeViewYouDao.SelectedNode.Text,treeLocation,updateTime,iType);
 
                 ///打开后设置语言
                 string Language = PubFunc.Synid2LanguageSetLang(PubFunc.Language2Synid(sLang));
@@ -321,8 +359,17 @@ namespace WeCode1._0
                         case "0"://目录
                             CurrentNode.ContextMenuStrip = contextMenuStripYDdir;
                             break;
-                        default:
+                        case "1":
                             CurrentNode.ContextMenuStrip = contextMenuStripYDtxt;
+                            toolStripMenuItemEncrypt.Visible = true;
+                            toolStripMenuItemDecrypt.Visible = false;
+                            break;
+                        case "2":
+                            CurrentNode.ContextMenuStrip = contextMenuStripYDtxt;
+                            toolStripMenuItemEncrypt.Visible = false;
+                            toolStripMenuItemDecrypt.Visible = true;
+                            break;
+                        default:
                             break;
                     }
                     treeViewYouDao.SelectedNode = CurrentNode;//选中这个节点
@@ -408,6 +455,7 @@ namespace WeCode1._0
                     appEle.SetAttribute("updatetime", tag.updatetime);
                     appEle.SetAttribute("Language", Language);
                     appEle.SetAttribute("isMark", "0");
+                    appEle.SetAttribute("IsLock", "0");
 
                     xseleNode.AppendChild(appEle);
                     xDoc.Save("TreeNodeLocal.xml");
@@ -417,7 +465,7 @@ namespace WeCode1._0
 
                     //新窗口打开编辑界面
                     string lastTime="最后更新时间："+DateTime.Now.ToString();
-                    formParent.openNewYouDao(Path, Title, treeViewYouDao.SelectedNode.FullPath,lastTime);
+                    formParent.openNewYouDao(Path, Title, treeViewYouDao.SelectedNode.FullPath,lastTime,1);
 
                     //打开后设置语言
                     Language = PubFunc.Synid2LanguageSetLang(SynId);
@@ -461,6 +509,7 @@ namespace WeCode1._0
                             appEle.SetAttribute("updatetime", tag.updatetime);
                             appEle.SetAttribute("Language", Language);
                             appEle.SetAttribute("isMark", "0");
+                            appEle.SetAttribute("IsLock", "0");
 
                             xseleNode.AppendChild(appEle);
                             xDoc.Save("TreeNodeLocal.xml");
@@ -470,7 +519,7 @@ namespace WeCode1._0
 
                             //新窗口打开编辑界面
                             string lastTime = "最后更新时间：" + DateTime.Now.ToString();
-                            formParent.openNewYouDao(Path, Title, treeViewYouDao.SelectedNode.FullPath,lastTime);
+                            formParent.openNewYouDao(Path, Title, treeViewYouDao.SelectedNode.FullPath,lastTime,1);
 
                             //打开后设置语言
                             Language = PubFunc.Synid2LanguageSetLang(SynId);
@@ -516,6 +565,7 @@ namespace WeCode1._0
                             appEle.SetAttribute("updatetime", tag.updatetime);
                             appEle.SetAttribute("Language", Language);
                             appEle.SetAttribute("isMark", "0");
+                            appEle.SetAttribute("IsLock", "0");
 
                             xseleNode.AppendChild(appEle);
                             xDoc.Save("TreeNodeLocal.xml");
@@ -525,7 +575,7 @@ namespace WeCode1._0
 
                             //新窗口打开编辑界面
                             string lastTime = "最后更新时间：" + DateTime.Now.ToString();
-                            formParent.openNewYouDao(Path, Title, treeViewYouDao.SelectedNode.FullPath,lastTime);
+                            formParent.openNewYouDao(Path, Title, treeViewYouDao.SelectedNode.FullPath,lastTime,1);
 
                             //打开后设置语言
                             Language = PubFunc.Synid2LanguageSetLang(SynId);
@@ -1090,6 +1140,163 @@ namespace WeCode1._0
             this.treeViewYouDao.Nodes.Clear();
             this.treeViewYouDao.Enabled = false;
             this.toolStrip1.Enabled = false;
+        }
+
+
+        //加密
+        private void toolStripMenuItemEncrypt_Click(object sender, EventArgs e)
+        {
+            //获取选中节点
+            TreeNode SeleNode = treeViewYouDao.SelectedNode;
+            if (SeleNode == null)
+                return;
+
+            string sNodeId = ((treeTagNote)treeViewYouDao.SelectedNode.Tag).path;
+            string MykeydYd = "";
+            if (Attachment.KeyDYouDao != "")
+            {
+                //内存中已存在秘钥
+                MykeydYd = Attachment.KeyDYouDao;
+            }
+            else
+            {
+                //内存中不存在秘钥
+                //判断是否是第一次设置密码，如果是，则弹出设置密码
+                XmlDocument doc = new XmlDocument();
+                doc.Load("TreeNodeLocal.xml");
+                XmlNode preNode = doc.SelectSingleNode("//wecode[@KeyD5]");
+                string isExist = "1";
+                if (preNode == null)
+                {
+                    isExist = "0";
+                }
+
+                string OpenType = "1";
+                if (isExist=="0")
+                {
+                    //先设置密码
+                    OpenType = "0";
+                }
+                else
+                {
+                    OpenType = "1";
+                }
+
+                DialogPSWYouDao dp = new DialogPSWYouDao(OpenType);
+                DialogResult dr = dp.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    MykeydYd = dp.ReturnVal;
+                }
+            }
+
+            //开始加密处理
+            if (MykeydYd != "")
+            {
+                //获取文章信息
+                string Content = NoteAPI.GetNote(sNodeId);
+                string EncrptyedContent = EncryptDecrptt.EncrptyByKey(Content, MykeydYd);
+                //重新保存
+                if (NoteAPI.UpdateNote(sNodeId, EncrptyedContent) == "OK")
+                {
+                    //更新配置文件
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load("TreeNodeLocal.xml");
+                    XmlNode preNode = doc.SelectSingleNode("//node()[@id='" + SeleNode.Name + "']");
+                    preNode.Attributes["IsLock"].Value = "1";
+                    doc.Save("TreeNodeLocal.xml");
+                    XMLAPI.XML2Yun();
+
+                    SeleNode.ImageIndex = 2;
+                    SeleNode.SelectedImageIndex = 2;
+
+                    formParent.SetLock(sNodeId);
+                }
+                else
+                {
+                    MessageBox.Show("操作失败！");
+                    return;
+                }
+
+            }
+        }
+
+        //取消加密
+        private void toolStripMenuItemDecrypt_Click(object sender, EventArgs e)
+        {
+            //获取选中节点
+            TreeNode SeleNode = treeViewYouDao.SelectedNode;
+            if (SeleNode == null)
+                return;
+
+            string sNodeId = ((treeTagNote)treeViewYouDao.SelectedNode.Tag).path;
+            string MykeydYd = "";
+            if (Attachment.KeyDYouDao != "")
+            {
+                //内存中已存在秘钥
+                MykeydYd = Attachment.KeyDYouDao;
+            }
+            else
+            {
+                //内存中不存在秘钥
+                //判断是否是第一次设置密码，如果是，则弹出设置密码
+                XmlDocument doc = new XmlDocument();
+                doc.Load("TreeNodeLocal.xml");
+                XmlNode preNode = doc.SelectSingleNode("//wecode[@KeyD5]");
+                string isExist = "1";
+                if (preNode == null)
+                {
+                    isExist = "0";
+                }
+
+                string OpenType = "2";
+                if (isExist == "0")
+                {
+                    //先设置密码
+                    OpenType = "0";
+                }
+                else
+                {
+                    OpenType = "2";
+                }
+
+                DialogPSWYouDao dp = new DialogPSWYouDao(OpenType);
+                DialogResult dr = dp.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    MykeydYd = dp.ReturnVal;
+                }
+            }
+
+            //开始解密处理
+            if (MykeydYd != "")
+            {
+                //获取文章信息
+                string Content = NoteAPI.GetNote(sNodeId);
+                string DecrptyedContent = EncryptDecrptt.DecrptyByKey(Content, MykeydYd);
+                //重新保存
+                if (NoteAPI.UpdateNote(sNodeId, DecrptyedContent) == "OK")
+                {
+                    //更新配置文件
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load("TreeNodeLocal.xml");
+                    XmlNode preNode = doc.SelectSingleNode("//node()[@id='" + SeleNode.Name + "']");
+                    preNode.Attributes["IsLock"].Value = "0";
+                    doc.Save("TreeNodeLocal.xml");
+                    XMLAPI.XML2Yun();
+
+                    SeleNode.ImageIndex = 1;
+                    SeleNode.SelectedImageIndex = 1;
+
+                    formParent.UnsetLock(sNodeId);
+                }
+                else
+                {
+                    MessageBox.Show("操作失败！");
+                    return;
+                }
+
+            }
         }
     }
 }

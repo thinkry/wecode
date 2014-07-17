@@ -83,8 +83,16 @@ namespace WeCode1._0
                     }
                     else
                     {
-                        tmpNode.ImageIndex = 1;
-                        tmpNode.SelectedImageIndex = 1;
+                        if (drv["IsLock"].ToString() == "0")
+                        {
+                            tmpNode.ImageIndex = 1;
+                            tmpNode.SelectedImageIndex = 1;
+                        }
+                        else
+                        {
+                            tmpNode.ImageIndex = 2;
+                            tmpNode.SelectedImageIndex = 2;
+                        }
                     }
                     string father = drv[id].ToString();
                     treeNodeCollection.Add(tmpNode);
@@ -320,7 +328,31 @@ namespace WeCode1._0
                 string UpdateTime = "最后更新时间： "+cTime.ToString();
 
                 string sNodeId = treeViewDir.SelectedNode.Tag.ToString();
-                formParent.openNew(sNodeId,treeLocation,UpdateTime);
+                if (iType == 2)
+                {
+                    //加密,对content解密
+                    string Mykeyd = "";
+                    if (Attachment.KeyD != "")
+                    {
+                        //内存中已存在秘钥
+                        Mykeyd = Attachment.KeyD;
+                    }
+                    else
+                    {
+                        //内存中不存在秘钥
+                        DialogPSW dp = new DialogPSW("3");
+                        DialogResult dr = dp.ShowDialog();
+                        if (dr == DialogResult.OK)
+                        {
+                            Mykeyd = dp.ReturnVal;
+                        }
+                    }
+
+                    if (Mykeyd == "")
+                        return;
+
+                }
+                formParent.openNew(sNodeId,treeLocation,UpdateTime,iType);
 
                 //打开后设置语言
                 string Language = AccessAdo.ExecuteScalar("select synid from ttree where nodeid=" + sNodeId).ToString();
@@ -346,8 +378,17 @@ namespace WeCode1._0
                         case "0"://目录
                             CurrentNode.ContextMenuStrip = contextMenuStripDir;
                             break;
-                        default:
+                        case "1"://未加密
                             CurrentNode.ContextMenuStrip = contextMenuStripTxt;
+                            toolStripMenuItemEncrypt.Visible = true;
+                            toolStripMenuItemDecrypt.Visible = false;
+                            break;
+                        case "2"://加密
+                            CurrentNode.ContextMenuStrip = contextMenuStripTxt;
+                            toolStripMenuItemEncrypt.Visible = false;
+                            toolStripMenuItemDecrypt.Visible = true;
+                            break;
+                        default:
                             break;
                     }
                     treeViewDir.SelectedNode = CurrentNode;//选中这个节点
@@ -551,7 +592,7 @@ namespace WeCode1._0
 
                     //新窗口打开编辑界面
                     string lastTime="最后更新时间："+DateTime.Now.ToString();
-                    formParent.openNew(NewNodeId, treeViewDir.SelectedNode.FullPath, lastTime);
+                    formParent.openNew(NewNodeId, treeViewDir.SelectedNode.FullPath, lastTime,1);
 
                     //打开后设置语言
                     Language = PubFunc.Synid2LanguageSetLang(SynId);
@@ -610,7 +651,7 @@ namespace WeCode1._0
 
                     //新窗口打开编辑界面
                     string lastTime = "最后更新时间：" + DateTime.Now.ToString();
-                    formParent.openNew(NewNodeId, treeViewDir.SelectedNode.FullPath, lastTime);
+                    formParent.openNew(NewNodeId, treeViewDir.SelectedNode.FullPath, lastTime,1);
 
                     //打开后设置语言
                     Language = PubFunc.Synid2LanguageSetLang(SynId);
@@ -999,6 +1040,149 @@ namespace WeCode1._0
         private void toolStripButtonSerch_Click(object sender, EventArgs e)
         {
             formParent.OpenSerch("local");
+        }
+
+        //加密文章
+        private void toolStripMenuItemEncrypt_Click(object sender, EventArgs e)
+        {
+
+            //获取选中节点
+            TreeNode SeleNode = treeViewDir.SelectedNode;
+            if (SeleNode == null)
+                return;
+
+            string NodeId = SeleNode.Tag.ToString();
+            string Mykeyd = "";
+            if (Attachment.KeyD != "")
+            {
+                //内存中已存在秘钥
+                Mykeyd = Attachment.KeyD;
+            }
+            else
+            {
+                //内存中不存在秘钥
+                //判断是否是第一次设置密码，如果是，则弹出设置密码
+                string sql = "select * from Mykeys";
+                DataTable keyDt = AccessAdo.ExecuteDataSet(sql).Tables[0];
+                string OpenType = "1";
+                if (keyDt.Rows.Count == 0)
+                {
+                    //先设置密码
+                    OpenType = "0";
+                }
+                else
+                {
+                    OpenType = "1";
+                }
+
+                DialogPSW dp = new DialogPSW(OpenType);
+                DialogResult dr = dp.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    Mykeyd = dp.ReturnVal;
+                }
+            }
+
+            //开始加密处理
+            if (Mykeyd != "")
+            {
+                //获取文章信息
+                string SQL = "select Title,Content from TContent inner join TTree on TContent.NodeId=Ttree.NodeId where TContent.NodeId=" + NodeId;
+                DataTable temp = AccessAdo.ExecuteDataSet(SQL, null).Tables[0];
+                if (temp.Rows.Count == 0)
+                    return ;
+                string Content = temp.Rows[0]["Content"].ToString();
+                string EncrptyedContent = EncryptDecrptt.EncrptyByKey(Content, Mykeyd);
+                //重新写入数据库
+                OleDbParameter p1 = new OleDbParameter("@Content", OleDbType.VarChar);
+                p1.Value = EncrptyedContent;
+                OleDbParameter p2 = new OleDbParameter("@NodeId", OleDbType.Integer);
+                p2.Value = Convert.ToInt32(NodeId);
+
+                OleDbParameter[] ArrPara = new OleDbParameter[2];
+                ArrPara[0] = p1;
+                ArrPara[1] = p2;
+                SQL = "update tcontent set content=@Content where NodeId=@NodeId";
+                AccessAdo.ExecuteNonQuery(SQL, ArrPara);
+                AccessAdo.ExecuteNonQuery("update ttree set IsLock=1 where NodeId=" + NodeId);
+                SeleNode.ImageIndex = 2;
+                SeleNode.SelectedImageIndex = 2;
+
+                formParent.SetLock(NodeId);
+                
+            }
+            
+
+        }
+
+
+        //取消加密
+        private void toolStripMenuItemDecrypt_Click(object sender, EventArgs e)
+        {
+            //获取选中节点
+            TreeNode SeleNode = treeViewDir.SelectedNode;
+            if (SeleNode == null)
+                return;
+
+            string NodeId = SeleNode.Tag.ToString();
+            string Mykeyd = "";
+            if (Attachment.KeyD != "")
+            {
+                //内存中已存在秘钥
+                Mykeyd = Attachment.KeyD;
+            }
+            else
+            {
+                //内存中不存在秘钥
+                //判断是否是第一次设置密码，如果是，则弹出设置密码
+                string sql = "select * from Mykeys";
+                DataTable keyDt = AccessAdo.ExecuteDataSet(sql).Tables[0];
+                string OpenType = "2";
+                if (keyDt.Rows.Count == 0)
+                {
+                    //先设置密码
+                    OpenType = "0";
+                }
+                else
+                {
+                    OpenType = "2";
+                }
+
+                DialogPSW dp = new DialogPSW(OpenType);
+                DialogResult dr = dp.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    Mykeyd = dp.ReturnVal;
+                }
+            }
+
+            //开始解密处理
+            if (Mykeyd != "")
+            {
+                //获取文章信息
+                string SQL = "select Title,Content from TContent inner join TTree on TContent.NodeId=Ttree.NodeId where TContent.NodeId=" + NodeId;
+                DataTable temp = AccessAdo.ExecuteDataSet(SQL, null).Tables[0];
+                if (temp.Rows.Count == 0)
+                    return;
+                string Content = temp.Rows[0]["Content"].ToString();
+                string DecrptyedContent = EncryptDecrptt.DecrptyByKey(Content, Mykeyd);
+                //重新写入数据库
+                OleDbParameter p1 = new OleDbParameter("@Content", OleDbType.VarChar);
+                p1.Value = DecrptyedContent;
+                OleDbParameter p2 = new OleDbParameter("@NodeId", OleDbType.Integer);
+                p2.Value = Convert.ToInt32(NodeId);
+
+                OleDbParameter[] ArrPara = new OleDbParameter[2];
+                ArrPara[0] = p1;
+                ArrPara[1] = p2;
+                SQL = "update tcontent set content=@Content where NodeId=@NodeId";
+                AccessAdo.ExecuteNonQuery(SQL, ArrPara);
+                AccessAdo.ExecuteNonQuery("update ttree set IsLock=0 where NodeId=" + NodeId);
+                SeleNode.ImageIndex = 1;
+                SeleNode.SelectedImageIndex = 1;
+
+                formParent.UnsetLock(NodeId);
+            }
         }
 
 

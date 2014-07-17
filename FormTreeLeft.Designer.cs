@@ -52,6 +52,9 @@
             this.toolStripButtonDown = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSerch = new System.Windows.Forms.ToolStripButton();
             this.treeViewDir = new System.Windows.Forms.TreeView();
+            this.toolStripMenuItemEncrypt = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemDecrypt = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripDir.SuspendLayout();
             this.contextMenuStripTxt.SuspendLayout();
             this.contextMenuStripTreeBlank.SuspendLayout();
@@ -63,10 +66,8 @@
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "Images_r13_c12_s1.png");
-            this.imageList1.Images.SetKeyName(1, "Images_r20_c12_s1121.png");
-            this.imageList1.Images.SetKeyName(2, "Images_r20_c12_s131.png");
-            this.imageList1.Images.SetKeyName(3, "Images_r20_c12_s1111.png");
-            this.imageList1.Images.SetKeyName(4, "Images_r20_c12_s111.png");
+            this.imageList1.Images.SetKeyName(1, "Images_r20_c12_s111.png");
+            this.imageList1.Images.SetKeyName(2, "Images_r20_c12_s1111.png");
             // 
             // contextMenuStripDir
             // 
@@ -115,15 +116,18 @@
             this.contextMenuStripTxt.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemTxtDel,
             this.toolStripMenuItemTxtProp,
-            this.toolStripMenuItemTxtMark});
+            this.toolStripMenuItemTxtMark,
+            this.toolStripSeparator2,
+            this.toolStripMenuItemEncrypt,
+            this.toolStripMenuItemDecrypt});
             this.contextMenuStripTxt.Name = "contextMenuStripTxt";
-            this.contextMenuStripTxt.Size = new System.Drawing.Size(125, 70);
+            this.contextMenuStripTxt.Size = new System.Drawing.Size(153, 142);
             // 
             // toolStripMenuItemTxtDel
             // 
             this.toolStripMenuItemTxtDel.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemTxtDel.Image")));
             this.toolStripMenuItemTxtDel.Name = "toolStripMenuItemTxtDel";
-            this.toolStripMenuItemTxtDel.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItemTxtDel.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItemTxtDel.Text = "删除";
             this.toolStripMenuItemTxtDel.Click += new System.EventHandler(this.toolStripMenuItemTxtDel_Click);
             // 
@@ -131,7 +135,7 @@
             // 
             this.toolStripMenuItemTxtProp.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemTxtProp.Image")));
             this.toolStripMenuItemTxtProp.Name = "toolStripMenuItemTxtProp";
-            this.toolStripMenuItemTxtProp.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItemTxtProp.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItemTxtProp.Text = "属性";
             this.toolStripMenuItemTxtProp.Click += new System.EventHandler(this.toolStripMenuItemTxtProp_Click);
             // 
@@ -139,7 +143,7 @@
             // 
             this.toolStripMenuItemTxtMark.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemTxtMark.Image")));
             this.toolStripMenuItemTxtMark.Name = "toolStripMenuItemTxtMark";
-            this.toolStripMenuItemTxtMark.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItemTxtMark.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItemTxtMark.Text = "加为书签";
             this.toolStripMenuItemTxtMark.Click += new System.EventHandler(this.toolStripMenuItemTxtMark_Click);
             // 
@@ -273,6 +277,27 @@
             this.treeViewDir.DragLeave += new System.EventHandler(this.treeViewDir_DragLeave);
             this.treeViewDir.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeViewDir_MouseDown);
             // 
+            // toolStripMenuItemEncrypt
+            // 
+            this.toolStripMenuItemEncrypt.Name = "toolStripMenuItemEncrypt";
+            this.toolStripMenuItemEncrypt.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemEncrypt.Text = "加密";
+            this.toolStripMenuItemEncrypt.Visible = false;
+            this.toolStripMenuItemEncrypt.Click += new System.EventHandler(this.toolStripMenuItemEncrypt_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            // 
+            // toolStripMenuItemDecrypt
+            // 
+            this.toolStripMenuItemDecrypt.Name = "toolStripMenuItemDecrypt";
+            this.toolStripMenuItemDecrypt.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemDecrypt.Text = "取消加密";
+            this.toolStripMenuItemDecrypt.Visible = false;
+            this.toolStripMenuItemDecrypt.Click += new System.EventHandler(this.toolStripMenuItemDecrypt_Click);
+            // 
             // FormTreeLeft
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -327,5 +352,8 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonDown;
         private System.Windows.Forms.ToolStripButton toolStripButtonSerch;
         private System.Windows.Forms.TreeView treeViewDir;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemEncrypt;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDecrypt;
     }
 }

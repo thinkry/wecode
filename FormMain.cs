@@ -263,8 +263,41 @@ namespace WeCode1._0
             }
         }
 
+
+        //将指定ID的文章标示为加密
+        public void SetLock(string nodeId)
+        {
+            if (Attachment.isWelcomePageopen == "0")
+            {
+                foreach (DocumentForm documentForm in dockPanel1.Documents)
+                {
+                    if (nodeId.Equals(documentForm.NodeId, StringComparison.OrdinalIgnoreCase))
+                    {
+                        documentForm.IsLock = 1;
+                        break;
+                    }
+                }
+            }
+        }
+
+        //将指定ID的文章标示为未加密
+        public void UnsetLock(string nodeId)
+        {
+            if (Attachment.isWelcomePageopen == "0")
+            {
+                foreach (DocumentForm documentForm in dockPanel1.Documents)
+                {
+                    if (nodeId.Equals(documentForm.NodeId, StringComparison.OrdinalIgnoreCase))
+                    {
+                        documentForm.IsLock = 0;
+                        break;
+                    }
+                }
+            }
+        }
+
         //打开文章
-        public void openNew(string nodeId,string treeLocation,string updateTime)
+        public void openNew(string nodeId,string treeLocation,string updateTime,int imageType)
         {
             //欢迎窗口是否打开，如果打开则关闭
             if (Attachment.isWelcomePageopen == "1")
@@ -292,11 +325,11 @@ namespace WeCode1._0
 
             // Open the files
             if (!isOpen)
-                OpenFile(nodeId,treeLocation,updateTime);
+                OpenFile(nodeId,treeLocation,updateTime,imageType);
         }
 
         //打开云笔记
-        public void openNewYouDao(string nodeId,string title,string treeLocation,string updatetime)
+        public void openNewYouDao(string nodeId,string title,string treeLocation,string updatetime,int imageType)
         {
             //欢迎窗口是否打开，如果打开则关闭
             if (Attachment.isWelcomePageopen == "1")
@@ -324,19 +357,49 @@ namespace WeCode1._0
 
             // Open the files
             if (!isOpen)
-                OpenFileYouDao(nodeId,title,treeLocation,updatetime);
+                OpenFileYouDao(nodeId,title,treeLocation,updatetime,imageType);
         }
 
-        private DocumentForm OpenFileYouDao(string nodeId, string title, string treeLocation, string updatetime)
+        private DocumentForm OpenFileYouDao(string nodeId, string title, string treeLocation, string updatetime,int imageType)
         {
             Attachment.isnewOpenDoc = "1";
             //获取文章信息
 
             string Content = NoteAPI.GetNote(nodeId);
 
+            if (imageType == 2)
+            {
+                //加密,对content解密
+                string MykeydYd = "";
+                if (Attachment.KeyDYouDao != "")
+                {
+                    //内存中已存在秘钥
+                    MykeydYd = Attachment.KeyDYouDao;
+                }
+                else
+                {
+                    //内存中不存在秘钥
+                    DialogPSWYouDao dp = new DialogPSWYouDao("3");
+                    DialogResult dr = dp.ShowDialog();
+                    if (dr == DialogResult.OK)
+                    {
+                        MykeydYd = dp.ReturnVal;
+                    }
+                }
+
+                if (MykeydYd == "")
+                    return null;
+                else
+                {
+                    Content = EncryptDecrptt.DecrptyByKey(Content, MykeydYd);
+                }
+
+            }
+
             DocumentForm doc = new DocumentForm();
             doc.TreeLocation = treeLocation;
             doc.LastUpdateTime = updatetime;
+            doc.IsLock = imageType - 1;
 
             SetScintillaToCurrentOptions(doc);
             doc.Scintilla.Text = Content;
@@ -373,7 +436,7 @@ namespace WeCode1._0
         //}
 
 
-        private DocumentForm OpenFile(string nodeId,string treeLocation,string updateTime)
+        private DocumentForm OpenFile(string nodeId,string treeLocation,string updateTime,int imageType)
         {
             Attachment.isnewOpenDoc = "1";
             //获取文章信息
@@ -384,9 +447,39 @@ namespace WeCode1._0
             string Title = temp.Rows[0]["Title"].ToString();
             string Content = temp.Rows[0]["Content"].ToString();
 
+            if (imageType == 2)
+            { 
+                //加密,对content解密
+                string Mykeyd = "";
+                if (Attachment.KeyD != "")
+                {
+                    //内存中已存在秘钥
+                    Mykeyd = Attachment.KeyD;
+                }
+                else
+                {
+                    //内存中不存在秘钥
+                    DialogPSW dp = new DialogPSW("3");
+                    DialogResult dr = dp.ShowDialog();
+                    if (dr == DialogResult.OK)
+                    {
+                        Mykeyd = dp.ReturnVal;
+                    }
+                }
+
+                if (Mykeyd == "")
+                    return null;
+                else
+                {
+                    Content = EncryptDecrptt.DecrptyByKey(Content, Mykeyd);
+                }
+
+            }
+
             DocumentForm doc = new DocumentForm();
             doc.TreeLocation = treeLocation;
             doc.LastUpdateTime = updateTime;
+            doc.IsLock = imageType - 1;
 
             SetScintillaToCurrentOptions(doc);
             doc.Scintilla.Text = Content;
@@ -1756,6 +1849,19 @@ namespace WeCode1._0
             {
                 ActiveDocument.Scintilla.ZoomFactor = _zoomLevel;
             }
+        }
+
+        //修改本地笔记本密码
+        private void toolStripMenuItem7_Click(object sender, EventArgs e)
+        {
+            DiaChgLocalPSW chpwd = new DiaChgLocalPSW("0");
+            chpwd.ShowDialog();
+        }
+
+        private void toolStripMenuItem8_Click(object sender, EventArgs e)
+        {
+            DiaChgLocalPSW chpwd = new DiaChgLocalPSW("1");
+            chpwd.ShowDialog();
         }
 
         
