@@ -40,6 +40,9 @@
             this.toolStripMenuItemTxtDel = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemTxtProp = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemTxtMark = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemEncrypt = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemDecrypt = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripTreeBlank = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemBlankNewDir = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -52,9 +55,6 @@
             this.toolStripButtonDown = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSerch = new System.Windows.Forms.ToolStripButton();
             this.treeViewDir = new System.Windows.Forms.TreeView();
-            this.toolStripMenuItemEncrypt = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemDecrypt = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripDir.SuspendLayout();
             this.contextMenuStripTxt.SuspendLayout();
             this.contextMenuStripTreeBlank.SuspendLayout();
@@ -146,6 +146,29 @@
             this.toolStripMenuItemTxtMark.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItemTxtMark.Text = "加为书签";
             this.toolStripMenuItemTxtMark.Click += new System.EventHandler(this.toolStripMenuItemTxtMark_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            // 
+            // toolStripMenuItemEncrypt
+            // 
+            this.toolStripMenuItemEncrypt.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemEncrypt.Image")));
+            this.toolStripMenuItemEncrypt.Name = "toolStripMenuItemEncrypt";
+            this.toolStripMenuItemEncrypt.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemEncrypt.Text = "加密";
+            this.toolStripMenuItemEncrypt.Visible = false;
+            this.toolStripMenuItemEncrypt.Click += new System.EventHandler(this.toolStripMenuItemEncrypt_Click);
+            // 
+            // toolStripMenuItemDecrypt
+            // 
+            this.toolStripMenuItemDecrypt.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemDecrypt.Image")));
+            this.toolStripMenuItemDecrypt.Name = "toolStripMenuItemDecrypt";
+            this.toolStripMenuItemDecrypt.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemDecrypt.Text = "取消加密";
+            this.toolStripMenuItemDecrypt.Visible = false;
+            this.toolStripMenuItemDecrypt.Click += new System.EventHandler(this.toolStripMenuItemDecrypt_Click);
             // 
             // contextMenuStripTreeBlank
             // 
@@ -276,27 +299,6 @@
             this.treeViewDir.DragOver += new System.Windows.Forms.DragEventHandler(this.treeViewDir_DragOver);
             this.treeViewDir.DragLeave += new System.EventHandler(this.treeViewDir_DragLeave);
             this.treeViewDir.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeViewDir_MouseDown);
-            // 
-            // toolStripMenuItemEncrypt
-            // 
-            this.toolStripMenuItemEncrypt.Name = "toolStripMenuItemEncrypt";
-            this.toolStripMenuItemEncrypt.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItemEncrypt.Text = "加密";
-            this.toolStripMenuItemEncrypt.Visible = false;
-            this.toolStripMenuItemEncrypt.Click += new System.EventHandler(this.toolStripMenuItemEncrypt_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
-            // 
-            // toolStripMenuItemDecrypt
-            // 
-            this.toolStripMenuItemDecrypt.Name = "toolStripMenuItemDecrypt";
-            this.toolStripMenuItemDecrypt.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItemDecrypt.Text = "取消加密";
-            this.toolStripMenuItemDecrypt.Visible = false;
-            this.toolStripMenuItemDecrypt.Click += new System.EventHandler(this.toolStripMenuItemDecrypt_Click);
             // 
             // FormTreeLeft
             // 

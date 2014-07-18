@@ -23,7 +23,7 @@ namespace WeCode1._0
             if (OpenType == "0")
             { 
                 //第一次设置密码
-                this.Text = "第一次使用，请设置密码！";
+                this.Text = "第一次使用有道云加密，请设置密码！";
             }
             else if (OpenType == "1")
             {
@@ -55,10 +55,22 @@ namespace WeCode1._0
             string pswInput = textBoxInput.Text;
             string pswConfirm = textBoxConfirm.Text;
 
-            //TODO校验
 
             if (strOpenType == "0")
             {
+
+                //校验密码长度以及两次输入是否一样
+                if (pswInput != pswConfirm)
+                {
+                    MessageBox.Show("两次密码不一致，请重新输入！");
+                    return;
+                }
+
+                if (pswInput.Length > 16 || pswInput.Length < 6)
+                {
+                    MessageBox.Show("密码长度需在6-16位之间！");
+                    return;
+                }
 
                 //密码转换，写入到内存以及数据库中
                 string keyD = EncryptDecrptt.KeyA2KeyD(pswInput);
@@ -96,15 +108,17 @@ namespace WeCode1._0
                 //string KeyD = EncryptDecrptt.KeyA2KeyD(pswInput);
                 //keyD需用keyE和keyA解密
                 string KeyE = preNode.Attributes["KeyE"].Value; ;
-                //keyD需从keyE和明文密码解密出来，修改了密码也不会改变
-                //存储在数据库的keyD5会随着密码变化变化，目的是为了对比密码是否正确
-                string KeyD = EncryptDecrptt.DecrptyByKey(KeyE, pswInput);
+                
                 string d51 = EncryptDecrptt.str2MD5(EncryptDecrptt.KeyA2KeyD(pswInput));
                 if(d5!=d51)
                 {
                     MessageBox.Show("密码错误！");
                     return;
                 }
+
+                //keyD需从keyE和明文密码解密出来，修改了密码也不会改变
+                //存储在数据库的keyD5会随着密码变化变化，目的是为了对比密码是否正确
+                string KeyD = EncryptDecrptt.DecrptyByKey(KeyE, pswInput);
 
                 //写入到内存
                 Attachment.KeyDYouDao = KeyD;
@@ -119,6 +133,11 @@ namespace WeCode1._0
         {
             DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void textBoxInput_TextChanged(object sender, EventArgs e)
+        {
+            this.textBoxInput.PasswordChar = '●';
         }
     }
 }

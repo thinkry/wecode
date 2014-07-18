@@ -40,7 +40,6 @@ namespace WeCode1._0
             string newpwd = textBoxnewpsw.Text;
             string newpwdconfirm = textBoxnewConfirm.Text;
 
-            //TODO校验
 
             if (strOpenType == "0")
             {
@@ -51,7 +50,20 @@ namespace WeCode1._0
                 string d51 = EncryptDecrptt.str2MD5(EncryptDecrptt.KeyA2KeyD(oldpwd));
                 if (d5 != d51)
                 {
-                    MessageBox.Show("密码错误！");
+                    MessageBox.Show("原密码错误！");
+                    return;
+                }
+
+                //校验密码长度以及两次输入是否一样
+                if (newpwd != newpwdconfirm)
+                {
+                    MessageBox.Show("新密码两次不一致，请重新输入！");
+                    return;
+                }
+
+                if (newpwd.Length > 16 || newpwd.Length < 6)
+                {
+                    MessageBox.Show("新密码长度需在6-16位之间！");
                     return;
                 }
 
@@ -88,15 +100,30 @@ namespace WeCode1._0
                 XmlNode preNode = xDoc.SelectSingleNode("//wecode");
                 string d5 = preNode.Attributes["KeyD5"].Value;
                 string KeyE = preNode.Attributes["KeyE"].Value; ;
-                //keyD需从keyE和明文密码解密出来，修改了密码也不会改变
-                //存储在数据库的keyD5会随着密码变化变化，目的是为了对比密码是否正确
-                string KeyD = EncryptDecrptt.DecrptyByKey(KeyE, oldpwd);
+                
                 string d51 = EncryptDecrptt.str2MD5(EncryptDecrptt.KeyA2KeyD(oldpwd));
                 if (d5 != d51)
                 {
-                    MessageBox.Show("密码错误！");
+                    MessageBox.Show("原密码错误！");
                     return;
                 }
+
+                //校验密码长度以及两次输入是否一样
+                if (newpwd != newpwdconfirm)
+                {
+                    MessageBox.Show("新密码两次不一致，请重新输入！");
+                    return;
+                }
+
+                if (newpwd.Length > 16 || newpwd.Length < 6)
+                {
+                    MessageBox.Show("新密码长度需在6-16位之间！");
+                    return;
+                }
+
+                //keyD需从keyE和明文密码解密出来，修改了密码也不会改变
+                //存储在数据库的keyD5会随着密码变化变化，目的是为了对比密码是否正确
+                string KeyD = EncryptDecrptt.DecrptyByKey(KeyE, oldpwd);
 
                 //新的密码转换，写入到内存以及数据库中
                 string keyDmd5 = EncryptDecrptt.str2MD5(EncryptDecrptt.KeyA2KeyD(newpwd));

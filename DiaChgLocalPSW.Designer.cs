@@ -53,13 +53,14 @@
             this.textBoxOldpsw.Name = "textBoxOldpsw";
             this.textBoxOldpsw.Size = new System.Drawing.Size(156, 21);
             this.textBoxOldpsw.TabIndex = 1;
+            this.textBoxOldpsw.UseSystemPasswordChar = true;
             // 
             // buttonOK
             // 
             this.buttonOK.Location = new System.Drawing.Point(84, 92);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 4;
+            this.buttonOK.TabIndex = 5;
             this.buttonOK.Text = "确定";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
@@ -69,7 +70,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(165, 92);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 5;
+            this.buttonCancel.TabIndex = 6;
             this.buttonCancel.Text = "取消";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -89,13 +90,15 @@
             this.textBoxnewpsw.Name = "textBoxnewpsw";
             this.textBoxnewpsw.Size = new System.Drawing.Size(156, 21);
             this.textBoxnewpsw.TabIndex = 3;
+            this.textBoxnewpsw.UseSystemPasswordChar = true;
             // 
             // textBoxnewConfirm
             // 
             this.textBoxnewConfirm.Location = new System.Drawing.Point(84, 65);
             this.textBoxnewConfirm.Name = "textBoxnewConfirm";
             this.textBoxnewConfirm.Size = new System.Drawing.Size(156, 21);
-            this.textBoxnewConfirm.TabIndex = 7;
+            this.textBoxnewConfirm.TabIndex = 4;
+            this.textBoxnewConfirm.UseSystemPasswordChar = true;
             // 
             // label1
             // 
@@ -108,6 +111,7 @@
             // 
             // DiaChgLocalPSW
             // 
+            this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(267, 124);

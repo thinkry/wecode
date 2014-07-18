@@ -1854,12 +1854,36 @@ namespace WeCode1._0
         //修改本地笔记本密码
         private void toolStripMenuItem7_Click(object sender, EventArgs e)
         {
+            //校验是否已经设置密码
+            string sql = "select * from Mykeys";
+            DataTable keyDt = AccessAdo.ExecuteDataSet(sql).Tables[0];
+            if (keyDt.Rows.Count == 0)
+            {
+                MessageBox.Show("当前本地笔记本尚未设置过密码！");
+                return;
+            }
+
             DiaChgLocalPSW chpwd = new DiaChgLocalPSW("0");
             chpwd.ShowDialog();
         }
 
         private void toolStripMenuItem8_Click(object sender, EventArgs e)
         {
+            if (Attachment.IsTokeneffective == 0)
+            {
+                MessageBox.Show("当前未登录有道云或者授权已失效，请先登录！");
+                return;
+            }
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load("TreeNodeLocal.xml");
+            XmlNode preNode = doc.SelectSingleNode("//wecode[@KeyD5]");
+            if (preNode == null)
+            {
+                MessageBox.Show("有道云尚未设置过密码！");
+                return;
+            }
+
             DiaChgLocalPSW chpwd = new DiaChgLocalPSW("1");
             chpwd.ShowDialog();
         }

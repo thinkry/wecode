@@ -51,6 +51,7 @@
             this.textBoxInput.Name = "textBoxInput";
             this.textBoxInput.Size = new System.Drawing.Size(156, 21);
             this.textBoxInput.TabIndex = 1;
+            this.textBoxInput.TextChanged += new System.EventHandler(this.textBoxInput_TextChanged);
             // 
             // buttonOK
             // 
@@ -87,9 +88,11 @@
             this.textBoxConfirm.Name = "textBoxConfirm";
             this.textBoxConfirm.Size = new System.Drawing.Size(156, 21);
             this.textBoxConfirm.TabIndex = 3;
+            this.textBoxConfirm.UseSystemPasswordChar = true;
             // 
-            // DialogPSW
+            // DialogPSWYouDao
             // 
+            this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(267, 98);
@@ -100,7 +103,7 @@
             this.Controls.Add(this.textBoxInput);
             this.Controls.Add(this.labelInput);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "DialogPSW";
+            this.Name = "DialogPSWYouDao";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "密码";
