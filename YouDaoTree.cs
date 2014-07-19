@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using System.Xml;
 using WeifenLuo.WinFormsUI.Docking;
 using System.Data.OleDb;
+using System.Threading;
+using System.Configuration;
 
 namespace WeCode1._0
 {
@@ -18,15 +20,73 @@ namespace WeCode1._0
         TreeNode dragDropTreeNode;
         DateTime startTime;
 
+        private Thread beginInvokeThread;
+        private delegate void beginInvokeDelegate();
+
+        private void StartMethod()
+        {
+            //授权校验
+            //判断token是否有效
+            string IsAuthor = AuthorAPI.GetIsAuthor();
+            if (IsAuthor != "OK")
+            {
+                //禁用云目录，授权失败
+                Attachment.IsTokeneffective = 0;
+                this.BeginInvoke(new beginInvokeDelegate(showNoAuthor));
+                formParent.SetAuthor(false);
+            }
+            else
+            {
+                //从云端拉取XML同步到本地
+                XMLAPI.Yun2XML();
+                Attachment.IsTokeneffective = 1;
+                this.BeginInvoke(new beginInvokeDelegate(beginInvokeMethod));
+                formParent.SetAuthor(true);
+            }
+        }
+
+        private void showNoAuthor()
+        {
+            //MessageBox.Show("未授权有道云笔记或者授权已过期，请点击用户--登录以重新授权！");
+            if (ConfigurationManager.AppSettings["authorAlert"] != "0")
+            {
+                if (MessageBox.Show("未授权有道云笔记或者授权已过期，点击菜单用户--登录以重新授权！\n\n点击“确定”不再提醒", "登录提醒", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+                {
+                    PubFunc.SetConfiguration("authorAlert", "0");
+                }
+            }
+
+        }
+
+        //校验通过后通知本窗体加载树
+        private void beginInvokeMethod()
+        {
+            MakeTree();
+        }
+
 
         public YouDaoTree()
         {
             InitializeComponent();
             treeViewYouDao.AllowDrop = true;
+
         }
 
         //窗体加载
         private void YouDaoTree_Load(object sender, EventArgs e)
+        {
+            //20140719 将主窗口判断授权移至这里判断
+            //另开线程，避免因网络原因造成的卡死，验证完成给主窗口发送消息，同时判断是否加载树
+            beginInvokeThread = new Thread(new ThreadStart(StartMethod));
+            beginInvokeThread.Start();
+
+
+            MakeTree();
+        }
+
+
+        //初始化
+        private void MakeTree()
         {
             //绑定树
             if (Attachment.IsTokeneffective == 1)
@@ -40,6 +100,7 @@ namespace WeCode1._0
                 toolStrip1.Enabled = false;
             }
         }
+
 
 
 

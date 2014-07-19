@@ -104,7 +104,8 @@ namespace WeCode1._0
             //第一次打开界面，先判断token是否有效（为空或者过期）
             //有效，同步XML到本地，加载有道云树目录;无效，打开授权页面进行授权
             //授权成功后，云端创建两个目录以及配置文件，然后加载树目录
-            IniYouDaoAuthor();
+            //IniYouDaoAuthor();
+            //-------移至有道窗口多线程校验-----------//
 
 
             //上报统计信息
@@ -1886,6 +1887,23 @@ namespace WeCode1._0
 
             DiaChgLocalPSW chpwd = new DiaChgLocalPSW("1");
             chpwd.ShowDialog();
+        }
+
+        //有道目录窗口判断授权后通知主窗口更改菜单栏信息
+        public void SetAuthor(Boolean isAuthor)
+        {
+            if (isAuthor == true)
+            {
+                //获取用户信息并禁用登陆按钮
+                this.toolStripMenuItemLogin.Visible = false;
+                this.toolStripMenuItemUinfo.Visible = true;
+                Text = "WeCode--已登录";
+            }
+            else {
+                this.toolStripMenuItemLogin.Visible = true;
+                this.toolStripMenuItemUinfo.Visible = false;
+                Text = "WeCode--未登录";
+            }
         }
 
         

@@ -45,5 +45,4 @@ E:\git\wecode\obj\x86\Release\WeCode.application
 E:\git\wecode\obj\x86\Release\WeCode1._0.DialogPSW.resources
 E:\git\wecode\obj\x86\Release\WeCode1._0.DialogPSWYouDao.resources
 E:\git\wecode\obj\x86\Release\WeCode1._0.DiaChgLocalPSW.resources
-E:\git\wecode\obj\x86\Release\WeCode.csprojResolveAssemblyReference.cache
 E:\git\wecode\bin\Release\ScintillaNET.pdb
