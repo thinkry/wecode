@@ -469,7 +469,7 @@ namespace WeCode1._0
 
                 else if (SeleNode != null)
                 {
-                    if (SeleNode.ImageIndex == 1 && IsOnRoot == "False")
+                    if ((SeleNode.ImageIndex == 1||SeleNode.ImageIndex == 2) && IsOnRoot == "False")
                     {
                         MessageBox.Show("不能在文章下新增节点！");
                         return;
@@ -600,7 +600,7 @@ namespace WeCode1._0
                 }
                 else if (SeleNode != null)
                 {
-                    if (SeleNode.ImageIndex == 1&&IsOnRoot=="False")
+                    if ((SeleNode.ImageIndex == 1||SeleNode.ImageIndex == 2)&&IsOnRoot=="False")
                     {
                         MessageBox.Show("不能在文章下新增节点！");
                         return;
@@ -768,7 +768,7 @@ namespace WeCode1._0
                     SeleNode.Text = Title;
                     //打开后设置语言
                     Language = PubFunc.Synid2LanguageSetLang(SynId);
-                    if (SeleNode.ImageIndex == 1)
+                    if (SeleNode.ImageIndex == 1 || SeleNode.ImageIndex==2)
                     {
                         formParent.SetLanguageByDoc(Language, SeleNode.Tag.ToString(),Title,SeleNode.FullPath);
                     }
@@ -920,7 +920,7 @@ namespace WeCode1._0
                             break;
                         }
                     }
-                    if (isChildNode||tn.ImageIndex==1)
+                    if (isChildNode || tn.ImageIndex == 1 || tn.ImageIndex == 2)
                     {
                         e.Effect = DragDropEffects.None;
                     }

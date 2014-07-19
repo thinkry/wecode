@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>KZz2aTJjHrKq0CUIBJ4E9HDd4V4=</dsig:DigestValue>
+        <dsig:DigestValue>hCaITwfRIrdK+RKYM58EqSr59hw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -62,7 +62,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>LhW/nFlP+3j/y9zIDR9TEpUnSKw=</dsig:DigestValue>
+        <dsig:DigestValue>DW6VYnh6fN1m6EIB6Z1tHyubaXo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -74,7 +74,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>EVCF/yp76yc+QbNlt/0XVwMWJE4=</dsig:DigestValue>
+        <dsig:DigestValue>TXU3lC9OGKxipwWAFrH3Qq3zkzo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -91,26 +91,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ScintillaNET.dll" size="638464">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ScintillaNET.dll" size="644096">
       <assemblyIdentity name="ScintillaNET" version="2.6.0.0" publicKeyToken="948D6C9751444115" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>7vvuuOjv3x3aTt/HtTn+h720vHo=</dsig:DigestValue>
+        <dsig:DigestValue>0yFKtMdYWdpUrQgtg5GkctnkwJ0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WeCode.exe" size="581632">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WeCode.exe" size="587776">
       <assemblyIdentity name="WeCode" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>jazdEiOLnJNShMY1v4ggTNrM3rY=</dsig:DigestValue>
+        <dsig:DigestValue>twYmv0+gId7ybEHpy7n2/K2hwB8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -126,13 +126,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="db\helpdb.mdb" size="323584" writeableType="applicationData">
+  <file name="db\helpdb.mdb" size="487424" writeableType="applicationData">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>+jCPXly8nWH1sJXVXkfbtBMEzdg=</dsig:DigestValue>
+      <dsig:DigestValue>Hatkuvz0O13cVF/yzAP3aorRCTY=</dsig:DigestValue>
     </hash>
   </file>
   <file name="m.ico" size="4286">
@@ -159,7 +159,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>on9dgcrGdAe0QCt7oIQ0oZEacdo=</dsig:DigestValue>
+      <dsig:DigestValue>EOGJpbRz+ubPQ5Ez/96R5P5PwhU=</dsig:DigestValue>
     </hash>
   </file>
   <file name="wecode.ico" size="136606">

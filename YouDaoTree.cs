@@ -254,7 +254,7 @@ namespace WeCode1._0
                 {
                     ParLang = ((treeTagBook)SeleNode.Tag).Language;
                 }
-                else if (SeleNode.ImageIndex == 1)
+                else if (SeleNode.ImageIndex == 1 || SeleNode.ImageIndex == 2)
                 {
                     ParLang = ((treeTagNote)SeleNode.Tag).Language;
                 }
@@ -305,7 +305,7 @@ namespace WeCode1._0
 
                 else if (SeleNode != null)
                 {
-                    if (SeleNode.ImageIndex == 1 && IsOnRoot == "False")
+                    if ((SeleNode.ImageIndex == 1||SeleNode.ImageIndex == 2) && IsOnRoot == "False")
                     {
                         MessageBox.Show("不能在文章下新增节点！");
                         return;
@@ -402,7 +402,7 @@ namespace WeCode1._0
                 {
                     ParLang = ((treeTagBook)SeleNode.Tag).Language;
                 }
-                else if (SeleNode.ImageIndex == 1)
+                else if (SeleNode.ImageIndex == 1 || SeleNode.ImageIndex == 2)
                 {
                     ParLang = ((treeTagNote)SeleNode.Tag).Language;
                 }
@@ -528,7 +528,7 @@ namespace WeCode1._0
 
                         else
                         {
-                            if (SeleNode.ImageIndex == 1 && IsOnRoot == "False")
+                            if ((SeleNode.ImageIndex == 1||SeleNode.ImageIndex == 2) && IsOnRoot == "False")
                             {
                                 MessageBox.Show("不能在文章下新增节点！");
                                 return;
@@ -819,7 +819,7 @@ namespace WeCode1._0
                     }
                     //打开后设置语言
                     Language = PubFunc.Synid2LanguageSetLang(SynId);
-                    if (SeleNode.ImageIndex == 1)
+                    if (SeleNode.ImageIndex == 1 || SeleNode.ImageIndex == 2)
                     {
                         formParent.SetLanguageByDoc(Language, ((treeTagNote)SeleNode.Tag).path,Title,SeleNode.FullPath);
                     }
@@ -1028,7 +1028,7 @@ namespace WeCode1._0
                             break;
                         }
                     }
-                    if (isChildNode || tn.ImageIndex == 1)
+                    if (isChildNode || tn.ImageIndex == 1||tn.ImageIndex == 2)
                     {
                         e.Effect = DragDropEffects.None;
                     }

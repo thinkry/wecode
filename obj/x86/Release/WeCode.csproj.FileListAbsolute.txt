@@ -5,7 +5,6 @@ E:\git\wecode\bin\Release\ScintillaNET.dll
 E:\git\wecode\bin\Release\WeifenLuo.WinFormsUI.Docking.dll
 E:\git\wecode\bin\Release\Newtonsoft.Json.pdb
 E:\git\wecode\bin\Release\Newtonsoft.Json.xml
-E:\git\wecode\bin\Release\ScintillaNET.pdb
 E:\git\wecode\bin\Release\WeifenLuo.WinFormsUI.Docking.pdb
 E:\git\wecode\bin\Release\Interop.ADODB.dll
 E:\git\wecode\bin\Release\Interop.ADOX.dll
@@ -46,3 +45,5 @@ E:\git\wecode\obj\x86\Release\WeCode.application
 E:\git\wecode\obj\x86\Release\WeCode1._0.DialogPSW.resources
 E:\git\wecode\obj\x86\Release\WeCode1._0.DialogPSWYouDao.resources
 E:\git\wecode\obj\x86\Release\WeCode1._0.DiaChgLocalPSW.resources
+E:\git\wecode\obj\x86\Release\WeCode.csprojResolveAssemblyReference.cache
+E:\git\wecode\bin\Release\ScintillaNET.pdb

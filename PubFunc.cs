@@ -47,6 +47,21 @@ namespace WeCode1._0
                 case "Python":
                     SynId = "111";
                     break;
+                case "AS3":
+                    SynId = "112";
+                    break;
+                case "Lua":
+                    SynId = "113";
+                    break;
+                case "JavaScript":
+                    SynId = "114";
+                    break;
+                case "PHP":
+                    SynId = "115";
+                    break;
+                case "Haxe":
+                    SynId = "116";
+                    break;
                 default:
                     break;
 
@@ -97,6 +112,21 @@ namespace WeCode1._0
                 case "111":
                     Language = "Python";
                     break;
+                case "112":
+                    Language = "AS3";
+                    break;
+                case "113":
+                    Language = "Lua";
+                    break;
+                case "114":
+                    Language = "JavaScript";
+                    break;
+                case "115":
+                    Language = "PHP";
+                    break;
+                case "116":
+                    Language = "Haxe";
+                    break;
                 default:
                     break;
 
@@ -146,6 +176,21 @@ namespace WeCode1._0
                     break;
                 case "111":
                     Language = "python";
+                    break;
+                case "112":
+                    Language = "as3";
+                    break;
+                case "113":
+                    Language = "lua";
+                    break;
+                case "114":
+                    Language = "js";
+                    break;
+                case "115":
+                    Language = "html";
+                    break;
+                case "116":
+                    Language = "haxe";
                     break;
                 default:
                     break;

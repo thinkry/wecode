@@ -46,9 +46,10 @@ namespace WeCode1._0
             if (comboBox1.Text == "本地")
             {
                 serchType = "local";
-                string SQL = "select NodeId,[title] as 标题 from ttree where type=1 and title like '%" + Title + "%'";
+                string SQL = "select NodeId,[title] as 标题,islock from ttree where type=1 and title like '%" + Title + "%'";
                 dataGridViewSerch.DataSource = AccessAdo.ExecuteDataSet(SQL).Tables[0];
                 dataGridViewSerch.Columns[0].Visible = false;
+                dataGridViewSerch.Columns[2].Visible = false;
             }
             else if (comboBox1.Text == "有道云" && Attachment.IsTokeneffective == 1)
             {
@@ -57,6 +58,7 @@ namespace WeCode1._0
                 tempDt.Columns.Add("path");
                 tempDt.Columns.Add("标题");
                 tempDt.Columns.Add("Language");
+                tempDt.Columns.Add("islock");
 
                 XmlDocument doc = new XmlDocument();
                 doc.Load("TreeNodeLocal.xml");
@@ -67,11 +69,13 @@ namespace WeCode1._0
                     dr["path"] = xnode.Attributes["path"].Value;
                     dr["标题"] = xnode.Attributes["title"].Value;
                     dr["Language"] = xnode.Attributes["Language"].Value;
+                    dr["islock"] = xnode.Attributes["IsLock"].Value;
                     tempDt.Rows.Add(dr);
                 }
                 dataGridViewSerch.DataSource = tempDt;
                 dataGridViewSerch.Columns[0].Visible = false;
                 dataGridViewSerch.Columns[2].Visible = false;
+                dataGridViewSerch.Columns[3].Visible = false;
 
 
             }
@@ -102,7 +106,33 @@ namespace WeCode1._0
                     string UpdateTime = "最后更新时间： " + cTime.ToString();
                     string treeLocation = PubFunc.id2FullPath(nodeid);
 
-                    formParent.openNew(nodeid, treeLocation, UpdateTime,1);
+                    int iType = Convert.ToInt16(dataGridViewSerch.SelectedRows[0].Cells[2].Value.ToString())+1;
+                    if (iType == 2)
+                    {
+                        //加密,对content解密
+                        string Mykeyd = "";
+                        if (Attachment.KeyD != "")
+                        {
+                            //内存中已存在秘钥
+                            Mykeyd = Attachment.KeyD;
+                        }
+                        else
+                        {
+                            //内存中不存在秘钥
+                            DialogPSW dp = new DialogPSW("3");
+                            DialogResult dr = dp.ShowDialog();
+                            if (dr == DialogResult.OK)
+                            {
+                                Mykeyd = dp.ReturnVal;
+                            }
+                        }
+
+                        if (Mykeyd == "")
+                            return;
+
+                    }
+
+                    formParent.openNew(nodeid, treeLocation, UpdateTime,iType);
 
                     //打开后设置语言
                     string Language = AccessAdo.ExecuteScalar("select synid from ttree where nodeid=" + nodeid).ToString();
@@ -123,7 +153,33 @@ namespace WeCode1._0
                     DateTime cTime = PubFunc.seconds2Time(TotalSeconds);
                     string UpdateTime = "最后更新时间： " + cTime.ToString();
 
-                    formParent.openNewYouDao(sNodeId, title,treeLacation,UpdateTime,1);
+                    int iType = Convert.ToInt16(dataGridViewSerch.SelectedRows[0].Cells[3].Value.ToString()) + 1;
+                    if (iType == 2)
+                    {
+                        //加密,对content解密
+                        string MykeydYd = "";
+                        if (Attachment.KeyDYouDao != "")
+                        {
+                            //内存中已存在秘钥
+                            MykeydYd = Attachment.KeyDYouDao;
+                        }
+                        else
+                        {
+                            //内存中不存在秘钥
+                            DialogPSWYouDao dp = new DialogPSWYouDao("3");
+                            DialogResult dr = dp.ShowDialog();
+                            if (dr == DialogResult.OK)
+                            {
+                                MykeydYd = dp.ReturnVal;
+                            }
+                        }
+
+                        if (MykeydYd == "")
+                            return;
+
+                    }
+
+                    formParent.openNewYouDao(sNodeId, title,treeLacation,UpdateTime,iType);
 
                     ///打开后设置语言
                     string Language = PubFunc.Synid2LanguageSetLang(PubFunc.Language2Synid(sLang));
