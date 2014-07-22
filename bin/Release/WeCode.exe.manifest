@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>sbXlCxVXAQavp5ZvNDK+CBIuapQ=</dsig:DigestValue>
+        <dsig:DigestValue>Kn6ZooovBv7IeY6BVtU+kpudUdk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -62,7 +62,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>WrOuSm0M+KwnzQ1KM0VcbkAoXtM=</dsig:DigestValue>
+        <dsig:DigestValue>y19pE4JjiWGRnMVsHwzVgjB4Ir0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -74,7 +74,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>36d+12gwQ5GFxAfwLoRX9R0naPs=</dsig:DigestValue>
+        <dsig:DigestValue>cDl7oIM5ATiW9Jke8I5KTmb6LEU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -110,7 +110,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>WVeKZmFHvqyPBgfN+CULRVufoTI=</dsig:DigestValue>
+        <dsig:DigestValue>DP1si6vqGRdxzgunKvy1wAUwLNE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -159,7 +159,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>EOGJpbRz+ubPQ5Ez/96R5P5PwhU=</dsig:DigestValue>
+      <dsig:DigestValue>jMVGaqAirDW3fE6OC0Z8m34nKGo=</dsig:DigestValue>
     </hash>
   </file>
   <file name="wecode.ico" size="136606">
