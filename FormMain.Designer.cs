@@ -51,7 +51,7 @@
             this.toolStripMenuItemOpenDB = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemZipDB = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemBackUpDB = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemYd2DB = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemExportHTML = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
@@ -154,7 +154,7 @@
             this.toolStripMenuItemOpenDB,
             this.toolStripMenuItemZipDB,
             this.toolStripMenuItemBackUpDB,
-            this.toolStripSeparator1,
+            this.toolStripMenuItemYd2DB,
             this.toolStripMenuItemExportHTML,
             this.toolStripSeparator11,
             this.toolStripMenuItem7,
@@ -201,10 +201,12 @@
             this.toolStripMenuItemBackUpDB.Text = "备份当前本地笔记本(&B)";
             this.toolStripMenuItemBackUpDB.Click += new System.EventHandler(this.toolStripMenuItemBackUpDB_Click);
             // 
-            // toolStripSeparator1
+            // toolStripMenuItemYd2DB
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(222, 6);
+            this.toolStripMenuItemYd2DB.Name = "toolStripMenuItemYd2DB";
+            this.toolStripMenuItemYd2DB.Size = new System.Drawing.Size(225, 22);
+            this.toolStripMenuItemYd2DB.Text = "导出有道笔记本";
+            this.toolStripMenuItemYd2DB.Click += new System.EventHandler(this.toolStripMenuItemYd2DB_Click);
             // 
             // toolStripMenuItemExportHTML
             // 
@@ -939,7 +941,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOpenDB;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemZipDB;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemBackUpDB;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDelAllMark;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemExit;
@@ -1012,6 +1013,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemYd2DB;
     }
 }
 

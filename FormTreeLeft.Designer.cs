@@ -121,13 +121,13 @@
             this.toolStripMenuItemEncrypt,
             this.toolStripMenuItemDecrypt});
             this.contextMenuStripTxt.Name = "contextMenuStripTxt";
-            this.contextMenuStripTxt.Size = new System.Drawing.Size(153, 142);
+            this.contextMenuStripTxt.Size = new System.Drawing.Size(125, 120);
             // 
             // toolStripMenuItemTxtDel
             // 
             this.toolStripMenuItemTxtDel.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemTxtDel.Image")));
             this.toolStripMenuItemTxtDel.Name = "toolStripMenuItemTxtDel";
-            this.toolStripMenuItemTxtDel.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemTxtDel.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItemTxtDel.Text = "删除";
             this.toolStripMenuItemTxtDel.Click += new System.EventHandler(this.toolStripMenuItemTxtDel_Click);
             // 
@@ -135,7 +135,7 @@
             // 
             this.toolStripMenuItemTxtProp.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemTxtProp.Image")));
             this.toolStripMenuItemTxtProp.Name = "toolStripMenuItemTxtProp";
-            this.toolStripMenuItemTxtProp.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemTxtProp.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItemTxtProp.Text = "属性";
             this.toolStripMenuItemTxtProp.Click += new System.EventHandler(this.toolStripMenuItemTxtProp_Click);
             // 
@@ -143,20 +143,20 @@
             // 
             this.toolStripMenuItemTxtMark.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemTxtMark.Image")));
             this.toolStripMenuItemTxtMark.Name = "toolStripMenuItemTxtMark";
-            this.toolStripMenuItemTxtMark.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemTxtMark.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItemTxtMark.Text = "加为书签";
             this.toolStripMenuItemTxtMark.Click += new System.EventHandler(this.toolStripMenuItemTxtMark_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(121, 6);
             // 
             // toolStripMenuItemEncrypt
             // 
             this.toolStripMenuItemEncrypt.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemEncrypt.Image")));
             this.toolStripMenuItemEncrypt.Name = "toolStripMenuItemEncrypt";
-            this.toolStripMenuItemEncrypt.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemEncrypt.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItemEncrypt.Text = "加密";
             this.toolStripMenuItemEncrypt.Visible = false;
             this.toolStripMenuItemEncrypt.Click += new System.EventHandler(this.toolStripMenuItemEncrypt_Click);
@@ -165,7 +165,7 @@
             // 
             this.toolStripMenuItemDecrypt.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemDecrypt.Image")));
             this.toolStripMenuItemDecrypt.Name = "toolStripMenuItemDecrypt";
-            this.toolStripMenuItemDecrypt.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemDecrypt.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItemDecrypt.Text = "取消加密";
             this.toolStripMenuItemDecrypt.Visible = false;
             this.toolStripMenuItemDecrypt.Click += new System.EventHandler(this.toolStripMenuItemDecrypt_Click);
@@ -293,7 +293,6 @@
             this.treeViewDir.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewDir_BeforeExpand);
             this.treeViewDir.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeViewDir_ItemDrag);
             this.treeViewDir.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDir_AfterSelect);
-            this.treeViewDir.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDir_NodeMouseClick);
             this.treeViewDir.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDir_NodeMouseDoubleClick);
             this.treeViewDir.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeViewDir_DragDrop);
             this.treeViewDir.DragOver += new System.Windows.Forms.DragEventHandler(this.treeViewDir_DragOver);

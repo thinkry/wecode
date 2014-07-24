@@ -146,19 +146,22 @@ namespace WeCode1._0
 
                 OleDbParameter p1 = new OleDbParameter("@Content", OleDbType.VarChar);
                 p1.Value = DocText;
-                OleDbParameter p2 = new OleDbParameter("@NodeId", OleDbType.Integer);
-                p2.Value = Convert.ToInt32(this.NodeId);
+                OleDbParameter p3 = new OleDbParameter("@NodeId", OleDbType.Integer);
+                p3.Value = Convert.ToInt32(this.NodeId);
+                OleDbParameter p2 = new OleDbParameter("@UpdateTime", OleDbType.Integer);
+                p2.Value = PubFunc.time2TotalSeconds();
 
-                OleDbParameter[] ArrPara = new OleDbParameter[2];
+                OleDbParameter[] ArrPara = new OleDbParameter[3];
                 ArrPara[0] = p1;
                 ArrPara[1] = p2;
-                string SQL = "update tcontent set content=@Content where NodeId=@NodeId";
+                ArrPara[2] = p3;
+                string SQL = "update tcontent set content=@Content,updatetime=@UpdateTime where NodeId=@NodeId";
                 AccessAdo.ExecuteNonQuery(SQL, ArrPara);
 
                 //更新修改时间
-                int Seconds = PubFunc.time2TotalSeconds();
-                SQL="update ttree set updatetime="+Seconds+" where nodeid="+NodeId;
-                AccessAdo.ExecuteNonQuery(SQL);
+                //int Seconds = PubFunc.time2TotalSeconds();
+                //SQL="update ttree set updatetime="+Seconds+" where nodeid="+NodeId;
+                //AccessAdo.ExecuteNonQuery(SQL);
 
                 LastUpdateTime = "最后更新时间："+DateTime.Now.ToString();
                 Attachment.frmMain.showFullPathTime("【本地笔记本】"+TreeLocation, LastUpdateTime);
@@ -177,20 +180,10 @@ namespace WeCode1._0
                     DocText = EncryptDecrptt.EncrptyByKey(DocText, Attachment.KeyDYouDao);
                 }
 
-                if (NoteAPI.UpdateNote(this.NodeId, DocText) == "OK")
+                int updatetime=PubFunc.time2TotalSeconds();
+                if (NoteAPI.UpdateNote(this.NodeId, DocText, updatetime.ToString()) == "OK")
                 {
-                    //更新XML最后修改时间
-                    XmlDocument doc = new XmlDocument();
-                    doc.Load("TreeNodeLocal.xml");
-                    XmlNode xnode = doc.SelectSingleNode("//note[path='"+NodeId+"'"+"]");
-                    if (xnode != null)
-                    {
-                        xnode.Attributes["updatetime"].Value = PubFunc.time2TotalSeconds().ToString();
-                    }
-                    doc.Save("TreeNodeLocal.xml");
-                    XMLAPI.XML2Yun();
-
-                    LastUpdateTime = "最后更新时间：" + DateTime.Now.ToString();
+                    LastUpdateTime = "最后更新时间：" + PubFunc.seconds2Time(updatetime).ToString();
                     Attachment.frmMain.showFullPathTime("【有道云】"+TreeLocation, LastUpdateTime);
 
                     scintilla1.Modified = false;
@@ -349,26 +342,28 @@ namespace WeCode1._0
 
         private void scintilla1_CharAdded(object sender, CharAddedEventArgs e)
         {
-            string tmp = scintilla1.GetWordFromPosition(scintilla1.CurrentPos);
-            string pretmp = scintilla1.GetWordFromPosition(scintilla1.CurrentPos - 1);
-            if (string.IsNullOrEmpty(tmp) || tmp.Length < 1 || !tmp.Equals(pretmp))
-                return;
-            List<string> userList = scintilla1.AutoComplete.List.FindAll(
-                delegate(string txt)
-                {
-                    if (txt.StartsWith(tmp, StringComparison.OrdinalIgnoreCase))
-                        return true;
-                    else
-                        return false;
-                });
-            //Debug.Print("Word: " + tmp);
-            if (userList.Count > 0)
-            {
-                scintilla1.AutoComplete.ShowUserList(-1, userList);
-                //scintilla.AutoComplete.Show();
-            }
+            return;
 
-            //scintilla.AutoComplete.Show();
+            //string tmp = scintilla1.GetWordFromPosition(scintilla1.CurrentPos);
+            //string pretmp = scintilla1.GetWordFromPosition(scintilla1.CurrentPos - 1);
+            //if (string.IsNullOrEmpty(tmp) || tmp.Length < 1 || !tmp.Equals(pretmp))
+            //    return;
+            //List<string> userList = scintilla1.AutoComplete.List.FindAll(
+            //    delegate(string txt)
+            //    {
+            //        if (txt.StartsWith(tmp, StringComparison.OrdinalIgnoreCase))
+            //            return true;
+            //        else
+            //            return false;
+            //    });
+            ////Debug.Print("Word: " + tmp);
+            //if (userList.Count > 0)
+            //{
+            //    scintilla1.AutoComplete.ShowUserList(-1, userList);
+            //    //scintilla.AutoComplete.Show();
+            //}
+
+            ////scintilla.AutoComplete.Show();
         }
 
         private void DocumentForm_FormClosed(object sender, FormClosedEventArgs e)

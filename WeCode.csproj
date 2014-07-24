@@ -132,6 +132,12 @@
       <DependentUpon>Download.cs</DependentUpon>
     </Compile>
     <Compile Include="EncryptDecrptt.cs" />
+    <Compile Include="ExportYoudaoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExportYoudaoForm.Designer.cs">
+      <DependentUpon>ExportYoudaoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormAttachment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +206,7 @@
     <Compile Include="WelcomeDoc.Designer.cs">
       <DependentUpon>WelcomeDoc.cs</DependentUpon>
     </Compile>
+    <Compile Include="XML2DB.cs" />
     <Compile Include="XMLAPI.cs" />
     <Compile Include="YouDaoTree.cs">
       <SubType>Form</SubType>
@@ -239,6 +246,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Download.resx">
       <DependentUpon>Download.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExportYoudaoForm.resx">
+      <DependentUpon>ExportYoudaoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAttachment.resx">
       <DependentUpon>FormAttachment.cs</DependentUpon>

@@ -330,7 +330,7 @@ namespace WeCode1._0
         }
 
         //打开云笔记
-        public void openNewYouDao(string nodeId,string title,string treeLocation,string updatetime,int imageType)
+        public void openNewYouDao(string nodeId,string title,string treeLocation,int imageType)
         {
             //欢迎窗口是否打开，如果打开则关闭
             if (Attachment.isWelcomePageopen == "1")
@@ -358,15 +358,18 @@ namespace WeCode1._0
 
             // Open the files
             if (!isOpen)
-                OpenFileYouDao(nodeId,title,treeLocation,updatetime,imageType);
+                OpenFileYouDao(nodeId,title,treeLocation,imageType);
         }
 
-        private DocumentForm OpenFileYouDao(string nodeId, string title, string treeLocation, string updatetime,int imageType)
+        private DocumentForm OpenFileYouDao(string nodeId, string title, string treeLocation,int imageType)
         {
             Attachment.isnewOpenDoc = "1";
             //获取文章信息
 
-            string Content = NoteAPI.GetNote(nodeId);
+            string[] result = NoteAPI.GetNote(nodeId);
+            string Content = result[0];
+            string updatetime ="最后更新时间："+ (PubFunc.seconds2Time(Convert.ToInt32(result[1]))).ToString();
+
 
             if (imageType == 2)
             {
@@ -650,15 +653,15 @@ namespace WeCode1._0
                 " [SynId] INTEGER, " +
                 " [Turn] INTEGER,  " +
                 " [MarkTime] INTEGER, " +
-                " [UpdateTime] INTEGER, "+
                 " [IsLock] INTEGER DEFAULT 0 ) ";
                 AccessAdo.ExecuteNonQuery(conn, crtSQL);
 
-                crtSQL=" CREATE TABLE TContent ( "+
-				" [NodeId] INTEGER CONSTRAINT PK_TTree27 PRIMARY KEY, "+
-				" [Content] MEMO, "+
-				" [Note] MEMO, "+
-				" [Link] MEMO) ";
+                crtSQL = " CREATE TABLE TContent ( " +
+                " [NodeId] INTEGER CONSTRAINT PK_TTree27 PRIMARY KEY, " +
+                " [Content] MEMO, " +
+                " [Note] MEMO, " +
+                " [Link] MEMO, " +
+                " [UpdateTime] INTEGER ) ";
                 AccessAdo.ExecuteNonQuery(conn, crtSQL);
 
                 crtSQL = " CREATE TABLE TAttachment ( " +
@@ -1905,6 +1908,87 @@ namespace WeCode1._0
                 Text = "WeCode--未登录";
             }
         }
+
+
+        //将有道云笔记导出为本地数据库
+        private void toolStripMenuItemYd2DB_Click(object sender, EventArgs e)
+        {
+            if (Attachment.IsTokeneffective == 0)
+            {
+                MessageBox.Show("当前未登录有道云或者授权已失效，请先登录！");
+                return;
+            }
+
+            //创建数据库
+            SaveFileDialog sf = new SaveFileDialog();
+            string path = "";
+            //设置文件类型
+            sf.Filter = "数据文件(*.mdb)|*.mdb";
+            if (sf.ShowDialog() == DialogResult.OK)
+            {
+                path = sf.FileName;
+
+                if (File.Exists(path)) //检查数据库是否已存在
+                {
+                    throw new Exception("目标数据库已存在,无法创建");
+                }
+                // 可以加上密码,这样创建后的数据库必须输入密码后才能打开
+                path = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + path;
+                // 创建一个CatalogClass对象的实例,
+                ADOX.CatalogClass cat = new ADOX.CatalogClass();
+                // 使用CatalogClass对象的Create方法创建ACCESS数据库
+                cat.Create(path);
+
+                //创建表，表结构在三个表中均新增gid字段，用于目录结构改变，nodeid变化时可以正确匹配到文章或者附件
+                OleDbConnection conn = new OleDbConnection(path);
+                string crtSQL = " CREATE TABLE TTree ( " +
+                " [NodeId] INTEGER CONSTRAINT PK_TTree26 PRIMARY KEY, " +
+                " [Title] VARCHAR, " +
+                " [Path] VARCHAR, " +
+                " [ParentId] INTEGER, " +
+                " [Type] INTEGER, " +
+                " [CreateTime] INTEGER, " +
+                " [SynId] INTEGER, " +
+                " [Turn] INTEGER,  " +
+                " [MarkTime] INTEGER, " +
+                " [IsLock] INTEGER DEFAULT 0 , "+
+                " [Gid] VARCHAR ) ";
+                AccessAdo.ExecuteNonQuery(conn, crtSQL);
+
+                crtSQL = " CREATE TABLE TContent ( " +
+                " [NodeId] INTEGER CONSTRAINT PK_TTree27 PRIMARY KEY, " +
+                " [Content] MEMO, " +
+                " [Note] MEMO, " +
+                " [Link] MEMO, " +
+                " [UpdateTime] INTEGER, "+
+                " [Gid] VARCHAR " +
+                " [Path] VARCHAR, " +
+                " [NeedSync] INTEGER DEFAULT 0) ";
+                AccessAdo.ExecuteNonQuery(conn, crtSQL);
+
+                crtSQL = " CREATE TABLE TAttachment ( " +
+                " [AffixId] INTEGER CONSTRAINT PK_TTree28 PRIMARY KEY, " +
+                " [NodeId] INTEGER, " +
+                " [Title] VARCHAR, " +
+                " [Data] IMAGE , " +
+                " [Size] INTEGER, " +
+                " [Time] INTEGER, "+
+                 " [Gid] VARCHAR " +
+                " [NeedSync] INTEGER DEFAULT 0) ";
+                AccessAdo.ExecuteNonQuery(conn, crtSQL);
+
+                crtSQL = " CREATE TABLE MyKeys ( " +
+                " [KeyE] MEMO, " +
+                " [KeyD5] MEMO) ";
+                AccessAdo.ExecuteNonQuery(conn, crtSQL);
+
+
+                //创建完成后导出有道云数据
+                ExportYoudaoForm exportForm = new ExportYoudaoForm(conn);
+                exportForm.Show();
+            }
+        }
+
 
         
     }

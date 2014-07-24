@@ -10,8 +10,6 @@ namespace WeCode1._0
 
         public string createtime { get; set; }
 
-        public string updatetime { get; set; }
-
         public string Language { get; set; }
 
         public string isMark { get; set; }

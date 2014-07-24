@@ -121,7 +121,7 @@ namespace WeCode1._0
 
                     NameValueCollection myCol = new NameValueCollection();
                     myCol.Add("title", title);//如果键值red相同结果合并 rojo,rouge  
-                    myCol.Add("content", "<DIV></DIV><DIV></DIV>");
+                    myCol.Add("content", "<DIV updatetime=\""+PubFunc.time2TotalSeconds()+"\"></DIV><DIV></DIV>");
                     myCol.Add("notebook", wecodeNotePath);
 
                     string aaa = HttpPostData(url.ToString(), myCol);
@@ -184,7 +184,8 @@ namespace WeCode1._0
         /// </summary>
         /// <param name="path"></param>
         /// <param name="content">sci文本框内的文本，未编码</param>
-        public static string UpdateNote(string path, string content)
+        /// <param name="updatetime">最后更新时间</param>
+        public static string UpdateNote(string path, string content,string updatetime)
         {
             string result = "OK";
             if (ConfigurationManager.AppSettings["AccessToken"] != "")
@@ -199,6 +200,10 @@ namespace WeCode1._0
                     }
                     string eContent = HttpUtility.HtmlEncode(content);
                     doc.DocumentElement.FirstChild.InnerXml = eContent;
+                    if (updatetime != "")
+                    {
+                        ((XmlElement)doc.DocumentElement.FirstChild).SetAttribute("updatetime", updatetime);
+                    }
 
 
                     //获取AccessTokon构造URL
@@ -263,13 +268,14 @@ namespace WeCode1._0
         }
 
         /// <summary>
-        /// 获取笔记的正文
+        /// 获取笔记的正文以及最后更新时间 20140724修改
         /// </summary>
         /// <param name="path">笔记路径</param>
         /// <returns>html解码之后的文本</returns>
-        public static string GetNote(string path)
+        public static string[] GetNote(string path)
         {
-            string result = "";
+            string[] result = new string[2];
+            string YouDaoResult = "";
             if (ConfigurationManager.AppSettings["AccessToken"] != "")
             {
                 try
@@ -289,11 +295,20 @@ namespace WeCode1._0
 
                     JObject o = JObject.Parse(JNotebookListAll);
                     string oa = o["content"].ToString();
+                    string createtime = o["create_time"].ToString();
 
                     XmlDocument xDoc = new XmlDocument();
                     xDoc.LoadXml("<root>" + oa + "</root>");
-                    result = xDoc.DocumentElement.FirstChild.InnerXml;
-                    result = HttpUtility.HtmlDecode(result);
+                    YouDaoResult = xDoc.DocumentElement.FirstChild.InnerXml;
+                    if (xDoc.DocumentElement.FirstChild.Attributes["updatetime"] != null)
+                    {
+                        result[1] = xDoc.DocumentElement.FirstChild.Attributes["updatetime"].Value;
+                    }
+                    else
+                    {
+                        result[1] = createtime;
+                    }
+                    result[0] = HttpUtility.HtmlDecode(YouDaoResult);
 
                 }
                 catch (Exception msg) //异常处理

@@ -137,7 +137,6 @@ namespace WeCode1._0
                         treeTagNote tNoteTag = new treeTagNote();
                         tNoteTag.path = cNode.Attributes["path"].Value;
                         tNoteTag.createtime = cNode.Attributes["createtime"].Value;
-                        tNoteTag.updatetime = cNode.Attributes["updatetime"].Value;
                         tNoteTag.Language = cNode.Attributes["Language"].Value;
                         tNoteTag.isMark = cNode.Attributes["isMark"].Value;
 
@@ -210,7 +209,6 @@ namespace WeCode1._0
                         treeTagNote tNoteTag = new treeTagNote();
                         tNoteTag.path = xNode.Attributes["path"].Value;
                         tNoteTag.createtime = xNode.Attributes["createtime"].Value;
-                        tNoteTag.updatetime = xNode.Attributes["updatetime"].Value;
                         tNoteTag.Language = xNode.Attributes["Language"].Value;
                         tempNode.ImageIndex = 1;
                         tempNode.SelectedImageIndex = 1;
@@ -255,8 +253,7 @@ namespace WeCode1._0
                 //双击文章，如果已经打开，则定位，否则新窗口打开
                 string sNodeId = ((treeTagNote)treeViewYouDao.SelectedNode.Tag).path;
                 string sLang = ((treeTagNote)treeViewYouDao.SelectedNode.Tag).Language;
-                string updateTime = ((treeTagNote)treeViewYouDao.SelectedNode.Tag).updatetime;
-                updateTime = "最后更新时间：" + PubFunc.seconds2Time(Convert.ToInt32(updateTime)).ToString();
+                //updateTime = "最后更新时间：" + PubFunc.seconds2Time(Convert.ToInt32(updateTime)).ToString();
                 string treeLocation = treeViewYouDao.SelectedNode.FullPath;
 
                 if (iType == 2)
@@ -284,7 +281,7 @@ namespace WeCode1._0
 
                 }
 
-                formParent.openNewYouDao(sNodeId, treeViewYouDao.SelectedNode.Text,treeLocation,updateTime,iType);
+                formParent.openNewYouDao(sNodeId, treeViewYouDao.SelectedNode.Text,treeLocation,iType);
 
                 ///打开后设置语言
                 string Language = PubFunc.Synid2LanguageSetLang(PubFunc.Language2Synid(sLang));
@@ -495,7 +492,6 @@ namespace WeCode1._0
                     treeTagNote tag = new treeTagNote();
                     tag.path = Path;
                     tag.createtime = PubFunc.time2TotalSeconds().ToString();
-                    tag.updatetime = PubFunc.time2TotalSeconds().ToString();
                     tag.Language = Language;
                     tag.isMark = "0";
 
@@ -513,7 +509,6 @@ namespace WeCode1._0
                     appEle.SetAttribute("title", Title);
                     appEle.SetAttribute("path", Path);
                     appEle.SetAttribute("createtime", tag.createtime);
-                    appEle.SetAttribute("updatetime", tag.updatetime);
                     appEle.SetAttribute("Language", Language);
                     appEle.SetAttribute("isMark", "0");
                     appEle.SetAttribute("IsLock", "0");
@@ -526,7 +521,7 @@ namespace WeCode1._0
 
                     //新窗口打开编辑界面
                     string lastTime="最后更新时间："+DateTime.Now.ToString();
-                    formParent.openNewYouDao(Path, Title, treeViewYouDao.SelectedNode.FullPath,lastTime,1);
+                    formParent.openNewYouDao(Path, Title, treeViewYouDao.SelectedNode.FullPath,1);
 
                     //打开后设置语言
                     Language = PubFunc.Synid2LanguageSetLang(SynId);
@@ -549,7 +544,6 @@ namespace WeCode1._0
                             treeTagNote tag = new treeTagNote();
                             tag.path = Path;
                             tag.createtime = PubFunc.time2TotalSeconds().ToString();
-                            tag.updatetime = PubFunc.time2TotalSeconds().ToString();
                             tag.Language = Language;
                             tag.isMark = "0";
 
@@ -567,7 +561,6 @@ namespace WeCode1._0
                             appEle.SetAttribute("title", Title);
                             appEle.SetAttribute("path", Path);
                             appEle.SetAttribute("createtime", tag.createtime);
-                            appEle.SetAttribute("updatetime", tag.updatetime);
                             appEle.SetAttribute("Language", Language);
                             appEle.SetAttribute("isMark", "0");
                             appEle.SetAttribute("IsLock", "0");
@@ -580,7 +573,7 @@ namespace WeCode1._0
 
                             //新窗口打开编辑界面
                             string lastTime = "最后更新时间：" + DateTime.Now.ToString();
-                            formParent.openNewYouDao(Path, Title, treeViewYouDao.SelectedNode.FullPath,lastTime,1);
+                            formParent.openNewYouDao(Path, Title, treeViewYouDao.SelectedNode.FullPath,1);
 
                             //打开后设置语言
                             Language = PubFunc.Synid2LanguageSetLang(SynId);
@@ -600,7 +593,6 @@ namespace WeCode1._0
                             treeTagNote tag = new treeTagNote();
                             tag.path = Path;
                             tag.createtime = PubFunc.time2TotalSeconds().ToString();
-                            tag.updatetime = PubFunc.time2TotalSeconds().ToString();
                             tag.Language = Language;
                             tag.isMark = "0";
 
@@ -623,7 +615,6 @@ namespace WeCode1._0
                             appEle.SetAttribute("title", Title);
                             appEle.SetAttribute("path", Path);
                             appEle.SetAttribute("createtime", tag.createtime);
-                            appEle.SetAttribute("updatetime", tag.updatetime);
                             appEle.SetAttribute("Language", Language);
                             appEle.SetAttribute("isMark", "0");
                             appEle.SetAttribute("IsLock", "0");
@@ -636,7 +627,7 @@ namespace WeCode1._0
 
                             //新窗口打开编辑界面
                             string lastTime = "最后更新时间：" + DateTime.Now.ToString();
-                            formParent.openNewYouDao(Path, Title, treeViewYouDao.SelectedNode.FullPath,lastTime,1);
+                            formParent.openNewYouDao(Path, Title, treeViewYouDao.SelectedNode.FullPath,1);
 
                             //打开后设置语言
                             Language = PubFunc.Synid2LanguageSetLang(SynId);
@@ -873,7 +864,6 @@ namespace WeCode1._0
                         treeTagNote tag = new treeTagNote();
                         tag.path = ((treeTagNote)SeleNode.Tag).path;
                         tag.createtime = ((treeTagNote)SeleNode.Tag).createtime;
-                        tag.updatetime = PubFunc.time2TotalSeconds().ToString();
                         tag.Language = Language;
                         tag.isMark = "0";
                         SeleNode.Tag = tag;
@@ -1255,10 +1245,10 @@ namespace WeCode1._0
             if (MykeydYd != "")
             {
                 //获取文章信息
-                string Content = NoteAPI.GetNote(sNodeId);
+                string Content = NoteAPI.GetNote(sNodeId)[0];
                 string EncrptyedContent = EncryptDecrptt.EncrptyByKey(Content, MykeydYd);
                 //重新保存
-                if (NoteAPI.UpdateNote(sNodeId, EncrptyedContent) == "OK")
+                if (NoteAPI.UpdateNote(sNodeId, EncrptyedContent,"") == "OK")
                 {
                     //更新配置文件
                     XmlDocument doc = new XmlDocument();
@@ -1333,10 +1323,10 @@ namespace WeCode1._0
             if (MykeydYd != "")
             {
                 //获取文章信息
-                string Content = NoteAPI.GetNote(sNodeId);
+                string Content = NoteAPI.GetNote(sNodeId)[0];
                 string DecrptyedContent = EncryptDecrptt.DecrptyByKey(Content, MykeydYd);
                 //重新保存
-                if (NoteAPI.UpdateNote(sNodeId, DecrptyedContent) == "OK")
+                if (NoteAPI.UpdateNote(sNodeId, DecrptyedContent,"") == "OK")
                 {
                     //更新配置文件
                     XmlDocument doc = new XmlDocument();

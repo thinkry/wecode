@@ -101,7 +101,7 @@ namespace WeCode1._0
                 if (serchType == "local")
                 {
                     string nodeid = dataGridViewSerch.SelectedRows[0].Cells[0].Value.ToString();
-                    int TotalSeconds = Convert.ToInt32(AccessAdo.ExecuteScalar("select updatetime from ttree where nodeid=" + nodeid).ToString());
+                    int TotalSeconds = Convert.ToInt32(AccessAdo.ExecuteScalar("select updatetime from tcontent where nodeid=" + nodeid).ToString());
                     DateTime cTime = PubFunc.seconds2Time(TotalSeconds);
                     string UpdateTime = "最后更新时间： " + cTime.ToString();
                     string treeLocation = PubFunc.id2FullPath(nodeid);
@@ -179,7 +179,7 @@ namespace WeCode1._0
 
                     }
 
-                    formParent.openNewYouDao(sNodeId, title,treeLacation,UpdateTime,iType);
+                    formParent.openNewYouDao(sNodeId, title,treeLacation,iType);
 
                     ///打开后设置语言
                     string Language = PubFunc.Synid2LanguageSetLang(PubFunc.Language2Synid(sLang));

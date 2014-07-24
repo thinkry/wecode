@@ -151,6 +151,43 @@ namespace WeCode1._0
         }
 
 
+
+        /// <summary>
+        /// 返回一个DataSet数据集
+        /// </summary>
+        /// <param name="connectionString">一个有效的连接字符串</param>
+        /// <param name="cmdText">存储过程名称或者sql命令语句</param>
+        /// <param name="commandParameters">执行命令所用参数的集合</param>
+        /// <returns>包含结果的数据集</returns>
+        public static DataSet ExecuteDataSet(OleDbConnection connection, string cmdText, params OleDbParameter[] commandParameters)
+        {
+            //创建一个SqlCommand对象，并对其进行初始化
+            OleDbCommand cmd = new OleDbCommand();
+            using (OleDbConnection conn = connection)
+            {
+                PrepareCommand(cmd, conn, null, cmdText, commandParameters);
+                //创建SqlDataAdapter对象以及DataSet
+                OleDbDataAdapter da = new OleDbDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                try
+                {
+                    //填充ds
+                    da.Fill(ds);
+                    // 清除cmd的参数集合 
+                    cmd.Parameters.Clear();
+                    //返回ds
+                    return ds;
+                }
+                catch
+                {
+                    //关闭连接，抛出异常
+                    conn.Close();
+                    throw;
+                }
+            }
+        }
+
+
         /// <summary>
         /// 用指定的数据库连接字符串执行一个命令并返回一个数据集的第一列
         /// </summary>

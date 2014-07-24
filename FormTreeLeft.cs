@@ -323,7 +323,7 @@ namespace WeCode1._0
                 //双击文章，如果已经打开，则定位，否则新窗口打开
 
                 string treeLocation = treeViewDir.SelectedNode.FullPath;
-                int TotalSeconds = Convert.ToInt32(AccessAdo.ExecuteScalar("select updatetime from ttree where nodeid=" + treeViewDir.SelectedNode.Tag.ToString()).ToString());
+                int TotalSeconds = Convert.ToInt32(AccessAdo.ExecuteScalar("select updatetime from tcontent where nodeid=" + treeViewDir.SelectedNode.Tag.ToString()).ToString());
                 DateTime cTime = PubFunc.seconds2Time(TotalSeconds);
                 string UpdateTime = "最后更新时间： "+cTime.ToString();
 
@@ -453,7 +453,7 @@ namespace WeCode1._0
                     //相差秒数
                     string Seconds = dt.Seconds.ToString();
                     //插入TTREE
-                    string sql = string.Format("insert into ttree(NodeID,Title,ParentId,Type,CreateTime,SynId,Turn,Updatetime) values({0},'{1}',{2},{3},{4},{5},{6},{7})", NewNodeId, Title, NewPid, 0, Seconds, SynId, NewTurn,Seconds);
+                    string sql = string.Format("insert into ttree(NodeID,Title,ParentId,Type,CreateTime,SynId,Turn) values({0},'{1}',{2},{3},{4},{5},{6})", NewNodeId, Title, NewPid, 0, Seconds, SynId, NewTurn);
                     AccessAdo.ExecuteNonQuery(sql);
 
                     //插入树节点
@@ -494,7 +494,7 @@ namespace WeCode1._0
                     //相差秒数
                     string Seconds=dt.TotalSeconds.ToString();
                     //插入TTREE
-                    string sql = string.Format("insert into ttree(NodeID,Title,ParentId,Type,CreateTime,SynId,Turn,UpdateTime) values({0},'{1}',{2},{3},{4},{5},{6},{7})", NewNodeId, Title, NewPid, 0, Seconds, SynId, NewTurn,Seconds);
+                    string sql = string.Format("insert into ttree(NodeID,Title,ParentId,Type,CreateTime,SynId,Turn) values({0},'{1}',{2},{3},{4},{5},{6})", NewNodeId, Title, NewPid, 0, Seconds, SynId, NewTurn);
                     AccessAdo.ExecuteNonQuery(sql);
 
                     //插入树节点
@@ -575,10 +575,10 @@ namespace WeCode1._0
                     //相差秒数
                     string Seconds = dt.TotalSeconds.ToString();
                     //插入TTREE
-                    string sql = string.Format("insert into ttree(NodeID,Title,ParentId,Type,CreateTime,SynId,Turn,UpdateTime) values({0},'{1}',{2},{3},{4},{5},{6},{7})", NewNodeId, Title, NewPid, 1, Seconds, SynId, NewTurn,Seconds);
+                    string sql = string.Format("insert into ttree(NodeID,Title,ParentId,Type,CreateTime,SynId,Turn) values({0},'{1}',{2},{3},{4},{5},{6})", NewNodeId, Title, NewPid, 1, Seconds, SynId, NewTurn);
                     AccessAdo.ExecuteNonQuery(sql);
                     //插入TTcontent
-                    sql = string.Format("insert into tcontent(NodeId) values({0})", NewNodeId);
+                    sql = string.Format("insert into tcontent(NodeId,updatetime) values({0},{1})", NewNodeId,Seconds);
                     AccessAdo.ExecuteNonQuery(sql);
 
                     //插入树节点
@@ -627,10 +627,10 @@ namespace WeCode1._0
                     //相差秒数
                     string Seconds = dt.TotalSeconds.ToString();
                     //插入TTREE
-                    string sql = string.Format("insert into ttree(NodeID,Title,ParentId,Type,CreateTime,SynId,Turn,UpdateTime) values({0},'{1}',{2},{3},{4},{5},{6},{7})", NewNodeId, Title, NewPid, 1, Seconds, SynId, NewTurn,Seconds);
+                    string sql = string.Format("insert into ttree(NodeID,Title,ParentId,Type,CreateTime,SynId,Turn) values({0},'{1}',{2},{3},{4},{5},{6})", NewNodeId, Title, NewPid, 1, Seconds, SynId, NewTurn);
                     AccessAdo.ExecuteNonQuery(sql);
                     //插入TTcontent
-                    sql = string.Format("insert into tcontent(NodeId) values({0})", NewNodeId);
+                    sql = string.Format("insert into tcontent(NodeId,updatetime) values({0},{1})", NewNodeId,Seconds);
                     AccessAdo.ExecuteNonQuery(sql);
 
                     //插入树节点
@@ -717,12 +717,6 @@ namespace WeCode1._0
             toolStripMenuItemDel_Click(sender, e);
         }
 
-        
-        private void treeViewDir_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            
-        }
-
         //加入书签
         private void toolStripMenuItemTxtMark_Click(object sender, EventArgs e)
         {
@@ -763,7 +757,7 @@ namespace WeCode1._0
                 if (SeleNode != null)
                 {
                     //更新标题和语言
-                    AccessAdo.ExecuteNonQuery("update ttree set title='"+Title+"',synid="+SynId+",updatetime="+PubFunc.time2TotalSeconds()+" where nodeid="+SeleNode.Tag.ToString());
+                    AccessAdo.ExecuteNonQuery("update ttree set title='"+Title+"',synid="+SynId+" where nodeid="+SeleNode.Tag.ToString());
                     //更新节点信息
                     SeleNode.Text = Title;
                     //打开后设置语言

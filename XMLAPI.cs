@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.Xml;
 using System.Web;
 using System.Collections.Specialized;
+using System.Data.OleDb;
 
 namespace WeCode1._0
 {
@@ -211,12 +212,40 @@ namespace WeCode1._0
 
                 //拉取完了检查升级
                 CheckDb.CheckUpdateXML();
+                //生成目录数据
+                LocalXml2TTree();
 
             }
             catch (Exception msg) //异常处理
             {
                 result = "";
             }
+
+        }
+
+
+        /// <summary>
+        /// 拉取云目录之后重新更新youdao数据库的目录，同时重新更新文章表与附件表
+        /// </summary>
+        public static void LocalXml2TTree()
+        {
+            XML2DB xml2tree = new XML2DB();
+            xml2tree.MakeXML2Tttree();
+
+            //更新文章表和附件表
+            updateAttTcon();
+        }
+
+        /// <summary>
+        /// 根据gid来重新更新nodeid信息，使得缓存数据库可以直接供本地打开
+        /// </summary>
+        public static void updateAttTcon()
+        {
+            OleDbConnection ExportConn = new OleDbConnection(@"db\youdao.mdb");
+            string SQL = "update tcontent inner join ttree on tcontent.gid=ttree.gid set tcontent.nodeid=ttree.nodeid";
+            AccessAdo.ExecuteNonQuery(ExportConn, SQL);
+            SQL = "update tattachment inner join ttree on tattachment.gid=ttree.gid set tattachment.nodeid=ttree.nodeid";
+            AccessAdo.ExecuteNonQuery(ExportConn, SQL);
 
         }
 
