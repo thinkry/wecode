@@ -351,6 +351,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="m.ico" />
+    <None Include="Resources\tongbu.gif" />
     <Content Include="TreeNodeLocal.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

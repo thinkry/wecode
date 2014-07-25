@@ -181,6 +181,31 @@ namespace WeCode1._0
                 }
 
                 int updatetime=PubFunc.time2TotalSeconds();
+
+                //存入缓存数据库
+                OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+
+                OleDbParameter p1 = new OleDbParameter("@Content", OleDbType.VarChar);
+                p1.Value = DocText;
+                OleDbParameter p3 = new OleDbParameter("@path", OleDbType.VarChar);
+                p3.Value = this.NodeId;
+                OleDbParameter p2 = new OleDbParameter("@UpdateTime", OleDbType.Integer);
+                p2.Value = updatetime;
+
+                OleDbParameter[] ArrPara = new OleDbParameter[3];
+                ArrPara[0] = p1;
+                ArrPara[1] = p2;
+                ArrPara[2] = p3;
+                string SQL = "update tcontent set content=@Content,updatetime=@UpdateTime,needSync=1 where path=@path";
+                AccessAdo.ExecuteNonQuery(ExportConn,SQL, ArrPara);
+
+                LastUpdateTime = "最后更新时间：" + PubFunc.seconds2Time(updatetime).ToString();
+                Attachment.frmMain.showFullPathTime("【有道云】" + TreeLocation, LastUpdateTime);
+
+                scintilla1.Modified = false;
+
+
+                /* 本段保存移至同步线程扫描执行，此处直接存储在缓存数据库
                 if (NoteAPI.UpdateNote(this.NodeId, DocText, updatetime.ToString()) == "OK")
                 {
                     LastUpdateTime = "最后更新时间：" + PubFunc.seconds2Time(updatetime).ToString();
@@ -192,6 +217,7 @@ namespace WeCode1._0
                 {
                     MessageBox.Show("保存失败！");
                 }
+                 */
             }
         }
 

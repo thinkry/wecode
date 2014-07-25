@@ -1144,6 +1144,7 @@ namespace WeCode1._0
 
             //设置菜单栏勾选状态
             SetMenuCheck();
+
         }
 
         public void SetMenuCheck()
@@ -1986,6 +1987,60 @@ namespace WeCode1._0
                 //创建完成后导出有道云数据
                 ExportYoudaoForm exportForm = new ExportYoudaoForm(conn);
                 exportForm.Show();
+            }
+        }
+
+        //开启扫描线程（供拉取云目录之后调用）
+        public void BeginSyncThread()
+        {
+            backgroundWorker1.RunWorkerAsync();
+        }
+
+        //后台线程执行
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            bool flag = true;
+            string path = "";
+            string Text = "";
+            int updatetime = 0;
+            int updatetime1 = 0;
+
+            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+            DataTable tempdt;
+            string sql = "";
+            while (flag)
+            {
+                ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+
+                sql = "select top 1 * from tcontent where needsync=1";
+                tempdt=AccessAdo.ExecuteDataSet(ExportConn,sql).Tables[0];
+                if (tempdt.Rows.Count == 0)
+                {
+                    toolStripSplitButton1.Visible = false;
+                    toolStripSplitButton2.Visible = true;
+                    Thread.Sleep(10000);
+                }
+                else
+                {
+                    toolStripSplitButton1.Visible = true;
+                    toolStripSplitButton2.Visible = false;
+
+                    //同步本条数据
+                    path = tempdt.Rows[0]["Path"].ToString();
+                    Text = tempdt.Rows[0]["Content"].ToString();
+                    updatetime = (int)tempdt.Rows[0]["UpdateTime"];
+                    if (NoteAPI.UpdateNote(path, Text, updatetime.ToString()) == "OK")
+                    {
+                        ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                        //同步完成后对比时间，如果没有发生改变则将标志置为0
+                        updatetime1 = (int)AccessAdo.ExecuteScalar(ExportConn, "select updatetime from tcontent where path='" + path + "'");
+                        if (updatetime1 == updatetime)
+                        {
+                            AccessAdo.ExecuteNonQuery(ExportConn, "update tcontent set needSync=0 where path='" + path + "'");
+                        }
+                    }
+
+                }
             }
         }
 

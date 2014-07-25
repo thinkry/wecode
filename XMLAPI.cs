@@ -226,6 +226,7 @@ namespace WeCode1._0
 
         /// <summary>
         /// 拉取云目录之后重新更新youdao数据库的目录，同时重新更新文章表与附件表
+        /// 并且同住主界面开始扫描线程进行同步
         /// </summary>
         public static void LocalXml2TTree()
         {
@@ -234,6 +235,11 @@ namespace WeCode1._0
 
             //更新文章表和附件表
             updateAttTcon();
+
+            //开始扫描线程
+            Attachment.frmMain.BeginSyncThread();
+
+
         }
 
         /// <summary>
@@ -241,8 +247,13 @@ namespace WeCode1._0
         /// </summary>
         public static void updateAttTcon()
         {
-            OleDbConnection ExportConn = new OleDbConnection(@"db\youdao.mdb");
-            string SQL = "update tcontent inner join ttree on tcontent.gid=ttree.gid set tcontent.nodeid=ttree.nodeid";
+            
+            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+
+            string SQL = "update tcontent set nodeid=-2";
+            AccessAdo.ExecuteNonQuery(ExportConn, SQL);
+
+            SQL = "update tcontent inner join ttree on tcontent.gid=ttree.gid set tcontent.nodeid=ttree.nodeid";
             AccessAdo.ExecuteNonQuery(ExportConn, SQL);
             SQL = "update tattachment inner join ttree on tattachment.gid=ttree.gid set tattachment.nodeid=ttree.nodeid";
             AccessAdo.ExecuteNonQuery(ExportConn, SQL);

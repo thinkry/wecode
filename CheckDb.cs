@@ -250,7 +250,7 @@ namespace WeCode1._0
                 AccessAdo.ExecuteNonQuery(conn, crtSQL);
 
                 crtSQL = " CREATE TABLE TContent ( " +
-                " [NodeId] INTEGER CONSTRAINT PK_TTree27 PRIMARY KEY, " +
+                " [NodeId] INTEGER , " +
                 " [Content] MEMO, " +
                 " [Note] MEMO, " +
                 " [Link] MEMO, " +
@@ -261,7 +261,7 @@ namespace WeCode1._0
                 AccessAdo.ExecuteNonQuery(conn, crtSQL);
 
                 crtSQL = " CREATE TABLE TAttachment ( " +
-                " [AffixId] INTEGER CONSTRAINT PK_TTree28 PRIMARY KEY, " +
+                " [AffixId] INTEGER , " +
                 " [NodeId] INTEGER, " +
                 " [Title] VARCHAR, " +
                 " [Data] IMAGE , " +

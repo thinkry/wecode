@@ -16,6 +16,14 @@ namespace WeCode1._0
         //生成目录结构，同时生成文章信息,内容在打开文章时再插入
         public void MakeXML2Tttree()
         {
+
+            //先删除mykey以及ttree表
+            string delSQL = "delete from mykeys";
+            AccessAdo.ExecuteNonQuery(ExportConn, delSQL);
+            delSQL = "delete from ttree";
+            AccessAdo.ExecuteNonQuery(ExportConn, delSQL);
+
+
             //1、先导出秘钥信息
             XmlDocument doc = new XmlDocument();
             doc.Load("TreeNodeLocal.xml");
@@ -163,13 +171,9 @@ namespace WeCode1._0
 
             }
 
-            //2、若文章表里面没有数据，则是第一次生成，目录生成完毕之后插入文章表，否则不再重新插入
-            string sql = "select count(*) from tcontent";
-            if ((int)AccessAdo.ExecuteScalar(ExportConn, sql) == 0)
-            {
-                sql = "insert into tcontent(nodeid,gid,path) select nodeid,gid,path from ttree";
-                AccessAdo.ExecuteNonQuery(ExportConn, sql);
-            }
+            //3、将tcontent中没有的从ttree重新插入
+            string sql = "insert into tcontent(nodeid,updatetime,gid,path) select nodeid,createtime,gid,path from ttree where ttree.type=1 and gid not in (select gid from tcontent)";
+            AccessAdo.ExecuteNonQuery(ExportConn, sql);
 
         }
 
