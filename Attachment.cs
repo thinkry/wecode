@@ -23,6 +23,8 @@ namespace WeCode1._0
         public static string KeyD = "";
         public static string KeyDYouDao = "";
 
+        public static string isYUN2XMLSuccess = "1";
+
         //加密文章是否成功打开
         public static string EncryptdeContentOpenSuccess="1";
 

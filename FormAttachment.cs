@@ -213,7 +213,10 @@ namespace WeCode1._0
             }
             else if (e.Button == MouseButtons.Right && e.RowIndex > -1 && e.ColumnIndex > -1 && Attachment.ActiveDOCType == "online")
             {
-                dataGridView1.CurrentRow.Selected = false;
+                if (dataGridView1.CurrentRow != null)
+                {
+                    dataGridView1.CurrentRow.Selected = false;
+                }
                 dataGridView1.Rows[e.RowIndex].Selected = true;
                 contextMenuStripOL1.Show(MousePosition.X, MousePosition.Y);
             }
@@ -413,6 +416,13 @@ namespace WeCode1._0
             string path = Attachment.ActiveNodeId;
             string rsurl=dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
             NoteAPI.DeleteRource(path, rsurl);
+
+            //更新缓存数据
+            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+            string gid = AccessAdo.ExecuteScalar(ExportConn, "select gid from ttree where path='" + path + "'").ToString();
+            AccessAdo.ExecuteNonQuery(ExportConn, "delete from tattachment where gid='" + gid + "'");
+
+
             ReFreshAttachGrid();
         }
 
@@ -429,6 +439,13 @@ namespace WeCode1._0
             {
                 Title = ReNameDia.ReturnVal[0];
                 NoteAPI.RenameRource(path, rsurl,Title);
+
+                //更新缓存数据
+                OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                string gid = AccessAdo.ExecuteScalar(ExportConn, "select gid from ttree where path='" + path + "'").ToString();
+                AccessAdo.ExecuteNonQuery(ExportConn,"update tattachment set title='" + Title + "' where gid='" + gid+"'");
+
+
                 ReFreshAttachGrid();
             }
             

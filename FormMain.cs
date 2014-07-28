@@ -364,11 +364,66 @@ namespace WeCode1._0
         private DocumentForm OpenFileYouDao(string nodeId, string title, string treeLocation,int imageType)
         {
             Attachment.isnewOpenDoc = "1";
+            string Content;
+            string updatetime;
             //获取文章信息
+            //如果缓存还没更新则提示是从缓存读取还是直接读取有道云
+            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+            string SQL = "select Content,UpdateTime from tcontent where path='" + nodeId + "' and needsync=1";
+            DataTable dt=AccessAdo.ExecuteDataSet(ExportConn,SQL).Tables[0];
+            if (dt.Rows.Count > 0)
+            {
+                //还未同步
+                if (MessageBox.Show("该笔记尚未完成同步，点击确定打开本地文章，取消打开云端文章", "选择信息！", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                {
+                    //打开本地文章
+                    Content = dt.Rows[0]["Content"].ToString();
+                    updatetime = dt.Rows[0]["UpdateTime"].ToString();
 
-            string[] result = NoteAPI.GetNote(nodeId);
-            string Content = result[0];
-            string updatetime ="最后更新时间："+ (PubFunc.seconds2Time(Convert.ToInt32(result[1]))).ToString();
+                }
+                else
+                {
+                    string[] result = NoteAPI.GetNote(nodeId);
+                    Content = result[0];
+                    updatetime = "最后更新时间：" + (PubFunc.seconds2Time(Convert.ToInt32(result[1]))).ToString();
+
+                    //写入缓存
+                    ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+
+                    OleDbParameter p1 = new OleDbParameter("@Content", OleDbType.VarChar);
+                    p1.Value = Content;
+                    OleDbParameter p2 = new OleDbParameter("@path", OleDbType.VarChar);
+                    p2.Value = nodeId;
+
+                    OleDbParameter[] ArrPara = new OleDbParameter[2];
+                    ArrPara[0] = p1;
+                    ArrPara[1] = p2;
+                    SQL = "update tcontent set content=@Content,needSync=0 where path=@path";
+                    AccessAdo.ExecuteNonQuery(ExportConn, SQL, ArrPara);
+                }
+            }
+            else
+            {
+                string[] result = NoteAPI.GetNote(nodeId);
+                Content = result[0];
+                updatetime = "最后更新时间：" + (PubFunc.seconds2Time(Convert.ToInt32(result[1]))).ToString();
+
+                //写入缓存
+                ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+
+                OleDbParameter p1 = new OleDbParameter("@Content", OleDbType.VarChar);
+                p1.Value = Content;
+                OleDbParameter p2 = new OleDbParameter("@path", OleDbType.VarChar);
+                p2.Value = nodeId;
+
+                OleDbParameter[] ArrPara = new OleDbParameter[2];
+                ArrPara[0] = p1;
+                ArrPara[1] = p2;
+                SQL = "update tcontent set content=@Content,needSync=0 where path=@path";
+                AccessAdo.ExecuteNonQuery(ExportConn, SQL, ArrPara);
+            }
+
+
 
 
             if (imageType == 2)
@@ -1908,6 +1963,12 @@ namespace WeCode1._0
                 this.toolStripMenuItemUinfo.Visible = false;
                 Text = "WeCode--未登录";
             }
+        }
+
+
+        public void ShowError(string msg)
+        {
+            MessageBox.Show(msg);
         }
 
 

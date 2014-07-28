@@ -304,6 +304,7 @@ namespace WeCode1._0
             //如果没有选中节点,则新建顶层目录
             if (SeleNode == null || treeViewYouDao.Nodes.Count == 0)
             {
+                //没有节点
                 isCreateRoot = "True";
             }
             else
@@ -359,6 +360,33 @@ namespace WeCode1._0
                     //同步到云端
                     XMLAPI.XML2Yun();
 
+
+                    ////------同步到本地缓存数据库
+                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                    string NewPid = "0";
+                    string NewNodeId = "1";
+                    string NewTurn = "1";
+                    string SynId = PubFunc.Language2Synid(Language);
+
+                    if (IsOnRoot == "True")
+                    {
+                        NewNodeId = AccessAdo.ExecuteScalar(ExportConn, "select max(NodeId) from ttree").ToString();
+                        NewNodeId = NewNodeId == "" ? "1" : (Convert.ToInt32(NewNodeId) + 1).ToString();
+                        NewTurn = AccessAdo.ExecuteScalar(ExportConn, "select max(Turn) from ttree where parentId=" + NewPid).ToString();
+                        NewTurn = NewTurn == "" ? "1" : (Convert.ToInt32(NewTurn) + 1).ToString();
+                    }
+
+
+                    //插入数据库记录
+                    DateTime d1 = DateTime.Parse("1970-01-01 08:00:00");
+                    DateTime d2 = DateTime.Now;
+                    TimeSpan dt = d2 - d1;
+                    //相差秒数
+                    string Seconds = dt.TotalSeconds.ToString();
+                    //插入TTREE
+                    string sql = string.Format("insert into ttree(NodeID,Title,ParentId,Type,CreateTime,SynId,Turn,MarkTime,IsLock,Gid) values({0},'{1}',{2},{3},{4},{5},{6},{7},{8},'{9}')", NewNodeId, Title, NewPid, 0, Seconds, SynId, NewTurn,0,0,sGUID);
+                    AccessAdo.ExecuteNonQuery(ExportConn, sql);
+
                 }
 
                 else if (SeleNode != null)
@@ -399,6 +427,36 @@ namespace WeCode1._0
 
                     //同步到云端
                     XMLAPI.XML2Yun();
+
+
+                    ////------同步到本地缓存数据库
+                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+
+                    string NewPid = AccessAdo.ExecuteScalar(ExportConn, "select nodeid from ttree where gid='" + SeleNode.Name + "'").ToString();
+                    string NewNodeId = AccessAdo.ExecuteScalar(ExportConn,"select max(NodeId) from ttree").ToString();
+                    NewNodeId = NewNodeId == "" ? "1" : (Convert.ToInt32(NewNodeId) + 1).ToString();
+                    string NewTurn = AccessAdo.ExecuteScalar(ExportConn,"select max(Turn) from ttree where parentId=" + NewPid).ToString();
+                    NewTurn = NewTurn == "" ? "1" : (Convert.ToInt32(NewTurn) + 1).ToString();
+                    string SynId = PubFunc.Language2Synid(Language);
+
+                    //顶层
+                    if (IsOnRoot == "True")
+                    {
+                        NewPid = "0";
+                        NewTurn = AccessAdo.ExecuteScalar(ExportConn,"select max(Turn) from ttree where parentId=0").ToString();
+                        NewTurn = NewTurn == "" ? "1" : (Convert.ToInt32(NewTurn) + 1).ToString();
+                    }
+
+                    //插入数据库记录
+                    DateTime d1 = DateTime.Parse("1970-01-01 08:00:00");
+                    DateTime d2 = DateTime.Now;
+                    TimeSpan dt = d2 - d1;
+                    //相差秒数
+                    string Seconds = dt.TotalSeconds.ToString();
+                    //插入TTREE
+                    string sql = string.Format("insert into ttree(NodeID,Title,ParentId,Type,CreateTime,SynId,Turn,MarkTime,IsLock,Gid) values({0},'{1}',{2},{3},{4},{5},{6},{7},{8},'{9}')", NewNodeId, Title, NewPid, 0, Seconds, SynId, NewTurn, 0, 0, sGUID);
+                    AccessAdo.ExecuteNonQuery(ExportConn,sql);
+
                 }
             }
         }
@@ -519,6 +577,27 @@ namespace WeCode1._0
                     //同步到云端
                     XMLAPI.XML2Yun();
 
+
+                    //---------同步到缓存数据库
+                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                    string NewPid = "0";
+                    string NewNodeId = "1";
+                    string NewTurn = "1";
+
+                    //插入数据库记录
+                    DateTime d1 = DateTime.Parse("1970-01-01 08:00:00");
+                    DateTime d2 = DateTime.Now;
+                    TimeSpan dt = d2 - d1;
+                    //相差秒数
+                    string Seconds = dt.TotalSeconds.ToString();
+                    //插入TTREE
+                    string sql = string.Format("insert into ttree(NodeID,Title,Path,ParentId,Type,CreateTime,SynId,Turn,MarkTime,IsLock,Gid) values({0},'{1}','{2}',{3},{4},{5},{6},{7},{8},{9},'{10}')", NewNodeId, Title,Path, NewPid, 1, Seconds, SynId, NewTurn,0,0,sGUID);
+                    AccessAdo.ExecuteNonQuery(ExportConn,sql);
+                    //插入TTcontent
+                    sql = string.Format("insert into tcontent(NodeId,updatetime,Gid,Path,NeedSync) values({0},{1},'{2}','{3}',{4})", NewNodeId, Seconds,sGUID,Path,0);
+                    AccessAdo.ExecuteNonQuery(ExportConn,sql);
+
+
                     //新窗口打开编辑界面
                     string lastTime="最后更新时间："+DateTime.Now.ToString();
                     formParent.openNewYouDao(Path, Title, treeViewYouDao.SelectedNode.FullPath,1);
@@ -570,6 +649,37 @@ namespace WeCode1._0
 
                             //同步到云端
                             XMLAPI.XML2Yun();
+
+                            ////-------------同步到缓存数据库
+                            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                            string NewPid = AccessAdo.ExecuteScalar(ExportConn, "select nodeid from ttree where gid='" + SeleNode.Name + "'").ToString();
+                            string NewNodeId = AccessAdo.ExecuteScalar(ExportConn,"select max(NodeId) from ttree").ToString();
+                            NewNodeId = NewNodeId == "" ? "1" : (Convert.ToInt32(NewNodeId) + 1).ToString();
+                            string NewTurn = AccessAdo.ExecuteScalar(ExportConn,"select max(Turn) from ttree where parentId=" + NewPid).ToString();
+                            NewTurn = NewTurn == "" ? "1" : (Convert.ToInt32(NewTurn) + 1).ToString();
+
+                            //顶层
+                            if (IsOnRoot == "True")
+                            {
+                                NewPid = "0";
+                                NewTurn = AccessAdo.ExecuteScalar(ExportConn,"select max(Turn) from ttree where parentId=0").ToString();
+                                NewTurn = NewTurn == "" ? "1" : (Convert.ToInt32(NewTurn) + 1).ToString();
+                            }
+
+                            //插入数据库记录
+                            DateTime d1 = DateTime.Parse("1970-01-01 08:00:00");
+                            DateTime d2 = DateTime.Now;
+                            TimeSpan dt = d2 - d1;
+                            //相差秒数
+                            string Seconds = dt.TotalSeconds.ToString();
+                            //插入TTREE
+                            string sql = string.Format("insert into ttree(NodeID,Title,path,ParentId,Type,CreateTime,SynId,Turn,MarkTime,IsLock,Gid) values({0},'{1}','{2}',{3},{4},{5},{6},{7},{8},{9},'{10}')", NewNodeId, Title,Path, NewPid, 1, Seconds, SynId, NewTurn,0,0,sGUID);
+                            AccessAdo.ExecuteNonQuery(ExportConn,sql);
+                            //插入TTcontent
+                            sql = string.Format("insert into tcontent(NodeId,updatetime,Gid,Path,NeedSync) values({0},{1},'{2}','{3}',{4})", NewNodeId, Seconds, sGUID, Path, 0);
+                            AccessAdo.ExecuteNonQuery(ExportConn,sql);
+
+
 
                             //新窗口打开编辑界面
                             string lastTime = "最后更新时间：" + DateTime.Now.ToString();
@@ -625,6 +735,38 @@ namespace WeCode1._0
                             //同步到云端
                             XMLAPI.XML2Yun();
 
+
+                            ////-------------同步到缓存数据库
+                            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                            string NewPid = AccessAdo.ExecuteScalar(ExportConn, "select nodeid from ttree where gid='" + SeleNode.Name + "'").ToString();
+                            string NewNodeId = AccessAdo.ExecuteScalar(ExportConn, "select max(NodeId) from ttree").ToString();
+                            NewNodeId = NewNodeId == "" ? "1" : (Convert.ToInt32(NewNodeId) + 1).ToString();
+                            string NewTurn = AccessAdo.ExecuteScalar(ExportConn, "select max(Turn) from ttree where parentId=" + NewPid).ToString();
+                            NewTurn = NewTurn == "" ? "1" : (Convert.ToInt32(NewTurn) + 1).ToString();
+
+                            //顶层
+                            if (IsOnRoot == "True")
+                            {
+                                NewPid = "0";
+                                NewTurn = AccessAdo.ExecuteScalar(ExportConn, "select max(Turn) from ttree where parentId=0").ToString();
+                                NewTurn = NewTurn == "" ? "1" : (Convert.ToInt32(NewTurn) + 1).ToString();
+                            }
+
+                            //插入数据库记录
+                            DateTime d1 = DateTime.Parse("1970-01-01 08:00:00");
+                            DateTime d2 = DateTime.Now;
+                            TimeSpan dt = d2 - d1;
+                            //相差秒数
+                            string Seconds = dt.TotalSeconds.ToString();
+                            //插入TTREE
+                            string sql = string.Format("insert into ttree(NodeID,Title,Path,ParentId,Type,CreateTime,SynId,Turn,MarkTime,IsLock,Gid) values({0},'{1}','{2}',{3},{4},{5},{6},{7},{8},{9},'{10}')", NewNodeId, Title,Path, NewPid, 1, Seconds, SynId, NewTurn, 0, 0, sGUID);
+                            AccessAdo.ExecuteNonQuery(ExportConn, sql);
+                            //插入TTcontent
+                            sql = string.Format("insert into tcontent(NodeId,updatetime,Gid,Path,NeedSync) values({0},{1},'{2}','{3}',{4})", NewNodeId, Seconds, sGUID, Path, 0);
+                            AccessAdo.ExecuteNonQuery(ExportConn, sql);
+
+
+
                             //新窗口打开编辑界面
                             string lastTime = "最后更新时间：" + DateTime.Now.ToString();
                             formParent.openNewYouDao(Path, Title, treeViewYouDao.SelectedNode.FullPath,1);
@@ -659,6 +801,10 @@ namespace WeCode1._0
             //先查找到所选节点下面所有的文章进行删除
             //删除云数据
             DelNodeData(SeleNode.Name);
+
+            //更新缓存数据
+            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+            DelLocalData(AccessAdo.ExecuteScalar(ExportConn,"select nodeid from ttree where gid='"+SeleNode.Name+"'").ToString());
 
             //移除树节点
             treeViewYouDao.Nodes.Remove(SeleNode);
@@ -708,6 +854,30 @@ namespace WeCode1._0
             seleNode.ParentNode.RemoveChild(seleNode);
             doc.Save("TreeNodeLocal.xml");
             XMLAPI.XML2Yun();
+
+        }
+        
+
+        //删除本地缓存数据
+        public void DelLocalData(string NodeId)
+        {
+            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+            string SQL = string.Format("select NodeId from Ttree where parentId={0}", NodeId);
+            DataTable temp = AccessAdo.ExecuteDataSet(ExportConn,SQL).Tables[0];
+            DataView dv = new DataView(temp);
+            foreach (DataRowView drv in dv)
+            {
+                DelLocalData(drv["NodeId"].ToString());
+            }
+
+            ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+            string DelSQL = string.Format("Delete from TAttachment where NodeId={0}", NodeId);
+            AccessAdo.ExecuteNonQuery(ExportConn,DelSQL);
+            DelSQL = string.Format("Delete from Tcontent where NodeId={0}", NodeId);
+            AccessAdo.ExecuteNonQuery(ExportConn,DelSQL);
+            DelSQL = string.Format("Delete from Ttree where NodeId={0}", NodeId);
+            AccessAdo.ExecuteNonQuery(ExportConn,DelSQL);
+
 
         }
 
@@ -851,6 +1021,12 @@ namespace WeCode1._0
                     preNode.Attributes["Language"].Value = Language;
                     doc.Save("TreeNodeLocal.xml");
                     XMLAPI.XML2Yun();
+
+                    //更新缓存数据
+                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                    string SQL = "update ttree set title='" + Title + "',SynId=" + SynId + " where gid='" + SeleNode.Name + "'";
+                    AccessAdo.ExecuteNonQuery(ExportConn, SQL);
+
                     //更新节点信息
                     SeleNode.Text = Title;
                     if (SeleNode.ImageIndex == 0)
@@ -897,6 +1073,12 @@ namespace WeCode1._0
             preNode.Attributes["isMark"].Value = "1";
             doc.Save("TreeNodeLocal.xml");
             XMLAPI.XML2Yun();
+
+            //更新缓存数据
+            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+            string SQL = "update ttree set marktime=1 where gid='" + SeleNode.Name + "'";
+            AccessAdo.ExecuteNonQuery(ExportConn, SQL);
+
         }
 
         private void YouDaoTree_Activated(object sender, EventArgs e)
@@ -1258,6 +1440,20 @@ namespace WeCode1._0
                     doc.Save("TreeNodeLocal.xml");
                     XMLAPI.XML2Yun();
 
+                    //---------更新缓存数据
+                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                    OleDbParameter p1 = new OleDbParameter("@Content", OleDbType.VarChar);
+                    p1.Value = EncrptyedContent;
+                    OleDbParameter p2 = new OleDbParameter("@Gid", OleDbType.VarChar);
+                    p2.Value = SeleNode.Name;
+
+                    OleDbParameter[] ArrPara = new OleDbParameter[2];
+                    ArrPara[0] = p1;
+                    ArrPara[1] = p2;
+                    string SQL = "update tcontent set content=@Content where Gid=@Gid";
+                    AccessAdo.ExecuteNonQuery(ExportConn,SQL, ArrPara);
+                    AccessAdo.ExecuteNonQuery(ExportConn,"update ttree set IsLock=1 where Gid='" + SeleNode.Name+"'");
+
                     SeleNode.ImageIndex = 2;
                     SeleNode.SelectedImageIndex = 2;
 
@@ -1335,6 +1531,22 @@ namespace WeCode1._0
                     preNode.Attributes["IsLock"].Value = "0";
                     doc.Save("TreeNodeLocal.xml");
                     XMLAPI.XML2Yun();
+
+
+                    //---------更新缓存数据
+                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                    OleDbParameter p1 = new OleDbParameter("@Content", OleDbType.VarChar);
+                    p1.Value = DecrptyedContent;
+                    OleDbParameter p2 = new OleDbParameter("@Gid", OleDbType.VarChar);
+                    p2.Value = SeleNode.Name;
+
+                    OleDbParameter[] ArrPara = new OleDbParameter[2];
+                    ArrPara[0] = p1;
+                    ArrPara[1] = p2;
+                    string SQL = "update tcontent set content=@Content where Gid=@Gid";
+                    AccessAdo.ExecuteNonQuery(ExportConn, SQL, ArrPara);
+                    AccessAdo.ExecuteNonQuery(ExportConn, "update ttree set IsLock=0 where Gid='" + SeleNode.Name + "'");
+
 
                     SeleNode.ImageIndex = 1;
                     SeleNode.SelectedImageIndex = 1;

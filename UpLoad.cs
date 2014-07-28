@@ -10,6 +10,7 @@ using System.Net;
 using System.Configuration;
 using Newtonsoft.Json.Linq;
 using System.Threading;
+using System.Data.OleDb;
 
 namespace WeCode1._0
 {
@@ -60,6 +61,57 @@ namespace WeCode1._0
                     string fileUrl = jo["url"].ToString();
                     //更新笔记
                     NoteAPI.UpdateRource(fileUrl, _length, _Filename, _notepath);
+
+                    //更新缓存数据
+                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                    FileStream fs = new FileStream(_Path, FileMode.Open, FileAccess.Read);
+                    byte[] data = new byte[fs.Length];
+                    fs.Read(data, 0, (int)fs.Length);
+
+                    int Datalength = (int)fs.Length;
+                    fs.Close();
+
+                    string NewAffixid = AccessAdo.ExecuteScalar(ExportConn,"select max(affixid) from tattachment").ToString();
+                    int intNewAffixid = NewAffixid == "" ? 1 : Convert.ToInt32(NewAffixid) + 1;
+
+                    int Nodeid = (int)AccessAdo.ExecuteScalar(ExportConn, "select nodeid from ttree where path='" + _notepath + "'");
+                    string Title = _Filename;
+                    int timeSeconds = PubFunc.time2TotalSeconds();
+
+                    //affixid
+                    OleDbParameter p1 = new OleDbParameter("@affixid", OleDbType.Integer);
+                    p1.Value = intNewAffixid;
+                    //nodeid
+                    OleDbParameter p2 = new OleDbParameter("@nodeid", OleDbType.Integer);
+                    p2.Value = Nodeid;
+                    //title
+                    OleDbParameter p3 = new OleDbParameter("@title", OleDbType.VarChar);
+                    p3.Value = Title;
+                    //二进制数据
+                    OleDbParameter p4 = new OleDbParameter("@Data", OleDbType.Binary);
+                    p4.Value = data;
+                    //size
+                    OleDbParameter p5 = new OleDbParameter("@size", OleDbType.Integer);
+                    p5.Value = Datalength;
+                    //time
+                    OleDbParameter p6 = new OleDbParameter("@time", OleDbType.Integer);
+                    p6.Value = timeSeconds;
+                    OleDbParameter p7 = new OleDbParameter("@gid", OleDbType.VarChar);
+                    p7.Value = AccessAdo.ExecuteScalar(ExportConn,"select gid from ttree where path='"+_notepath+"'").ToString();
+
+                    OleDbParameter[] arrPara = new OleDbParameter[7];
+                    arrPara[0] = p1;
+                    arrPara[1] = p2;
+                    arrPara[2] = p3;
+                    arrPara[3] = p4;
+                    arrPara[4] = p5;
+                    arrPara[5] = p6;
+                    arrPara[6] = p7;
+                    string SQL = "insert into tattachment values(@affixid,@nodeid,@title,@Data,@size,@time,@gid)";
+                    AccessAdo.ExecuteNonQuery(ExportConn,SQL, arrPara);
+
+
+
                     MessageBox.Show("上传成功！");
                     Attachment.AttForm.ReFreshAttachGrid();
                     this.Close();

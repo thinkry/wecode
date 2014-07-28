@@ -89,6 +89,19 @@ namespace WeCode1._0
                 xDoc.Save("TreeNodeLocal.xml");
                 XMLAPI.XML2Yun();
 
+                //更新缓存数据
+                OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                OleDbParameter p1 = new OleDbParameter("@KeyE", OleDbType.VarChar);
+                p1.Value = keyE;
+                OleDbParameter p2 = new OleDbParameter("@KeyD5", OleDbType.VarChar);
+                p2.Value = keyDmd5;
+
+                OleDbParameter[] ArrPara = new OleDbParameter[2];
+                ArrPara[0] = p1;
+                ArrPara[1] = p2;
+                string SQL = "insert into MyKeys(KeyE,KeyD5) values(@KeyE,@KeyD5)";
+                AccessAdo.ExecuteNonQuery(ExportConn,SQL, ArrPara);
+
                 //临时存储keyD到内存，避免每次加密文章输入密码
                 Attachment.KeyDYouDao = keyD;
 
