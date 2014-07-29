@@ -163,8 +163,7 @@ namespace WeCode1._0
         {
             //创建一个SqlCommand对象，并对其进行初始化
             OleDbCommand cmd = new OleDbCommand();
-            using (OleDbConnection conn = connection)
-            {
+            OleDbConnection conn = connection;
                 PrepareCommand(cmd, conn, null, cmdText, commandParameters);
                 //创建SqlDataAdapter对象以及DataSet
                 OleDbDataAdapter da = new OleDbDataAdapter(cmd);
@@ -184,7 +183,6 @@ namespace WeCode1._0
                     conn.Close();
                     throw;
                 }
-            }
         }
 
 

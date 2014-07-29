@@ -55,7 +55,7 @@ namespace WeCode1._0
                 ArrPara[0] = p1;
                 ArrPara[1] = p2;
                 string SQL = "insert into MyKeys(KeyE,KeyD5) values(@KeyE,@KeyD5)";
-                AccessAdo.ExecuteNonQuery(ExportConn,SQL, ArrPara);
+                AccessAdo.ExecuteNonQuery(ExportConn, SQL, ArrPara);
 
             }
 
@@ -77,6 +77,7 @@ namespace WeCode1._0
                     string createtime = cNode.Attributes["createtime"].Value;
                     string islock = cNode.Attributes["IsLock"].Value;
                     string ismark = cNode.Attributes["isMark"].Value;
+                    string id = cNode.Attributes["id"].Value;
                     int nodeid = this.iNodeId;
 
                     OleDbParameter p1 = new OleDbParameter("@NodeId", OleDbType.Integer);
@@ -99,8 +100,10 @@ namespace WeCode1._0
                     p9.Value = ismark;
                     OleDbParameter p10 = new OleDbParameter("@islock", OleDbType.Integer);
                     p10.Value = islock;
+                    OleDbParameter p11 = new OleDbParameter("@gid", OleDbType.VarChar);
+                    p11.Value = id;
 
-                    OleDbParameter[] ArrPara = new OleDbParameter[10];
+                    OleDbParameter[] ArrPara = new OleDbParameter[11];
                     ArrPara[0] = p1;
                     ArrPara[1] = p2;
                     ArrPara[2] = p3;
@@ -111,9 +114,10 @@ namespace WeCode1._0
                     ArrPara[7] = p8;
                     ArrPara[8] = p9;
                     ArrPara[9] = p10;
+                    ArrPara[10] = p11;
 
-                    string SQL = "insert into ttree(NodeID,Title,path,ParentId,Type,CreateTime,SynId,Turn,MarkTime,UpdateTime,IsLock) "+
-                                " values(@NodeId,@Title,@path,@parentid,@Type,@createtime,@SysId,@turn,@marktime,@islock) ";
+                    string SQL = "insert into ttree(NodeID,Title,path,ParentId,Type,CreateTime,SynId,Turn,MarkTime,IsLock,gid) " +
+                                " values(@NodeId,@Title,@path,@parentid,@Type,@createtime,@SysId,@turn,@marktime,@islock,@gid) ";
                     AccessAdo.ExecuteNonQuery(ExportConn, SQL, ArrPara);
 
                     this.iNodeId++;
@@ -127,6 +131,7 @@ namespace WeCode1._0
                     string title = cNode.Attributes["title"].Value;
                     string Language = cNode.Attributes["Language"].Value;
                     string SysId = PubFunc.Language2Synid(Language);
+                    string id = cNode.Attributes["id"].Value;
                     int nodeid = this.iNodeId;
 
                     OleDbParameter p1 = new OleDbParameter("@NodeId", OleDbType.Integer);
@@ -149,8 +154,10 @@ namespace WeCode1._0
                     p9.Value = 0;
                     OleDbParameter p10 = new OleDbParameter("@islock", OleDbType.Integer);
                     p10.Value = 0;
+                    OleDbParameter p11 = new OleDbParameter("@gid", OleDbType.VarChar);
+                    p11.Value = id;
 
-                    OleDbParameter[] ArrPara = new OleDbParameter[10];
+                    OleDbParameter[] ArrPara = new OleDbParameter[11];
                     ArrPara[0] = p1;
                     ArrPara[1] = p2;
                     ArrPara[2] = p3;
@@ -161,9 +168,10 @@ namespace WeCode1._0
                     ArrPara[7] = p8;
                     ArrPara[8] = p9;
                     ArrPara[9] = p10;
+                    ArrPara[10] = p11;
 
-                    string SQL = "insert into ttree(NodeID,Title,path,ParentId,Type,CreateTime,SynId,Turn,MarkTime,UpdateTime,IsLock) " +
-                                " values(@NodeId,@Title,@path,@parentid,@Type,@createtime,@SysId,@turn,@marktime,@islock) ";
+                    string SQL = "insert into ttree(NodeID,Title,path,ParentId,Type,CreateTime,SynId,Turn,MarkTime,IsLock,gid) " +
+                                " values(@NodeId,@Title,@path,@parentid,@Type,@createtime,@SysId,@turn,@marktime,@islock,@gid) ";
                     AccessAdo.ExecuteNonQuery(ExportConn, SQL, ArrPara);
 
                     this.iNodeId++;
@@ -174,13 +182,60 @@ namespace WeCode1._0
 
             }
 
+            //3、将tcontent中没有的从ttree重新插入
+            string sql = "insert into tcontent(nodeid,updatetime,gid,path) select nodeid,createtime,gid,path from ttree where ttree.type=1 and gid not in (select gid from tcontent)";
+            AccessAdo.ExecuteNonQuery(ExportConn, sql);
+
+
+            //4、开始从云端获取文章以及附件信息
+            //附件ID
+            int Affid = 1;
+            sql = "select * from tcontent";
+            DataTable dt = AccessAdo.ExecuteDataSet(ExportConn, sql).Tables[0];
+            int RowCount = dt.Rows.Count;
+            for (int i = 0; i < RowCount; i++)
+            {
+                string path = dt.Rows[i]["Path"].ToString();
+                string nodeid = dt.Rows[i]["NodeId"].ToString();
+                string[] result = NoteAPI.GetNote(path);
+                string content=result[0];
+                int updatetime = Convert.ToInt32(result[1]);
+
+                OleDbParameter p1 = new OleDbParameter("@Content", OleDbType.VarChar);
+                p1.Value = content;
+                OleDbParameter p2 = new OleDbParameter("@UpdateTime", OleDbType.Integer);
+                p2.Value = updatetime;
+                OleDbParameter p3 = new OleDbParameter("@path", OleDbType.VarChar);
+                p3.Value = path;
+
+                OleDbParameter[] ArrPara = new OleDbParameter[3];
+                ArrPara[0] = p1;
+                ArrPara[1] = p2;
+                ArrPara[2] = p3;
+                sql = "update tcontent set content=@Content,updatetime=@UpdateTime where path=@path";
+                AccessAdo.ExecuteNonQuery(ExportConn, sql, ArrPara);
+
+                //有道附件
+                XmlDocument xDoc = NoteAPI.GetResourceWithXML(nodeid);
+                string fileUrl,title;
+                int length;
+                foreach (XmlNode xNode in xDoc.DocumentElement.ChildNodes)
+                {
+                    fileUrl = xNode.Attributes["path"].Value;
+                    title = xNode.Attributes["title"].Value;
+                    length = Convert.ToInt32(xNode.Attributes["filelength"].Value);
+                    //下载附件数据
+ 
+                }
+                
+            }
+
         }
 
         //递归方法
-        private void addTreeNode(XmlNode xmlNode,int pid)
+        private void addTreeNode(XmlNode xmlNode, int pid)
         {
             XmlNode xNode;
-            TreeNode tNode;
             XmlNodeList xNodeList;
 
             if (xmlNode.HasChildNodes) //The current node has children
@@ -199,6 +254,7 @@ namespace WeCode1._0
                         string createtime = xNode.Attributes["createtime"].Value;
                         string islock = xNode.Attributes["IsLock"].Value;
                         string ismark = xNode.Attributes["isMark"].Value;
+                        string id = xNode.Attributes["id"].Value;
                         int nodeid = this.iNodeId;
 
                         OleDbParameter p1 = new OleDbParameter("@NodeId", OleDbType.Integer);
@@ -216,13 +272,15 @@ namespace WeCode1._0
                         OleDbParameter p7 = new OleDbParameter("@SysId", OleDbType.Integer);
                         p7.Value = SysId;
                         OleDbParameter p8 = new OleDbParameter("@turn", OleDbType.Integer);
-                        p8.Value = x+1;
+                        p8.Value = x + 1;
                         OleDbParameter p9 = new OleDbParameter("@marktime", OleDbType.Integer);
                         p9.Value = ismark;
                         OleDbParameter p10 = new OleDbParameter("@islock", OleDbType.Integer);
                         p10.Value = islock;
+                        OleDbParameter p11 = new OleDbParameter("@gid", OleDbType.VarChar);
+                        p11.Value = id;
 
-                        OleDbParameter[] ArrPara = new OleDbParameter[10];
+                        OleDbParameter[] ArrPara = new OleDbParameter[11];
                         ArrPara[0] = p1;
                         ArrPara[1] = p2;
                         ArrPara[2] = p3;
@@ -233,9 +291,10 @@ namespace WeCode1._0
                         ArrPara[7] = p8;
                         ArrPara[8] = p9;
                         ArrPara[9] = p10;
+                        ArrPara[10] = p11;
 
-                        string SQL = "insert into ttree(NodeID,Title,path,ParentId,Type,CreateTime,SynId,Turn,MarkTime,UpdateTime,IsLock) " +
-                                    " values(@NodeId,@Title,@path,@parentid,@Type,@createtime,@SysId,@turn,@marktime,@islock) ";
+                        string SQL = "insert into ttree(NodeID,Title,path,ParentId,Type,CreateTime,SynId,Turn,MarkTime,IsLock,gid) " +
+                                    " values(@NodeId,@Title,@path,@parentid,@Type,@createtime,@SysId,@turn,@marktime,@islock,@gid) ";
                         AccessAdo.ExecuteNonQuery(ExportConn, SQL, ArrPara);
 
                         this.iNodeId++;
@@ -247,6 +306,7 @@ namespace WeCode1._0
                         string title = xNode.Attributes["title"].Value;
                         string Language = xNode.Attributes["Language"].Value;
                         string SysId = PubFunc.Language2Synid(Language);
+                        string id = xNode.Attributes["id"].Value;
                         int nodeid = this.iNodeId;
 
                         OleDbParameter p1 = new OleDbParameter("@NodeId", OleDbType.Integer);
@@ -264,13 +324,15 @@ namespace WeCode1._0
                         OleDbParameter p7 = new OleDbParameter("@SysId", OleDbType.Integer);
                         p7.Value = SysId;
                         OleDbParameter p8 = new OleDbParameter("@turn", OleDbType.Integer);
-                        p8.Value = x+1;
+                        p8.Value = x + 1;
                         OleDbParameter p9 = new OleDbParameter("@marktime", OleDbType.Integer);
                         p9.Value = 0;
                         OleDbParameter p10 = new OleDbParameter("@islock", OleDbType.Integer);
                         p10.Value = 0;
+                        OleDbParameter p11 = new OleDbParameter("@gid", OleDbType.VarChar);
+                        p11.Value = id;
 
-                        OleDbParameter[] ArrPara = new OleDbParameter[10];
+                        OleDbParameter[] ArrPara = new OleDbParameter[11];
                         ArrPara[0] = p1;
                         ArrPara[1] = p2;
                         ArrPara[2] = p3;
@@ -281,16 +343,17 @@ namespace WeCode1._0
                         ArrPara[7] = p8;
                         ArrPara[8] = p9;
                         ArrPara[9] = p10;
+                        ArrPara[10] = p11;
 
-                        string SQL = "insert into ttree(NodeID,Title,path,ParentId,Type,CreateTime,SynId,Turn,MarkTime,UpdateTime,IsLock) " +
-                                    " values(@NodeId,@Title,@path,@parentid,@Type,@createtime,@SysId,@turn,@marktime,@islock) ";
+                        string SQL = "insert into ttree(NodeID,Title,path,ParentId,Type,CreateTime,SynId,Turn,MarkTime,IsLock,gid) " +
+                                    " values(@NodeId,@Title,@path,@parentid,@Type,@createtime,@SysId,@turn,@marktime,@islock,@gid) ";
                         AccessAdo.ExecuteNonQuery(ExportConn, SQL, ArrPara);
 
                         this.iNodeId++;
 
                         addTreeNode(xNode, nodeid);
                     }
-                    
+
                 }
             }
         }
