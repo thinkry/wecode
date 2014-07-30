@@ -279,6 +279,19 @@ namespace WeCode1._0
                 progressBar1.Value = i + 1;
                 
             }
+
+            //5、删除多余的字段
+            sql = "alter table ttree drop COLUMN Path";
+            AccessAdo.ExecuteNonQuery(ExportConn, sql);
+            sql = "alter table ttree drop COLUMN gid";
+            AccessAdo.ExecuteNonQuery(ExportConn, sql);
+            sql = "alter table tcontent drop COLUMN Path";
+            AccessAdo.ExecuteNonQuery(ExportConn, sql);
+            sql = "alter table tcontent drop COLUMN gid";
+            AccessAdo.ExecuteNonQuery(ExportConn, sql);
+            sql = "alter table tattachment drop COLUMN gid";
+            AccessAdo.ExecuteNonQuery(ExportConn, sql);
+
             MessageBox.Show("导出完成！");
             //关闭数据库连接
             if (ExportConn.State != ConnectionState.Closed)
