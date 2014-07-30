@@ -1262,14 +1262,16 @@ namespace WeCode1._0
         //退出
         private void toolStripMenuItemExit_Click(object sender, EventArgs e)
         {
-
-            //若没有同步完成则禁止退出
-            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
-            DataTable dt = AccessAdo.ExecuteDataSet(ExportConn, "select * from tcontent where needSync=1").Tables[0];
-            if (dt.Rows.Count > 0)
+            if (Attachment.IsTokeneffective == 1)
             {
-                MessageBox.Show("存在未同步完成的云笔记，请不要退出！");
-                return;
+                //若没有同步完成则禁止退出
+                OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                DataTable dt = AccessAdo.ExecuteDataSet(ExportConn, "select * from tcontent where needSync=1").Tables[0];
+                if (dt.Rows.Count > 0)
+                {
+                    MessageBox.Show("存在未同步完成的云笔记，请不要退出！");
+                    return;
+                }
             }
 
             //先判断查找是否显示，显示先隐藏
