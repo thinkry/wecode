@@ -30,21 +30,21 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            WeifenLuo.WinFormsUI.Docking.DockPanelSkin dockPanelSkin4 = new WeifenLuo.WinFormsUI.Docking.DockPanelSkin();
-            WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin autoHideStripSkin4 = new WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin();
-            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient10 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient22 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin dockPaneStripSkin4 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin();
-            WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient dockPaneStripGradient4 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient23 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient11 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient24 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient dockPaneStripToolWindowGradient4 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient25 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient26 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient12 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient27 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient28 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.DockPanelSkin dockPanelSkin1 = new WeifenLuo.WinFormsUI.Docking.DockPanelSkin();
+            WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin autoHideStripSkin1 = new WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin();
+            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient1 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient1 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin dockPaneStripSkin1 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin();
+            WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient dockPaneStripGradient1 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient2 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient2 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient3 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient dockPaneStripToolWindowGradient1 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient4 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient5 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient3 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient6 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient7 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItemFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemNewDB = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,6 +60,11 @@
             this.toolStripMenuItemDelAllMark = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemUinfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemLogin = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemChgYoudaoPSW = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemYoudaoExport = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemUndo = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemRedo = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,9 +92,6 @@
             this.toolStripMenuItemResZoom = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemFont = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemUser = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemUinfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemLogin = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
@@ -127,8 +129,6 @@
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.toolStripMenuItemChgYoudaoPSW = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemYoudaoExport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMain.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.statusStripMain.SuspendLayout();
@@ -262,6 +262,52 @@
             this.toolStripMenuItemExit.Size = new System.Drawing.Size(225, 22);
             this.toolStripMenuItemExit.Text = "退出(&X)";
             this.toolStripMenuItemExit.Click += new System.EventHandler(this.toolStripMenuItemExit_Click);
+            // 
+            // toolStripMenuItemUser
+            // 
+            this.toolStripMenuItemUser.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemUinfo,
+            this.toolStripMenuItemLogin,
+            this.toolStripMenuItemChgYoudaoPSW,
+            this.toolStripMenuItemYoudaoExport});
+            this.toolStripMenuItemUser.Name = "toolStripMenuItemUser";
+            this.toolStripMenuItemUser.Size = new System.Drawing.Size(73, 21);
+            this.toolStripMenuItemUser.Text = "云笔记(&U)";
+            this.toolStripMenuItemUser.Click += new System.EventHandler(this.toolStripMenuItemAuthor_Click);
+            // 
+            // toolStripMenuItemUinfo
+            // 
+            this.toolStripMenuItemUinfo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemUinfo.Image")));
+            this.toolStripMenuItemUinfo.Name = "toolStripMenuItemUinfo";
+            this.toolStripMenuItemUinfo.Size = new System.Drawing.Size(184, 22);
+            this.toolStripMenuItemUinfo.Text = "有道云账号信息...";
+            this.toolStripMenuItemUinfo.Visible = false;
+            this.toolStripMenuItemUinfo.Click += new System.EventHandler(this.toolStripMenuItemUinfo_Click);
+            // 
+            // toolStripMenuItemLogin
+            // 
+            this.toolStripMenuItemLogin.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemLogin.Image")));
+            this.toolStripMenuItemLogin.Name = "toolStripMenuItemLogin";
+            this.toolStripMenuItemLogin.Size = new System.Drawing.Size(184, 22);
+            this.toolStripMenuItemLogin.Text = "登录有道云...";
+            this.toolStripMenuItemLogin.Visible = false;
+            this.toolStripMenuItemLogin.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            // 
+            // toolStripMenuItemChgYoudaoPSW
+            // 
+            this.toolStripMenuItemChgYoudaoPSW.Name = "toolStripMenuItemChgYoudaoPSW";
+            this.toolStripMenuItemChgYoudaoPSW.Size = new System.Drawing.Size(184, 22);
+            this.toolStripMenuItemChgYoudaoPSW.Text = "修改云笔记加密密码";
+            this.toolStripMenuItemChgYoudaoPSW.Visible = false;
+            this.toolStripMenuItemChgYoudaoPSW.Click += new System.EventHandler(this.toolStripMenuItemChgYoudaoPSW_Click);
+            // 
+            // toolStripMenuItemYoudaoExport
+            // 
+            this.toolStripMenuItemYoudaoExport.Name = "toolStripMenuItemYoudaoExport";
+            this.toolStripMenuItemYoudaoExport.Size = new System.Drawing.Size(184, 22);
+            this.toolStripMenuItemYoudaoExport.Text = "云笔记同步到本地";
+            this.toolStripMenuItemYoudaoExport.Visible = false;
+            this.toolStripMenuItemYoudaoExport.Click += new System.EventHandler(this.toolStripMenuItemYoudaoExport_Click);
             // 
             // toolStripMenuItemEdit
             // 
@@ -493,36 +539,6 @@
             this.toolStripMenuItemFont.Size = new System.Drawing.Size(173, 22);
             this.toolStripMenuItemFont.Text = "源代码字体(&F)";
             this.toolStripMenuItemFont.Click += new System.EventHandler(this.toolStripMenuItemFont_Click);
-            // 
-            // toolStripMenuItemUser
-            // 
-            this.toolStripMenuItemUser.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemUinfo,
-            this.toolStripMenuItemLogin,
-            this.toolStripMenuItemChgYoudaoPSW,
-            this.toolStripMenuItemYoudaoExport});
-            this.toolStripMenuItemUser.Name = "toolStripMenuItemUser";
-            this.toolStripMenuItemUser.Size = new System.Drawing.Size(73, 21);
-            this.toolStripMenuItemUser.Text = "云笔记(&U)";
-            this.toolStripMenuItemUser.Click += new System.EventHandler(this.toolStripMenuItemAuthor_Click);
-            // 
-            // toolStripMenuItemUinfo
-            // 
-            this.toolStripMenuItemUinfo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemUinfo.Image")));
-            this.toolStripMenuItemUinfo.Name = "toolStripMenuItemUinfo";
-            this.toolStripMenuItemUinfo.Size = new System.Drawing.Size(184, 22);
-            this.toolStripMenuItemUinfo.Text = "有道云账号信息...";
-            this.toolStripMenuItemUinfo.Visible = false;
-            this.toolStripMenuItemUinfo.Click += new System.EventHandler(this.toolStripMenuItemUinfo_Click);
-            // 
-            // toolStripMenuItemLogin
-            // 
-            this.toolStripMenuItemLogin.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemLogin.Image")));
-            this.toolStripMenuItemLogin.Name = "toolStripMenuItemLogin";
-            this.toolStripMenuItemLogin.Size = new System.Drawing.Size(184, 22);
-            this.toolStripMenuItemLogin.Text = "登录有道云...";
-            this.toolStripMenuItemLogin.Visible = false;
-            this.toolStripMenuItemLogin.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripMenuItemHelp
             // 
@@ -838,53 +854,53 @@
             this.dockPanel1.Location = new System.Drawing.Point(0, 50);
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.Size = new System.Drawing.Size(866, 492);
-            dockPanelGradient10.EndColor = System.Drawing.SystemColors.ControlLight;
-            dockPanelGradient10.StartColor = System.Drawing.SystemColors.ControlLight;
-            autoHideStripSkin4.DockStripGradient = dockPanelGradient10;
-            tabGradient22.EndColor = System.Drawing.SystemColors.Control;
-            tabGradient22.StartColor = System.Drawing.SystemColors.Control;
-            tabGradient22.TextColor = System.Drawing.SystemColors.ControlDarkDark;
-            autoHideStripSkin4.TabGradient = tabGradient22;
-            autoHideStripSkin4.TextFont = new System.Drawing.Font("微软雅黑", 9F);
-            dockPanelSkin4.AutoHideStripSkin = autoHideStripSkin4;
-            tabGradient23.EndColor = System.Drawing.SystemColors.ControlLightLight;
-            tabGradient23.StartColor = System.Drawing.SystemColors.ControlLightLight;
-            tabGradient23.TextColor = System.Drawing.SystemColors.ControlText;
-            dockPaneStripGradient4.ActiveTabGradient = tabGradient23;
-            dockPanelGradient11.EndColor = System.Drawing.SystemColors.Control;
-            dockPanelGradient11.StartColor = System.Drawing.SystemColors.Control;
-            dockPaneStripGradient4.DockStripGradient = dockPanelGradient11;
-            tabGradient24.EndColor = System.Drawing.SystemColors.ControlLight;
-            tabGradient24.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
-            tabGradient24.StartColor = System.Drawing.SystemColors.ControlLightLight;
-            tabGradient24.TextColor = System.Drawing.SystemColors.ControlText;
-            dockPaneStripGradient4.InactiveTabGradient = tabGradient24;
-            dockPaneStripSkin4.DocumentGradient = dockPaneStripGradient4;
-            dockPaneStripSkin4.TextFont = new System.Drawing.Font("微软雅黑", 9F);
-            tabGradient25.EndColor = System.Drawing.SystemColors.ActiveCaption;
-            tabGradient25.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
-            tabGradient25.StartColor = System.Drawing.SystemColors.ActiveCaption;
-            tabGradient25.TextColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dockPaneStripToolWindowGradient4.ActiveCaptionGradient = tabGradient25;
-            tabGradient26.EndColor = System.Drawing.SystemColors.Control;
-            tabGradient26.StartColor = System.Drawing.SystemColors.Control;
-            tabGradient26.TextColor = System.Drawing.SystemColors.ControlText;
-            dockPaneStripToolWindowGradient4.ActiveTabGradient = tabGradient26;
-            dockPanelGradient12.EndColor = System.Drawing.SystemColors.ControlLight;
-            dockPanelGradient12.StartColor = System.Drawing.SystemColors.ControlLight;
-            dockPaneStripToolWindowGradient4.DockStripGradient = dockPanelGradient12;
-            tabGradient27.EndColor = System.Drawing.SystemColors.ControlLight;
-            tabGradient27.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
-            tabGradient27.StartColor = System.Drawing.SystemColors.ControlLight;
-            tabGradient27.TextColor = System.Drawing.SystemColors.InactiveCaptionText;
-            dockPaneStripToolWindowGradient4.InactiveCaptionGradient = tabGradient27;
-            tabGradient28.EndColor = System.Drawing.Color.Transparent;
-            tabGradient28.StartColor = System.Drawing.Color.Transparent;
-            tabGradient28.TextColor = System.Drawing.SystemColors.ControlDarkDark;
-            dockPaneStripToolWindowGradient4.InactiveTabGradient = tabGradient28;
-            dockPaneStripSkin4.ToolWindowGradient = dockPaneStripToolWindowGradient4;
-            dockPanelSkin4.DockPaneStripSkin = dockPaneStripSkin4;
-            this.dockPanel1.Skin = dockPanelSkin4;
+            dockPanelGradient1.EndColor = System.Drawing.SystemColors.ControlLight;
+            dockPanelGradient1.StartColor = System.Drawing.SystemColors.ControlLight;
+            autoHideStripSkin1.DockStripGradient = dockPanelGradient1;
+            tabGradient1.EndColor = System.Drawing.SystemColors.Control;
+            tabGradient1.StartColor = System.Drawing.SystemColors.Control;
+            tabGradient1.TextColor = System.Drawing.SystemColors.ControlDarkDark;
+            autoHideStripSkin1.TabGradient = tabGradient1;
+            autoHideStripSkin1.TextFont = new System.Drawing.Font("微软雅黑", 9F);
+            dockPanelSkin1.AutoHideStripSkin = autoHideStripSkin1;
+            tabGradient2.EndColor = System.Drawing.SystemColors.ControlLightLight;
+            tabGradient2.StartColor = System.Drawing.SystemColors.ControlLightLight;
+            tabGradient2.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripGradient1.ActiveTabGradient = tabGradient2;
+            dockPanelGradient2.EndColor = System.Drawing.SystemColors.Control;
+            dockPanelGradient2.StartColor = System.Drawing.SystemColors.Control;
+            dockPaneStripGradient1.DockStripGradient = dockPanelGradient2;
+            tabGradient3.EndColor = System.Drawing.SystemColors.ControlLight;
+            tabGradient3.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            tabGradient3.StartColor = System.Drawing.SystemColors.ControlLightLight;
+            tabGradient3.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripGradient1.InactiveTabGradient = tabGradient3;
+            dockPaneStripSkin1.DocumentGradient = dockPaneStripGradient1;
+            dockPaneStripSkin1.TextFont = new System.Drawing.Font("微软雅黑", 9F);
+            tabGradient4.EndColor = System.Drawing.SystemColors.ActiveCaption;
+            tabGradient4.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            tabGradient4.StartColor = System.Drawing.SystemColors.ActiveCaption;
+            tabGradient4.TextColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dockPaneStripToolWindowGradient1.ActiveCaptionGradient = tabGradient4;
+            tabGradient5.EndColor = System.Drawing.SystemColors.Control;
+            tabGradient5.StartColor = System.Drawing.SystemColors.Control;
+            tabGradient5.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripToolWindowGradient1.ActiveTabGradient = tabGradient5;
+            dockPanelGradient3.EndColor = System.Drawing.SystemColors.ControlLight;
+            dockPanelGradient3.StartColor = System.Drawing.SystemColors.ControlLight;
+            dockPaneStripToolWindowGradient1.DockStripGradient = dockPanelGradient3;
+            tabGradient6.EndColor = System.Drawing.SystemColors.ControlLight;
+            tabGradient6.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            tabGradient6.StartColor = System.Drawing.SystemColors.ControlLight;
+            tabGradient6.TextColor = System.Drawing.SystemColors.InactiveCaptionText;
+            dockPaneStripToolWindowGradient1.InactiveCaptionGradient = tabGradient6;
+            tabGradient7.EndColor = System.Drawing.Color.Transparent;
+            tabGradient7.StartColor = System.Drawing.Color.Transparent;
+            tabGradient7.TextColor = System.Drawing.SystemColors.ControlDarkDark;
+            dockPaneStripToolWindowGradient1.InactiveTabGradient = tabGradient7;
+            dockPaneStripSkin1.ToolWindowGradient = dockPaneStripToolWindowGradient1;
+            dockPanelSkin1.DockPaneStripSkin = dockPaneStripSkin1;
+            this.dockPanel1.Skin = dockPanelSkin1;
             this.dockPanel1.SupportDeeplyNestedContent = true;
             this.dockPanel1.TabIndex = 4;
             this.dockPanel1.TabStop = true;
@@ -932,20 +948,6 @@
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "{B4D96DC3-2E14-4288-A13F-92DA69EFE5F1}.gif");
             this.imageList1.Images.SetKeyName(1, "Only.ico");
-            // 
-            // toolStripMenuItemChgYoudaoPSW
-            // 
-            this.toolStripMenuItemChgYoudaoPSW.Name = "toolStripMenuItemChgYoudaoPSW";
-            this.toolStripMenuItemChgYoudaoPSW.Size = new System.Drawing.Size(184, 22);
-            this.toolStripMenuItemChgYoudaoPSW.Text = "修改云笔记加密密码";
-            this.toolStripMenuItemChgYoudaoPSW.Click += new System.EventHandler(this.toolStripMenuItemChgYoudaoPSW_Click);
-            // 
-            // toolStripMenuItemYoudaoExport
-            // 
-            this.toolStripMenuItemYoudaoExport.Name = "toolStripMenuItemYoudaoExport";
-            this.toolStripMenuItemYoudaoExport.Size = new System.Drawing.Size(184, 22);
-            this.toolStripMenuItemYoudaoExport.Text = "云笔记同步到本地";
-            this.toolStripMenuItemYoudaoExport.Click += new System.EventHandler(this.toolStripMenuItemYoudaoExport_Click);
             // 
             // FormMain
             // 

@@ -1263,6 +1263,15 @@ namespace WeCode1._0
         private void toolStripMenuItemExit_Click(object sender, EventArgs e)
         {
 
+            //若没有同步完成则禁止退出
+            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+            DataTable dt = AccessAdo.ExecuteDataSet(ExportConn, "select * from tcontent where needSync=1").Tables[0];
+            if (dt.Rows.Count > 0)
+            {
+                MessageBox.Show("存在未同步完成的云笔记，请不要退出！");
+                return;
+            }
+
             //先判断查找是否显示，显示先隐藏
             if (this.FormFind.IsHidden == false)
                 FormFind.Hide();
@@ -1463,6 +1472,8 @@ namespace WeCode1._0
                 //授权成功，禁用登陆按钮，初始化目录以及配置信息，显示有道云树
                 this.toolStripMenuItemLogin.Visible = false;
                 this.toolStripMenuItemUinfo.Visible = true;
+                this.toolStripMenuItemChgYoudaoPSW.Visible = true;
+                this.toolStripMenuItemYoudaoExport.Visible = true;
                 Text = "WeCode--已登录";
                 //初始化目录以及配置信息
                 AuthorAPI.CreatewecodeConfig();
@@ -1507,6 +1518,8 @@ namespace WeCode1._0
             //禁用云目录
             this.toolStripMenuItemLogin.Visible = true;
             this.toolStripMenuItemUinfo.Visible = false;
+            this.toolStripMenuItemChgYoudaoPSW.Visible = false;
+            this.toolStripMenuItemYoudaoExport.Visible = false;
             Text = "WeCode--未登录";
 
             Attachment.IsTokeneffective = 0;
@@ -1940,11 +1953,15 @@ namespace WeCode1._0
                 //获取用户信息并禁用登陆按钮
                 this.toolStripMenuItemLogin.Visible = false;
                 this.toolStripMenuItemUinfo.Visible = true;
+                this.toolStripMenuItemChgYoudaoPSW.Visible = true;
+                this.toolStripMenuItemYoudaoExport.Visible = true;
                 Text = "WeCode--已登录";
             }
             else {
                 this.toolStripMenuItemLogin.Visible = true;
                 this.toolStripMenuItemUinfo.Visible = false;
+                this.toolStripMenuItemChgYoudaoPSW.Visible = false;
+                this.toolStripMenuItemYoudaoExport.Visible = false;
                 Text = "WeCode--未登录";
             }
         }
@@ -1982,8 +1999,6 @@ namespace WeCode1._0
             string sql = "";
             while (flag)
             {
-                ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
-
                 sql = "select top 1 * from tcontent where needsync=1";
                 tempdt=AccessAdo.ExecuteDataSet(ExportConn,sql).Tables[0];
                 if (tempdt.Rows.Count == 0)
@@ -2003,7 +2018,6 @@ namespace WeCode1._0
                     updatetime = (int)tempdt.Rows[0]["UpdateTime"];
                     if (NoteAPI.UpdateNote(path, Text, updatetime.ToString()) == "OK")
                     {
-                        ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
                         //同步完成后对比时间，如果没有发生改变则将标志置为0
                         updatetime1 = (int)AccessAdo.ExecuteScalar(ExportConn, "select updatetime from tcontent where path='" + path + "'");
                         if (updatetime1 == updatetime)

@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>mc3HiVgNOG+vQ9n9xMsRZhn1+fY=</dsig:DigestValue>
+        <dsig:DigestValue>lD4UmLrS17SRvunMOJOBUHepWhQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -62,7 +62,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>LYavqrBG9L/HP8atmgkxDZ/JdpM=</dsig:DigestValue>
+        <dsig:DigestValue>O4BjphfqjQlsCFm5KsxpQ2ujjc4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -74,7 +74,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>tX0yNctpOjG3iBB5wX1wMrmaMtM=</dsig:DigestValue>
+        <dsig:DigestValue>IGHDxCMeovld1gCLz9QxC3k56Rc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -103,14 +103,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WeCode.exe" size="615424">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WeCode.exe" size="622592">
       <assemblyIdentity name="WeCode" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>725fBKw8NbmPey+5y8AR7WGZAyM=</dsig:DigestValue>
+        <dsig:DigestValue>Pbdto9Z+MSsJj/QA8c7nu1aCweE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -159,7 +159,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>jMVGaqAirDW3fE6OC0Z8m34nKGo=</dsig:DigestValue>
+      <dsig:DigestValue>DhOj3cXvGynhoaysSXpdM+sAVqE=</dsig:DigestValue>
     </hash>
   </file>
   <file name="wecode.ico" size="136606">

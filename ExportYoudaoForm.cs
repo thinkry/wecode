@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Data.OleDb;
 using System.Threading;
 using System.Xml;
+using System.Configuration;
 
 namespace WeCode1._0
 {
@@ -22,6 +23,7 @@ namespace WeCode1._0
         {
             InitializeComponent();
             ExportConn = conn;
+            label1.Text = "云笔记导出过程中请不要操作云笔记\r\n附件较大的笔记可能导出较慢，请耐心等待！";
         }
 
         private void ExportYoudaoForm_Shown(object sender, EventArgs e)
@@ -36,6 +38,7 @@ namespace WeCode1._0
         public void ExportYoudao()
         {
             //1、先导出秘钥信息
+            labelMessage.Text = "正在导出秘钥信息...";
             XmlDocument doc = new XmlDocument();
             doc.Load("TreeNodeLocal.xml");
             XmlNode preNode = doc.SelectSingleNode("//wecode[@KeyD5]");
@@ -58,9 +61,11 @@ namespace WeCode1._0
                 AccessAdo.ExecuteNonQuery(ExportConn, SQL, ArrPara);
 
             }
+            labelMessage.Text = "秘钥信息导出完毕...";
 
 
             //2、生成ttree
+            labelMessage.Text = "正在生成目录...";
             XmlNode wecode = doc.DocumentElement;
 
             //标记顺序的下标
@@ -186,6 +191,8 @@ namespace WeCode1._0
             string sql = "insert into tcontent(nodeid,updatetime,gid,path) select nodeid,createtime,gid,path from ttree where ttree.type=1 and gid not in (select gid from tcontent)";
             AccessAdo.ExecuteNonQuery(ExportConn, sql);
 
+            labelMessage.Text = "目录生成完毕...";
+
 
             //4、开始从云端获取文章以及附件信息
             //附件ID
@@ -193,9 +200,12 @@ namespace WeCode1._0
             sql = "select * from tcontent";
             DataTable dt = AccessAdo.ExecuteDataSet(ExportConn, sql).Tables[0];
             int RowCount = dt.Rows.Count;
+            progressBar1.Maximum = RowCount;
             for (int i = 0; i < RowCount; i++)
             {
+                labelMessage.Text = "正在导出第"+(i+1).ToString()+"篇笔记及其附件，总共"+RowCount.ToString()+"篇...";
                 string path = dt.Rows[i]["Path"].ToString();
+                string gid = dt.Rows[i]["Gid"].ToString();
                 string nodeid = dt.Rows[i]["NodeId"].ToString();
                 string[] result = NoteAPI.GetNote(path);
                 string content=result[0];
@@ -216,21 +226,114 @@ namespace WeCode1._0
                 AccessAdo.ExecuteNonQuery(ExportConn, sql, ArrPara);
 
                 //有道附件
-                XmlDocument xDoc = NoteAPI.GetResourceWithXML(nodeid);
+                XmlDocument xDoc = NoteAPI.GetResourceWithXML(path);
                 string fileUrl,title;
-                int length;
+                int Datalength;
                 foreach (XmlNode xNode in xDoc.DocumentElement.ChildNodes)
                 {
                     fileUrl = xNode.Attributes["path"].Value;
                     title = xNode.Attributes["title"].Value;
-                    length = Convert.ToInt32(xNode.Attributes["filelength"].Value);
+                    Datalength = Convert.ToInt32(xNode.Attributes["filelength"].Value);
                     //下载附件数据
- 
+                    int intNewAffixid = Affid;
+
+                    int Nodeid = Convert.ToInt32(nodeid);
+                    string Title = title;
+                    int timeSeconds = PubFunc.time2TotalSeconds();
+
+                    //affixid
+                    OleDbParameter para1 = new OleDbParameter("@affixid", OleDbType.Integer);
+                    para1.Value = intNewAffixid;
+                    //nodeid
+                    OleDbParameter para2 = new OleDbParameter("@nodeid", OleDbType.Integer);
+                    para2.Value = Nodeid;
+                    //title
+                    OleDbParameter para3 = new OleDbParameter("@title", OleDbType.VarChar);
+                    para3.Value = Title;
+                    //二进制数据
+                    OleDbParameter para4 = new OleDbParameter("@Data", OleDbType.Binary);
+                    para4.Value = DownloadFile(fileUrl);
+                    //size
+                    OleDbParameter para5 = new OleDbParameter("@size", OleDbType.Integer);
+                    para5.Value = Datalength;
+                    //time
+                    OleDbParameter para6 = new OleDbParameter("@time", OleDbType.Integer);
+                    para6.Value = timeSeconds;
+
+                    OleDbParameter para7 = new OleDbParameter("@gid", OleDbType.VarChar);
+                    para7.Value = gid;
+
+                    OleDbParameter[] arrPara = new OleDbParameter[7];
+                    arrPara[0] = para1;
+                    arrPara[1] = para2;
+                    arrPara[2] = para3;
+                    arrPara[3] = para4;
+                    arrPara[4] = para5;
+                    arrPara[5] = para6;
+                    arrPara[6] = para7;
+                    string SQL = "insert into tattachment values(@affixid,@nodeid,@title,@Data,@size,@time,@gid)";
+                    AccessAdo.ExecuteNonQuery(ExportConn,SQL, arrPara);
+                    Affid++;
                 }
+
+                progressBar1.Value = i + 1;
                 
             }
+            MessageBox.Show("导出完成！");
+            //关闭数据库连接
+            if (ExportConn.State != ConnectionState.Closed)
+                ExportConn.Close();
+            this.Close();
 
         }
+
+
+        /// <summary>
+        /// 下载文件
+        /// </summary>
+        /// <param name="URL">下载文件地址</param>
+        public byte[] DownloadFile(string URL)
+        {
+            URL += "?oauth_token=" + ConfigurationManager.AppSettings["AccessToken"];
+            byte[] result;
+            System.IO.MemoryStream memoryStream = new System.IO.MemoryStream();
+            try
+            {
+                System.Net.HttpWebRequest Myrq = (System.Net.HttpWebRequest)System.Net.HttpWebRequest.Create(URL);
+                System.Net.HttpWebResponse myrp = (System.Net.HttpWebResponse)Myrq.GetResponse();
+                long totalBytes = myrp.ContentLength;
+                System.IO.Stream st = myrp.GetResponseStream();
+                memoryStream = new System.IO.MemoryStream();
+
+                byte[] by = new byte[1024];
+                int osize = st.Read(by, 0, (int)by.Length);
+
+                //已上传的字节数 
+                long offset = 0;
+
+                while (osize > 0)
+                {
+                    //System.Windows.Forms.Application.DoEvents();
+                    memoryStream.Write(by, 0, osize);
+                    offset += osize;
+                    osize = st.Read(by, 0, (int)by.Length);
+                }
+                result = memoryStream.GetBuffer();
+                st.Close();
+                memoryStream.Close();
+                return result;
+            }
+            catch (System.Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                memoryStream.Close();
+            }
+        }
+
+
 
         //递归方法
         private void addTreeNode(XmlNode xmlNode, int pid)
@@ -356,6 +459,18 @@ namespace WeCode1._0
 
                 }
             }
+        }
+
+        private void ExportYoudaoForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            t.Abort();
+            //关闭数据库连接
+            if (ExportConn.State != ConnectionState.Closed)
+                ExportConn.Close();
+
+            this.Dispose();
+
+            this.Close();
         }
 
     }
