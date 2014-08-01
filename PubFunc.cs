@@ -369,5 +369,19 @@ namespace WeCode1._0
             }
             return result;
         }
+
+
+        //获取当前有道用户缓存数据库路径
+        public static string GetYoudaoDBPath()
+        {
+            string result = "";
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load("TreeNodeLocal.xml");
+            XmlNode RootNode = doc.DocumentElement;
+            result = "db\\youdao_" + RootNode.Attributes["UserId"].Value + ".mdb";
+            return result;
+        }
+
     }
 }

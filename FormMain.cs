@@ -368,7 +368,7 @@ namespace WeCode1._0
             string updatetime;
             //获取文章信息
             //如果缓存还没更新则提示是从缓存读取还是直接读取有道云
-            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
             string SQL = "select Content,UpdateTime from tcontent where path='" + nodeId + "' and needsync=1";
             DataTable dt=AccessAdo.ExecuteDataSet(ExportConn,SQL).Tables[0];
             if (dt.Rows.Count > 0)
@@ -388,7 +388,7 @@ namespace WeCode1._0
                     updatetime = "最后更新时间：" + (PubFunc.seconds2Time(Convert.ToInt32(result[1]))).ToString();
 
                     //写入缓存
-                    ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                    ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
 
                     OleDbParameter p1 = new OleDbParameter("@Content", OleDbType.VarChar);
                     p1.Value = Content;
@@ -409,7 +409,7 @@ namespace WeCode1._0
                 updatetime = "最后更新时间：" + (PubFunc.seconds2Time(Convert.ToInt32(result[1]))).ToString();
 
                 //写入缓存
-                ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
 
                 OleDbParameter p1 = new OleDbParameter("@Content", OleDbType.VarChar);
                 p1.Value = Content;
@@ -823,9 +823,34 @@ namespace WeCode1._0
                //修改连接字符串，并重新加载
                 string conStr = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + fileName;
                 UpdateConnectionStringsConfig("DBConn",conStr);
+
+                
                 
                 //重新加载所有资源
                 AccessAdo.strConnection = conStr;
+
+                //提示
+                DataTable tempdt = AccessAdo.ExecuteDataSet("select * from tcontent").Tables[0];
+                Boolean isNeedSyncExists = false;
+                for (int i = 0; i < tempdt.Columns.Count; i++)
+                {
+                    if (tempdt.Columns[i].ColumnName == "NeedSync")
+                    {
+                        isNeedSyncExists = true;
+                        break;
+                    }
+                    else
+                    {
+                        isNeedSyncExists = false;
+                    }
+                }
+
+                if (isNeedSyncExists == true)
+                {
+                    //打开的是缓存数据库，给予用户提示
+                    MessageBox.Show("打开的是有道缓存数据库，对其进行的修改不会同步到云笔记！");
+                }
+
                 
                 //升级数据库
                 CheckDb.UpdateDB();
@@ -1265,7 +1290,7 @@ namespace WeCode1._0
             if (Attachment.IsTokeneffective == 1)
             {
                 //若没有同步完成则禁止退出
-                OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
                 DataTable dt = AccessAdo.ExecuteDataSet(ExportConn, "select * from tcontent where needSync=1").Tables[0];
                 if (dt.Rows.Count > 0)
                 {
@@ -1981,11 +2006,27 @@ namespace WeCode1._0
             
         }
 
+
+        #region 扫描线程
+
+        Boolean needWake = false;
+
+        public void InterRuptSleep()
+        {
+            needWake = true;
+            toolStripSplitButton1.Visible = true;
+            toolStripSplitButton2.Visible = false;
+        }
+
+
         //开启扫描线程（供拉取云目录之后调用）
+        
         public void BeginSyncThread()
         {
             backgroundWorker1.RunWorkerAsync();
+            
         }
+
 
         //后台线程执行
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -1996,7 +2037,7 @@ namespace WeCode1._0
             int updatetime = 0;
             int updatetime1 = 0;
 
-            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
             DataTable tempdt;
             string sql = "";
             while (flag)
@@ -2005,9 +2046,23 @@ namespace WeCode1._0
                 tempdt=AccessAdo.ExecuteDataSet(ExportConn,sql).Tables[0];
                 if (tempdt.Rows.Count == 0)
                 {
-                    toolStripSplitButton1.Visible = false;
-                    toolStripSplitButton2.Visible = true;
-                    Thread.Sleep(10000);
+                    Thread.Sleep(1000);
+                    if (needWake == false)
+                    {
+                        toolStripSplitButton1.Visible = false;
+                        toolStripSplitButton2.Visible = true;
+                    }
+                    for (int i = 0; i < 18; i++)
+                    {
+                        if (needWake == true)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Thread.Sleep(500);
+                        }
+                    }
                 }
                 else
                 {
@@ -2028,9 +2083,13 @@ namespace WeCode1._0
                         }
                     }
 
+                    needWake = false;
+
                 }
             }
         }
+
+        #endregion
 
         //修改云笔记加密密码
         private void toolStripMenuItemChgYoudaoPSW_Click(object sender, EventArgs e)
@@ -2064,73 +2123,46 @@ namespace WeCode1._0
                 return;
             }
 
-            //创建数据库
-            SaveFileDialog sf = new SaveFileDialog();
             string path = "";
-            //设置文件类型
-            sf.Filter = "数据文件(*.mdb)|*.mdb";
-            if (sf.ShowDialog() == DialogResult.OK)
+            path = PubFunc.GetYoudaoDBPath();
+
+            if (!File.Exists(path)) //检查数据库是否已存在
             {
-                path = sf.FileName;
+                MessageBox.Show("缓存数据库不存在，无法同步！");
+                return;
+            }
+            path = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + path;
+            OleDbConnection conn = new OleDbConnection(path);
 
-                if (File.Exists(path)) //检查数据库是否已存在
-                {
-                    throw new Exception("目标数据库已存在,无法创建");
-                }
-                // 可以加上密码,这样创建后的数据库必须输入密码后才能打开
-                path = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + path;
-                // 创建一个CatalogClass对象的实例,
-                ADOX.CatalogClass cat = new ADOX.CatalogClass();
-                // 使用CatalogClass对象的Create方法创建ACCESS数据库
-                cat.Create(path);
+            //创建完成后导出有道云数据
+            ExportYoudaoForm exportForm = new ExportYoudaoForm(conn);
+            exportForm.Show();
+        }
 
-                //创建表，表结构在三个表中均新增gid字段，用于目录结构改变，nodeid变化时可以正确匹配到文章或者附件
-                OleDbConnection conn = new OleDbConnection(path);
-                string crtSQL = " CREATE TABLE TTree ( " +
-                " [NodeId] INTEGER CONSTRAINT PK_TTree26 PRIMARY KEY, " +
-                " [Title] VARCHAR, " +
-                " [Path] VARCHAR, " +
-                " [ParentId] INTEGER, " +
-                " [Type] INTEGER, " +
-                " [CreateTime] INTEGER, " +
-                " [SynId] INTEGER, " +
-                " [Turn] INTEGER,  " +
-                " [MarkTime] INTEGER, " +
-                " [IsLock] INTEGER DEFAULT 0 , " +
-                " [Gid] VARCHAR ) ";
-                AccessAdo.ExecuteNonQuery(conn, crtSQL);
+        private void toolStripSplitButton2_Click(object sender, EventArgs e)
+        {
+            showSyncMessage();
+        }
 
-                crtSQL = " CREATE TABLE TContent ( " +
-                " [NodeId] INTEGER CONSTRAINT PK_TTree27 PRIMARY KEY, " +
-                " [Content] MEMO, " +
-                " [Note] MEMO, " +
-                " [Link] MEMO, " +
-                " [UpdateTime] INTEGER, " +
-                " [Gid] VARCHAR, " +
-                " [Path] VARCHAR, " +
-                " [NeedSync] INTEGER DEFAULT 0) ";
-                AccessAdo.ExecuteNonQuery(conn, crtSQL);
+        private void toolStripSplitButton1_Click(object sender, EventArgs e)
+        {
+            showSyncMessage();
+        }
 
-                crtSQL = " CREATE TABLE TAttachment ( " +
-                " [AffixId] INTEGER CONSTRAINT PK_TTree28 PRIMARY KEY, " +
-                " [NodeId] INTEGER, " +
-                " [Title] VARCHAR, " +
-                " [Data] IMAGE, " +
-                " [Size] INTEGER, " +
-                " [Time] INTEGER, " +
-                " [Gid] VARCHAR ) ";
-                AccessAdo.ExecuteNonQuery(conn, crtSQL);
-
-
-                crtSQL = " CREATE TABLE MyKeys ( " +
-                " [KeyE] MEMO, " +
-                " [KeyD5] MEMO) ";
-                AccessAdo.ExecuteNonQuery(conn, crtSQL);
-
-
-                //创建完成后导出有道云数据
-                ExportYoudaoForm exportForm = new ExportYoudaoForm(conn);
-                exportForm.Show();
+        private void showSyncMessage()
+        { 
+            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
+            DataTable tempdt;
+            string sql = "";
+            sql = "select * from tcontent where needsync=1";
+            tempdt=AccessAdo.ExecuteDataSet(ExportConn,sql).Tables[0];
+            if (tempdt.Rows.Count == 0)
+            {
+                MessageBox.Show("已全部同步完成！");
+            }
+            else
+            {
+                MessageBox.Show("还剩余" + tempdt.Rows.Count.ToString() + "篇笔记未同步完成！");
             }
         }
 

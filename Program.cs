@@ -19,6 +19,21 @@ namespace WeCode1._0
 
         static System.Threading.Mutex m;
         public static EventWaitHandle ProgramStarted; 
+        //当前版本
+        public static string sVer="1.1.1";
+
+
+        private static void  CheckConfig()
+        {
+            //更新版本号
+            string ConfigVer = PubFunc.GetConfiguration("Version");
+            if (sVer != ConfigVer)
+            {
+                PubFunc.SetConfiguration("Version", sVer);
+            }
+
+        }
+
 
         [STAThread]
         static void Main()
@@ -29,6 +44,11 @@ namespace WeCode1._0
                 string UUID = System.Guid.NewGuid().ToString();
                 PubFunc.SetConfiguration("UUID", UUID);
             }
+
+
+            //检查当前的appconfig
+            CheckConfig();
+
 
             bool bRun = true;
             m = new System.Threading.Mutex(true, Application.ProductName, out bRun);

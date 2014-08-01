@@ -248,7 +248,7 @@ namespace WeCode1._0
         public static void updateAttTcon()
         {
             
-            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
 
             string SQL = "update tcontent set nodeid=-2";
             AccessAdo.ExecuteNonQuery(ExportConn, SQL);

@@ -37,6 +37,14 @@ namespace WeCode1._0
         //导出笔记本
         public void ExportYoudao()
         {
+
+            //先删除mykey以及ttree表
+            string delSQL = "delete from mykeys";
+            AccessAdo.ExecuteNonQuery(ExportConn, delSQL);
+            delSQL = "delete from ttree";
+            AccessAdo.ExecuteNonQuery(ExportConn, delSQL);
+
+
             //1、先导出秘钥信息
             labelMessage.Text = "正在导出秘钥信息...";
             XmlDocument doc = new XmlDocument();
@@ -280,19 +288,8 @@ namespace WeCode1._0
                 
             }
 
-            //5、删除多余的字段
-            sql = "alter table ttree drop COLUMN Path";
-            AccessAdo.ExecuteNonQuery(ExportConn, sql);
-            sql = "alter table ttree drop COLUMN gid";
-            AccessAdo.ExecuteNonQuery(ExportConn, sql);
-            sql = "alter table tcontent drop COLUMN Path";
-            AccessAdo.ExecuteNonQuery(ExportConn, sql);
-            sql = "alter table tcontent drop COLUMN gid";
-            AccessAdo.ExecuteNonQuery(ExportConn, sql);
-            sql = "alter table tattachment drop COLUMN gid";
-            AccessAdo.ExecuteNonQuery(ExportConn, sql);
 
-            MessageBox.Show("导出完成！");
+            MessageBox.Show("云笔记同步到本地完成！");
             //关闭数据库连接
             if (ExportConn.State != ConnectionState.Closed)
                 ExportConn.Close();
@@ -331,9 +328,11 @@ namespace WeCode1._0
                     offset += osize;
                     osize = st.Read(by, 0, (int)by.Length);
                 }
-                result = memoryStream.GetBuffer();
+                //result = memoryStream.GetBuffer();
+                result = new byte[memoryStream.Length];
+                memoryStream.Position = 0;
+                memoryStream.Read(result, 0, (int)memoryStream.Length);
                 st.Close();
-                memoryStream.Close();
                 return result;
             }
             catch (System.Exception)

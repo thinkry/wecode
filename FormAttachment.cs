@@ -170,7 +170,7 @@ namespace WeCode1._0
                     arrPara[3] = p4;
                     arrPara[4] = p5;
                     arrPara[5] = p6;
-                    string SQL = "insert into tattachment values(@affixid,@nodeid,@title,@Data,@size,@time)";
+                    string SQL = "insert into tattachment([affixId],[NodeId],[Title],[Data],[Size],[Time]) values(@affixid,@nodeid,@title,@Data,@size,@time)";
                     AccessAdo.ExecuteNonQuery(SQL, arrPara);
 
                     myStream.Close();
@@ -418,7 +418,7 @@ namespace WeCode1._0
             NoteAPI.DeleteRource(path, rsurl);
 
             //更新缓存数据
-            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
             string gid = AccessAdo.ExecuteScalar(ExportConn, "select gid from ttree where path='" + path + "'").ToString();
             AccessAdo.ExecuteNonQuery(ExportConn, "delete from tattachment where gid='" + gid + "'");
 
@@ -441,7 +441,7 @@ namespace WeCode1._0
                 NoteAPI.RenameRource(path, rsurl,Title);
 
                 //更新缓存数据
-                OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
                 string gid = AccessAdo.ExecuteScalar(ExportConn, "select gid from ttree where path='" + path + "'").ToString();
                 AccessAdo.ExecuteNonQuery(ExportConn,"update tattachment set title='" + Title + "' where gid='" + gid+"'");
 

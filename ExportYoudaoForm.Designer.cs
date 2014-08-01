@@ -70,6 +70,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "ExportYoudaoForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "导出云笔记";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ExportYoudaoForm_FormClosing);
             this.Shown += new System.EventHandler(this.ExportYoudaoForm_Shown);

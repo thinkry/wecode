@@ -173,6 +173,7 @@ namespace WeCode1._0
         //检查升级XML
         public static void CheckUpdateXML()
         {
+            string uid = System.Guid.NewGuid().ToString();
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load("TreeNodeLocal.xml");
 
@@ -218,11 +219,24 @@ namespace WeCode1._0
                     ((XmlElement)node).RemoveAttribute("updatetime");
                 }
             }
+
+            //检查wecode目录笔记是否存在GUID，不存在则创建，用于标示缓存数据库
+            XmlNode RootNode = xDoc.DocumentElement;
+            if (RootNode.Attributes["UserId"] == null)
+            {
+                ((XmlElement)RootNode).SetAttribute("UserId", uid);
+            }
+            else
+            {
+                uid = RootNode.Attributes["UserId"].Value;
+            }
+
             xDoc.Save("TreeNodeLocal.xml");
             XMLAPI.XML2Yun();
 
-            //检查youdao数据库文件是否存在，不存在则创建
-            string path = @"db\youdao.mdb";
+            //检查youdao数据库文件是否存在，不存在则创建,数据库以youdao_userid的格式
+            //当前登录用户的userid           
+            string path = @"db\youdao_" + uid + ".mdb";
 
             if (!File.Exists(path)) //检查数据库是否已存在
             {
@@ -275,6 +289,7 @@ namespace WeCode1._0
                 " [KeyD5] MEMO) ";
                 AccessAdo.ExecuteNonQuery(conn, crtSQL);
             }
+
         }
 
     }

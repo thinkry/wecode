@@ -174,6 +174,7 @@ namespace WeCode1._0
                 if (DocText.Length == 0)
                     return;
 
+
                 //如果是加密文章，先把文本加密再保存
                 if (IsLock == 1)
                 {
@@ -183,7 +184,7 @@ namespace WeCode1._0
                 int updatetime=PubFunc.time2TotalSeconds();
 
                 //存入缓存数据库
-                OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
 
                 OleDbParameter p1 = new OleDbParameter("@Content", OleDbType.VarChar);
                 p1.Value = DocText;
@@ -204,6 +205,8 @@ namespace WeCode1._0
 
                 scintilla1.Modified = false;
 
+                //通知主窗口唤醒扫描线程
+                Attachment.frmMain.InterRuptSleep();
 
                 /* 本段保存移至同步线程扫描执行，此处直接存储在缓存数据库
                 if (NoteAPI.UpdateNote(this.NodeId, DocText, updatetime.ToString()) == "OK")

@@ -63,7 +63,7 @@ namespace WeCode1._0
                     NoteAPI.UpdateRource(fileUrl, _length, _Filename, _notepath);
 
                     //更新缓存数据
-                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
                     FileStream fs = new FileStream(_Path, FileMode.Open, FileAccess.Read);
                     byte[] data = new byte[fs.Length];
                     fs.Read(data, 0, (int)fs.Length);
@@ -107,7 +107,7 @@ namespace WeCode1._0
                     arrPara[4] = p5;
                     arrPara[5] = p6;
                     arrPara[6] = p7;
-                    string SQL = "insert into tattachment values(@affixid,@nodeid,@title,@Data,@size,@time,@gid)";
+                    string SQL = "insert into tattachment([affixId],[NodeId],[Title],[Data],[Size],[Time],[Gid]) values(@affixid,@nodeid,@title,@Data,@size,@time,@gid)";
                     AccessAdo.ExecuteNonQuery(ExportConn,SQL, arrPara);
 
 

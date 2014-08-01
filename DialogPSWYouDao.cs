@@ -90,7 +90,7 @@ namespace WeCode1._0
                 XMLAPI.XML2Yun();
 
                 //更新缓存数据
-                OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
                 OleDbParameter p1 = new OleDbParameter("@KeyE", OleDbType.VarChar);
                 p1.Value = keyE;
                 OleDbParameter p2 = new OleDbParameter("@KeyD5", OleDbType.VarChar);

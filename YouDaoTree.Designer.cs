@@ -121,13 +121,13 @@
             this.toolStripMenuItemEncrypt,
             this.toolStripMenuItemDecrypt});
             this.contextMenuStripYDtxt.Name = "contextMenuStripYDtxt";
-            this.contextMenuStripYDtxt.Size = new System.Drawing.Size(153, 142);
+            this.contextMenuStripYDtxt.Size = new System.Drawing.Size(125, 120);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem6.Image")));
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem6.Text = "删除";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
@@ -135,7 +135,7 @@
             // 
             this.toolStripMenuItem7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem7.Image")));
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem7.Text = "属性";
             this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 
@@ -143,20 +143,20 @@
             // 
             this.toolStripMenuItem5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem5.Image")));
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem5.Text = "加为书签";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(121, 6);
             // 
             // toolStripMenuItemEncrypt
             // 
             this.toolStripMenuItemEncrypt.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemEncrypt.Image")));
             this.toolStripMenuItemEncrypt.Name = "toolStripMenuItemEncrypt";
-            this.toolStripMenuItemEncrypt.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemEncrypt.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItemEncrypt.Text = "加密";
             this.toolStripMenuItemEncrypt.Visible = false;
             this.toolStripMenuItemEncrypt.Click += new System.EventHandler(this.toolStripMenuItemEncrypt_Click);
@@ -165,7 +165,7 @@
             // 
             this.toolStripMenuItemDecrypt.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItemDecrypt.Image")));
             this.toolStripMenuItemDecrypt.Name = "toolStripMenuItemDecrypt";
-            this.toolStripMenuItemDecrypt.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemDecrypt.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItemDecrypt.Text = "取消加密";
             this.toolStripMenuItemDecrypt.Visible = false;
             this.toolStripMenuItemDecrypt.Click += new System.EventHandler(this.toolStripMenuItemDecrypt_Click);
@@ -319,7 +319,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "YouDaoTree";
             this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft;
-            this.Text = "有道云";
+            this.Text = "云笔记本";
             this.Activated += new System.EventHandler(this.YouDaoTree_Activated);
             this.Deactivate += new System.EventHandler(this.YouDaoTree_Deactivate);
             this.Load += new System.EventHandler(this.YouDaoTree_Load);

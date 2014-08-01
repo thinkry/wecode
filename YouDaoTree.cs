@@ -362,7 +362,7 @@ namespace WeCode1._0
 
 
                     ////------同步到本地缓存数据库
-                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
                     string NewPid = "0";
                     string NewNodeId = "1";
                     string NewTurn = "1";
@@ -430,7 +430,7 @@ namespace WeCode1._0
 
 
                     ////------同步到本地缓存数据库
-                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
 
                     string NewPid = AccessAdo.ExecuteScalar(ExportConn, "select nodeid from ttree where gid='" + SeleNode.Name + "'").ToString();
                     string NewNodeId = AccessAdo.ExecuteScalar(ExportConn,"select max(NodeId) from ttree").ToString();
@@ -579,7 +579,7 @@ namespace WeCode1._0
 
 
                     //---------同步到缓存数据库
-                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
                     string NewPid = "0";
                     string NewNodeId = "1";
                     string NewTurn = "1";
@@ -651,7 +651,7 @@ namespace WeCode1._0
                             XMLAPI.XML2Yun();
 
                             ////-------------同步到缓存数据库
-                            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
                             string NewPid = AccessAdo.ExecuteScalar(ExportConn, "select nodeid from ttree where gid='" + SeleNode.Name + "'").ToString();
                             string NewNodeId = AccessAdo.ExecuteScalar(ExportConn,"select max(NodeId) from ttree").ToString();
                             NewNodeId = NewNodeId == "" ? "1" : (Convert.ToInt32(NewNodeId) + 1).ToString();
@@ -737,7 +737,7 @@ namespace WeCode1._0
 
 
                             ////-------------同步到缓存数据库
-                            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
                             string NewPid = AccessAdo.ExecuteScalar(ExportConn, "select nodeid from ttree where gid='" + SeleNode.Name + "'").ToString();
                             string NewNodeId = AccessAdo.ExecuteScalar(ExportConn, "select max(NodeId) from ttree").ToString();
                             NewNodeId = NewNodeId == "" ? "1" : (Convert.ToInt32(NewNodeId) + 1).ToString();
@@ -803,7 +803,7 @@ namespace WeCode1._0
             DelNodeData(SeleNode.Name);
 
             //更新缓存数据
-            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
             DelLocalData(AccessAdo.ExecuteScalar(ExportConn,"select nodeid from ttree where gid='"+SeleNode.Name+"'").ToString());
 
             //移除树节点
@@ -861,7 +861,7 @@ namespace WeCode1._0
         //删除本地缓存数据
         public void DelLocalData(string NodeId)
         {
-            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
             string SQL = string.Format("select NodeId from Ttree where parentId={0}", NodeId);
             DataTable temp = AccessAdo.ExecuteDataSet(ExportConn,SQL).Tables[0];
             DataView dv = new DataView(temp);
@@ -870,7 +870,7 @@ namespace WeCode1._0
                 DelLocalData(drv["NodeId"].ToString());
             }
 
-            ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+            ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
             string DelSQL = string.Format("Delete from TAttachment where NodeId={0}", NodeId);
             AccessAdo.ExecuteNonQuery(ExportConn,DelSQL);
             DelSQL = string.Format("Delete from Tcontent where NodeId={0}", NodeId);
@@ -1023,7 +1023,7 @@ namespace WeCode1._0
                     XMLAPI.XML2Yun();
 
                     //更新缓存数据
-                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
                     string SQL = "update ttree set title='" + Title + "',SynId=" + SynId + " where gid='" + SeleNode.Name + "'";
                     AccessAdo.ExecuteNonQuery(ExportConn, SQL);
 
@@ -1075,7 +1075,7 @@ namespace WeCode1._0
             XMLAPI.XML2Yun();
 
             //更新缓存数据
-            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+            OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
             string SQL = "update ttree set marktime=1 where gid='" + SeleNode.Name + "'";
             AccessAdo.ExecuteNonQuery(ExportConn, SQL);
 
@@ -1441,7 +1441,7 @@ namespace WeCode1._0
                     XMLAPI.XML2Yun();
 
                     //---------更新缓存数据
-                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
                     OleDbParameter p1 = new OleDbParameter("@Content", OleDbType.VarChar);
                     p1.Value = EncrptyedContent;
                     OleDbParameter p2 = new OleDbParameter("@Gid", OleDbType.VarChar);
@@ -1534,7 +1534,7 @@ namespace WeCode1._0
 
 
                     //---------更新缓存数据
-                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+                    OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
                     OleDbParameter p1 = new OleDbParameter("@Content", OleDbType.VarChar);
                     p1.Value = DecrptyedContent;
                     OleDbParameter p2 = new OleDbParameter("@Gid", OleDbType.VarChar);

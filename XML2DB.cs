@@ -11,7 +11,7 @@ namespace WeCode1._0
 
         //每次插入数据库记录后，nodeid递增
         public int iNodeId = 1;
-        public OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=db\\youdao.mdb");
+        public OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
 
         //生成目录结构，同时生成文章信息,内容在打开文章时再插入
         public void MakeXML2Tttree()
