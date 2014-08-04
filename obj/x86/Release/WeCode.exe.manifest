@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>rn8VJb+bMgMZaeARH3S4MRhMziA=</dsig:DigestValue>
+        <dsig:DigestValue>4ypfrvU/DUcyAcxUiEEwg1+wbd4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -62,7 +62,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>u/51OKSmQW3Idi/D3ZZv0L7/ous=</dsig:DigestValue>
+        <dsig:DigestValue>z3/BM1sW9pg8qjQwIfir/nVYQSU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -74,7 +74,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>AaFUjPyK0O9EL2GjhvDdNKqFmJw=</dsig:DigestValue>
+        <dsig:DigestValue>HxYBmKbjwsC/DBK01Plu7j/rZM4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -103,14 +103,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WeCode.exe" size="623104">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WeCode.exe" size="623616">
       <assemblyIdentity name="WeCode" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>6fY0kVhhFu8x9P/acfSSIT1tmsI=</dsig:DigestValue>
+        <dsig:DigestValue>9O4ZNFZoBD83AFuyhmgtXHwIUu0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -126,13 +126,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="db\helpdb.mdb" size="503808" writeableType="applicationData">
+  <file name="db\helpdb.mdb" size="438272" writeableType="applicationData">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>lwP1zkMBERQxoO6k/U6LRKMXl5I=</dsig:DigestValue>
+      <dsig:DigestValue>z2LXVgotO/8fHU8nV9Ck6MJPk0I=</dsig:DigestValue>
     </hash>
   </file>
   <file name="m.ico" size="4286">

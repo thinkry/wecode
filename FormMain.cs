@@ -183,7 +183,6 @@ namespace WeCode1._0
                 //禁用云目录
                 this.toolStripMenuItemLogin.Visible = true;
                 this.toolStripMenuItemUinfo.Visible = false;
-                Text = "WeCode--未登录";
 
                 Attachment.IsTokeneffective = 0;
                 this.Load += new System.EventHandler(this.showNoAuthor);
@@ -196,7 +195,6 @@ namespace WeCode1._0
                 //获取用户信息并禁用登陆按钮
                 this.toolStripMenuItemLogin.Visible = false;
                 this.toolStripMenuItemUinfo.Visible = true;
-                Text = "WeCode--已登录";
             }
             
         }
@@ -1501,7 +1499,6 @@ namespace WeCode1._0
                 this.toolStripMenuItemUinfo.Visible = true;
                 this.toolStripMenuItemChgYoudaoPSW.Visible = true;
                 this.toolStripMenuItemYoudaoExport.Visible = true;
-                Text = "WeCode--已登录";
                 //初始化目录以及配置信息
                 AuthorAPI.CreatewecodeConfig();
                 //从云端拉取目录配置到本地
@@ -1547,7 +1544,6 @@ namespace WeCode1._0
             this.toolStripMenuItemUinfo.Visible = false;
             this.toolStripMenuItemChgYoudaoPSW.Visible = false;
             this.toolStripMenuItemYoudaoExport.Visible = false;
-            Text = "WeCode--未登录";
 
             Attachment.IsTokeneffective = 0;
             frYoudaoTree.YdLogOut();
@@ -1982,14 +1978,12 @@ namespace WeCode1._0
                 this.toolStripMenuItemUinfo.Visible = true;
                 this.toolStripMenuItemChgYoudaoPSW.Visible = true;
                 this.toolStripMenuItemYoudaoExport.Visible = true;
-                Text = "WeCode--已登录";
             }
             else {
                 this.toolStripMenuItemLogin.Visible = true;
                 this.toolStripMenuItemUinfo.Visible = false;
                 this.toolStripMenuItemChgYoudaoPSW.Visible = false;
                 this.toolStripMenuItemYoudaoExport.Visible = false;
-                Text = "WeCode--未登录";
             }
         }
 
@@ -2136,7 +2130,7 @@ namespace WeCode1._0
 
             //创建完成后导出有道云数据
             ExportYoudaoForm exportForm = new ExportYoudaoForm(conn);
-            exportForm.Show();
+            exportForm.ShowDialog();
         }
 
         private void toolStripSplitButton2_Click(object sender, EventArgs e)

@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DocMark));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.dataGridViewSerch = new System.Windows.Forms.DataGridView();
             this.buttonRefresh = new System.Windows.Forms.Button();
             this.buttonDelMark = new System.Windows.Forms.Button();
+            this.dataGridViewSerch = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSerch)).BeginInit();
             this.SuspendLayout();
@@ -65,6 +65,38 @@
             this.comboBox1.Size = new System.Drawing.Size(121, 20);
             this.comboBox1.TabIndex = 3;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // buttonRefresh
+            // 
+            this.buttonRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonRefresh.FlatAppearance.BorderSize = 0;
+            this.buttonRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRefresh.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonRefresh.Image = ((System.Drawing.Image)(resources.GetObject("buttonRefresh.Image")));
+            this.buttonRefresh.Location = new System.Drawing.Point(146, 3);
+            this.buttonRefresh.Name = "buttonRefresh";
+            this.buttonRefresh.Size = new System.Drawing.Size(63, 23);
+            this.buttonRefresh.TabIndex = 2;
+            this.buttonRefresh.Text = " 刷新";
+            this.buttonRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonRefresh.UseVisualStyleBackColor = true;
+            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
+            // 
+            // buttonDelMark
+            // 
+            this.buttonDelMark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDelMark.FlatAppearance.BorderSize = 0;
+            this.buttonDelMark.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDelMark.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonDelMark.Image = ((System.Drawing.Image)(resources.GetObject("buttonDelMark.Image")));
+            this.buttonDelMark.Location = new System.Drawing.Point(221, 3);
+            this.buttonDelMark.Name = "buttonDelMark";
+            this.buttonDelMark.Size = new System.Drawing.Size(63, 23);
+            this.buttonDelMark.TabIndex = 1;
+            this.buttonDelMark.Text = " 删除";
+            this.buttonDelMark.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonDelMark.UseVisualStyleBackColor = true;
+            this.buttonDelMark.Click += new System.EventHandler(this.buttonDelMark_Click);
             // 
             // dataGridViewSerch
             // 
@@ -98,36 +130,6 @@
             this.dataGridViewSerch.Size = new System.Drawing.Size(284, 362);
             this.dataGridViewSerch.TabIndex = 1;
             this.dataGridViewSerch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSerch_CellDoubleClick);
-            // 
-            // buttonRefresh
-            // 
-            this.buttonRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRefresh.FlatAppearance.BorderSize = 0;
-            this.buttonRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRefresh.Image = ((System.Drawing.Image)(resources.GetObject("buttonRefresh.Image")));
-            this.buttonRefresh.Location = new System.Drawing.Point(146, 3);
-            this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(63, 23);
-            this.buttonRefresh.TabIndex = 2;
-            this.buttonRefresh.Text = " 刷新";
-            this.buttonRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonRefresh.UseVisualStyleBackColor = true;
-            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
-            // 
-            // buttonDelMark
-            // 
-            this.buttonDelMark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDelMark.FlatAppearance.BorderSize = 0;
-            this.buttonDelMark.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDelMark.Image = ((System.Drawing.Image)(resources.GetObject("buttonDelMark.Image")));
-            this.buttonDelMark.Location = new System.Drawing.Point(221, 3);
-            this.buttonDelMark.Name = "buttonDelMark";
-            this.buttonDelMark.Size = new System.Drawing.Size(63, 23);
-            this.buttonDelMark.TabIndex = 1;
-            this.buttonDelMark.Text = " 删除";
-            this.buttonDelMark.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonDelMark.UseVisualStyleBackColor = true;
-            this.buttonDelMark.Click += new System.EventHandler(this.buttonDelMark_Click);
             // 
             // DocMark
             // 

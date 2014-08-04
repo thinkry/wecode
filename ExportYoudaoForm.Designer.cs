@@ -37,18 +37,20 @@
             // labelMessage
             // 
             this.labelMessage.AutoSize = true;
+            this.labelMessage.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelMessage.Location = new System.Drawing.Point(12, 76);
             this.labelMessage.Name = "labelMessage";
-            this.labelMessage.Size = new System.Drawing.Size(41, 12);
+            this.labelMessage.Size = new System.Drawing.Size(43, 17);
             this.labelMessage.TabIndex = 0;
             this.labelMessage.Text = "label1";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(13, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 12);
+            this.label1.Size = new System.Drawing.Size(0, 17);
             this.label1.TabIndex = 1;
             // 
             // progressBar1

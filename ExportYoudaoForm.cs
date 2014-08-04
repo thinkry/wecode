@@ -43,6 +43,8 @@ namespace WeCode1._0
             AccessAdo.ExecuteNonQuery(ExportConn, delSQL);
             delSQL = "delete from ttree";
             AccessAdo.ExecuteNonQuery(ExportConn, delSQL);
+            delSQL = "delete from tcontent";
+            AccessAdo.ExecuteNonQuery(ExportConn, delSQL);
 
 
             //1、先导出秘钥信息

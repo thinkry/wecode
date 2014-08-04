@@ -41,41 +41,45 @@
             // labelTip
             // 
             this.labelTip.AutoSize = true;
-            this.labelTip.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelTip.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelTip.Location = new System.Drawing.Point(12, 18);
             this.labelTip.Name = "labelTip";
-            this.labelTip.Size = new System.Drawing.Size(31, 12);
+            this.labelTip.Size = new System.Drawing.Size(32, 17);
             this.labelTip.TabIndex = 0;
             this.labelTip.Text = "属性";
             // 
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
+            this.labelTitle.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelTitle.Location = new System.Drawing.Point(12, 52);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(29, 12);
+            this.labelTitle.Size = new System.Drawing.Size(44, 17);
             this.labelTitle.TabIndex = 1;
-            this.labelTitle.Text = "标题";
+            this.labelTitle.Text = "标题：";
             // 
             // labelType
             // 
             this.labelType.AutoSize = true;
+            this.labelType.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelType.Location = new System.Drawing.Point(12, 92);
             this.labelType.Name = "labelType";
-            this.labelType.Size = new System.Drawing.Size(89, 12);
+            this.labelType.Size = new System.Drawing.Size(92, 17);
             this.labelType.TabIndex = 2;
             this.labelType.Text = "选择语言类型：";
             // 
             // textBoxTitle
             // 
+            this.textBoxTitle.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBoxTitle.Location = new System.Drawing.Point(107, 49);
             this.textBoxTitle.Name = "textBoxTitle";
-            this.textBoxTitle.Size = new System.Drawing.Size(277, 21);
+            this.textBoxTitle.Size = new System.Drawing.Size(277, 23);
             this.textBoxTitle.TabIndex = 3;
             // 
             // comboBoxLanguageType
             // 
             this.comboBoxLanguageType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxLanguageType.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBoxLanguageType.FormattingEnabled = true;
             this.comboBoxLanguageType.Items.AddRange(new object[] {
             "Text",
@@ -96,21 +100,23 @@
             "Haxe"});
             this.comboBoxLanguageType.Location = new System.Drawing.Point(107, 89);
             this.comboBoxLanguageType.Name = "comboBoxLanguageType";
-            this.comboBoxLanguageType.Size = new System.Drawing.Size(277, 20);
+            this.comboBoxLanguageType.Size = new System.Drawing.Size(277, 25);
             this.comboBoxLanguageType.TabIndex = 4;
             // 
             // checkBoxIsOnRootCreate
             // 
             this.checkBoxIsOnRootCreate.AutoSize = true;
+            this.checkBoxIsOnRootCreate.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.checkBoxIsOnRootCreate.Location = new System.Drawing.Point(14, 132);
             this.checkBoxIsOnRootCreate.Name = "checkBoxIsOnRootCreate";
-            this.checkBoxIsOnRootCreate.Size = new System.Drawing.Size(144, 16);
+            this.checkBoxIsOnRootCreate.Size = new System.Drawing.Size(147, 21);
             this.checkBoxIsOnRootCreate.TabIndex = 5;
             this.checkBoxIsOnRootCreate.Text = "在顶层新建目录或文章";
             this.checkBoxIsOnRootCreate.UseVisualStyleBackColor = true;
             // 
             // buttonOk
             // 
+            this.buttonOk.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.buttonOk.Location = new System.Drawing.Point(207, 156);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
@@ -121,6 +127,7 @@
             // 
             // buttonCancel
             // 
+            this.buttonCancel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.buttonCancel.Location = new System.Drawing.Point(309, 156);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
@@ -131,6 +138,7 @@
             // 
             // ProperDialog
             // 
+            this.AcceptButton = this.buttonOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(396, 199);
