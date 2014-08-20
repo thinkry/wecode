@@ -50,7 +50,7 @@ namespace WeCode1._0
             //MessageBox.Show("未授权有道云笔记或者授权已过期，请点击用户--登录以重新授权！");
             if (ConfigurationManager.AppSettings["authorAlert"] != "0")
             {
-                if (MessageBox.Show("未授权有道云笔记或者授权已过期，点击菜单用户--登录以重新授权！\n\n点击“确定”不再提醒", "登录提醒", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+                if (MessageBox.Show("wecode笔记可以保存在有道云上，您可通过云笔记-登录有道云登录！\n\n点击“确定”不再提醒", "登录提醒", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
                 {
                     PubFunc.SetConfiguration("authorAlert", "0");
                 }

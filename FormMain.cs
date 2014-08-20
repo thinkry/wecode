@@ -2160,6 +2160,11 @@ namespace WeCode1._0
             }
         }
 
+        private void menuStripMain_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
 
         
     }

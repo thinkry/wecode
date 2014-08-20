@@ -53,7 +53,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormAuthor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "授权";
+            this.Text = "登录";
             this.Load += new System.EventHandler(this.FormAuthor_Load);
             this.ResumeLayout(false);
 

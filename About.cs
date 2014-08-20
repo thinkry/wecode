@@ -19,7 +19,7 @@ namespace WeCode1._0
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string target = "http://thinkry.github.io/wecode";
+            string target = "http://wecode.thinkry.com";
             try
             {
                 System.Diagnostics.Process.Start(target);
