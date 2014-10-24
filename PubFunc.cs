@@ -62,6 +62,9 @@ namespace WeCode1._0
                 case "Haxe":
                     SynId = "116";
                     break;
+                case "Go":
+                    SynId = "117";
+                    break;
                 default:
                     break;
 
@@ -127,6 +130,9 @@ namespace WeCode1._0
                 case "116":
                     Language = "Haxe";
                     break;
+                case "117":
+                    Language = "Go";
+                    break;
                 default:
                     break;
 
@@ -191,6 +197,9 @@ namespace WeCode1._0
                     break;
                 case "116":
                     Language = "haxe";
+                    break;
+                case "117":
+                    Language = "go";
                     break;
                 default:
                     break;

@@ -97,7 +97,8 @@
             "Lua",
             "JavaScript",
             "PHP",
-            "Haxe"});
+            "Haxe",
+            "Go"});
             this.comboBoxLanguageType.Location = new System.Drawing.Point(107, 89);
             this.comboBoxLanguageType.Name = "comboBoxLanguageType";
             this.comboBoxLanguageType.Size = new System.Drawing.Size(277, 25);
