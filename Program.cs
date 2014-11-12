@@ -20,7 +20,7 @@ namespace WeCode1._0
         static System.Threading.Mutex m;
         public static EventWaitHandle ProgramStarted; 
         //当前版本
-        public static string sVer="1.1.5";
+        public static string sVer="1.1.6";
 
 
         private static void  CheckConfig()
