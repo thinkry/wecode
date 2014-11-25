@@ -1,9 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeCode", "WeCode.csproj", "{B9AD3FFB-9135-4937-8E4B-6279C4F9B633}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "wecode1", "..\wecodeSetup\wecodeSetup.vdproj", "{91EC1FFC-2BF4-4B68-A4AB-53FA634BCA68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +13,6 @@ Global
 		{B9AD3FFB-9135-4937-8E4B-6279C4F9B633}.Debug|x86.Build.0 = Debug|x86
 		{B9AD3FFB-9135-4937-8E4B-6279C4F9B633}.Release|x86.ActiveCfg = Release|x86
 		{B9AD3FFB-9135-4937-8E4B-6279C4F9B633}.Release|x86.Build.0 = Release|x86
-		{91EC1FFC-2BF4-4B68-A4AB-53FA634BCA68}.Debug|x86.ActiveCfg = Debug
-		{91EC1FFC-2BF4-4B68-A4AB-53FA634BCA68}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
