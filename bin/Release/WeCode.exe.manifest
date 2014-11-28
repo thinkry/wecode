@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>PDWrnx4jVAlTBDnlbcQgXNzDJ90=</dsig:DigestValue>
+        <dsig:DigestValue>/e1undk9G91wFbAw9frlE629nXc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -62,7 +62,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>aMXr/3IEDlSl2RL//RBtkFNFXiI=</dsig:DigestValue>
+        <dsig:DigestValue>mX87kv5jdMhegKV2mFrgzmN/CaI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -74,19 +74,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>Z8PrgLj3B9DxKYjJ6L+TPHnKOQM=</dsig:DigestValue>
+        <dsig:DigestValue>r7aoAdrjJHa4hF+0rDEeru1iUYU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Newtonsoft.Json.dll" size="491008">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Newtonsoft.Json.dll" size="497152">
       <assemblyIdentity name="Newtonsoft.Json" version="6.0.0.0" publicKeyToken="30AD4FE6B2A6AEED" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>qyhF1ERPiWvwxQfU8Z/hPSJD7Xg=</dsig:DigestValue>
+        <dsig:DigestValue>jrU05embopeyA3p+pg+wZOmsAuE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -110,7 +110,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>N39frQYBilsttUYWbMfJxmHZwGo=</dsig:DigestValue>
+        <dsig:DigestValue>JSBEVzUmb9ex8Zd8zdnnpqMNmms=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
