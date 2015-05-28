@@ -9,6 +9,7 @@ using System.Data.OleDb;
 using System.Threading;
 using System.Xml;
 using System.Configuration;
+using WeCode1._0.youdao;
 
 namespace WeCode1._0
 {
@@ -217,9 +218,9 @@ namespace WeCode1._0
                 string path = dt.Rows[i]["Path"].ToString();
                 string gid = dt.Rows[i]["Gid"].ToString();
                 string nodeid = dt.Rows[i]["NodeId"].ToString();
-                string[] result = NoteAPI.GetNote(path);
-                string content=result[0];
-                int updatetime = Convert.ToInt32(result[1]);
+                YouDaoNode2 note = NoteAPI.GetNote(path);
+                string content = note.GetContent();
+                int updatetime = Convert.ToInt32(note.GetUpdateTime());
 
                 OleDbParameter p1 = new OleDbParameter("@Content", OleDbType.VarChar);
                 p1.Value = content;
@@ -236,14 +237,13 @@ namespace WeCode1._0
                 AccessAdo.ExecuteNonQuery(ExportConn, sql, ArrPara);
 
                 //有道附件
-                XmlDocument xDoc = NoteAPI.GetResourceWithXML(path);
                 string fileUrl,title;
                 int Datalength;
-                foreach (XmlNode xNode in xDoc.DocumentElement.ChildNodes)
+                foreach (Dictionary<string, string> item in note.GetAttachments())
                 {
-                    fileUrl = xNode.Attributes["path"].Value;
-                    title = xNode.Attributes["title"].Value;
-                    Datalength = Convert.ToInt32(xNode.Attributes["filelength"].Value);
+                    fileUrl = item["path"];
+                    title = item["title"];
+                    Datalength = Convert.ToInt32(item["filelength"]);
                     //下载附件数据
                     int intNewAffixid = Affid;
 

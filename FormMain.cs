@@ -369,42 +369,25 @@ namespace WeCode1._0
             OleDbConnection ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
             string SQL = "select Content,UpdateTime from tcontent where path='" + nodeId + "' and needsync=1";
             DataTable dt=AccessAdo.ExecuteDataSet(ExportConn,SQL).Tables[0];
-            if (dt.Rows.Count > 0)
+            youdao.YouDaoNode2 note = null;
+
+            do 
             {
-                //还未同步
-                if (MessageBox.Show("该笔记尚未完成同步，点击确定打开本地文章，取消打开云端文章", "选择信息！", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                if (dt.Rows.Count > 0)
                 {
-                    //打开本地文章
-                    Content = dt.Rows[0]["Content"].ToString();
-                    updatetime = dt.Rows[0]["UpdateTime"].ToString();
-
+                    //还未同步
+                    if (MessageBox.Show("该笔记尚未完成同步，点击确定打开本地文章，取消打开云端文章", "选择信息！", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                    {
+                        //打开本地文章
+                        Content = dt.Rows[0]["Content"].ToString();
+                        updatetime = dt.Rows[0]["UpdateTime"].ToString();
+                        break;
+                    }
                 }
-                else
-                {
-                    string[] result = NoteAPI.GetNote(nodeId);
-                    Content = result[0];
-                    updatetime = "最后更新时间：" + (PubFunc.seconds2Time(Convert.ToInt32(result[1]))).ToString();
 
-                    //写入缓存
-                    ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
-
-                    OleDbParameter p1 = new OleDbParameter("@Content", OleDbType.VarChar);
-                    p1.Value = Content;
-                    OleDbParameter p2 = new OleDbParameter("@path", OleDbType.VarChar);
-                    p2.Value = nodeId;
-
-                    OleDbParameter[] ArrPara = new OleDbParameter[2];
-                    ArrPara[0] = p1;
-                    ArrPara[1] = p2;
-                    SQL = "update tcontent set content=@Content,needSync=0 where path=@path";
-                    AccessAdo.ExecuteNonQuery(ExportConn, SQL, ArrPara);
-                }
-            }
-            else
-            {
-                string[] result = NoteAPI.GetNote(nodeId);
-                Content = result[0];
-                updatetime = "最后更新时间：" + (PubFunc.seconds2Time(Convert.ToInt32(result[1]))).ToString();
+                note = NoteAPI.GetNote(nodeId);
+                Content = note.GetContent();
+                updatetime = "最后更新时间：" + (PubFunc.seconds2Time(Convert.ToInt32(note.GetUpdateTime()))).ToString();
 
                 //写入缓存
                 ExportConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source="+PubFunc.GetYoudaoDBPath());
@@ -419,10 +402,7 @@ namespace WeCode1._0
                 ArrPara[1] = p2;
                 SQL = "update tcontent set content=@Content,needSync=0 where path=@path";
                 AccessAdo.ExecuteNonQuery(ExportConn, SQL, ArrPara);
-            }
-
-
-
+            } while(false);
 
             if (imageType == 2)
             {
@@ -464,6 +444,7 @@ namespace WeCode1._0
             doc.Scintilla.Modified = false;
             doc.Text = title;
             doc.NodeId = nodeId;
+            //doc.Data = note;
             doc.Type = "online";
             doc.Show(dockPanel1);
 

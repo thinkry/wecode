@@ -9,20 +9,72 @@ using System.Web;
 using System.Xml;
 using System.Collections.Specialized;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
+using WeCode1._0.youdao;
 
 namespace WeCode1._0
 {
     class NoteAPI
     {
-        //发送消息Post方法
-        public static string sendMessage(string strUrl, string PostStr)
+        private static string _bookPath = "";
+
+        /// <summary>
+        /// 获取wecodenote目录路径
+        /// </summary>
+        /// <returns>path</returns>
+        private static string GetBOOKPath()
+        {
+            if (_bookPath != null && _bookPath != "")
+            {
+                return _bookPath;
+            }
+
+            //wecodenote笔记本路径
+            try
+            {
+                //获取AccessTokon构造URL
+                StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/notebook/all.json"); //可变字符串
+
+                //获取access_token构造POST参数
+                StringBuilder urlPoststr = new StringBuilder(""); // 可变字符串
+                //追加组合格式字符串
+                urlPoststr.AppendFormat("oauth_token={0}&", ConfigurationManager.AppSettings["AccessToken"]);
+                //获取POST提交数据返回内容
+                string JNotebookListAll = sendMessage(url.ToString(), urlPoststr.ToString());
+                //获取的数据装换为Json格式 此时返回的json格式的数据
+                //JObject obj = JObject.Parse(AccessContent);
+
+                JArray ja = (JArray)JsonConvert.DeserializeObject(JNotebookListAll);
+                foreach (JObject jo in ja)
+                {
+                    if (jo["name"].ToString() == "wecodenote")
+                    {
+                        _bookPath = jo["path"].ToString();
+                    }
+                }
+            }
+            catch (Exception msg) //异常处理
+            {
+                _bookPath = "";
+            }
+
+            return _bookPath;
+        }
+
+        /// <summary>
+        /// 发送消息Post方法
+        /// </summary>
+        /// <param name="strUrl"></param>
+        /// <param name="PostStr"></param>
+        /// <returns></returns>
+        private static string sendMessage(string strUrl, string PostStr)
         {
             try
             {
                 //设置消息头
                 CookieContainer objCookieContainer = null;
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(strUrl);
-                request.Method = "Post";
+                request.Method = "POST";
                 request.ContentType = "application/x-www-form-urlencoded";
                 request.Referer = strUrl;
                 if (objCookieContainer == null)
@@ -60,300 +112,306 @@ namespace WeCode1._0
             return null;
         }
 
-
-        /// <summary>
-        /// 获取笔记的附件,转换成<div>为节点的XML，用于绑定附件列表
-        /// </summary>
-        /// <param name="path">笔记路径</param>
-        /// <returns>xmlDocument对象</returns>
-        public static XmlDocument GetResourceWithXML(string path)
+        private static bool CheckAccessToken()
         {
-            XmlDocument xDoc = new XmlDocument();
-            if (ConfigurationManager.AppSettings["AccessToken"] != "")
-            {
-                try
-                {
-                    //获取AccessTokon构造URL
-                    StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/note/get.json"); //可变字符串
-
-                    //获取access_token构造POST参数
-                    StringBuilder urlPoststr = new StringBuilder(""); // 可变字符串
-                    //追加组合格式字符串
-                    urlPoststr.AppendFormat("oauth_token={0}&", ConfigurationManager.AppSettings["AccessToken"]);
-                    urlPoststr.AppendFormat("&path={0}&", path);
-                    //获取POST提交数据返回内容
-                    string JNotebookListAll = sendMessage(url.ToString(), urlPoststr.ToString());
-
-                    //获取的数据装换为Json格式 此时返回的json格式的数据
-
-                    JObject o = JObject.Parse(JNotebookListAll);
-                    string oa = o["content"].ToString();
-
-                    xDoc.LoadXml("<root>" + oa + "</root>");
-                    string sResourceDIV = xDoc.DocumentElement.LastChild.OuterXml;
-                    xDoc.LoadXml(sResourceDIV);
-
-                }
-                catch (Exception msg) //异常处理
-                {
-
-                }
-            }
-            return xDoc;
+            return (ConfigurationManager.AppSettings["AccessToken"] != "");
         }
 
         /// <summary>
-        /// 创建笔记
+        /// 获取指定笔记
         /// </summary>
-        /// <param name="title">笔记标题</param>
-        /// <returns>笔记路径</returns>
-        public static string CreateNote(string title)
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static YouDaoNode2 GetNote(string path)
         {
-            string result = "";
-            string wecodeNotePath = GetBOOKPath();
-
-            if (ConfigurationManager.AppSettings["AccessToken"] != "")
+            if (!CheckAccessToken())
             {
-                try
-                {
-                    //获取AccessTokon构造URL
-                    StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/note/create.json"); //可变字符串
-
-                    NameValueCollection myCol = new NameValueCollection();
-                    myCol.Add("title", title);//如果键值red相同结果合并 rojo,rouge  
-                    myCol.Add("content", "<DIV updatetime=\""+PubFunc.time2TotalSeconds()+"\"></DIV><DIV></DIV>");
-                    myCol.Add("notebook", wecodeNotePath);
-
-                    string aaa = HttpPostData(url.ToString(), myCol);
-                    JObject jo = JObject.Parse(aaa);
-                    result = jo["path"].ToString();
-                }
-                catch (Exception msg) //异常处理
-                {
-
-                }
+                return null;
             }
 
-            return result;
-
-        }
-
-        /// <summary>
-        /// 获取wecodenote目录路径
-        /// </summary>
-        /// <returns>path</returns>
-        public static string GetBOOKPath()
-        {
-            string result = "";
-            //wecodenote笔记本路径
+            YouDaoNode2 result = null;
             try
             {
                 //获取AccessTokon构造URL
-                StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/notebook/all.json"); //可变字符串
+                StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/note/get.json"); //可变字符串
 
                 //获取access_token构造POST参数
                 StringBuilder urlPoststr = new StringBuilder(""); // 可变字符串
                 //追加组合格式字符串
                 urlPoststr.AppendFormat("oauth_token={0}&", ConfigurationManager.AppSettings["AccessToken"]);
+                urlPoststr.AppendFormat("&path={0}&", path);
                 //获取POST提交数据返回内容
                 string JNotebookListAll = sendMessage(url.ToString(), urlPoststr.ToString());
-                //获取的数据装换为Json格式 此时返回的json格式的数据
-                //JObject obj = JObject.Parse(AccessContent);
 
-                JArray ja = (JArray)JsonConvert.DeserializeObject(JNotebookListAll);
-                foreach (JObject jo in ja)
-                {
-                    if (jo["name"].ToString() == "wecodenote")
-                    {
-                        result = jo["path"].ToString();
-                    }
-                }
+                //获取的数据装换为Json格式 此时返回的json格式的数据
+                JObject o = JObject.Parse(JNotebookListAll);
+                string data = o["content"].ToString();
+                string createtime = o["create_time"].ToString();
+                result = YouDaoNode2.FromString(path, data, createtime);
             }
             catch (Exception msg) //异常处理
             {
-                result = "";
+
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 创建笔记
+        /// </summary>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public static YouDaoNode2 CreateNote(string title)
+        {
+            if (!CheckAccessToken())
+            {
+                return null;
+            }
+
+            YouDaoNode2 result = null;
+            try
+            {
+                result = new YouDaoNode2();
+                result.SetTitle(title);
+                result.SetUpdateTime(PubFunc.time2TotalSeconds().ToString());
+
+                //获取AccessTokon构造URL
+                StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/note/create.json"); //可变字符串
+
+                NameValueCollection myCol = new NameValueCollection();
+                myCol.Add("title", result.GetTitle());
+                myCol.Add("content", result.ToString());
+                myCol.Add("notebook", GetBOOKPath());
+
+                string aaa = HttpPostData(url.ToString(), myCol);
+                JObject jo = JObject.Parse(aaa);
+                result.SetPath(jo["path"].ToString());
+            }
+            catch (Exception msg) //异常处理
+            {
+
             }
             return result;
         }
 
-
-
-        //修改笔记，仅修改内容
         /// <summary>
-        /// 
+        /// 修改笔记，仅修改内容
+        /// </summary>
+        /// <param name="note"></param>
+        /// <param name="content"></param>
+        /// <param name="updatetime"></param>
+        /// <returns></returns>
+        public static string UpdateContent(ref YouDaoNode2 note, string content, string updatetime)
+        {
+            if (!CheckAccessToken())
+            {
+                return "FAIL";
+            }
+
+            string result = "OK";
+            try
+            {
+                note.SetContent(content);
+                note.SetUpdateTime(updatetime);
+
+                //获取AccessTokon构造URL
+                StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/note/update.json"); //可变字符串
+
+                NameValueCollection myCol = new NameValueCollection();
+                myCol.Add("path", note.GetPath());
+                myCol.Add("content", note.ToString());
+
+                string aaa = HttpPostData(url.ToString(), myCol);
+                result = "OK";
+            }
+            catch (Exception msg) //异常处理
+            {
+                result = "FAIL";
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 修改笔记标题
+        /// </summary>
+        /// <param name="note"></param>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public static string UpdateTitle(ref YouDaoNode2 note, string title)
+        {
+            if (!CheckAccessToken())
+            {
+                return "FAIL";
+            }
+
+            string result = "OK";
+            try
+            {
+                note.SetUpdateTime(title);
+
+                //获取AccessTokon构造URL
+                StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/note/update.json"); //可变字符串
+
+                NameValueCollection myCol = new NameValueCollection();
+                myCol.Add("path", note.GetPath());
+                myCol.Add("title", note.GetTitle());
+
+                string aaa = HttpPostData(url.ToString(), myCol);
+                result = "OK";
+            }
+            catch (Exception msg) //异常处理
+            {
+                result = "FAIL";
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 删除笔记
+        /// </summary>
+        /// <param name="note"></param>
+        /// <returns></returns>
+        public static string DeleteNote(string path)
+        {
+            if (!CheckAccessToken())
+            {
+                return "FAIL";
+            }
+
+            string result = "FAIL";
+            try
+            {
+                //获取AccessTokon构造URL
+                StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/note/delete.json"); //可变字符串
+
+                //获取access_token构造POST参数
+                StringBuilder urlPoststr = new StringBuilder(""); // 可变字符串
+                //追加组合格式字符串
+                urlPoststr.AppendFormat("oauth_token={0}&", ConfigurationManager.AppSettings["AccessToken"]);
+                urlPoststr.AppendFormat("&path={0}&", path);
+                //获取POST提交数据返回内容
+                string JNotebookListAll = sendMessage(url.ToString(), urlPoststr.ToString());
+                result = "OK";
+
+                //获取的数据装换为Json格式 此时返回的json格式的数据
+            }
+            catch (Exception msg) //异常处理
+            {
+
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 增加附件
+        /// </summary>
+        /// <param name="note"></param>
+        /// <param name="fileUrl"></param>
+        /// <param name="fileLength"></param>
+        /// <param name="fileName"></param>
+        public static void AddAttachment(ref YouDaoNode2 note, string fileUrl, string fileLength, string fileName)
+        {
+            if (!CheckAccessToken())
+            {
+                return;
+            }
+
+            try
+            {
+                note.AddAttachment(fileUrl, fileLength, fileName);
+
+                //获取AccessTokon构造URL
+                StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/note/update.json"); //可变字符串
+
+                NameValueCollection myCol = new NameValueCollection();
+                myCol.Add("path", note.GetPath());
+                myCol.Add("content", note.ToString());
+
+                string aaa = HttpPostData(url.ToString(), myCol);
+            }
+            catch (Exception msg) //异常处理
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// 删除附件
+        /// </summary>
+        /// <param name="note"></param>
+        /// <param name="fileUrl"></param>
+        public static void DelAttachment(ref YouDaoNode2 note, string fileUrl)
+        {
+            if (!CheckAccessToken())
+            {
+                return;
+            }
+
+            try
+            {
+                note.DelAttachment(fileUrl);
+
+                //获取AccessTokon构造URL
+                StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/note/update.json"); //可变字符串
+
+                NameValueCollection myCol = new NameValueCollection();
+                myCol.Add("path", note.GetPath());
+                myCol.Add("content", note.ToString());
+
+                string aaa = HttpPostData(url.ToString(), myCol);
+            }
+            catch (Exception msg) //异常处理
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// 重命名附件
+        /// </summary>
+        /// <param name="note"></param>
+        /// <param name="fileUrl"></param>
+        public static void RenameAttachment(ref YouDaoNode2 note, string fileUrl, string fileName)
+        {
+            if (!CheckAccessToken())
+            {
+                return;
+            }
+
+            try
+            {
+                note.RenameAttachment(fileUrl, fileName);
+
+                //获取AccessTokon构造URL
+                StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/note/update.json"); //可变字符串
+
+                NameValueCollection myCol = new NameValueCollection();
+                myCol.Add("path", note.GetPath());
+                myCol.Add("content", note.ToString());
+
+                string aaa = HttpPostData(url.ToString(), myCol);
+            }
+            catch (Exception msg) //异常处理
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// 修改笔记，仅修改内容
+        /// 外部应该保存YouDaoNote2对象，不能每次保存都从网络上取数据
         /// </summary>
         /// <param name="path"></param>
         /// <param name="content">sci文本框内的文本，未编码</param>
         /// <param name="updatetime">最后更新时间</param>
-        public static string UpdateNote(string path, string content,string updatetime)
+        public static string UpdateNote(string path, string content, string updatetime)
         {
-            string result = "OK";
-            if (ConfigurationManager.AppSettings["AccessToken"] != "")
-            {
-                try
-                {
-                    //编码
-                    XmlDocument doc = GetNoteWithXML(path);
-                    if (doc == null)
-                    {
-                        return "FAIL";
-                    }
-                    string eContent = HttpUtility.HtmlEncode(content);
-                    doc.DocumentElement.FirstChild.InnerXml = eContent;
-                    if (updatetime != "")
-                    {
-                        ((XmlElement)doc.DocumentElement.FirstChild).SetAttribute("updatetime", updatetime);
-                    }
-
-
-                    //获取AccessTokon构造URL
-                    StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/note/update.json"); //可变字符串
-
-                    NameValueCollection myCol = new NameValueCollection();
-                    myCol.Add("path", path);//如果键值red相同结果合并 rojo,rouge  
-                    myCol.Add("content", doc.DocumentElement.InnerXml);
-
-                    string aaa = HttpPostData(url.ToString(), myCol);
-
-                    result = "OK";
-
-
-                }
-                catch (Exception msg) //异常处理
-                {
-                    result = "FAIL";
-                }
-            }
-            return result;
+            YouDaoNode2 note = GetNote(path);
+            return UpdateContent(ref note, content, updatetime);
         }
-
-
-        /// <summary>
-        /// 获取笔记的content,转换成root为节点的XML
-        /// </summary>
-        /// <param name="path">笔记路径</param>
-        /// <returns>xmlDocument对象</returns>
-        public static XmlDocument GetNoteWithXML(string path)
-        {
-            XmlDocument xDoc = new XmlDocument();
-            if (ConfigurationManager.AppSettings["AccessToken"] != "")
-            {
-                try
-                {
-                    //获取AccessTokon构造URL
-                    StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/note/get.json"); //可变字符串
-
-                    //获取access_token构造POST参数
-                    StringBuilder urlPoststr = new StringBuilder(""); // 可变字符串
-                    //追加组合格式字符串
-                    urlPoststr.AppendFormat("oauth_token={0}&", ConfigurationManager.AppSettings["AccessToken"]);
-                    urlPoststr.AppendFormat("&path={0}&", path);
-                    //获取POST提交数据返回内容
-                    string JNotebookListAll = sendMessage(url.ToString(), urlPoststr.ToString());
-
-                    //获取的数据装换为Json格式 此时返回的json格式的数据
-
-                    JObject o = JObject.Parse(JNotebookListAll);
-                    string oa = o["content"].ToString();
-
-                    xDoc.LoadXml("<root>" + oa + "</root>");
-
-                }
-                catch (Exception msg) //异常处理
-                {
-
-                }
-            }
-            return xDoc;
-        }
-
-        /// <summary>
-        /// 获取笔记的正文以及最后更新时间 20140724修改
-        /// </summary>
-        /// <param name="path">笔记路径</param>
-        /// <returns>html解码之后的文本</returns>
-        public static string[] GetNote(string path)
-        {
-            string[] result = new string[2];
-            string YouDaoResult = "";
-            if (ConfigurationManager.AppSettings["AccessToken"] != "")
-            {
-                try
-                {
-                    //获取AccessTokon构造URL
-                    StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/note/get.json"); //可变字符串
-
-                    //获取access_token构造POST参数
-                    StringBuilder urlPoststr = new StringBuilder(""); // 可变字符串
-                    //追加组合格式字符串
-                    urlPoststr.AppendFormat("oauth_token={0}&", ConfigurationManager.AppSettings["AccessToken"]);
-                    urlPoststr.AppendFormat("&path={0}&", path);
-                    //获取POST提交数据返回内容
-                    string JNotebookListAll = sendMessage(url.ToString(), urlPoststr.ToString());
-
-                    //获取的数据装换为Json格式 此时返回的json格式的数据
-
-                    JObject o = JObject.Parse(JNotebookListAll);
-                    string oa = o["content"].ToString();
-                    string createtime = o["create_time"].ToString();
-
-                    XmlDocument xDoc = new XmlDocument();
-                    xDoc.LoadXml("<root>" + oa + "</root>");
-                    YouDaoResult = xDoc.DocumentElement.FirstChild.InnerXml;
-                    if (xDoc.DocumentElement.FirstChild.Attributes["updatetime"] != null)
-                    {
-                        result[1] = xDoc.DocumentElement.FirstChild.Attributes["updatetime"].Value;
-                    }
-                    else
-                    {
-                        result[1] = createtime;
-                    }
-                    result[0] = HttpUtility.HtmlDecode(YouDaoResult);
-
-                }
-                catch (Exception msg) //异常处理
-                {
-
-                }
-            }
-            return result;
-        }
-
-        //获取最后修改时间
-        public static string GetUpdateTime(string path)
-        {
-            string result = "";
-            if (ConfigurationManager.AppSettings["AccessToken"] != "")
-            {
-                try
-                {
-                    //获取AccessTokon构造URL
-                    StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/note/get.json"); //可变字符串
-
-                    //获取access_token构造POST参数
-                    StringBuilder urlPoststr = new StringBuilder(""); // 可变字符串
-                    //追加组合格式字符串
-                    urlPoststr.AppendFormat("oauth_token={0}&", ConfigurationManager.AppSettings["AccessToken"]);
-                    urlPoststr.AppendFormat("&path={0}&", path);
-                    //获取POST提交数据返回内容
-                    string JNotebookListAll = sendMessage(url.ToString(), urlPoststr.ToString());
-
-                    //获取的数据装换为Json格式 此时返回的json格式的数据
-
-                    JObject o = JObject.Parse(JNotebookListAll);
-                    string oa = o["modify_time"].ToString();
-                    result = oa;
-
-                }
-                catch (Exception msg) //异常处理
-                {
-
-                }
-            }
-            return result;
-        }
-
-
 
         //post数据，ContentType = "multipart/form-data"
         private static string HttpPostData(string url, NameValueCollection stringDict)
@@ -417,93 +475,20 @@ namespace WeCode1._0
             return responseContent;
         }
 
-
-        /// <summary>
-        /// 删除笔记
-        /// </summary>
-        /// <param name="path">笔记路径</param>
-        /// <returns>删除结果 FAIL/OK</returns>
-        public static string DeleteNote(string path)
-        {
-            string result = "FAIL";
-            if (ConfigurationManager.AppSettings["AccessToken"] != "")
-            {
-                try
-                {
-                    //获取AccessTokon构造URL
-                    StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/note/delete.json"); //可变字符串
-
-                    //获取access_token构造POST参数
-                    StringBuilder urlPoststr = new StringBuilder(""); // 可变字符串
-                    //追加组合格式字符串
-                    urlPoststr.AppendFormat("oauth_token={0}&", ConfigurationManager.AppSettings["AccessToken"]);
-                    urlPoststr.AppendFormat("&path={0}&", path);
-                    //获取POST提交数据返回内容
-                    string JNotebookListAll=sendMessage(url.ToString(), urlPoststr.ToString());
-                    result = "OK";
-                    //获取的数据装换为Json格式 此时返回的json格式的数据
-
-
-
-                }
-                catch (Exception msg) //异常处理
-                {
-
-                }
-            }
-            return result;
-        }
-
-
-
         //修改笔记，用于更新附件链接
         /// <summary>
         /// 
         /// </summary>
         /// <param name="path"></param>
         /// <param name="content"></param>
-        public static void UpdateRource(string fileUrl, string filelenth,string filename,string path)
+        public static void UpdateRource(string fileUrl, string fileLength, string fileName, string path)
         {
-            if (ConfigurationManager.AppSettings["AccessToken"] != "")
+            YouDaoNode2 note = GetNote(path);
+            if (note != null)
             {
-                try
-                {
-                    //编码
-                    XmlDocument doc = GetNoteWithXML(path);
-                    if (doc == null)
-                    {
-                        return;
-                    }
-                    XmlElement xNode = doc.CreateElement("img");
-                    xNode.SetAttribute("src", "");
-                    xNode.SetAttribute("alt", filename);
-                    xNode.SetAttribute("title", filename);
-                    xNode.SetAttribute("filename", "");
-                    xNode.SetAttribute("filelength", filelenth);
-                    xNode.SetAttribute("path", fileUrl);
-                    xNode.SetAttribute("id", "");
-
-                    doc.DocumentElement.LastChild.AppendChild(xNode);
-
-                    //获取AccessTokon构造URL
-                    StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/note/update.json"); //可变字符串
-
-                    NameValueCollection myCol = new NameValueCollection();
-                    myCol.Add("path", path);//如果键值red相同结果合并 rojo,rouge  
-                    myCol.Add("content", doc.DocumentElement.InnerXml);
-
-                    string aaa = HttpPostData(url.ToString(), myCol);
-
-
-
-                }
-                catch (Exception msg) //异常处理
-                {
-
-                }
+                AddAttachment(ref note, fileUrl, fileLength, fileName);
             }
         }
-
 
         //删除附件
         /// <summary>
@@ -511,46 +496,12 @@ namespace WeCode1._0
         /// </summary>
         /// <param name="notepath">笔记路径</param>
         /// <param name="url">附件URL</param>
-        public static void DeleteRource(string notepath, string RsUrl)
+        public static void DeleteRource(string notePath, string rsUrl)
         {
-            if (ConfigurationManager.AppSettings["AccessToken"] != "")
+            YouDaoNode2 note = GetNote(notePath);
+            if (note != null)
             {
-                try
-                {
-                    //编码
-                    XmlDocument doc = GetNoteWithXML(notepath);
-                    if (doc == null)
-                    {
-                        return;
-                    }
-                    //查找附件节点
-                    XmlNodeList xlist = doc.DocumentElement.LastChild.ChildNodes;
-                    
-                    foreach (XmlNode xnode in xlist)
-                    {
-                        if (xnode.Attributes["path"].Value == RsUrl)
-                        {
-                            doc.DocumentElement.LastChild.RemoveChild(xnode);
-                            break;
-                        }
-                    }
-
-                    //获取AccessTokon构造URL
-                    StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/note/update.json"); //可变字符串
-
-                    NameValueCollection myCol = new NameValueCollection();
-                    myCol.Add("path", notepath);//如果键值red相同结果合并 rojo,rouge  
-                    myCol.Add("content", doc.DocumentElement.InnerXml);
-
-                    string aaa = HttpPostData(url.ToString(), myCol);
-
-
-
-                }
-                catch (Exception msg) //异常处理
-                {
-
-                }
+                DelAttachment(ref note, rsUrl);
             }
         }
 
@@ -560,95 +511,58 @@ namespace WeCode1._0
         /// </summary>
         /// <param name="notepath">笔记路径</param>
         /// <param name="url">附件URL</param>
-        public static void RenameRource(string notepath, string RsUrl,string Title)
+        public static void RenameRource(string notePath, string rsUrl, string title)
         {
-            if (ConfigurationManager.AppSettings["AccessToken"] != "")
+            YouDaoNode2 note = GetNote(notePath);
+            if (note != null)
             {
-                try
-                {
-                    //编码
-                    XmlDocument doc = GetNoteWithXML(notepath);
-                    if (doc == null)
-                    {
-                        return;
-                    }
-                    //查找附件节点
-                    XmlNodeList xlist = doc.DocumentElement.LastChild.ChildNodes;
-
-                    foreach (XmlNode xnode in xlist)
-                    {
-                        if (xnode.Attributes["path"].Value == RsUrl)
-                        {
-                            xnode.Attributes["title"].Value = Title;
-                            break;
-                        }
-                    }
-
-                    //获取AccessTokon构造URL
-                    StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/note/update.json"); //可变字符串
-
-                    NameValueCollection myCol = new NameValueCollection();
-                    myCol.Add("path", notepath);//如果键值red相同结果合并 rojo,rouge  
-                    myCol.Add("content", doc.DocumentElement.InnerXml);
-
-                    string aaa = HttpPostData(url.ToString(), myCol);
-
-
-
-                }
-                catch (Exception msg) //异常处理
-                {
-
-                }
+                RenameAttachment(ref note, rsUrl, title);
             }
         }
 
         public static string GetUserInfo()
         {
+            if (!CheckAccessToken())
+            {
+                return "";
+            }
+
             string result = "";
 
-            if (ConfigurationManager.AppSettings["AccessToken"] == "")
+            //测试获取用户信息
+            try
+            {
+                //获取AccessTokon构造URL
+                StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/user/get.json"); //可变字符串
+                //追加组合格式字符串
+                url.AppendFormat("?oauth_token={0}&", ConfigurationManager.AppSettings["AccessToken"]);
+
+                string Input = url.ToString();
+                //HttpWebRequest对象实例:该类用于获取和操作HTTP请求
+                var request = (HttpWebRequest)WebRequest.Create(Input); //Create:创建WebRequest对象
+                //设置请求方法为GET
+                //request.Headers.Add("Authorization", "Bearer " + accessToken);
+                request.Method = "GET";
+                //HttpWebResponse对象实例:该类用于获取和操作HTTP应答 
+                var response = (HttpWebResponse)request.GetResponse(); //GetResponse:获取答复
+                //构造数据流对象实例
+                Stream stream = response.GetResponseStream(); //GetResponseStream:获取应答流
+                StreamReader sr = new StreamReader(stream); //从字节流中读取字符
+                //从流当前位置读取到末尾并显示在WebBrower控件中 
+                string content = sr.ReadToEnd();
+
+                result = content;
+                //关闭响应流
+                stream.Close();
+                sr.Close();
+                response.Close();
+            }
+            catch (Exception msg) //异常处理
             {
                 result = "";
-            }
-            else
-            {
-                //测试获取用户信息
-                try
-                {
-                    //获取AccessTokon构造URL
-                    StringBuilder url = new StringBuilder("https://note.youdao.com/yws/open/user/get.json"); //可变字符串
-                    //追加组合格式字符串
-                    url.AppendFormat("?oauth_token={0}&", ConfigurationManager.AppSettings["AccessToken"]);
-
-                    string Input = url.ToString();
-                    //HttpWebRequest对象实例:该类用于获取和操作HTTP请求
-                    var request = (HttpWebRequest)WebRequest.Create(Input); //Create:创建WebRequest对象
-                    //设置请求方法为GET
-                    //request.Headers.Add("Authorization", "Bearer " + accessToken);
-                    request.Method = "GET";
-                    //HttpWebResponse对象实例:该类用于获取和操作HTTP应答 
-                    var response = (HttpWebResponse)request.GetResponse(); //GetResponse:获取答复
-                    //构造数据流对象实例
-                    Stream stream = response.GetResponseStream(); //GetResponseStream:获取应答流
-                    StreamReader sr = new StreamReader(stream); //从字节流中读取字符
-                    //从流当前位置读取到末尾并显示在WebBrower控件中 
-                    string content = sr.ReadToEnd();
-
-                    result = content;
-                    //关闭响应流
-                    stream.Close();
-                    sr.Close();
-                    response.Close();
-                }
-                catch (Exception msg) //异常处理
-                {
-                    result = "";
-                }
             }
 
             return result;
         }
-
     }
 }

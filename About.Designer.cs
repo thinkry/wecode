@@ -117,7 +117,7 @@
             // linkLabel3
             // 
             this.linkLabel3.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.linkLabel3.Location = new System.Drawing.Point(153, 146);
+            this.linkLabel3.Location = new System.Drawing.Point(153, 178);
             this.linkLabel3.Name = "linkLabel3";
             this.linkLabel3.Size = new System.Drawing.Size(220, 15);
             this.linkLabel3.TabIndex = 12;
@@ -138,7 +138,7 @@
             // linkLabel4
             // 
             this.linkLabel4.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.linkLabel4.Location = new System.Drawing.Point(153, 178);
+            this.linkLabel4.Location = new System.Drawing.Point(153, 146);
             this.linkLabel4.Name = "linkLabel4";
             this.linkLabel4.Size = new System.Drawing.Size(220, 15);
             this.linkLabel4.TabIndex = 13;

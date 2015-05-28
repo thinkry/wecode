@@ -10,6 +10,7 @@ using WeifenLuo.WinFormsUI.Docking;
 using System.Data.OleDb;
 using System.Threading;
 using System.Configuration;
+using WeCode1._0.youdao;
 
 namespace WeCode1._0
 {
@@ -536,7 +537,8 @@ namespace WeCode1._0
                 string sGUID = System.Guid.NewGuid().ToString();
 
                 //云端创建笔记，返回路径
-                string Path = NoteAPI.CreateNote(Title);
+                YouDaoNode2 node = NoteAPI.CreateNote(Title);
+                string Path = node.GetPath();
 
                 //无节点，直接顶层创建
                 if (isHaveNodes == "False")
@@ -1117,24 +1119,6 @@ namespace WeCode1._0
 
         private void treeViewYouDao_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            //try
-            //{
-            //    TreeNode seleNode = treeViewYouDao.SelectedNode;
-            //    if (seleNode == null)
-            //        return;
-            //    if (seleNode.ImageIndex == 0)
-            //        return;
-            //    string path = seleNode.FullPath;
-            //    string sNodeId = ((treeTagNote)treeViewYouDao.SelectedNode.Tag).path;
-            //    int TotalSeconds = Convert.ToInt32(NoteAPI.GetUpdateTime(sNodeId));
-            //    DateTime cTime = PubFunc.seconds2Time(TotalSeconds);
-            //    string createTime = "最后更新时间： " + cTime.ToString();
-            //    formParent.showFullPathTime(path, createTime);
-            //}
-            //catch (Exception wx)
-            //{
-                
-            //}
         }
 
         #region drag
@@ -1427,7 +1411,7 @@ namespace WeCode1._0
             if (MykeydYd != "")
             {
                 //获取文章信息
-                string Content = NoteAPI.GetNote(sNodeId)[0];
+                string Content = NoteAPI.GetNote(sNodeId).GetContent();
                 string EncrptyedContent = EncryptDecrptt.EncrptyByKey(Content, MykeydYd);
                 //重新保存
                 if (NoteAPI.UpdateNote(sNodeId, EncrptyedContent,"") == "OK")
@@ -1519,10 +1503,11 @@ namespace WeCode1._0
             if (MykeydYd != "")
             {
                 //获取文章信息
-                string Content = NoteAPI.GetNote(sNodeId)[0];
-                string DecrptyedContent = EncryptDecrptt.DecrptyByKey(Content, MykeydYd);
+                youdao.YouDaoNode2 note = NoteAPI.GetNote(sNodeId);
+                string DecrptyedContent = EncryptDecrptt.DecrptyByKey(note.GetContent(), MykeydYd);
+
                 //重新保存
-                if (NoteAPI.UpdateNote(sNodeId, DecrptyedContent,"") == "OK")
+                if (NoteAPI.UpdateContent(ref note, DecrptyedContent, note.GetUpdateTime()) == "OK")
                 {
                     //更新配置文件
                     XmlDocument doc = new XmlDocument();

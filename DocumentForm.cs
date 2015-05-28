@@ -32,6 +32,8 @@ namespace WeCode1._0
 
         private int _isLock=0;
 
+        private youdao.YouDaoNode2 _data = null;
+
         #endregion Fields
 
         #region Properties
@@ -84,6 +86,12 @@ namespace WeCode1._0
                 return scintilla1;
             }
         }
+
+        //public youdao.YouDaoNode2 Data
+        //{
+        //    get { return _data; }
+        //    set { _data = value; }
+        //}
 
         #endregion Properties
 
@@ -207,20 +215,6 @@ namespace WeCode1._0
 
                 //通知主窗口唤醒扫描线程
                 Attachment.frmMain.InterRuptSleep();
-
-                /* 本段保存移至同步线程扫描执行，此处直接存储在缓存数据库
-                if (NoteAPI.UpdateNote(this.NodeId, DocText, updatetime.ToString()) == "OK")
-                {
-                    LastUpdateTime = "最后更新时间：" + PubFunc.seconds2Time(updatetime).ToString();
-                    Attachment.frmMain.showFullPathTime("【有道云】"+TreeLocation, LastUpdateTime);
-
-                    scintilla1.Modified = false;
-                }
-                else
-                {
-                    MessageBox.Show("保存失败！");
-                }
-                 */
             }
         }
 

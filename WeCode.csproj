@@ -67,7 +67,7 @@
     </Reference>
     <Reference Include="ScintillaNET, Version=2.6.0.0, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Administrator\Desktop\sciSource\bin\Debug\ScintillaNET.dll</HintPath>
+      <HintPath>bin\Release\ScintillaNET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -78,7 +78,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WeifenLuo.WinFormsUI.Docking">
-      <HintPath>..\WeCode1.0\WeCode1.0\bin\Debug\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+      <HintPath>bin\Release\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -201,6 +201,7 @@
     <Compile Include="UserInfo.Designer.cs">
       <DependentUpon>UserInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="utils\StringUtils.cs" />
     <Compile Include="WelcomeDoc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -227,6 +228,7 @@
     <Compile Include="DiaChgLocalPSW.Designer.cs">
       <DependentUpon>DiaChgLocalPSW.cs</DependentUpon>
     </Compile>
+    <Compile Include="youdao\YouDaoNode2.cs" />
     <EmbeddedResource Include="AttRenameDialog.resx">
       <DependentUpon>AttRenameDialog.cs</DependentUpon>
     </EmbeddedResource>

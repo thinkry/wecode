@@ -66,7 +66,7 @@ namespace WeCode1._0
             else if (Attachment.ActiveDOCType == "online")
             { 
                 //有道附件
-                XmlDocument xDoc = NoteAPI.GetResourceWithXML(Attachment.ActiveNodeId);
+                youdao.YouDaoNode2 node = NoteAPI.GetNote(Attachment.ActiveNodeId); //@@可优化掉
                 DataTable tempDt=new DataTable();
                 tempDt.Columns.Add("path");
                 tempDt.Columns.Add("序号");
@@ -74,13 +74,13 @@ namespace WeCode1._0
                 tempDt.Columns.Add("大小");
                 tempDt.Columns.Add("加入日期");
                 int i=1;
-                foreach (XmlNode xNode in xDoc.DocumentElement.ChildNodes)
+                foreach (Dictionary<string, string> item in node.GetAttachments())
                 {
                     DataRow dr = tempDt.NewRow();
-                    dr["path"] = xNode.Attributes["path"].Value;
+                    dr["path"] = item["path"];
                     dr["序号"] = i;
-                    dr["标题"] = xNode.Attributes["title"].Value;
-                    dr["大小"] = (double.Parse(xNode.Attributes["filelength"].Value)/1024).ToString("0.00")+"KB";
+                    dr["标题"] = item["title"];
+                    dr["大小"] = (double.Parse(item["filelength"])/1024).ToString("0.00")+"KB";
                     dr["加入日期"] = "";
                     tempDt.Rows.Add(dr);
                     i++;
