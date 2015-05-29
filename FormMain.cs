@@ -386,6 +386,11 @@ namespace WeCode1._0
                 }
 
                 note = NoteAPI.GetNote(nodeId);
+                if (note == null)
+                {
+                    MessageBox.Show("从有道云打开笔记失败...");
+                    return null;
+                }
                 Content = note.GetContent();
                 updatetime = "最后更新时间：" + (PubFunc.seconds2Time(Convert.ToInt32(note.GetUpdateTime()))).ToString();
 

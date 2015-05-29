@@ -12,9 +12,9 @@ namespace WeCode1._0.utils
         /// </summary>
         /// <param name="xmlParams"></param>
         /// <returns></returns>
-        public static Dictionary<String, String> SplitXmlParams(String xmlParams)
+        public static Dictionary<string, string> SplitXmlParams(string xmlParams)
         {
-            char[] spaces = new char[] {' ', '\t', '\r', '\n'};
+            char[] spaces = new char[] {' ', '\t', '\r', '\n', '>'};
 
             //先跳过<div这个node name
             int tagB = xmlParams.IndexOf('<');
@@ -31,16 +31,16 @@ namespace WeCode1._0.utils
             }
 
             char[] seps = new char[] {' ', '\t'};
-            String[] items = xmlParams.Substring(tagB, tagE - tagB)
-                .Split(seps, StringSplitOptions.RemoveEmptyEntries);
+            string t = xmlParams.Substring(tagB, tagE - tagB);
+            string[] items = t.Split(seps, StringSplitOptions.RemoveEmptyEntries);
 
-            Dictionary<String, String> ret = new Dictionary<String, String>();
+            Dictionary<string, string> ret = new Dictionary<string, string>();
 
             char[] seps2 = new char[] { '=' };
             char[] seps3 = new char[] { '"', ' ', '\n', '\r', '\t' };
-            foreach (String item in items)
+            foreach (string item in items)
             {
-                String[] values = item.Split(seps2, StringSplitOptions.RemoveEmptyEntries);
+                string[] values = item.Split(seps2, StringSplitOptions.RemoveEmptyEntries);
                 if (values.Length != 2)
                 {
                     continue;

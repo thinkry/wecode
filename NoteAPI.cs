@@ -142,6 +142,10 @@ namespace WeCode1._0
                 urlPoststr.AppendFormat("&path={0}&", path);
                 //获取POST提交数据返回内容
                 string JNotebookListAll = sendMessage(url.ToString(), urlPoststr.ToString());
+                if (JNotebookListAll == null)
+                {
+                    return null;
+                }
 
                 //获取的数据装换为Json格式 此时返回的json格式的数据
                 JObject o = JObject.Parse(JNotebookListAll);
@@ -151,7 +155,7 @@ namespace WeCode1._0
             }
             catch (Exception msg) //异常处理
             {
-
+                Console.Write(msg);
             }
 
             return result;

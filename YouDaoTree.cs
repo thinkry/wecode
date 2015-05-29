@@ -1411,10 +1411,17 @@ namespace WeCode1._0
             if (MykeydYd != "")
             {
                 //获取文章信息
-                string Content = NoteAPI.GetNote(sNodeId).GetContent();
+                youdao.YouDaoNode2 note = NoteAPI.GetNote(sNodeId);
+                if (note == null)
+                {
+                    MessageBox.Show("操作失败！");
+                    return;
+                }
+
+                string Content = note.GetContent();
                 string EncrptyedContent = EncryptDecrptt.EncrptyByKey(Content, MykeydYd);
                 //重新保存
-                if (NoteAPI.UpdateNote(sNodeId, EncrptyedContent,"") == "OK")
+                if (NoteAPI.UpdateContent(ref note, EncrptyedContent, note.GetUpdateTime()) == "OK")
                 {
                     //更新配置文件
                     XmlDocument doc = new XmlDocument();
@@ -1504,6 +1511,11 @@ namespace WeCode1._0
             {
                 //获取文章信息
                 youdao.YouDaoNode2 note = NoteAPI.GetNote(sNodeId);
+                if (note == null)
+                {
+                    MessageBox.Show("操作失败！");
+                    return;
+                }
                 string DecrptyedContent = EncryptDecrptt.DecrptyByKey(note.GetContent(), MykeydYd);
 
                 //重新保存

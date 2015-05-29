@@ -138,7 +138,7 @@ namespace WeCode1._0.youdao
             }
 
             //获取最后更新时间
-            if (contentParams.ContainsKey("updatetime"))
+            if (contentParams.ContainsKey("updatetime") && contentParams["updatetime"].Length > 0)
             {
                 result.SetUpdateTime(contentParams["updatetime"]);
             }

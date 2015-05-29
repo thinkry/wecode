@@ -219,6 +219,11 @@ namespace WeCode1._0
                 string gid = dt.Rows[i]["Gid"].ToString();
                 string nodeid = dt.Rows[i]["NodeId"].ToString();
                 YouDaoNode2 note = NoteAPI.GetNote(path);
+                if (note == null)
+                {
+                    Console.WriteLine(path + "导出失败，跳过");
+                    continue;
+                }
                 string content = note.GetContent();
                 int updatetime = Convert.ToInt32(note.GetUpdateTime());
 

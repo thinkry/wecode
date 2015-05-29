@@ -66,7 +66,11 @@ namespace WeCode1._0
             else if (Attachment.ActiveDOCType == "online")
             { 
                 //有道附件
-                youdao.YouDaoNode2 node = NoteAPI.GetNote(Attachment.ActiveNodeId); //@@可优化掉
+                youdao.YouDaoNode2 node = NoteAPI.GetNote(Attachment.ActiveNodeId);
+                if (node == null)
+                {
+                    return;
+                }
                 DataTable tempDt=new DataTable();
                 tempDt.Columns.Add("path");
                 tempDt.Columns.Add("序号");
