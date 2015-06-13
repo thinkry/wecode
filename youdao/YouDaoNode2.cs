@@ -123,7 +123,7 @@ namespace WeCode1._0.youdao
 
             //解析内容 第一个div标记
             int firstB = data.IndexOf('>') + 1;
-            int firstE = data.IndexOf("</div>", firstB);
+            int firstE = data.IndexOf("</div>", firstB, StringComparison.OrdinalIgnoreCase);
             string first = data.Substring(firstB, firstE - firstB);
 
             if (contentParams.ContainsKey("type") && contentParams["type"].Trim() == typeBase64)
@@ -157,11 +157,11 @@ namespace WeCode1._0.youdao
             }
 
             //解析附件第二个div标记
-            int secondB = data.IndexOf("<div", firstE + 6);
+            int secondB = data.IndexOf("<div", firstE + 6, StringComparison.OrdinalIgnoreCase);
             if (secondB >= 0)  //有附件
             {
                 secondB = data.IndexOf('>', secondB + 4) + 1;
-                int secondE = data.LastIndexOf("</div>");
+                int secondE = data.LastIndexOf("</div>", StringComparison.OrdinalIgnoreCase);
                 string second = data.Substring(secondB, secondE - secondB);
                 result.ParseAttachments(second);
             }
