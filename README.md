@@ -1,8 +1,6 @@
 wecode
 ======
 
-官网：http://wecode.thinkry.com
-
 ---
 wecode简介
 ------
