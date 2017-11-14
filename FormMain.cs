@@ -1680,7 +1680,7 @@ namespace WeCode1._0
 
                 MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于对向Internet资源的请求进行身份验证的网络凭据。
 
-                Byte[] pageData = MyWebClient.DownloadData("http://wecode.thinkry.com/version.xml"); //从指定网站下载数据
+                Byte[] pageData = MyWebClient.DownloadData("http://thinkry.github.io/wecode/version.xml"); //从指定网站下载数据
 
                 pageHtml = Encoding.UTF8.GetString(pageData);
                 pageHtml = pageHtml.Trim();
@@ -1723,7 +1723,7 @@ namespace WeCode1._0
         //主页
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
-            string target = "http://wecode.thinkry.com";
+            string target = "http://thinkry.github.io";
             try
             {
                 System.Diagnostics.Process.Start(target);

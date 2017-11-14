@@ -36,7 +36,7 @@ namespace WeCode1._0
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            StartProcess("http://wecode.thinkry.com");
+            StartProcess("http://thinkry.github.io");
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

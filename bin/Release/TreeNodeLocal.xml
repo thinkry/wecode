@@ -1,3 +1,258 @@
-<wecode notever="1">
-  
+<wecode KeyD5="8ae62f92902e2536ebfd3b1bd6fa6f10" KeyE="aDo1+hGgjUotzFfOyy2WLuYU8yISp21ZqsgfS6j6IM8=" UserId="bf63385b-7209-4c0f-b3c6-42720cb640c0">
+  <book id="94857300-c2a4-472f-9d57-6cb8b71185b6" title="工作日记" Language="C/C++">
+    <book id="cb25bd89-549e-4bf8-8d7e-a16c127e9b42" title="2015" Language="C/C++">
+      <note id="32e053d8-f5af-4933-9cb9-fb3ba31a1c04" title="2015-05" path="/D2B521A35EE84BEBAA041AE6877560F6/5812AA6B0F2341E78EF5DA216DE79FC1" createtime="1433120723" Language="C/C++" isMark="0" IsLock="0" />
+    </book>
+    <book id="99f0a687-886d-4e8b-a057-93bbffb3b40e" title="2014" Language="C/C++">
+      <note id="2454ae44-77d7-4f12-9118-2380ce4120a3" title="2014-06" path="/D2B521A35EE84BEBAA041AE6877560F6/4045EC6E64E24A8D873D48A20D62114E" createtime="1405701235" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="1764a2dc-5506-45c2-ab11-3ff0520115a2" title="2014-05" path="/D2B521A35EE84BEBAA041AE6877560F6/4FBC47AC87FA4ACFB7057867516C7D6F" createtime="1405701252" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="a73cc641-3278-4068-b65d-8123e6f70bd2" title="2014-04" path="/D2B521A35EE84BEBAA041AE6877560F6/51AC1009931D44249DDE877A3CAFE568" createtime="1405701325" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="4cc22e15-fc57-4d17-99cc-c4f657e88558" title="2014-03" path="/D2B521A35EE84BEBAA041AE6877560F6/8FCF75A55C494B278E9DC00E8A74ED7F" createtime="1405701259" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="289e0f9b-87df-435e-894c-01a9bc4921f5" title="2014-02" path="/D2B521A35EE84BEBAA041AE6877560F6/9EE4C1B0218940DDB736BC818217E012" createtime="1405701266" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="c02bbb34-86f1-475e-948d-b7e09632c022" title="2014-01" path="/D2B521A35EE84BEBAA041AE6877560F6/11A2D74B666D48E0B5FF395B06CD6B42" createtime="1405701273" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="21a21f01-6a1e-404a-ad49-dbc2fef1da26" title="2014-07" path="/D2B521A35EE84BEBAA041AE6877560F6/DBC0AFA66CE04E4D804986D36110C670" createtime="1405149049" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="6329939e-efc9-463c-b2e5-a286540cac0a" title="2014-08" path="/D2B521A35EE84BEBAA041AE6877560F6/3329189B35FA4412A4C90A12EA48C438" createtime="1406856901" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="af03ad3f-0b11-47a0-a57b-3c5eefa67380" title="2014-09" path="/D2B521A35EE84BEBAA041AE6877560F6/D9E4307903F54D13A6E45808130314C5" createtime="1409541351" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="95ad0529-b2e5-4d90-976e-c6030aab8ff9" title="2014-10" path="/D2B521A35EE84BEBAA041AE6877560F6/C391A2BA811C447BA1CC8C62B16803FF" createtime="1412735446" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="2a8623db-cf10-45b4-8bb4-4a7a9c084a03" title="2014-11" path="/D2B521A35EE84BEBAA041AE6877560F6/28268C79AF944751A3DC4C2B65BAED9F" createtime="1415582315" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="0b8d138a-c883-42f1-8ce6-189afc95bfdc" title="外网环境" path="/D2B521A35EE84BEBAA041AE6877560F6/5022E351359F43A08891AC3F66A5D4E2" createtime="1406083595" Language="Text" isMark="0" IsLock="0" />
+      <note id="d8500fac-b2e1-4d8a-bc64-e03a905ba157" title="范特西" path="/D2B521A35EE84BEBAA041AE6877560F6/D34769A2158E4400A68CDA782F52C99C" createtime="1415589770" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="2b3c5739-14bc-424b-a82f-4a21ab44f0a7" title="2014-12" path="/D2B521A35EE84BEBAA041AE6877560F6/51415E435E754365A06396D92BC22837" createtime="1418018961" Language="C/C++" isMark="0" IsLock="0" />
+    </book>
+    <book id="b95b1c89-ff9d-4db4-b591-76d7a933a974" title="2013" Language="C/C++">
+      <note id="8352c97d-5afe-427f-b198-eb779466358a" title="2013-12" path="/D2B521A35EE84BEBAA041AE6877560F6/884AF770695E40C1AAB096C480C37276" createtime="1405700771" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="df4e18d7-befd-4acd-ae18-784a67d1b8f4" title="2013-11" path="/D2B521A35EE84BEBAA041AE6877560F6/7C108DDEDADB4675BED0FB8671C7983E" createtime="1405700895" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="4f12249f-cd44-4170-aad3-b2aa68682bfb" title="2013-10" path="/D2B521A35EE84BEBAA041AE6877560F6/A77FC4D18E72404583509E48D1D5F277" createtime="1405700916" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="b9aba1ed-0a95-47da-8767-9819c53f4c4f" title="2013-09" path="/D2B521A35EE84BEBAA041AE6877560F6/948F30F2DE194D36B58E6BD3A25E67FF" createtime="1405700931" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="67f6c939-eb88-4b7c-850e-7d316b3d5822" title="2013-08" path="/D2B521A35EE84BEBAA041AE6877560F6/9CA53348331B4033AB4DBEB6E003F7BB" createtime="1405700944" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="0868b43b-1732-4480-8833-823fc6eda820" title="2013-07" path="/D2B521A35EE84BEBAA041AE6877560F6/28E5C30A6A604E7680E71BA5FA63A40C" createtime="1405700958" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="a9d46de8-c1ac-41d8-9989-2bdf41c0130a" title="2013-06" path="/D2B521A35EE84BEBAA041AE6877560F6/849D79CD85F8467F90AF6950862AFABA" createtime="1405700979" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="850f1cc6-c00a-4208-92dc-33275d3140ee" title="2013-05" path="/D2B521A35EE84BEBAA041AE6877560F6/940913E27A4F4B4E89FB2601B05299DE" createtime="1405700994" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="e8d9fd2f-43dd-4520-8a13-9a13367b4610" title="2013-04" path="/D2B521A35EE84BEBAA041AE6877560F6/54ECAC1220EB40EF9F50B74925BDAB50" createtime="1405701010" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="db1395a7-3632-4444-9553-7e20a1646db5" title="2013-03" path="/D2B521A35EE84BEBAA041AE6877560F6/F5F6B7276BC14156907183FEECC99DBA" createtime="1405701036" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="b16fa109-928f-473c-85cc-70b7c52db894" title="2013-02" path="/D2B521A35EE84BEBAA041AE6877560F6/A1E5696FD7E840F0830C661BE884BE7E" createtime="1405701059" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="5c21c26c-ff72-4f48-9ebd-b7a0ab95df90" title="2013-01" path="/D2B521A35EE84BEBAA041AE6877560F6/69FDAC742B7842949C6AE7E8C2ADB9BE" createtime="1405701080" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="bd5661ba-7065-4101-944b-d1733c843102" title="自我目标管理" path="/D2B521A35EE84BEBAA041AE6877560F6/8D41E6A9C38B4C64831BF00A8E06D502" createtime="1405701117" Language="C/C++" isMark="0" IsLock="0" />
+    </book>
+    <book id="a98a6cad-c15f-47d4-9972-6a7d25724e30" title="2012" Language="C/C++">
+      <note id="cb361e17-6c6e-47e6-9f0c-61536f0c16bc" title="2012-12" path="/D2B521A35EE84BEBAA041AE6877560F6/5EAD7B86330D40B684AA10139A216F47" createtime="1405701867" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="a5f5cfdc-6313-44bd-9a6d-bd6202fcb37e" title="2012-11" path="/D2B521A35EE84BEBAA041AE6877560F6/861BC228F8254A39B14758B165D87A6D" createtime="1405701907" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="4e657cb6-b24e-4df0-bfe9-3ff9b23b3be9" title="2012-10" path="/D2B521A35EE84BEBAA041AE6877560F6/AC4988A9BBE24A14B9E8751C77C09AE3" createtime="1405701934" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="148b9128-ebe3-42ea-b23d-7139600c20fa" title="2012-09" path="/D2B521A35EE84BEBAA041AE6877560F6/4646997B3138482FB9099BE1B32956F5" createtime="1405701959" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="a7fabc94-3b99-40ac-863d-e15851b41b66" title="2012-08" path="/D2B521A35EE84BEBAA041AE6877560F6/DC241E3175AE4B839C294A5A222B4051" createtime="1405701988" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="552b8d1f-eed0-4df4-9402-811654b65664" title="2012-07" path="/D2B521A35EE84BEBAA041AE6877560F6/2429B25A37CF4D988C49F4120470FCFC" createtime="1405702006" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="152640f9-b537-4fd9-a01d-e0c154603079" title="2012-06" path="/D2B521A35EE84BEBAA041AE6877560F6/0E8028238C234A34BCE4C3E730782ECE" createtime="1405702025" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="afd57fa2-b8ec-4f06-bdce-d24fc3909591" title="2012-05" path="/D2B521A35EE84BEBAA041AE6877560F6/00FAEE250A1D425F8E7D53267D7A7731" createtime="1405702031" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="aba9224b-6226-489d-97ee-496bab4965ee" title="2012-04" path="/D2B521A35EE84BEBAA041AE6877560F6/B8B6EBD2F2E04C07A96ADE90582006CB" createtime="1405702044" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="ea16048f-4290-4f7e-81d3-a2a7fd14189f" title="2012-03" path="/D2B521A35EE84BEBAA041AE6877560F6/AF150EB437CC435EADD8EF04690293FE" createtime="1405702050" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="9df55c50-31dd-4e4d-9458-e4702e0c0ffa" title="2012-02" path="/D2B521A35EE84BEBAA041AE6877560F6/550507146C044FA48B9EED918B4C61D0" createtime="1405702057" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="e5565e67-9a2f-4f1c-b236-ddb88b0c1799" title="2012-01" path="/D2B521A35EE84BEBAA041AE6877560F6/CCF2BF0BF67A4C27931EE325EF871D99" createtime="1405702063" Language="C/C++" isMark="0" IsLock="0" />
+    </book>
+    <book id="eae6dd99-2692-45b1-adfa-c8d6bc56a7e9" title="2011" Language="C/C++">
+      <note id="778c9e39-8f62-4da4-954e-2ffe7f8207f7" title="2011-12" path="/D2B521A35EE84BEBAA041AE6877560F6/AB1DE4DD0CD54D8D916E1EAFAFCF1FA5" createtime="1405702216" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="27b77f15-7947-48bd-85a8-9759aa13f60f" title="2011-11" path="/D2B521A35EE84BEBAA041AE6877560F6/0457035D08214036B4D5157EE7BE46BF" createtime="1405702223" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="c3ba966b-3519-402a-b9d0-e6df1ca7a3d6" title="2011-10" path="/D2B521A35EE84BEBAA041AE6877560F6/AA0A8B64B0D04245B3172C28B5DB29A4" createtime="1405702231" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="0897f7e6-657d-4845-84cd-c5d882719789" title="2011-09" path="/D2B521A35EE84BEBAA041AE6877560F6/BC114F348A344DF28E73760525135BB6" createtime="1405702237" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="490cad03-54c4-467b-9440-d69c632fae42" title="2011-08" path="/D2B521A35EE84BEBAA041AE6877560F6/17544BD93E4E4FFEAA794C36387517BF" createtime="1405702243" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="17a53d93-b3bd-4fe3-a104-153d394ef3ef" title="2011-07" path="/D2B521A35EE84BEBAA041AE6877560F6/037CE26F52C442C8A41158B80D0AA14B" createtime="1405702250" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="f61337a2-7fad-4fea-8f5e-ff259f497838" title="2011-06" path="/D2B521A35EE84BEBAA041AE6877560F6/C2C0A453AF5A40D8A93A942AA3124D82" createtime="1405702256" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="36dcbfc0-ce8a-4c7a-93ac-4fc75a8f932d" title="2011-05" path="/D2B521A35EE84BEBAA041AE6877560F6/A21750619F8F4C2AA1DABAADDCA55E62" createtime="1405702262" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="638ba32b-edaa-4208-a18f-800f954e1fcd" title="2011-04" path="/D2B521A35EE84BEBAA041AE6877560F6/4AAEBA1584B54148A0819E3AC0373E81" createtime="1405702268" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="da53306e-5dd8-4926-b2df-92fd875c5d1d" title="2011-03" path="/D2B521A35EE84BEBAA041AE6877560F6/AF076FC97CB84AE7A82B31CB6FDE6133" createtime="1405702274" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="8a1cf0a6-9a9c-4e1d-bd51-e5dc2f5d7586" title="2011-02" path="/D2B521A35EE84BEBAA041AE6877560F6/236817E1E2DE4AF5BB22D5B8838FBA36" createtime="1405702280" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="aeccd1fb-15dc-4445-be8c-c59eaefd524f" title="2011-01" path="/D2B521A35EE84BEBAA041AE6877560F6/C13093AA667B4444BFE667BEC40317B4" createtime="1405702286" Language="C/C++" isMark="0" IsLock="0" />
+    </book>
+    <book id="92102da6-2a3a-4aa0-b28b-ff568bf026da" title="2010" Language="C/C++">
+      <note id="3b16b8c0-3101-4ffc-96e8-2e5f530c1834" title="2010-12" path="/D2B521A35EE84BEBAA041AE6877560F6/149BDC549E4541968B1332CED4ED6EE7" createtime="1405702555" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="c228919d-5848-4aef-9001-1f2a6e14a174" title="2010-11" path="/D2B521A35EE84BEBAA041AE6877560F6/476D30A0F4DA48DCBD0D95E3A7D86842" createtime="1405702562" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="4371d88c-6578-48c4-b4bd-4115c6cad53a" title="2010-10" path="/D2B521A35EE84BEBAA041AE6877560F6/32DC98CE86DA4F6D8D938B19B95A4033" createtime="1405702569" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="9e6c3082-70ca-4643-b1f9-7fa5011712b0" title="2010-09" path="/D2B521A35EE84BEBAA041AE6877560F6/0B0AFB92489046B7998359A49A94C5E6" createtime="1405702576" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="396eba1c-6fe4-4349-b72f-a783d1beb480" title="2010-08" path="/D2B521A35EE84BEBAA041AE6877560F6/49DAAFEC8B9D41DAA235D1621109D312" createtime="1405702583" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="2f431831-fc0b-413e-837a-26e2fdce2ae6" title="2010-07" path="/D2B521A35EE84BEBAA041AE6877560F6/416C78EDB16241A894AC2C35929AA96B" createtime="1405702593" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="5635b58d-f599-472d-b158-c784afc10dc9" title="2010-06" path="/D2B521A35EE84BEBAA041AE6877560F6/0150B08AFA164ED4B8D0EE67A7FC331F" createtime="1405702600" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="e95c2548-5ae0-416d-add9-0f1a666c3d04" title="2010-05" path="/D2B521A35EE84BEBAA041AE6877560F6/822B6E0EADF14AC3A19A17030A6B1429" createtime="1405702606" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="97e46fea-07f7-4a37-b77b-486a0b4eceed" title="2010-04" path="/D2B521A35EE84BEBAA041AE6877560F6/56ACF68647C44E23B4BB4E2048CC46D7" createtime="1405702613" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="c47f8b88-bcc0-4e89-8978-95f88af3fbbe" title="2010-03" path="/D2B521A35EE84BEBAA041AE6877560F6/3C7CAF757E67406193C578708EF51AC2" createtime="1405702620" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="1f322302-1d3a-4739-b436-7dc4f35abcf9" title="2010-02" path="/D2B521A35EE84BEBAA041AE6877560F6/211B87B6EEF44EBBA8A0775925FD849C" createtime="1405702626" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="0f1c6c98-a68f-4f2a-907d-a695d1f890e1" title="2010-01" path="/D2B521A35EE84BEBAA041AE6877560F6/6FB579264EE4469E82302482212DE9B9" createtime="1405702632" Language="C/C++" isMark="0" IsLock="0" />
+    </book>
+    <book id="59a75c77-7d31-42f4-92ac-1b96daef29af" title="2009" Language="C/C++">
+      <note id="e91118c5-a2d9-40ab-b79c-d8b8de5ae745" title="2009-12" path="/D2B521A35EE84BEBAA041AE6877560F6/FC5CDAD6DC1340128F2F7C16EFE4FA2E" createtime="1405699340" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="8d21bd24-adc7-43fe-a47a-4178de265945" title="2009-11" path="/D2B521A35EE84BEBAA041AE6877560F6/7A4B9AC1B4EC4891A777C5F514DF3CB8" createtime="1405699429" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="6f4fe767-70af-42ae-9ba4-89e6a5dbc18e" title="2009-10" path="/D2B521A35EE84BEBAA041AE6877560F6/D5D2DE34309A4806BB844ABB9AA7EA09" createtime="1405699515" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="e1a1e762-8992-406b-a6da-dd994b2e5d1c" title="2009-09" path="/D2B521A35EE84BEBAA041AE6877560F6/A42311F22B06414896A6748ED044D2EB" createtime="1405699561" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="04fe9667-ecec-4d3d-bc82-d5267c124f32" title="2009-07" path="/D2B521A35EE84BEBAA041AE6877560F6/37A2DEDF56CC4232815F98671F83C567" createtime="1405700435" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="190a0be0-53ef-4415-ac67-085c6444593b" title="2009-06" path="/D2B521A35EE84BEBAA041AE6877560F6/4B19C09215B84E53B7133E81DCD39533" createtime="1405700471" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="f17ae55a-e9ee-4f08-882c-b8468e320fde" title="2009-05" path="/D2B521A35EE84BEBAA041AE6877560F6/9D838E1A2F684017B3FFC2095AA97135" createtime="1405700509" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="36e60e21-a172-4758-8315-2645780d627a" title="2009-04" path="/D2B521A35EE84BEBAA041AE6877560F6/A57AF81F040F4ABB86B86EFBDB568C7E" createtime="1405700523" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="0ad53664-c1d3-414e-bc02-5940b8af8d53" title="2009-03" path="/D2B521A35EE84BEBAA041AE6877560F6/5594FBC50A6648DC8A58526C649EC805" createtime="1405700545" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="6a7740ae-1a85-4be0-ab2f-490e5e3a1009" title="2009-02" path="/D2B521A35EE84BEBAA041AE6877560F6/31C70EDCEC31401D9E0F41C9C098F11F" createtime="1405700564" Language="C/C++" isMark="0" IsLock="0" />
+    </book>
+    <book id="eed5c646-116f-4a64-b934-48d74b0ec4c3" title="2005" Language="C/C++">
+      <note id="7df19824-3fc9-4879-8001-92e93c275312" title="2005-12" path="/D2B521A35EE84BEBAA041AE6877560F6/92E5A652D8C64BCF932F39F63D98A3E4" createtime="1405699108" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="49b98567-06d2-443c-8dbb-f3d13f321592" title="2005-11" path="/D2B521A35EE84BEBAA041AE6877560F6/EA851658D8E54060AE572819EC92D0E4" createtime="1405699139" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="ba3e744d-94a3-4536-ae8e-84d5f7955e7c" title="2005-10" path="/D2B521A35EE84BEBAA041AE6877560F6/260687D01D5546768E41A77664B7080E" createtime="1405699161" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="1f9af703-136b-4e98-8e7c-bb2f429393ec" title="2005-09" path="/D2B521A35EE84BEBAA041AE6877560F6/5DF7E5BCF6F54A9D8E69F11A2FCA49D0" createtime="1405699180" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="b9f106ce-bc14-4c1d-b72d-e4ef31eeb7d3" title="2005-08" path="/D2B521A35EE84BEBAA041AE6877560F6/33852ED70D734E23AA3A9A5AA5F2B8F3" createtime="1405699207" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="ce6f44b0-979b-4d36-87a0-e599c7e96b5f" title="2005-07" path="/D2B521A35EE84BEBAA041AE6877560F6/7DE522DF3445421592778A765A397C78" createtime="1405699226" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="5e05b616-5d64-463b-ae74-d5725b0021d9" title="2005-06" path="/D2B521A35EE84BEBAA041AE6877560F6/160F270A1F2F43799BDC7DE5B903F69B" createtime="1405699243" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="0cb432e0-d9e3-4950-9162-d345931703f0" title="2005-05" path="/D2B521A35EE84BEBAA041AE6877560F6/B95858066C7F4991879BA9814A857FD9" createtime="1405699084" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="569d0c03-6642-45dc-8025-3ba32a2f23f8" title="2005-04" path="/D2B521A35EE84BEBAA041AE6877560F6/2400F9A12E74482CB579A3D5DFAE6412" createtime="1405699051" Language="C/C++" isMark="0" IsLock="0" />
+    </book>
+    <note id="c13100c9-f7fa-4dcb-8d46-e980a6c2698e" title="2015-06" path="/D2B521A35EE84BEBAA041AE6877560F6/A6FE3C7EB1EE481085F4F92A5BEDC417" createtime="1432899576" Language="C/C++" isMark="0" IsLock="0" />
+    <note id="c912afd1-8cae-42f2-a425-4f216036b738" title="2015-08" path="/D2B521A35EE84BEBAA041AE6877560F6/FE0D551EF8754AAA97424551BC41E624" createtime="1439176601" Language="C/C++" isMark="0" IsLock="0" />
+  </book>
+  <book id="9c1aafda-af79-4224-b147-9d4bf9bff27a" title="编程语言" Language="C/C++">
+    <book id="5bf1b908-5453-459c-88c3-7cd76feafc33" title="lua" Language="C/C++">
+      <note id="572f1250-f924-436c-976a-da2e382d73dd" title="lua技术笔记" path="/D2B521A35EE84BEBAA041AE6877560F6/F607C987556F41EA82E201DF31A39CBA" createtime="1405149249" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="a194d3e0-9410-4f73-8c70-c5014b81d91f" title="lua在linux的安装" path="/D2B521A35EE84BEBAA041AE6877560F6/0CED519FC51D405CB704EFEBEF9400E3" createtime="1405697512" Language="C/C++" isMark="0" IsLock="0" />
+    </book>
+    <book id="379de81d-3f01-4e3a-9c30-5daea537ca99" title="haxe" Language="C/C++">
+      <note id="07209bc5-52f7-4203-b321-6c92454305c7" title="haxe技术笔记" path="/D2B521A35EE84BEBAA041AE6877560F6/DC6A26EADE434E23986F4A0A4930760E" createtime="1405149204" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="ac16e086-3b4b-4331-9e90-8d8a6edeb6ac" title="haxe UI编辑器研究" path="/D2B521A35EE84BEBAA041AE6877560F6/1837F07830AF4ADFB3711FDF8A1B7CDE" createtime="1405695157" Language="Text" isMark="0" IsLock="0" />
+      <note id="325199a4-58c7-4b22-81ed-9aef1d2c9b68" title="as3代码快速转换" path="/D2B521A35EE84BEBAA041AE6877560F6/17688AD418FC486F882E3F24E2FBFB20" createtime="1405695200" Language="C/C++" isMark="0" IsLock="0" />
+    </book>
+    <book id="d68c0f51-8033-4049-9f1c-af88ed5d5050" title="c++" Language="C/C++">
+      <book id="dfbdddab-d91f-4c9e-8ee7-b66b80cc5eb7" title="C++11" Language="C/C++">
+        <note id="e79fb53c-b296-45d9-89fa-ac8a33d8a603" title="我用哪些C++11的特性" path="/D2B521A35EE84BEBAA041AE6877560F6/D35C11C640A643229076CEA3ADF473F7" createtime="1404283745" Language="C/C++" isMark="0" IsLock="0" />
+      </book>
+      <book id="2a756520-27e1-407f-be9e-c2f41b896312" title="招聘" Language="C/C++">
+        <note id="5b99586a-c451-4554-8a18-d25442884035" title="面试经验总结" path="/D2B521A35EE84BEBAA041AE6877560F6/6E3897D08B294433B16430C5C6A16D9E" createtime="1405698108" Language="C/C++" isMark="0" IsLock="0" />
+        <note id="09f43289-25cb-45b1-9895-e9997882d907" title="电话面试题" path="/D2B521A35EE84BEBAA041AE6877560F6/111933D9FBAA4B65A1FAFEE7A512D666" createtime="1405698006" Language="C/C++" isMark="0" IsLock="0" />
+        <note id="e176b67e-ed15-4240-b1c6-aa30cb292c2c" title="面试总结-文摘" path="/D2B521A35EE84BEBAA041AE6877560F6/AA1812F662524287A2CD8B2C0F0AD217" createtime="1405698272" Language="C/C++" isMark="0" IsLock="0" />
+        <note id="42bf4275-2638-4136-9d38-b00eabe52bf9" title="简历来源" path="/D2B521A35EE84BEBAA041AE6877560F6/1EA0A63CEC8E4FA58A5C27B6B806891E" createtime="1405698059" Language="C/C++" isMark="0" IsLock="0" />
+        <note id="403f24e4-e708-4b1f-b7d4-d17e12888ca9" title="flash面试题" path="/D2B521A35EE84BEBAA041AE6877560F6/257004795DDA465980A31B8B5B23794A" createtime="1405697965" Language="Java" isMark="0" IsLock="0" />
+        <note id="e73052ea-b816-4231-86d2-c0bbca23634d" title="c++面试题" path="/D2B521A35EE84BEBAA041AE6877560F6/7946099399CC4B1EA1D294AFBD29E5EF" createtime="1405698306" Language="C/C++" isMark="0" IsLock="0" />
+      </book>
+      <note id="d64a9404-f63b-49eb-9bfd-4bdc74890fb7" title="c++注意点" path="/D2B521A35EE84BEBAA041AE6877560F6/771205C2C51D4CC2A0401257C1B79184" createtime="1405698659" Language="C/C++" isMark="0" IsLock="0" />
+    </book>
+  </book>
+  <book id="f460848e-08fd-4ad0-b070-cf97e84593bf" title="前台开发" Language="C/C++">
+    <book id="f872f588-cd38-47f5-8861-e4c942fe5c46" title="android" Language="C/C++">
+      <note id="7fa4af44-ea48-48d7-bd02-61c51cd7cf45" title="android下的gdb调试" path="/D2B521A35EE84BEBAA041AE6877560F6/8608C3E7246E4F9A9C6FAC810C6CBD99" createtime="1405093946" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="7b4e8fdd-b94d-4cfc-a3ab-3245eeb96e0d" title="ddms使用" path="/D2B521A35EE84BEBAA041AE6877560F6/2CA50247340B471180C252F0DF4B8451" createtime="1405147808" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="0c49b16b-cefc-42d0-9e23-ebda3cc3fcb0" title="ssh服务" path="/D2B521A35EE84BEBAA041AE6877560F6/D256FB4525744F7AAB79CBB6DF3024C4" createtime="1405308801" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="91166380-e08a-4a08-844e-1e19e87edebd" title="android软件测试日志文件抓取" path="/D2B521A35EE84BEBAA041AE6877560F6/D2AA3BF84E47454BB69E5E20F32E108A" createtime="1405414115" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="543c5473-5b57-4963-8f15-4f4bea5afccd" title="腾讯的安卓平台高效的性能测试工具APT" path="/D2B521A35EE84BEBAA041AE6877560F6/6A579A6B62314C5D9CD59FFC9A2EFFCF" createtime="1409380313" Language="C/C++" isMark="0" IsLock="0" />
+    </book>
+    <book id="b470064a-4c9f-4313-bda7-d2cff4a8ca1a" title="cocos2d-x" Language="C/C++">
+      <note id="2ef89583-6df0-4822-8ff5-5f016ea98312" title="cocos2d-x 3.0多线程异步资源加载" path="/D2B521A35EE84BEBAA041AE6877560F6/D41C4D3654D744A6820608FB3EF1CCA9" createtime="1404281622" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="7704c020-b2ba-4a2d-a477-82f674af071f" title="cocos2dx-haxe" path="/D2B521A35EE84BEBAA041AE6877560F6/4CDBAF7D3E93445C814EEE55F48CEFB5" createtime="1405149144" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="31396982-ccbb-4a44-bb40-56eb16c538af" title="使用C++11" path="/D2B521A35EE84BEBAA041AE6877560F6/1CCD1773A29D4878872793D91AD23D30" createtime="1409284696" Language="C/C++" isMark="0" IsLock="0" />
+    </book>
+    <book id="6c8167ad-4514-42b9-9af5-bf0071b33003" title="quickx" Language="Lua">
+      <note id="76441423-df26-4645-a980-587787d6e15a" title="笔记" path="/D2B521A35EE84BEBAA041AE6877560F6/20BF17A4204E45D498C93C3D036DE27D" createtime="1414651654" Language="Lua" isMark="0" IsLock="0" />
+    </book>
+    <book id="fdaaba58-bf4b-438c-8a37-08ec56cc9024" title="AI" Language="C/C++">
+      <note id="7f666675-9bf0-47cb-9725-c5205f04753d" title="行为树笔记" path="/D2B521A35EE84BEBAA041AE6877560F6/55C17EAE19D04A1BAB481BDC35C3DE73" createtime="1418348522" Language="C/C++" isMark="0" IsLock="0" />
+    </book>
+    <book id="04fa77ce-1d2f-4ef5-adc4-854d4732674f" title="u3d" Language="C/C++">
+      <note id="3a86b6c6-d135-41cf-a9b7-6a9256f83a98" title="性能优化" path="/D2B521A35EE84BEBAA041AE6877560F6/F84ECE764CEA42878AF4934423A270F0" createtime="1419650699" Language="C#" isMark="0" IsLock="0" />
+    </book>
+    <book id="e4668d84-8fcd-4b44-bf75-06212177d844" title="html5" Language="C/C++">
+      <note id="2b36f2ee-7ed8-4137-a480-e6a47da8ffde" title="手机端的自适应问题" path="/D2B521A35EE84BEBAA041AE6877560F6/034E033816614EE495A99B71D423AC4B" createtime="1432980163" Language="JavaScript" isMark="0" IsLock="0" />
+      <note id="8afd43ce-74e8-43be-addc-d5089522dfa9" title="框架选择" path="/D2B521A35EE84BEBAA041AE6877560F6/196650C728A2441EB41FAEFE0DFE7636" createtime="1436087844" Language="JavaScript" isMark="0" IsLock="0" />
+    </book>
+  </book>
+  <book id="a2714c1b-0b48-4242-b756-1c035785a08e" title="后台开发" Language="Text">
+    <note id="e7b4baed-f0f8-444f-b137-c9a680c8514b" title="CentOS5.5 安全加固" path="/D2B521A35EE84BEBAA041AE6877560F6/CB7665EEB36E40B3BE04173ECB467097" createtime="1405697434" Language="Text" isMark="0" IsLock="0" />
+    <note id="01433392-704c-423d-9125-170e15825cd9" title="新人成长计划" path="/D2B521A35EE84BEBAA041AE6877560F6/3582E6BB491F422BB3FA5AB99DF49240" createtime="1405698775" Language="Text" isMark="0" IsLock="0" />
+    <note id="78b02794-c718-410c-9ac4-b3630edf94c8" title="程序员培训" path="/D2B521A35EE84BEBAA041AE6877560F6/90889D8FBDB84C3AA14A08F836CD168D" createtime="1405700690" Language="Text" isMark="0" IsLock="0" />
+    <book id="b56777c3-83a7-4a0f-bc9e-aeb73287ad06" title="Java" Language="Java">
+      <note id="3c7bce31-e17a-4885-b93b-cddfa0001a7e" title="spring" path="/D2B521A35EE84BEBAA041AE6877560F6/60EB0ADB0F6B4D85A29ACD2E4E71833B" createtime="1430700205" Language="Java" isMark="0" IsLock="0" />
+    </book>
+  </book>
+  <book id="48d94de4-dd80-4aeb-a36b-31a0dda6e5cc" title="子女教育" Language="C/C++">
+    <note id="54797d03-d8dc-4a6f-8b18-53f07dd11be2" title="悠悠教育" path="/D2B521A35EE84BEBAA041AE6877560F6/D91010C8F83E405DA56987E8ADC801AC" createtime="1405696828" Language="C/C++" isMark="0" IsLock="0" />
+  </book>
+  <book id="ac72525d-cf17-4b4a-b335-9f9d423b1dfd" title="个人" Language="C/C++">
+    <book id="dd96b60e-7a90-4639-a7cf-5c82a13b5209" title="管理经验" Language="C/C++">
+      <note id="c047d191-23fa-432e-8cde-dd5e1d2e817b" title="报告备忘" path="/D2B521A35EE84BEBAA041AE6877560F6/5E1F230A5519490FB8D4EB37B046D1AA" createtime="1405696726" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="7861b276-244e-4e44-991a-b164ecb4af2b" title="优秀基层经理的领导行为" path="/D2B521A35EE84BEBAA041AE6877560F6/68C5F5D227BF48FFB3884303D551E987" createtime="1405696744" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="c74da2ef-cfad-4c30-9976-5c329bce7e1f" title="NBA范特西项目笔记" path="/D2B521A35EE84BEBAA041AE6877560F6/B67C58B79CFC475293FE0C7E220EE338" createtime="1421734860" Language="C/C++" isMark="0" IsLock="0" />
+    </book>
+    <note id="82fad26e-a993-440c-b528-bdf9b5d3ff81" title="唯一" path="/D2B521A35EE84BEBAA041AE6877560F6/E5B9D344D2C8415BB296017A5D887204" createtime="1405670771" Language="C/C++" isMark="0" IsLock="1" />
+    <note id="703a491b-7b3e-4df5-a6f4-62f0a9dfa498" title="个人信息" path="/D2B521A35EE84BEBAA041AE6877560F6/3335BC43774442FFB6917CB813CD6433" createtime="1405676280" Language="C/C++" isMark="0" IsLock="1" />
+    <note id="457b4d80-8343-4a47-8cd8-e0f15932358e" title="游戏项目" path="/D2B521A35EE84BEBAA041AE6877560F6/E5BCCE16E8E54FC0B22B3491A22876A2" createtime="1406771298" Language="C/C++" isMark="0" IsLock="1" />
+    <note id="e9baae7f-db0f-4dd8-8ca0-f49117719797" title="自我成长" path="/D2B521A35EE84BEBAA041AE6877560F6/DEEDB20BCE6D414684F1505EA93AF474" createtime="1405696909" Language="C/C++" isMark="0" IsLock="1" />
+    <note id="3e8fab5d-3768-4342-98b7-d55631382588" title="复盘" path="/D2B521A35EE84BEBAA041AE6877560F6/545926BE5EDD4691A8DF9E31FD1CC385" createtime="1405676333" Language="C/C++" isMark="0" IsLock="1" />
+    <note id="db273ebc-d0bf-4eae-aaf9-48af835dc487" title="如何做选择" path="/D2B521A35EE84BEBAA041AE6877560F6/30486B7036014EEAAE7E306C13FD977F" createtime="1405695115" Language="C/C++" isMark="0" IsLock="0" />
+    <note id="a4133136-8623-43e7-a10d-8dc25e2933bd" title="金刚经体会" path="/D2B521A35EE84BEBAA041AE6877560F6/381AAD7ECD1D44B58F137FE4B1907F7E" createtime="1405696036" Language="Text" isMark="0" IsLock="0" />
+    <note id="a08f0cd1-d5bb-4326-9a73-550f660bfa0c" title="记笔记" path="/D2B521A35EE84BEBAA041AE6877560F6/E9F143C5FA844596B8A095B8BC00C53C" createtime="1405697125" Language="C/C++" isMark="0" IsLock="0" />
+    <note id="dba892c4-4d7e-496f-bcac-afdd45cd009f" title="游戏投资模式" path="/D2B521A35EE84BEBAA041AE6877560F6/6D4059686E564C9F85286C1F200F2899" createtime="1405697150" Language="C/C++" isMark="0" IsLock="0" />
+    <note id="d86b6715-f7b8-4504-ab9a-8d936691a253" title="读书列表" path="/D2B521A35EE84BEBAA041AE6877560F6/121DD3FED3F9442A899849E47DB9573F" createtime="1440047019" Language="C/C++" isMark="0" IsLock="0" />
+  </book>
+  <book id="d47e73d4-b47b-4233-82b4-625f851f35bb" title="游戏" Language="C/C++">
+    <book id="6e918efd-86df-489e-88b5-e6e2d0374498" title="策划和运营" Language="C/C++">
+      <note id="1ee3beb7-9534-4225-b609-2feb7ea8cffe" title="策划学习" path="/D2B521A35EE84BEBAA041AE6877560F6/7FF4256988BE4A28BBDC70094B9D332F" createtime="1405697189" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="edde858a-c945-4772-a528-e69f42b8129d" title="2012-10-30上海交流" path="/D2B521A35EE84BEBAA041AE6877560F6/2FF6B6B8B08C46148B2447D8239D5E73" createtime="1405697240" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="ce923f80-2d9c-4953-bcda-8066096883a6" title="3366运营经验" path="/D2B521A35EE84BEBAA041AE6877560F6/0127169380CB4DD9922F96CA5374011F" createtime="1405697897" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="d190a712-677b-4422-b926-dfaf8ebbf705" title="数据运营" path="/D2B521A35EE84BEBAA041AE6877560F6/A89C92EEF8B740C69A6B11C5D270F13F" createtime="1405697848" Language="C/C++" isMark="0" IsLock="0" />
+    </book>
+    <book id="2584e9c5-69a3-462c-9dd8-32e61259a5fa" title="研发管理" Language="C/C++">
+      <note id="df059d50-560c-4fcd-9d37-736624649e6d" title="研发管理总结" path="/D2B521A35EE84BEBAA041AE6877560F6/26BC1289D0234963B866B44BD8D1B494" createtime="1405698410" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="941fef65-3d10-4a77-a880-4fdf83e54890" title="2011-10-14研发总结" path="/D2B521A35EE84BEBAA041AE6877560F6/E9C6B86A06284911BC6B826BA831DEFA" createtime="1405697585" Language="Text" isMark="0" IsLock="0" />
+      <note id="fec11015-0977-442f-b0a9-3107061d4bcf" title="晨会制度" path="/D2B521A35EE84BEBAA041AE6877560F6/89EA41AC56CF446BB26C6BA1C9B00BA7" createtime="1405697637" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="0edbaa17-2da2-4d4a-8bc5-ad7e9982d69a" title="腾讯敏捷框架TAPD" path="/D2B521A35EE84BEBAA041AE6877560F6/D6964F90787A44A1B9608AD89301D7AF" createtime="1405697685" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="4f3a1295-838a-45c6-b925-4403e11b6cea" title="互联网敏捷开发实践之路-腾讯王速瑜" path="/D2B521A35EE84BEBAA041AE6877560F6/EB3D55AA883146E1B4838495A16B9149" createtime="1405697710" Language="C/C++" isMark="0" IsLock="0" />
+    </book>
+    <note id="ab7ab9d9-e6c0-4941-8421-fdc5ba03498f" title="精选小游戏" path="/D2B521A35EE84BEBAA041AE6877560F6/1B0EFA88C46D4BD0BF2147C8527835A0" createtime="1405172132" Language="Text" isMark="0" IsLock="0" />
+    <note id="70352ca2-3fe8-447c-930c-bafc8e795630" title="小测试" path="/D2B521A35EE84BEBAA041AE6877560F6/E8B03C4DCAD6453FA8931B6DECB331E2" createtime="1405303870" Language="C/C++" isMark="0" IsLock="0" />
+    <note id="9b73ddfd-34b5-467e-8167-3e7715e88f81" title="塔防游戏分析" path="/D2B521A35EE84BEBAA041AE6877560F6/9467566F5152430EA2548626845EF313" createtime="1405695965" Language="Text" isMark="0" IsLock="0" />
+    <note id="ad1c9487-731f-4b98-a4f2-0e461b946cf9" title="刀塔传奇分析" path="/D2B521A35EE84BEBAA041AE6877560F6/F820B6E8DB4B4530B6995FCA0F103EC3" createtime="1406682874" Language="C/C++" isMark="0" IsLock="0" />
+    <note id="f621d2a2-b493-4d61-a8b6-13d482f22f99" title="三国游戏" path="/2C3C53CDA82B46D4933F7D2B864E08E9/B3BFC6F6A1544C239CA0AB47BD95EB3D" createtime="1406688794" Language="C/C++" isMark="0" IsLock="0" />
+    <note id="f75d72cc-b934-4874-90f7-877b35900a72" title="美人" path="/D2B521A35EE84BEBAA041AE6877560F6/A981805A6EA14B7A8225779B8BE91F25" createtime="1408538051" Language="C/C++" isMark="0" IsLock="0" />
+    <note id="20f5ec89-1bc5-4280-a7bc-9fd7be1b2dc3" title="mud" path="/D2B521A35EE84BEBAA041AE6877560F6/09CE0158BDF0464A98931E1E66EB4A91" createtime="1413430226" Language="C/C++" isMark="0" IsLock="0" />
+  </book>
+  <book id="1fac272b-0f12-4864-9573-2f997517d35a" title="项目" Language="C/C++">
+    <book id="47254262-8ac0-42d6-8bee-972b79045b94" title="wecode" Language="C/C++">
+      <note id="74ca0dea-6419-41d4-bc43-549c51f31320" title="近期优化" path="/D2B521A35EE84BEBAA041AE6877560F6/A9D038B911E04E10AE0E2D45E5A2156D" createtime="1405145070" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="50c8d9cf-601f-49a4-842e-d0a576867a59" title="中期功能" path="/D2B521A35EE84BEBAA041AE6877560F6/EEF37B57EA324B1ABF323977EE569D27" createtime="1405145397" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="04af3cd3-2ff8-4c9a-a344-71fc24275ec9" title="同步方案" path="/D2B521A35EE84BEBAA041AE6877560F6/BB5ECE55C7724803ADE4B5DB1A3EF0AB" createtime="1406082700" Language="C/C++" isMark="0" IsLock="0" />
+    </book>
+    <book id="c4c0ff81-7815-4e4b-aec7-d4714a1b3e30" title="足球" Language="C/C++">
+      <note id="c6fd5959-a9b6-40c5-b4d1-8a4df74cafea" title="核心玩法" path="/D2B521A35EE84BEBAA041AE6877560F6/90CC0A2E446649CD88EEADF6C92E8695" createtime="1407032483" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="2233747b-421b-4e1a-bd35-4666cf07de45" title="片段设计" path="/D2B521A35EE84BEBAA041AE6877560F6/22E25DE5995C41CDAA2E55D91DB98188" createtime="1406960145" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="f7d6bd3e-f950-4c66-9489-d53316d85fef" title="战术" path="/D2B521A35EE84BEBAA041AE6877560F6/5DE1904927F64B19B8C441C7061B902C" createtime="1406964621" Language="C/C++" isMark="0" IsLock="0" />
+      <note id="12b309b9-0145-4cea-846c-0bb4cc32c16a" title="总体" path="/D2B521A35EE84BEBAA041AE6877560F6/7D3680BF3A634B6BB950B276606D6942" createtime="1407134982" Language="C/C++" isMark="0" IsLock="0" />
+    </book>
+    <note id="5e96167e-96ef-4474-a4f3-89a7323f62a5" title="项目思考" path="/D2B521A35EE84BEBAA041AE6877560F6/82E38B2F329045559FED0EAFA3D44498" createtime="1405676431" Language="C/C++" isMark="0" IsLock="1" />
+    <note id="39cb92d0-7a46-4606-b8ea-cc6fe40abebd" title="图片分享应用" path="/D2B521A35EE84BEBAA041AE6877560F6/B705A57447804C7AA1C390EDEAC47F5E" createtime="1405695249" Language="C/C++" isMark="0" IsLock="0" />
+    <note id="d17d1e82-5fab-4637-a29e-c4121ee65a22" title="斗地主" path="/D2B521A35EE84BEBAA041AE6877560F6/44D583011C04480B83B93209C6B7E07F" createtime="1405695356" Language="C/C++" isMark="0" IsLock="0" />
+    <note id="c7f0e636-5594-41d0-9011-bec0d10d179d" title="手机PC蛋蛋" path="/D2B521A35EE84BEBAA041AE6877560F6/3B9B20EA37DF44F8AD252231679AFEB6" createtime="1405695513" Language="C/C++" isMark="0" IsLock="0" />
+    <note id="9caf19d0-407e-48e1-ba66-fa221a4513a0" title="炸金花分析" path="/D2B521A35EE84BEBAA041AE6877560F6/DD8CF6D6080F4E5AB658E17E9DB46DD9" createtime="1405700635" Language="C/C++" isMark="0" IsLock="0" />
+    <note id="a2f3fc1d-95e4-4968-aa88-d85a2da08b6d" title="人比人" path="/D2B521A35EE84BEBAA041AE6877560F6/75E0152E5FE14977B5033198A705D584" createtime="1410761476" Language="C/C++" isMark="0" IsLock="0" />
+    <note id="af5d9ff1-e49f-4fda-8278-ac88ac52ed53" title="挂机篮球" path="/D2B521A35EE84BEBAA041AE6877560F6/58D0BC6080724595B8690DC958706E50" createtime="1418111897" Language="C/C++" isMark="0" IsLock="0" />
+  </book>
+  <book id="6bebeea8-4a23-468b-91e2-f615e8230479" title="收集" Language="Text">
+    <note id="5b20c639-f046-4e5f-ab4a-aa06f837159f" title="一些经常听说却不知道意思的著名定义" path="/D2B521A35EE84BEBAA041AE6877560F6/CE13A28FD06B4D1B84DA01EFAB6C215D" createtime="1405695867" Language="Text" isMark="0" IsLock="0" />
+    <note id="a3a63b87-9efd-4b0f-b006-30de6f7314b8" title="哈佛幸福课" path="/D2B521A35EE84BEBAA041AE6877560F6/8D732AE6A7F94719BDDA6495FAA6C1B0" createtime="1405695927" Language="Text" isMark="0" IsLock="0" />
+    <note id="35623b87-411c-4cff-8856-b8e213022553" title="南怀瑾老师如何静坐" path="/D2B521A35EE84BEBAA041AE6877560F6/26C55B4CB60E4D148524CECD04FA9FDD" createtime="1405696436" Language="C/C++" isMark="0" IsLock="0" />
+    <note id="e59e6434-2603-499a-b7ce-10463ac7ce53" title="HP大中华区前总裁孙振耀撰文谈退休并畅谈人生" path="/D2B521A35EE84BEBAA041AE6877560F6/72AEF4F369D048D4964FB95DC138B579" createtime="1405696372" Language="C/C++" isMark="0" IsLock="0" />
+  </book>
+  <book id="f8e8f3d6-4855-46f8-83ae-b5f438949d82" title="房地产" Language="Text">
+    <note id="eb00bb4c-0d77-4657-89fe-0a9e8e32c74a" title="网文一" path="/D2B521A35EE84BEBAA041AE6877560F6/F2862B258D49467D9357EB4EA953ACFD" createtime="1405696139" Language="Text" isMark="0" IsLock="0" />
+    <note id="5d596863-a064-4212-a9b4-ad8a807fbbdf" title="2010年深圳房价之乱弹" path="/D2B521A35EE84BEBAA041AE6877560F6/A305A991B3F3468A972BB05ECC463E1B" createtime="1405696195" Language="Text" isMark="0" IsLock="0" />
+    <note id="82e52b27-a081-4931-a3e9-2c81f5134eee" title="2009年房价步入快速下跌轨道" path="/D2B521A35EE84BEBAA041AE6877560F6/7022CBA5645E4111B459DC1EAEE2639D" createtime="1405696220" Language="Text" isMark="0" IsLock="0" />
+    <note id="8907ec56-56d5-46a2-9e82-f14e28a6d208" title="2010总结" path="/D2B521A35EE84BEBAA041AE6877560F6/7EF24E4B45C2492ABBBD85DBCD8689F6" createtime="1405696254" Language="Text" isMark="0" IsLock="0" />
+    <note id="9e16a972-4592-449a-891c-b40439ab214c" title="QA" path="/D2B521A35EE84BEBAA041AE6877560F6/4E7AB45C77E945B0AA2686AB85BE95E5" createtime="1405696285" Language="Text" isMark="0" IsLock="0" />
+    <note id="4b8673cc-1f41-4657-88ce-ccc81afda65d" title="深圳二手房置业宝典--ZT又一侠" path="/D2B521A35EE84BEBAA041AE6877560F6/4577970A2368487D90125873725FC9BF" createtime="1405696314" Language="Text" isMark="0" IsLock="0" />
+    <note id="ab7197c4-8c54-4cf2-98af-c56d726fbe2c" title="家居风水" path="/D2B521A35EE84BEBAA041AE6877560F6/9F9E02A9293C40458B568C2D47459756" createtime="1405697283" Language="Text" isMark="0" IsLock="0" />
+  </book>
+  <book id="e7c43231-77a4-47c2-b017-ecdc1d63420d" title="项目开发" Language="C/C++">
+    <note id="bcf2f33a-34e2-492d-8b8e-72529cb3ea7e" title="总体安排" path="/D2B521A35EE84BEBAA041AE6877560F6/268E931DC2C94FB7A9EDE2072D1297DB" createtime="1408085681" Language="C/C++" isMark="0" IsLock="0" />
+    <book id="8d530a2b-fd6b-4cfe-af9b-c5991dc8bf1f" title="OA系统" Language="C/C++" />
+  </book>
+  <book id="06e4408f-0979-4309-ade4-29fa429e84e2" title="小牛" Language="C/C++">
+    <note id="34220c95-d392-4e1d-b29a-a834af66dff6" title="代码阅读" path="/D2B521A35EE84BEBAA041AE6877560F6/876C7D79FF26400C8EA396326313D3FB" createtime="1433120765" Language="C/C++" isMark="0" IsLock="0" />
+    <note id="92446383-be23-4e93-bd1a-837d82f30e6f" title="待报销" path="/D2B521A35EE84BEBAA041AE6877560F6/8631DABB5B0E428F95CD99E0AFC38E8B" createtime="1433120792" Language="C/C++" isMark="0" IsLock="0" />
+    <note id="9e2ba09f-97d5-445a-9ed8-47e41fe08504" title="公司信息" path="/D2B521A35EE84BEBAA041AE6877560F6/B067E8655B5249BCADF4405B43820245" createtime="1433120844" Language="C/C++" isMark="0" IsLock="0" />
+    <note id="f1132330-061e-474e-ab41-68155058503c" title="环境信息" path="/D2B521A35EE84BEBAA041AE6877560F6/DD5AC816B1064FC3844F0C4BEBF672E1" createtime="1433120865" Language="C/C++" isMark="0" IsLock="1" />
+    <note id="41933356-4fef-456f-a552-0613c7bc234c" title="技术研发部" path="/D2B521A35EE84BEBAA041AE6877560F6/E1FA359C2C4046A0A0CE4A3C7C9E9363" createtime="1433328179" Language="C/C++" isMark="0" IsLock="0" />
+    <note id="92c452d6-7e50-4cdf-bcdb-6d5c61f163f5" title="管理教练" path="/D2B521A35EE84BEBAA041AE6877560F6/6FAFEF02FB9B4524994ED1C752E39E15" createtime="1434416661" Language="C/C++" isMark="0" IsLock="1" />
+    <note id="fdacf1bc-f339-4bab-8326-c54af5004fd5" title="运营事故汇总" path="/D2B521A35EE84BEBAA041AE6877560F6/354F34C7FA0448B285E812B5E5DDF24B" createtime="1435634468" Language="C/C++" isMark="0" IsLock="0" />
+  </book>
+  <book id="a2ed177e-4190-4292-ace3-1f642b614f65" title="互联网金融" Language="C/C++">
+    <note id="9c34f9c7-7834-4f4a-8459-12de292c7d2c" title="熟悉业务" path="/D2B521A35EE84BEBAA041AE6877560F6/0E0EB8E9C0164C5EA7166056BDBADBFB" createtime="1437176924" Language="C/C++" isMark="0" IsLock="0" />
+  </book>
 </wecode>

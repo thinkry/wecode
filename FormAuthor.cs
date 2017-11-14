@@ -36,7 +36,7 @@ namespace WeCode1._0
             StringBuilder url = new StringBuilder(GetAuthorizationCodeUri.ToString()); //可变字符串
             //追加组合格式字符串
             url.AppendFormat("?client_id={0}&",ConfigurationManager.AppSettings["ConsumerKey"]);
-            url.AppendFormat("redirect_uri={0}&", "http://note.youdao.com/test");
+            url.AppendFormat("redirect_uri={0}&", ConfigurationManager.AppSettings["RedirectUri"]);
             url.AppendFormat("response_type={0}&", "code");
             url.AppendFormat("state={0}", "state");
             //url.AppendFormat("scope={0}", "scope=shuo_basic_r,shuo_basic_w");
@@ -81,7 +81,7 @@ namespace WeCode1._0
                 url.AppendFormat("?client_id={0}&", ConfigurationManager.AppSettings["ConsumerKey"]);
                 url.AppendFormat("client_secret={0}&", ConfigurationManager.AppSettings["ConsumerSecret"]);
                 url.AppendFormat("grant_type={0}&", "authorization_code");
-                url.AppendFormat("redirect_uri={0}&", "http://note.youdao.com/test");
+                url.AppendFormat("redirect_uri={0}&", ConfigurationManager.AppSettings["RedirectUri"]);
                 url.AppendFormat("code={0}", autorizationCode);
                 //url.AppendFormat("scope={0}", "scope=shuo_basic_r,shuo_basic_w");
                 //显示输入URL
